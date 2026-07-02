@@ -9,7 +9,7 @@ export function useUploadProfilePhoto() {
   const queryClient = useQueryClient()
 
   return useMutation<
-    { media: { url: string }; profile: Profile },
+    { url: string; profile: Profile },
     Error,
     File
   >({

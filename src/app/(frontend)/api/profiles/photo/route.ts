@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { put, del } from '@vercel/blob'
 import config from '@payload-config'
 import { ensureGuestInitialized } from '@/lib/payload-client'
 import { withRetry } from '@/lib/with-retry'
@@ -29,26 +30,16 @@ export async function POST(req: NextRequest) {
 
     const buffer = Buffer.from(await file.arrayBuffer())
     const fileName = file.name.replace(/[^a-zA-Z0-9._-]/g, '_')
+    const pathname = `profiles/${guestId}_${Date.now()}_${fileName}`
+
+    const blob = await put(pathname, buffer, {
+      access: 'public',
+      contentType: file.type,
+    })
 
     const { getPayload } = await import('payload')
     const payloadConfig = await config
     const payload = await getPayload({ config: payloadConfig })
-
-    const media = await withRetry(() =>
-      payload.create({
-        collection: 'media',
-        data: {
-          alt: `Profile photo for ${guestId}`,
-          guestId,
-        },
-        file: {
-          data: buffer,
-          mimetype: file.type,
-          name: fileName,
-          size: file.size,
-        },
-      }),
-    )
 
     const profileResult = await withRetry(() =>
       payload.find({
@@ -60,24 +51,25 @@ export async function POST(req: NextRequest) {
     )
 
     let profile
+    const avatarUrl = blob.url
     if (profileResult.totalDocs > 0) {
       profile = await withRetry(() =>
         payload.update({
           collection: 'profiles',
           id: profileResult.docs[0].id,
-          data: { avatar: media.url ?? media.filename ?? null },
+          data: { avatar: avatarUrl },
         }),
       )
     } else {
       profile = await withRetry(() =>
         payload.create({
           collection: 'profiles',
-          data: { guestId, avatar: media.url ?? media.filename ?? null },
+          data: { guestId, avatar: avatarUrl },
         }),
       )
     }
 
-    return NextResponse.json({ media, profile }, { status: 201 })
+    return NextResponse.json({ url: avatarUrl, profile }, { status: 201 })
   } catch (error) {
     console.error('[POST /api/profiles/photo]', error)
     return NextResponse.json({ error: 'Service unavailable' }, { status: 503 })
@@ -108,6 +100,11 @@ export async function DELETE(req: NextRequest) {
 
     if (profileResult.totalDocs === 0) {
       return NextResponse.json({ success: true })
+    }
+
+    const prevAvatar = profileResult.docs[0].avatar as string | null
+    if (prevAvatar?.startsWith('https://')) {
+      await del(prevAvatar).catch(() => {})
     }
 
     await withRetry(() =>
