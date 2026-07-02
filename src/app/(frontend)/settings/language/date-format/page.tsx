@@ -8,12 +8,12 @@ const FORMATS = [
   { value: 'mmddyyyy', label: 'MM/DD/YYYY', example: '10/25/2023' },
   { value: 'yyyymmdd', label: 'YYYY-MM-DD', example: '2023-10-25 (ISO 8601)' },
   { value: 'long', label: 'Long Format', example: 'Wednesday, October 25, 2023' },
-]
+] as const
 
 const TIME_FORMATS = [
   { value: '24h', label: '24-hour (17:00)', example: '17:00' },
   { value: '12h', label: '12-hour (5:00 PM)', example: '5:00 PM' },
-]
+] as const
 
 export default function DateTimeFormatPage() {
   const { preferences, isFetched: _isFetched } = useDateTimePrefs()
@@ -120,7 +120,7 @@ export default function DateTimeFormatPage() {
                         name="date-format"
                         value={fmt.value}
                         checked={selectedFormat === fmt.value}
-                        onChange={(e) => setSelectedFormat(e.target.value)}
+                        onChange={(e) => setSelectedFormat(e.target.value as typeof fmt.value)}
                         className="sr-only"
                       />
                       {selectedFormat === fmt.value && (
@@ -164,7 +164,7 @@ export default function DateTimeFormatPage() {
                         name="time-format"
                         value={t.value}
                         checked={selectedTime === t.value}
-                        onChange={(e) => setSelectedTime(e.target.value)}
+                        onChange={(e) => setSelectedTime(e.target.value as typeof t.value)}
                         className="sr-only"
                       />
                       {selectedTime === t.value && (
@@ -237,7 +237,7 @@ export default function DateTimeFormatPage() {
             <button
               type="button"
               className="px-8 h-12 bg-primary text-on-primary rounded-xl font-semibold shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-              onClick={() => updateDateTime.mutate({ autoDetect, dateFormat: selectedFormat as 'ddmmyyyy' | 'mmddyyyy' | 'yyyymmdd' | 'long', timeFormat: selectedTime as '24h' | '12h' })}
+              onClick={() => updateDateTime.mutate({ ...preferences, autoDetect, dateFormat: selectedFormat as 'ddmmyyyy' | 'mmddyyyy' | 'yyyymmdd' | 'long', timeFormat: selectedTime as '24h' | '12h' })}
               disabled={updateDateTime.isPending}
             >
               {updateDateTime.isPending ? 'Saving...' : 'Save Changes'}

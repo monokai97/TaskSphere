@@ -128,8 +128,9 @@ export function useToggleTask(listId?: number) {
       return { previousData }
     },
     onError: (_err, _vars, context) => {
-      if (context?.previousData) {
-        queryClient.setQueryData([TASKS_KEY, listId], context.previousData)
+      const ctx = context as { previousData?: TasksResponse } | undefined
+      if (ctx?.previousData) {
+        queryClient.setQueryData([TASKS_KEY, listId], ctx.previousData)
       }
     },
     onSettled: () => {
@@ -162,8 +163,9 @@ export function useDeleteTask(listId?: number) {
       return { previousData }
     },
     onError: (_err, _id, context) => {
-      if (context?.previousData) {
-        queryClient.setQueryData([TASKS_KEY, listId], context.previousData)
+      const ctx = context as { previousData?: TasksResponse } | undefined
+      if (ctx?.previousData) {
+        queryClient.setQueryData([TASKS_KEY, listId], ctx.previousData)
       }
     },
     onSettled: () => {

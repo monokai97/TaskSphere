@@ -259,6 +259,15 @@ export interface GuestSession {
     | number
     | boolean
     | null;
+  backgroundPreferences?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
   updatedAt: string;
 }
 /**
@@ -573,6 +582,7 @@ export interface GuestSessionsSelect<T extends boolean = true> {
   emailSummaryPreferences?: T;
   pushNotificationPreferences?: T;
   dateTimePreferences?: T;
+  backgroundPreferences?: T;
   updatedAt?: T;
 }
 /**

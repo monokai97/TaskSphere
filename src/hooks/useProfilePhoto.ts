@@ -39,11 +39,12 @@ export function useUploadProfilePhoto() {
       return { previousData, objectUrl: avatarUrl }
     },
     onError: (_err, _file, context) => {
-      if (context?.previousData) {
-        queryClient.setQueryData([PROFILE_KEY], context.previousData)
+      const ctx = context as { previousData?: Profile | null; objectUrl?: string } | undefined
+      if (ctx?.previousData) {
+        queryClient.setQueryData([PROFILE_KEY], ctx.previousData)
       }
-      if (context?.objectUrl) {
-        URL.revokeObjectURL(context.objectUrl)
+      if (ctx?.objectUrl) {
+        URL.revokeObjectURL(ctx.objectUrl)
       }
     },
     onSettled: () => {
@@ -73,8 +74,9 @@ export function useRemoveProfilePhoto() {
       return { previousData }
     },
     onError: (_err, _vars, context) => {
-      if (context?.previousData) {
-        queryClient.setQueryData([PROFILE_KEY], context.previousData)
+      const ctx = context as { previousData?: Profile | null } | undefined
+      if (ctx?.previousData) {
+        queryClient.setQueryData([PROFILE_KEY], ctx.previousData)
       }
     },
     onSettled: () => {

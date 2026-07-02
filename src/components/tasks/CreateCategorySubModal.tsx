@@ -38,8 +38,8 @@ export function CreateCategorySubModal({
   onCreate,
 }: CreateCategorySubModalProps) {
   const [name, setName] = useState('')
-  const [selectedIcon, setSelectedIcon] = useState(ICON_OPTIONS[0])
-  const [selectedColor, setSelectedColor] = useState(COLOR_OPTIONS[0])
+  const [selectedIcon, setSelectedIcon] = useState<(typeof ICON_OPTIONS)[number]>(ICON_OPTIONS[0])
+  const [selectedColor, setSelectedColor] = useState<(typeof COLOR_OPTIONS)[number]>(COLOR_OPTIONS[0])
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {

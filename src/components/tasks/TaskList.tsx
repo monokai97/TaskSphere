@@ -212,7 +212,7 @@ export function TaskList({
     )
   }
 
-  if (state.data?.docs?.length > 0) {
+  if ((state.data?.docs?.length ?? 0) > 0) {
     return (
       <>
         {selectedIds.size > 0 && (
@@ -224,7 +224,7 @@ export function TaskList({
           />
         )}
         <div className="space-y-3">
-          {state.data.docs.map((task) => (
+          {state.data!.docs.map((task) => (
             <TaskItem
               key={task.id}
               task={task}

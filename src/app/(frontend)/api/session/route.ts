@@ -51,12 +51,12 @@ export async function GET(req: NextRequest) {
       density: session.density ?? null,
       notificationsEnabled: session.notificationsEnabled ?? null,
       twoFactorEnabled: session.twoFactorEnabled ?? null,
-      desktopAlertPreferences: session.desktopAlertPreferences ?? null,
-      emailSummaryPreferences: session.emailSummaryPreferences ?? null,
-      pushNotificationPreferences: session.pushNotificationPreferences ?? null,
-      dateTimePreferences: session.dateTimePreferences ?? null,
-      backgroundPreferences: session.backgroundPreferences ?? null,
-      integrations: session.integrations ?? null,
+      desktopAlertPreferences: (session.desktopAlertPreferences ?? null) as Record<string, unknown> | null,
+      emailSummaryPreferences: (session.emailSummaryPreferences ?? null) as Record<string, unknown> | null,
+      pushNotificationPreferences: (session.pushNotificationPreferences ?? null) as Record<string, unknown> | null,
+      dateTimePreferences: (session.dateTimePreferences ?? null) as Record<string, unknown> | null,
+      backgroundPreferences: (session.backgroundPreferences ?? null) as Record<string, unknown> | null,
+      integrations: (session.integrations ?? null) as Record<string, unknown> | null,
     })
   } catch (error) {
     console.error('[GET /api/session]', error)

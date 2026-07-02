@@ -113,7 +113,7 @@ export default function AppLanguagePage() {
                     name="app-language"
                     value={lang.value}
                     checked={selectedLang === lang.value}
-                    onChange={(e) => setSelectedLang(e.target.value)}
+                    onChange={(e) => setSelectedLang(e.target.value as typeof lang.value)}
                     className="w-5 h-5 text-primary border-outline focus:ring-primary"
                   />
                 </label>
@@ -144,7 +144,7 @@ export default function AppLanguagePage() {
                     name="date-format"
                     value={fmt.value}
                     checked={selectedFormat === fmt.value}
-                    onChange={(e) => setSelectedFormat(e.target.value)}
+                    onChange={(e) => setSelectedFormat(e.target.value as typeof fmt.value)}
                     className="w-5 h-5 text-primary border-outline focus:ring-primary"
                   />
                 </label>
@@ -159,7 +159,7 @@ export default function AppLanguagePage() {
             <div className="relative max-w-xs">
               <select
                 value={firstDay}
-                onChange={(e) => setFirstDay(e.target.value)}
+                onChange={(e) => setFirstDay(e.target.value as 'monday' | 'sunday' | 'saturday')}
                 className="block w-full pl-4 pr-10 py-3 text-base border-border-subtle-light focus:outline-none focus:ring-primary focus:border-primary sm:text-sm rounded-xl appearance-none bg-surface-container-lowest"
               >
                 <option value="monday">Monday</option>

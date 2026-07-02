@@ -44,8 +44,9 @@ export function useSignOutSession() {
       return { previousData }
     },
     onError: (_err, _id, context) => {
-      if (context?.previousData) {
-        queryClient.setQueryData([SESSIONS_KEY], context.previousData)
+      const ctx = context as { previousData?: SessionsResponse } | undefined
+      if (ctx?.previousData) {
+        queryClient.setQueryData([SESSIONS_KEY], ctx.previousData)
       }
     },
     onSettled: () => {
@@ -75,8 +76,9 @@ export function useSignOutAllSessions() {
       return { previousData }
     },
     onError: (_err, _vars, context) => {
-      if (context?.previousData) {
-        queryClient.setQueryData([SESSIONS_KEY], context.previousData)
+      const ctx = context as { previousData?: SessionsResponse } | undefined
+      if (ctx?.previousData) {
+        queryClient.setQueryData([SESSIONS_KEY], ctx.previousData)
       }
     },
     onSettled: () => {

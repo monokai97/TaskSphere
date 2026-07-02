@@ -61,8 +61,9 @@ export function useUpsertProfile() {
       return { previousData }
     },
     onError: (_err, _vars, context) => {
-      if (context?.previousData) {
-        queryClient.setQueryData([PROFILE_KEY], context.previousData)
+      const ctx = context as { previousData?: Profile | null } | undefined
+      if (ctx?.previousData) {
+        queryClient.setQueryData([PROFILE_KEY], ctx.previousData)
       }
     },
     onSettled: () => {
