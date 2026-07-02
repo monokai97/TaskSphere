@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Configuración de Microsoft Teams | FocusFlow</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Geist:wght@400;500;600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface-variant": "#434655",
+                        "primary-fixed": "#dbe1ff",
+                        "surface-elevated-dark": "#27272A",
+                        "on-tertiary": "#ffffff",
+                        "canvas-dark": "#09090B",
+                        "surface": "#f8f9fa",
+                        "on-secondary-fixed": "#231b00",
+                        "on-tertiary-container": "#ecf0ff",
+                        "surface-dim": "#d9dadb",
+                        "on-primary-container": "#eeefff",
+                        "primary": "#004ac6",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-container": "#2563eb",
+                        "border-subtle-light": "#F3F4F6",
+                        "secondary-fixed": "#ffe083",
+                        "inverse-on-surface": "#f0f1f2",
+                        "tertiary-container": "#666d7f",
+                        "surface-container-highest": "#e1e3e4",
+                        "on-error-container": "#93000a",
+                        "background": "#f8f9fa",
+                        "surface-container-high": "#e7e8e9",
+                        "inverse-surface": "#2e3132",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed-variant": "#574500",
+                        "text-secondary-dark": "#A1A1AA",
+                        "surface-bright": "#f8f9fa",
+                        "on-surface": "#191c1d",
+                        "outline-variant": "#c3c6d7",
+                        "error-container": "#ffdad6",
+                        "tertiary": "#4e5566",
+                        "tertiary-fixed-dim": "#c0c6db",
+                        "surface-tint": "#0053db",
+                        "secondary-container": "#fed01b",
+                        "surface-container-low": "#f3f4f5",
+                        "tertiary-fixed": "#dce2f7",
+                        "surface-dark": "#18181B",
+                        "inverse-primary": "#b4c5ff",
+                        "text-secondary-light": "#6B7280",
+                        "on-tertiary-fixed-variant": "#404758",
+                        "on-secondary-container": "#6f5900",
+                        "surface-variant": "#e1e3e4",
+                        "error": "#ba1a1a",
+                        "border-subtle-dark": "rgba(39, 39, 42, 0.5)",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "secondary-fixed-dim": "#eec200",
+                        "on-tertiary-fixed": "#141b2b",
+                        "secondary": "#735c00",
+                        "on-error": "#ffffff",
+                        "outline": "#737686",
+                        "surface-container": "#edeeef",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "on-background": "#191c1d",
+                        "on-primary-fixed": "#00174b"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.5rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-gap": "0.25rem",
+                        "container-padding": "3rem",
+                        "container-padding-mobile": "1rem",
+                        "gutter-md": "1rem",
+                        "detail-panel-width": "384px",
+                        "sidebar-width": "288px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "task-item": ["Inter"],
+                        "display-xl-mobile": ["Geist"],
+                        "display-xl": ["Geist"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Geist"],
+                        "label-sm": ["Geist"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "task-item": ["15px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "display-xl-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "display-xl": ["36px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-effect {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        body {
+            background-color: #f8f9fa;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #e2e8f0;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-surface antialiased overflow-hidden">
+<div class="flex h-screen w-full relative">
+<!-- SIDEBAR (Fixed 288px) -->
+<aside class="fixed left-0 top-0 h-screen w-sidebar-width bg-surface/80 glass-effect border-r border-outline-variant/30 flex flex-col z-50">
+<div class="p-6 flex flex-col gap-8 h-full">
+<!-- Brand Header -->
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined text-[24px]">filter_center_focus</span>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-on-surface leading-none">FocusFlow</h1>
+<p class="text-[12px] text-on-surface-variant/70 tracking-wide mt-1">Digital Zen</p>
+</div>
+</div>
+<!-- Nav Links -->
+<nav class="flex-1 space-y-2">
+<a class="group flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-highest transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-body-md">Perfil</span>
+</a>
+<a class="group flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-highest transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">notifications</span>
+<span class="font-body-md">Notificaciones</span>
+</a>
+<a class="group flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-highest transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">palette</span>
+<span class="font-body-md">Apariencia</span>
+</a>
+<a class="group flex items-center gap-3 px-4 py-3 rounded-lg text-primary font-bold border-l-4 border-primary bg-surface-container-low transition-all duration-300" href="#">
+<span class="material-symbols-outlined">extension</span>
+<span class="font-body-md">Integraciones</span>
+</a>
+<a class="group flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-highest transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">lock</span>
+<span class="font-body-md">Privacidad</span>
+</a>
+</nav>
+<!-- User Profile -->
+<div class="mt-auto p-4 bg-surface-container rounded-xl flex items-center gap-3">
+<img class="w-10 h-10 rounded-full border-2 border-white" data-alt="Close-up studio portrait of a professional woman with a calm expression, wearing a minimalist neutral blazer, against a clean light gray background, high-end photography, sharp focus, natural lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjmrp0un_rQGa4_zfViUvoP59xehyAJ2JAyRkb5DwexK1ZKldENCP39O9BkZ_CgJwO62BG1vZ2lgz8-FIOryUOt0uE5hk5HfI6K4r5O-fQz0ad3wJXZ97Kygkh4a_HprUVq4f2RfnKBOMzV6IsnFct1z7KDi26V1n94wvvReXuC86nPrMmEBNTJlmhG5XiG-Y_GXBiAFIksEOrIKIcKGHQHNSZF4j1SRpq8rZ-yumajBhs1jiqSkASNwSp6F-1RR1WTVGMWrtn-tqV"/>
+<div class="overflow-hidden">
+<p class="font-semibold text-on-surface truncate">Alex Rivera</p>
+<p class="text-[12px] text-on-surface-variant">Plan Pro</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- MAIN WORKSPACE (Fluid) -->
+<main class="ml-sidebar-width flex-1 h-screen overflow-y-auto custom-scrollbar bg-background">
+<!-- Top App Bar Content (Internal) -->
+<header class="sticky top-0 h-16 w-full bg-background/50 glass-effect border-b border-outline-variant/30 flex items-center justify-between px-12 z-40">
+<div class="flex items-center gap-4">
+<a class="p-2 hover:bg-surface-container-highest rounded-full transition-colors" href="/settings/integrations">
+<span class="material-symbols-outlined text-on-surface-variant">arrow_back</span>
+</a>
+<span class="font-label-sm text-label-sm uppercase tracking-[0.1em] text-on-surface-variant/60">Configuración / Integraciones</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">help</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+</header>
+<div class="p-12 max-w-4xl mx-auto space-y-12">
+<!-- Page Title & Header -->
+<div class="flex items-center gap-6">
+<div class="w-16 h-16 bg-[#6264A7] rounded-2xl flex items-center justify-center shadow-lg">
+<svg class="w-10 h-10 text-white" fill="currentColor" viewbox="0 0 24 24">
+<path d="M20 7.33a3 3 0 1 1-3.33 3A3 3 0 0 1 20 7.33zM16.67 17a3.33 3.33 0 0 1-6.67 0V15a3.33 3.33 0 0 1 6.67 0zM12.67 4A2.67 2.67 0 1 1 10 6.67 2.67 2.67 0 0 1 12.67 4zm-4 13.33A2.67 2.67 0 1 1 6 14.67a2.67 2.67 0 0 1 2.67 2.66zm.66-9.33A2 2 0 1 1 7.33 6a2 2 0 0 1 2 2z"></path>
+</svg>
+</div>
+<div>
+<h2 class="font-display-xl text-display-xl text-on-surface tracking-tight">Microsoft Teams Integration</h2>
+<p class="text-on-surface-variant text-body-lg">Sincroniza tu flujo de trabajo de FocusFlow con el ecosistema de Teams.</p>
+</div>
+</div>
+<!-- Connection Status -->
+<section class="bg-surface-container-lowest border border-outline-variant/30 rounded-2xl p-8 flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-5">
+<div class="w-12 h-12 bg-green-50 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-green-600">check_circle</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Conectado a Workspace: Ethereal Corp</h3>
+<p class="text-on-surface-variant text-sm mt-1 flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">sync</span>
+                                Última sincronización: Hoy, 10:45 AM
+                            </p>
+</div>
+</div>
+<button class="px-6 py-2.5 rounded-lg border border-error text-error font-semibold hover:bg-error/5 transition-all active:scale-[0.98]">
+                        Desconectar
+                    </button>
+</section>
+<!-- Sync Preferences -->
+<section class="space-y-6">
+<h4 class="font-headline-md text-on-surface px-1">Preferencias de Sincronización</h4>
+<div class="grid gap-4">
+<!-- Preference 1 -->
+<div class="p-6 bg-white border border-border-subtle-light rounded-xl flex items-center justify-between hover:shadow-md transition-all">
+<div class="flex items-start gap-4">
+<div class="mt-1 p-2 bg-primary/5 rounded-lg">
+<span class="material-symbols-outlined text-primary">do_not_disturb_on</span>
+</div>
+<div>
+<p class="font-semibold text-on-surface">Sincronización de Presencia</p>
+<p class="text-sm text-on-surface-variant mt-0.5">Actualiza automáticamente tu estado en Teams a 'En Foco' y activa 'No molestar' durante tus sesiones.</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<!-- Preference 2 -->
+<div class="p-6 bg-white border border-border-subtle-light rounded-xl flex items-center justify-between hover:shadow-md transition-all">
+<div class="flex items-start gap-4">
+<div class="mt-1 p-2 bg-primary/5 rounded-lg">
+<span class="material-symbols-outlined text-primary">campaign</span>
+</div>
+<div>
+<p class="font-semibold text-on-surface">Notificaciones del Feed de Actividad</p>
+<p class="text-sm text-on-surface-variant mt-0.5">Publica un mensaje en un canal específico de Teams cuando completes una tarea importante.</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</section>
+<!-- Channel Mapping -->
+<section class="space-y-4">
+<h4 class="font-headline-md text-on-surface px-1">Mapeo de Canales</h4>
+<div class="p-6 bg-white border border-border-subtle-light rounded-xl">
+<label class="block text-sm font-medium text-on-surface-variant mb-3">Canal de destino para actualizaciones</label>
+<div class="relative">
+<select class="block w-full rounded-lg border-outline-variant bg-surface-container-lowest py-3 pl-4 pr-10 text-on-surface focus:border-primary focus:ring-primary appearance-none transition-colors">
+<option>#general</option>
+<option>#product-updates</option>
+<option>#marketing-announcements</option>
+<option>#engineering-sync</option>
+</select>
+<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-on-surface-variant">
+<span class="material-symbols-outlined">expand_more</span>
+</div>
+</div>
+<p class="text-[12px] text-on-surface-variant/60 mt-3 italic">Las actualizaciones de tareas marcadas como 'Prioridad Alta' se enviarán aquí.</p>
+</div>
+</section>
+<!-- Teams Tab Section -->
+<section class="bg-primary/5 border border-primary/10 rounded-2xl p-8 flex gap-8 items-center">
+<div class="flex-1 space-y-4">
+<h4 class="font-headline-md text-primary font-bold">Pestaña de FocusFlow en Teams</h4>
+<p class="text-on-surface-variant leading-relaxed">Añade FocusFlow como una pestaña dentro de cualquier canal de Teams para gestionar proyectos compartidos y tableros de tareas sin salir de tu entorno de colaboración.</p>
+<button class="flex items-center gap-2 text-primary font-bold group">
+<span>Ver guía de instalación</span>
+<span class="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform">open_in_new</span>
+</button>
+</div>
+<div class="w-48 h-32 bg-white rounded-lg shadow-inner border border-primary/10 relative overflow-hidden flex items-center justify-center p-4">
+<!-- Representative Visual -->
+<div class="w-full h-full bg-surface-container rounded border-2 border-dashed border-outline-variant flex items-center justify-center text-outline-variant">
+<span class="material-symbols-outlined text-[40px]">add</span>
+</div>
+<div class="absolute top-2 left-2 flex gap-1">
+<div class="w-2 h-2 rounded-full bg-red-400"></div>
+<div class="w-2 h-2 rounded-full bg-yellow-400"></div>
+<div class="w-2 h-2 rounded-full bg-green-400"></div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- DETAIL PANEL (Live Preview - Fixed 384px) -->
+<aside class="h-screen w-detail-panel-width bg-surface-container-low border-l border-outline-variant/30 flex flex-col p-8 overflow-y-auto custom-scrollbar">
+<h3 class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant/60 mb-8">Vista Previa en Vivo</h3>
+<div class="space-y-10">
+<!-- Presence Preview -->
+<div class="space-y-4">
+<p class="text-sm font-semibold text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+                        Presencia en Teams
+                    </p>
+<div class="bg-white p-4 rounded-xl shadow-sm flex items-center gap-4">
+<div class="relative">
+<img class="w-12 h-12 rounded-full" data-alt="Close-up studio portrait of a professional woman with a calm expression, wearing a minimalist neutral blazer, against a clean light gray background, high-end photography, sharp focus, natural lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOME3dyxJKXz1ZCjywsJVvHT71RsxTbHgVPFGtIh2ESQPKQBdB4CeH8G6qdXWEP7A0Sq6dUNAr1ZTl0nIAgdpaM36wXHW0NrgU_F6qA55Mrz2RooCT8jKHFqO2NaUeDZeijqHXFfmboEH_c3GQSoyMISEQ7dIf0WRWEy8iky5-ZKRpZNI5fTE6Rid1Jpol7yuKcYQCgsUgXJCHXt0Jg9xvHyPTJ_b19WzwvCifvkcv_Z1Pv7Bp_FLeSpit2aGZ8V2d4HTieCsB9Lmp"/>
+<div class="absolute -bottom-1 -right-1 w-4 h-4 bg-red-500 border-2 border-white rounded-full flex items-center justify-center">
+<div class="w-2 h-[2px] bg-white"></div>
+</div>
+</div>
+<div>
+<p class="font-bold text-on-surface">Alex Rivera</p>
+<p class="text-sm text-on-surface-variant flex items-center gap-1.5">
+<span class="text-red-500 font-medium">En Foco</span>
+<span class="text-on-surface-variant/40">•</span>
+                                🔕 No molestar
+                            </p>
+</div>
+</div>
+</div>
+<!-- Adaptive Card Preview -->
+<div class="space-y-4">
+<p class="text-sm font-semibold text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">chat_bubble</span>
+                        Notificación de Canal
+                    </p>
+<div class="bg-[#F3F2F1] p-4 rounded-lg border border-[#E1DFDD] space-y-3">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 bg-primary rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-[14px] text-white">filter_center_focus</span>
+</div>
+<span class="text-[12px] font-bold text-[#605E5C]">FocusFlow</span>
+</div>
+<div class="bg-white p-4 rounded shadow-sm space-y-3">
+<div class="flex items-start justify-between">
+<p class="font-bold text-[#323130] text-sm">✅ Tarea Completada</p>
+<span class="text-[10px] text-[#605E5C]">Ahora mismo</span>
+</div>
+<p class="text-[13px] text-[#323130]">Finalize Q4 Roadmap</p>
+<div class="space-y-1">
+<div class="flex justify-between text-[11px] text-[#605E5C]">
+<span>Progreso del Proyecto</span>
+<span>85%</span>
+</div>
+<div class="w-full bg-[#EDEBE9] h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[85%]"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- FocusFlow Tip -->
+<div class="bg-surface-container-highest/50 rounded-2xl p-6 border border-outline-variant/20 relative overflow-hidden">
+<div class="absolute -right-4 -top-4 opacity-10">
+<span class="material-symbols-outlined text-[80px]">lightbulb</span>
+</div>
+<div class="relative z-10">
+<div class="flex items-center gap-2 mb-3">
+<span class="material-symbols-outlined text-primary">tips_and_updates</span>
+<span class="font-bold text-on-surface">Tip de FocusFlow</span>
+</div>
+<p class="text-sm text-on-surface-variant leading-relaxed">
+                            Usa el comando <span class="bg-white px-1.5 py-0.5 rounded border border-outline-variant text-primary font-mono text-xs">@FocusFlow</span> dentro de cualquier chat de Teams para añadir tareas directamente a tu lista sin cambiar de aplicación.
+                        </p>
+</div>
+</div>
+<!-- Sync Animation (Aura Effect) -->
+<div class="mt-8 flex justify-center opacity-40 grayscale">
+
+</div>
+</div>
+</aside>
+</div>
+<!-- Micro-interaction Script -->
+<script>
+        document.querySelectorAll('input[type="checkbox"]').forEach(toggle => {
+            toggle.addEventListener('change', function() {
+                const parent = this.closest('.bg-white');
+                if (this.checked) {
+                    parent.classList.add('border-primary/30', 'bg-primary/5');
+                } else {
+                    parent.classList.remove('border-primary/30', 'bg-primary/5');
+                }
+            });
+        });
+
+        // Soft fade in for the main content
+        document.addEventListener('DOMContentLoaded', () => {
+            const main = document.querySelector('main');
+            main.style.opacity = '0';
+            main.style.transition = 'opacity 0.6s ease-out';
+            requestAnimationFrame(() => {
+                main.style.opacity = '1';
+            });
+        });
+    </script>
+</body></html>

@@ -1,0 +1,597 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang2058{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\f0\fs22\lang10 Collection Configs\par
+A Collection is a group of records, called Documents, that all share a common schema. You can define as many Collections as your application needs. Each Document in a Collection is stored in the Database based on the Fields that you define, and automatically generates a Local API, REST API, and GraphQL API used to manage your Documents.\par
+\par
+Collections are also used to achieve Authentication in Payload. By defining a Collection with auth options, that Collection receives additional operations to support user authentication.\par
+\par
+Collections are the primary way to structure recurring data in your application, such as users, products, pages, posts, and other types of content that you might want to manage. Each Collection can have its own unique Access Control, Hooks, Admin Options, and more.\par
+\par
+To define a Collection Config, use the collections property in your Payload Config:\par
+\par
+import \{ buildConfig \} from 'payload'\par
+\par
+export default buildConfig(\{\par
+  // ...\par
+  collections: [\par
+    \par
+    // Your Collections go here\par
+  ],\par
+\})\par
+Tip: If your Collection is only ever meant to contain a single Document, consider using a Global instead.\par
+\par
+Config Options\par
+It's often best practice to write your Collections in separate files and then import them into the main Payload Config.\par
+\par
+Here is what a simple Collection Config might look like:\par
+\par
+import type \{ CollectionConfig \} from 'payload'\par
+\par
+export const Posts: CollectionConfig = \{\par
+  slug: 'posts',\par
+  fields: [\par
+    \{\par
+      name: 'title',\par
+      type: 'text',\par
+    \},\par
+  ],\par
+\}\par
+Reminder: For more complex examples, see the Templates and Examples directories in the Payload repository.\par
+\par
+The following options are available:\par
+\par
+Option\par
+\par
+Description\par
+\par
+admin\par
+\par
+The configuration options for the Admin Panel. More details.\par
+\par
+access\par
+\par
+Provide Access Control functions to define exactly who should be able to do what with Documents in this Collection. More details.\par
+\par
+auth\par
+\par
+Specify options if you would like this Collection to feature authentication. More details.\par
+\par
+custom\par
+\par
+Extension point for adding custom data (e.g. for plugins)\par
+\par
+disableDuplicate\par
+\par
+When true, do not show the "Duplicate" button while editing documents within this Collection and prevent duplicate from all APIs.\par
+\par
+defaultSort\par
+\par
+Pass a top-level field to sort by default in the Collection List View. Prefix the name of the field with a minus symbol ("-") to sort in descending order. Multiple fields can be specified by using a string array.\par
+\par
+dbName\par
+\par
+Custom table or Collection name depending on the Database Adapter. Auto-generated from slug if not defined.\par
+\par
+endpoints\par
+\par
+Add custom routes to the REST API. Set to false to disable routes. More details.\par
+\par
+fields *\par
+\par
+Array of field types that will determine the structure and functionality of the data stored within this Collection. More details.\par
+\par
+graphQL\par
+\par
+Manage GraphQL-related properties for this collection. More\par
+\par
+hooks\par
+\par
+Entry point for Hooks. More details.\par
+\par
+orderable\par
+\par
+If true, enables custom ordering for the collection, and documents can be reordered via drag and drop. Uses orderable for efficient reordering.\par
+\par
+labels\par
+\par
+Singular and plural labels for use in identifying this Collection throughout Payload. Auto-generated from slug if not defined.\par
+\par
+enableQueryPresets\par
+\par
+Enable query presets for this Collection. More details.\par
+\par
+lockDocuments\par
+\par
+Enables or disables document locking. By default, document locking is enabled. Set to an object to configure, or set to false to disable locking. More details.\par
+\par
+slug *\par
+\par
+Unique, URL-friendly string that will act as an identifier for this Collection.\par
+\par
+timestamps\par
+\par
+Set to false to disable documents' automatically generated createdAt and updatedAt timestamps.\par
+\par
+trash\par
+\par
+A boolean to enable soft deletes for this collection. Defaults to false. More details.\par
+\par
+typescript\par
+\par
+An object with property interface as the text used in schema generation. Auto-generated from slug if not defined.\par
+\par
+upload\par
+\par
+Specify options if you would like this Collection to support file uploads. For more, consult the Uploads documentation.\par
+\par
+versions\par
+\par
+Set to true to enable default options, or configure with object properties. More details.\par
+\par
+defaultPopulate\par
+\par
+Specify which fields to select when this Collection is populated from another document. More Details.\par
+\par
+indexes\par
+\par
+Define compound indexes for this collection. This can be used to either speed up querying/sorting by 2 or more fields at the same time or to ensure uniqueness between several fields.\par
+\par
+forceSelect\par
+\par
+Specify which fields should be selected always, regardless of the select query which can be useful that the field exists for access control / hooks. More details.\par
+\par
+disableBulkEdit\par
+\par
+Disable the bulk edit operation for the collection in the admin panel and the REST API\par
+\par
+* An asterisk denotes that a property is required.\par
+\par
+Fields\par
+Fields define the schema of the Documents within a Collection. To learn more, go to the Fields documentation.\par
+\par
+Access Control\par
+Collection Access Control determines what a user can and cannot do with any given Document within a Collection. To learn more, go to the Access Control documentation.\par
+\par
+Hooks\par
+Collection Hooks allow you to tie into the lifecycle of your Documents so you can execute your own logic during specific events. To learn more, go to the Hooks documentation.\par
+\par
+Orderable\par
+When orderable is enabled, Payload uses fractional indexing to efficiently manage document order. When enabled on collections, this allows you to manually drag and drop documents in the Admin Panel to reorder them, as well as programmatically set the order of documents via the Local API, REST API, or GraphQL API.\par
+\par
+Orderable can also be added to joins fields.\par
+\par
+Fractional indexing\par
+If you need to generate order keys programmatically (e.g., when creating documents via the Local API with a specific order), you can import the utilities directly:\par
+\par
+import \{ generateKeyBetween, generateNKeysBetween \} from 'payload/shared'\par
+\par
+// Generate a key between two existing keys (or null for start/end)\par
+const newKey = generateKeyBetween('a0', 'a1')\par
+\par
+// Generate a key at the start (before 'a0')\par
+const startKey = generateKeyBetween(null, 'a0')\par
+\par
+// Generate a key at the end (after 'a1')\par
+const endKey = generateKeyBetween('a1', null)\par
+\par
+// Generate multiple keys between two existing keys\par
+const keys = generateNKeysBetween('a0', 'a1', 5)\par
+These utilities are useful when you need fine-grained control over document ordering, such as inserting documents at specific positions or batch-creating documents with predetermined order.\par
+\par
+Admin Options\par
+The behavior of Collections within the Admin Panel can be fully customized to fit the needs of your application. This includes grouping or hiding their navigation links, adding Custom Components, selecting which fields to display in the List View, and more.\par
+\par
+To configure Admin Options for Collections, use the admin property in your Collection Config:\par
+\par
+import type \{ CollectionConfig \} from 'payload'\par
+\par
+export const MyCollection: CollectionConfig = \{\par
+  // ...\par
+  admin: \{\par
+    \par
+    // ...\par
+  \},\par
+\}\par
+The following options are available:\par
+\par
+Option\par
+\par
+Description\par
+\par
+group\par
+\par
+Text or localization object used to group Collection and Global links in the admin navigation. Set to false to hide the link from the navigation while keeping its routes accessible.\par
+\par
+hidden\par
+\par
+Set to true or a function, called with the current user, returning true to exclude this Collection from navigation and admin routing.\par
+\par
+useAsTitle\par
+\par
+Specify a top-level field to use for a document title throughout the Admin Panel. If no field is defined, the ID of the document is used as the title.\par
+\par
+description\par
+\par
+Text to display below the Collection label in the List View to give editors more information. Alternatively, you can use the admin.components.Description to render a React component. More details.\par
+\par
+defaultColumns\par
+\par
+Array of field names that correspond to which columns to show by default in this Collection's List View.\par
+\par
+disableCopyToLocale\par
+\par
+Disables the "Copy to Locale" button while editing documents within this Collection. Only applicable when localization is enabled.\par
+\par
+groupBy\par
+\par
+Beta. Enable grouping by a field in the list view.\par
+\par
+hideAPIURL\par
+\par
+Hides the "API URL" meta field while editing documents within this Collection.\par
+\par
+enableRichTextLink\par
+\par
+The Rich Text field features a Link element which allows for users to automatically reference related documents within their rich text. Set to true by default.\par
+\par
+enableRichTextRelationship\par
+\par
+The Rich Text field features a Relationship element which allows for users to automatically reference related documents within their rich text. Set to true by default.\par
+\par
+folders\par
+\par
+A boolean to enable folders for a given collection. Defaults to false. More details.\par
+\par
+formatDocURL\par
+\par
+Function to customize document links in the List View. Return null to disable linking, or a string for custom URLs. More details.\par
+\par
+meta\par
+\par
+Page metadata overrides to apply to this Collection within the Admin Panel. More details.\par
+\par
+preview\par
+\par
+Function to generate preview URLs within the Admin Panel that can point to your app. More details.\par
+\par
+livePreview\par
+\par
+Enable real-time editing for instant visual feedback of your front-end application. More details.\par
+\par
+components\par
+\par
+Swap in your own React components to be used within this Collection. More details.\par
+\par
+listSearchableFields\par
+\par
+Specify which fields should be searched in the List search view. More details.\par
+\par
+enableListViewSelectAPI\par
+\par
+Performance opt-in. When true, uses the Select API in the List View to query only the active columns as opposed to entire documents. More details.\par
+\par
+pagination\par
+\par
+Set pagination-specific options for this Collection in the List View. More details.\par
+\par
+baseFilter\par
+\par
+Defines a default base filter which will be applied to the List View (along with any other filters applied by the user) and internal links in Lexical Editor,\par
+\par
+Note: If you set useAsTitle to a relationship or join field, it will use only the ID of the related document(s) as the title. To display a specific field (i.e. title) from the related document instead, create a virtual field that extracts the desired data, and set useAsTitle to that virtual field.\par
+\par
+Custom Components\par
+Collections can set their own Custom Components which only apply to Collection-specific UI within the Admin Panel. This includes elements such as the Save Button, or entire layouts such as the Edit View.\par
+\par
+To override Collection Components, use the admin.components property in your Collection Config:\par
+\par
+import type \{ CollectionConfig \} from 'payload'\par
+\par
+export const MyCollection: CollectionConfig = \{\par
+  // ...\par
+  admin: \{\par
+    components: \{\par
+      \par
+      // ...\par
+    \},\par
+  \},\par
+\}\par
+The following options are available:\par
+\par
+Option\par
+\par
+Description\par
+\par
+afterList\par
+\par
+An array of components to inject after the built-in List View. More details.\par
+\par
+afterListTable\par
+\par
+An array of components to inject after the built-in List View's table. More details.\par
+\par
+beforeList\par
+\par
+An array of components to inject before the built-in List View. More details.\par
+\par
+beforeListTable\par
+\par
+An array of components to inject before the built-in List View's table. More details.\par
+\par
+listMenuItems\par
+\par
+An array of components to render within a menu next to the List Controls (after the Columns and Filters options)\par
+\par
+Description\par
+\par
+A component to render below the Collection label in the List View. An alternative to the admin.description property. More details.\par
+\par
+edit\par
+\par
+Override specific components within the Edit View. More details.\par
+\par
+views\par
+\par
+Override or create new views within the Admin Panel. More details.\par
+\par
+Edit View Options\par
+Custom components within the Edit View are configured under admin.components.edit:\par
+\par
+import type \{ CollectionConfig \} from 'payload'\par
+\par
+export const MyCollection: CollectionConfig = \{\par
+  // ...\par
+  admin: \{\par
+    components: \{\par
+      edit: \{\par
+        Status: '/path/to/CustomStatus',\par
+        SaveButton: '/path/to/CustomSaveButton',\par
+        PublishButton: '/path/to/CustomPublishButton',\par
+      \},\par
+    \},\par
+  \},\par
+\}\par
+The following components can be customized within admin.components.edit:\par
+\par
+Option\par
+\par
+Description\par
+\par
+beforeDocumentControls\par
+\par
+Inject custom components before the Save / Publish buttons. More details.\par
+\par
+editMenuItems\par
+\par
+Inject custom components within the 3-dot menu dropdown located in the document controls bar. More details.\par
+\par
+SaveButton\par
+\par
+Replace the default Save Button within the Edit View. Drafts must be disabled. More details.\par
+\par
+SaveDraftButton\par
+\par
+Replace the default Save Draft Button within the Edit View. Drafts must be enabled and autosave must be disabled. More details.\par
+\par
+Status\par
+\par
+Replace the default Status component within the Edit View. Drafts must be enabled. More details.\par
+\par
+PublishButton\par
+\par
+Replace the default Publish Button within the Edit View. Drafts must be enabled. More details.\par
+\par
+UnpublishButton\par
+\par
+Replace the default Unpublish Button within the Edit View. Drafts must be enabled. More details.\par
+\par
+PreviewButton\par
+\par
+Replace the default Preview Button within the Edit View. Preview must be enabled. More details.\par
+\par
+Upload\par
+\par
+Replace the default Upload component within the Edit View. Upload must be enabled. More details.\par
+\par
+Important: All edit view components must be configured under admin.components.edit, not directly under admin.components.\par
+\par
+For example, use admin.components.edit.Status, not admin.components.Status.\par
+\par
+Note: For details on how to build Custom Components, see Building Custom Components.\par
+\par
+Pagination\par
+All Collections receive their own List View which displays a paginated list of documents that can be sorted and filtered. The pagination behavior of the List View can be customized on a per-Collection basis, and uses the same Pagination API that Payload provides.\par
+\par
+To configure pagination options, use the admin.pagination property in your Collection Config:\par
+\par
+import type \{ CollectionConfig \} from 'payload'\par
+\par
+export const Posts: CollectionConfig = \{\par
+  // ...\par
+  admin: \{\par
+    pagination: \{\par
+      defaultLimit: 10,\par
+      limits: [10, 20, 50],\par
+    \},\par
+  \},\par
+\}\par
+The following options are available:\par
+\par
+Option\par
+\par
+Description\par
+\par
+defaultLimit\par
+\par
+Integer that specifies the default per-page limit that should be used. Defaults to 10.\par
+\par
+limits\par
+\par
+Provide an array of integers to use as per-page options for admins to choose from in the List View.\par
+\par
+List Searchable Fields\par
+In the List View, there is a "search" box that allows you to quickly find a document through a simple text search. By default, it searches on the ID field. If defined, the admin.useAsTitle field is used. Or, you can explicitly define which fields to search based on the needs of your application.\par
+\par
+To define which fields should be searched, use the admin.listSearchableFields property in your Collection Config:\par
+\par
+import type \{ CollectionConfig \} from 'payload'\par
+\par
+export const Posts: CollectionConfig = \{\par
+  // ...\par
+  admin: \{\par
+    listSearchableFields: ['title', 'slug'],\par
+  \},\par
+\}\par
+Tip: If you are adding listSearchableFields, make sure you index each of these fields so your admin queries can remain performant.\par
+\par
+Enable List View Select API\par
+When true, the List View will use the Select API to query only the active columns as opposed to entire documents. This can greatly improve performance, especially for collections with large documents or many fields.\par
+\par
+To enable this, set enableListViewSelectAPI: true in your Collection Config:\par
+\par
+import type \{ CollectionConfig \} from 'payload'\par
+\par
+export const Posts: CollectionConfig = \{\par
+  // ...\par
+  admin: \{\par
+    // ...\par
+    enableListViewSelectAPI: true,\par
+  \},\par
+\}\par
+Note: The enableListViewSelectAPI property is labeled as experimental, as it will likely become the default behavior in v4 and be deprecated.\par
+\par
+Enabling this feature may cause unexpected behavior in some cases, however, such as when using hooks that rely on the full document data.\par
+\par
+For example, if your component relies on a "title" field, this field will no longer be populated if the column is inactive:\par
+\par
+import type \{ CollectionConfig \} from 'payload'\par
+\par
+export const Posts: CollectionConfig = \{\par
+  // ...\par
+  fields: [\par
+    // ...\par
+    \{\par
+      name: 'myField',\par
+      type: 'text',\par
+      hooks: \{\par
+        afterRead: [\par
+          (\{ doc \}) => doc.title, // The `title` field will no longer be populated by default, unless the column is active\par
+        ],\par
+      \},\par
+    \},\par
+  ],\par
+\}\par
+To ensure title is always present, you will need to add that field to the forceSelect property in your Collection Config:\par
+\par
+export const Posts: CollectionConfig = \{\par
+  // ...\par
+  forceSelect: \{\par
+    title: true,\par
+  \},\par
+\}\par
+Format Document URLs\par
+The formatDocURL function allows you to customize how document links are generated in the List View. This is useful for disabling links for certain documents, redirecting to custom destinations, or modifying URLs based on user context or document state.\par
+\par
+To define a custom document URL formatter, use the admin.formatDocURL property in your Collection Config:\par
+\par
+import type \{ CollectionConfig \} from 'payload'\par
+\par
+export const Posts: CollectionConfig = \{\par
+  // ...\par
+  admin: \{\par
+    formatDocURL: (\{ doc, defaultURL, req, collectionSlug, viewType \}) => \{\par
+      // Disable linking for documents with specific status\par
+      if (doc.status === 'private') \{\par
+        return null\par
+      \}\par
+\par
+      // Custom destination for featured posts\par
+      if (doc.featured) \{\par
+        return '/admin/featured-posts'\par
+      \}\par
+\par
+      // Add query parameters based on user role\par
+      if (req.user?.role === 'admin') \{\par
+        return defaultURL + '?admin=true'\par
+      \}\par
+\par
+      // Use default URL for all other cases\par
+      return defaultURL\par
+    \},\par
+  \},\par
+\}\par
+The formatDocURL function receives the following arguments:\par
+\par
+Argument\par
+\par
+Description\par
+\par
+doc\par
+\par
+The document data for the current row\par
+\par
+defaultURL\par
+\par
+The default URL that Payload would normally generate for this document. You can return this as-is, modify it, or replace it entirely.\par
+\par
+req\par
+\par
+The full PayloadRequest object, providing access to user context, payload instance, and other request data\par
+\par
+collectionSlug\par
+\par
+The slug of the current collection\par
+\par
+viewType\par
+\par
+The current view context ('list', 'trash', etc.) where the link is being generated\par
+\par
+The function should return:\par
+\par
+null to disable the link entirely (no link will be rendered)\par
+A string containing the custom URL to use for the link\par
+The defaultURL parameter to use Payload's default linking behavior\par
+Tip: The defaultURL parameter saves you from having to reconstruct URLs manually. You can modify it by appending query parameters or use it as a fallback for your custom logic.\par
+\par
+Examples\par
+Disable linking for certain users:\par
+\par
+formatDocURL: (\{ defaultURL, req \}) => \{\par
+  if (req.user?.role === 'editor') \{\par
+    return null // No link rendered\par
+  \}\par
+  return defaultURL\par
+\}\par
+GraphQL\par
+You can completely disable GraphQL for this collection by passing graphQL: false to your collection config. This will completely disable all queries, mutations, and types from appearing in your GraphQL schema.\par
+\par
+You can also pass an object to the collection's graphQL property, which allows you to define the following properties:\par
+\par
+Option\par
+\par
+Description\par
+\par
+singularName\par
+\par
+Override the "singular" name that will be used in GraphQL schema generation.\par
+\par
+pluralName\par
+\par
+Override the "plural" name that will be used in GraphQL schema generation.\par
+\par
+disableQueries\par
+\par
+Disable all GraphQL queries that correspond to this collection by passing true.\par
+\par
+disableMutations\par
+\par
+Disable all GraphQL mutations that correspond to this collection by passing true.\par
+\par
+TypeScript\par
+You can import types from Payload to help make writing your Collection configs easier and type-safe. There are two main types that represent the Collection Config, CollectionConfig and SanitizedCollectionConfig.\par
+\par
+The CollectionConfig type represents a raw Collection Config in its full form, where only the bare minimum properties are marked as required. The SanitizedCollectionConfig type represents a Collection Config after it has been fully sanitized. Generally, this is only used internally by Payload.\par
+\par
+import type \{ CollectionConfig, SanitizedCollectionConfig \} from 'payload'\par
+}
+ 

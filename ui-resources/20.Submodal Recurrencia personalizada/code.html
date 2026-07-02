@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Ethereal Focus - Custom Repeat</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Geist:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .task-input-focus:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(0, 74, 198, 0.1);
+        }
+        /* Custom scrollbar for minimalist look */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #e1e3e4;
+            border-radius: 10px;
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-container": "#eeefff",
+                    "surface-container-low": "#f3f4f5",
+                    "surface-elevated-dark": "#27272A",
+                    "secondary": "#735c00",
+                    "canvas-dark": "#09090B",
+                    "outline-variant": "#c3c6d7",
+                    "text-secondary-dark": "#A1A1AA",
+                    "on-tertiary-fixed-variant": "#404758",
+                    "inverse-primary": "#b4c5ff",
+                    "primary-fixed-dim": "#b4c5ff",
+                    "on-primary-fixed-variant": "#003ea8",
+                    "on-secondary-fixed": "#231b00",
+                    "inverse-surface": "#2e3132",
+                    "on-secondary-fixed-variant": "#574500",
+                    "text-secondary-light": "#6B7280",
+                    "surface-container": "#edeeef",
+                    "on-primary-fixed": "#00174b",
+                    "surface-dark": "#18181B",
+                    "primary-container": "#2563eb",
+                    "on-surface-variant": "#434655",
+                    "on-background": "#191c1d",
+                    "outline": "#737686",
+                    "tertiary-fixed": "#dce2f7",
+                    "on-secondary-container": "#6f5900",
+                    "secondary-container": "#fed01b",
+                    "primary-fixed": "#dbe1ff",
+                    "on-primary": "#ffffff",
+                    "on-surface": "#191c1d",
+                    "on-error": "#ffffff",
+                    "surface-dim": "#d9dadb",
+                    "on-error-container": "#93000a",
+                    "surface-variant": "#e1e3e4",
+                    "secondary-fixed": "#ffe083",
+                    "background": "#f8f9fa",
+                    "surface-container-highest": "#e1e3e4",
+                    "on-tertiary-container": "#ecf0ff",
+                    "on-tertiary": "#ffffff",
+                    "tertiary-fixed-dim": "#c0c6db",
+                    "surface": "#f8f9fa",
+                    "tertiary-container": "#666d7f",
+                    "error": "#ba1a1a",
+                    "primary": "#004ac6",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-bright": "#f8f9fa",
+                    "inverse-on-surface": "#f0f1f2",
+                    "surface-container-high": "#e7e8e9",
+                    "border-subtle-light": "#F3F4F6",
+                    "tertiary": "#4e5566",
+                    "secondary-fixed-dim": "#eec200",
+                    "error-container": "#ffdad6",
+                    "on-secondary": "#ffffff",
+                    "border-subtle-dark": "rgba(39, 39, 42, 0.5)",
+                    "on-tertiary-fixed": "#141b2b",
+                    "surface-tint": "#0053db"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "sidebar-width": "288px",
+                    "gutter-md": "1rem",
+                    "stack-gap": "0.25rem",
+                    "container-padding": "3rem",
+                    "container-padding-mobile": "1rem",
+                    "detail-panel-width": "384px"
+            },
+            "fontFamily": {
+                    "label-sm": ["Geist"],
+                    "body-lg": ["Inter"],
+                    "task-item": ["Inter"],
+                    "body-md": ["Inter"],
+                    "display-xl-mobile": ["Geist"],
+                    "display-xl": ["Geist"],
+                    "headline-md": ["Geist"]
+            },
+            "fontSize": {
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "task-item": ["15px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "display-xl-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "display-xl": ["36px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-hidden h-screen">
+<!-- Global Background Animation -->
+
+<div class="relative z-10 flex h-full">
+<!-- Sidebar Shell (Shared Component) -->
+<aside class="hidden md:flex flex-col h-full py-8 fixed left-0 top-0 h-full w-sidebar-width bg-white/80 backdrop-blur-md border-r border-border-subtle-light transition-all duration-300">
+<div class="px-6 mb-8">
+<h1 class="font-display-xl text-display-xl font-bold text-primary">Ethereal Focus</h1>
+<p class="font-body-md text-on-surface-variant">Stay productive</p>
+</div>
+<nav class="flex-1 px-4 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 bg-primary-container/10 text-primary font-semibold border-l-4 border-primary" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">sunny</span>
+<span class="font-body-md">My Day</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant/50 transition-colors" href="#">
+<span class="material-symbols-outlined">star</span>
+<span class="font-body-md">Important</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant/50 transition-colors" href="#">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="font-body-md">Planned</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant/50 transition-colors" href="#">
+<span class="material-symbols-outlined">task_alt</span>
+<span class="font-body-md">Tasks</span>
+</a>
+</nav>
+<div class="mt-auto px-6 space-y-6">
+<button class="w-full py-3 px-4 bg-primary text-on-primary rounded-xl font-headline-md shadow-lg flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.98] transition-all">
+<span class="material-symbols-outlined">add</span>
+                    New List
+                </button>
+<div class="pt-6 border-t border-border-subtle-light space-y-4">
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-md">Settings</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-body-md">Help</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Workspace -->
+<main class="flex-1 md:ml-sidebar-width h-full flex flex-col items-center justify-center relative">
+<!-- Context: This is where the modal sits on top of the task creation/editing flow -->
+<div class="w-full max-w-2xl px-12 opacity-40 pointer-events-none filter blur-[2px]">
+<h2 class="font-display-xl text-display-xl mb-8">Quarterly Strategy Review</h2>
+<div class="space-y-4">
+<div class="p-4 bg-white rounded-xl shadow-sm border border-border-subtle-light flex items-center gap-4">
+<div class="w-6 h-6 border-2 border-primary rounded-full"></div>
+<span class="font-task-item text-task-item">Review budget allocations</span>
+</div>
+<div class="p-4 bg-white rounded-xl shadow-sm border border-border-subtle-light flex items-center gap-4">
+<div class="w-6 h-6 border-2 border-primary rounded-full"></div>
+<span class="font-task-item text-task-item">Compile department feedback</span>
+</div>
+</div>
+</div>
+<!-- Modal Backdrop -->
+<div class="fixed inset-0 bg-on-background/10 backdrop-blur-[2px] z-50 flex items-center justify-center p-4">
+<!-- Custom Repeat Sub-Modal -->
+<div class="glass-panel w-full max-w-[440px] rounded-xl shadow-2xl overflow-hidden border border-white/50 flex flex-col transform transition-all duration-300 scale-100 opacity-100">
+<!-- Header -->
+<div class="px-6 py-5 border-b border-border-subtle-light flex items-center justify-between">
+<div class="flex items-center gap-3">
+<button class="p-2 -ml-2 rounded-full hover:bg-surface-variant/50 transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h3 class="font-headline-md text-headline-md">Custom Repeat</h3>
+</div>
+<button class="p-2 rounded-full hover:bg-surface-variant/50 transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<!-- Content Body -->
+<div class="p-8 space-y-10 overflow-y-auto max-h-[716px]">
+<!-- Repeat Every -->
+<div class="space-y-4">
+<label class="font-label-sm text-label-sm uppercase tracking-wider text-text-secondary-light">Repeat every</label>
+<div class="flex items-center gap-4">
+<div class="w-20">
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg px-3 py-2.5 font-body-md text-center task-input-focus transition-all" min="1" type="number" value="1"/>
+</div>
+<div class="flex-1 relative">
+<select class="w-full appearance-none bg-surface-container-lowest border border-outline-variant rounded-lg px-4 py-2.5 font-body-md pr-10 task-input-focus transition-all cursor-pointer" id="frequencyUnit" onchange="toggleSections()">
+<option value="days">Days</option>
+<option selected="" value="weeks">Weeks</option>
+<option value="months">Months</option>
+<option value="years">Years</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Occurs On: Weeks (Conditional) -->
+<div class="space-y-4 transition-all duration-300" id="weeksSection">
+<label class="font-label-sm text-label-sm uppercase tracking-wider text-text-secondary-light">Occurs on</label>
+<div class="flex justify-between">
+<button class="w-10 h-10 rounded-full border border-outline-variant flex items-center justify-center font-body-md text-on-surface-variant hover:border-primary/50 transition-colors">S</button>
+<button class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-body-md shadow-md scale-105">M</button>
+<button class="w-10 h-10 rounded-full border border-outline-variant flex items-center justify-center font-body-md text-on-surface-variant hover:border-primary/50 transition-colors">T</button>
+<button class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-body-md shadow-md scale-105">W</button>
+<button class="w-10 h-10 rounded-full border border-outline-variant flex items-center justify-center font-body-md text-on-surface-variant hover:border-primary/50 transition-colors">T</button>
+<button class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-body-md shadow-md scale-105">F</button>
+<button class="w-10 h-10 rounded-full border border-outline-variant flex items-center justify-center font-body-md text-on-surface-variant hover:border-primary/50 transition-colors">S</button>
+</div>
+</div>
+<!-- Occurs On: Months (Conditional, Hidden by default) -->
+<div class="space-y-4 hidden opacity-0 transition-all duration-300" id="monthsSection">
+<label class="font-label-sm text-label-sm uppercase tracking-wider text-text-secondary-light">Occurs on</label>
+<div class="space-y-3">
+<label class="flex items-center gap-3 p-4 bg-surface-container-lowest border border-outline-variant rounded-xl cursor-pointer hover:bg-primary-container/5 transition-colors group">
+<input checked="" class="w-5 h-5 text-primary border-outline-variant focus:ring-primary/20" name="month_occurrence" type="radio"/>
+<span class="font-body-md text-on-surface group-hover:text-primary transition-colors">On day 15</span>
+</label>
+<label class="flex items-center gap-3 p-4 bg-surface-container-lowest border border-outline-variant rounded-xl cursor-pointer hover:bg-primary-container/5 transition-colors group">
+<input class="w-5 h-5 text-primary border-outline-variant focus:ring-primary/20" name="month_occurrence" type="radio"/>
+<span class="font-body-md text-on-surface group-hover:text-primary transition-colors">On the third Sunday</span>
+</label>
+</div>
+</div>
+<!-- Summary -->
+<div class="p-4 bg-primary/5 rounded-lg border border-primary/10">
+<p class="text-primary text-sm flex items-start gap-2">
+<span class="material-symbols-outlined text-[18px] mt-0.5" style="font-variation-settings: 'FILL' 1;">info</span>
+<span id="summaryText">Repeats every week on Monday, Wednesday, and Friday.</span>
+</p>
+</div>
+</div>
+<!-- Footer -->
+<div class="px-8 py-6 border-t border-border-subtle-light flex gap-4">
+<button class="flex-1 py-3 px-4 border border-outline-variant text-on-surface-variant font-headline-md rounded-xl hover:bg-surface-variant/20 active:scale-[0.98] transition-all">
+                            Cancel
+                        </button>
+<button class="flex-1 py-3 px-4 bg-primary text-on-primary font-headline-md rounded-xl shadow-lg hover:shadow-xl active:scale-[0.98] transition-all">
+                            Save
+                        </button>
+</div>
+</div>
+</div>
+</main>
+</div>
+<script>
+        function toggleSections() {
+            const unit = document.getElementById('frequencyUnit').value;
+            const weeks = document.getElementById('weeksSection');
+            const months = document.getElementById('monthsSection');
+            const summary = document.getElementById('summaryText');
+
+            // Reset
+            weeks.classList.add('hidden');
+            weeks.classList.remove('opacity-100');
+            months.classList.add('hidden');
+            months.classList.remove('opacity-100');
+
+            if (unit === 'weeks') {
+                weeks.classList.remove('hidden');
+                setTimeout(() => weeks.classList.add('opacity-100'), 10);
+                summary.innerText = "Repeats every week on Monday, Wednesday, and Friday.";
+            } else if (unit === 'months') {
+                months.classList.remove('hidden');
+                setTimeout(() => months.classList.add('opacity-100'), 10);
+                summary.innerText = "Repeats every month on day 15.";
+            } else if (unit === 'days') {
+                summary.innerText = "Repeats every day.";
+            } else if (unit === 'years') {
+                summary.innerText = "Repeats every year.";
+            }
+        }
+
+        // Initialize multi-selection styling logic for week buttons
+        document.querySelectorAll('#weeksSection button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.classList.toggle('bg-primary');
+                this.classList.toggle('text-on-primary');
+                this.classList.toggle('shadow-md');
+                this.classList.toggle('scale-105');
+                this.classList.toggle('border-outline-variant');
+                this.classList.toggle('text-on-surface-variant');
+            });
+        });
+
+        // Initialize
+        toggleSections();
+    </script>
+</body></html>

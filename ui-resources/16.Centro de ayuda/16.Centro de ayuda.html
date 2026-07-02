@@ -1,0 +1,364 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Geist:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-effect {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+        .font-geist {
+            font-family: 'Geist', sans-serif;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #e1e3e4;
+            border-radius: 10px;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-tint": "#0053db",
+                        "tertiary-container": "#666d7f",
+                        "border-subtle-light": "#F3F4F6",
+                        "surface-bright": "#f8f9fa",
+                        "border-subtle-dark": "rgba(39, 39, 42, 0.5)",
+                        "on-primary-fixed": "#00174b",
+                        "on-primary": "#ffffff",
+                        "on-surface": "#191c1d",
+                        "on-error": "#ffffff",
+                        "outline": "#737686",
+                        "surface": "#f8f9fa",
+                        "on-tertiary": "#ffffff",
+                        "inverse-surface": "#2e3132",
+                        "surface-dim": "#d9dadb",
+                        "on-error-container": "#93000a",
+                        "error": "#ba1a1a",
+                        "surface-variant": "#e1e3e4",
+                        "surface-container-high": "#e7e8e9",
+                        "primary": "#004ac6",
+                        "on-tertiary-fixed-variant": "#404758",
+                        "primary-container": "#2563eb",
+                        "surface-container-highest": "#e1e3e4",
+                        "canvas-dark": "#09090B",
+                        "on-secondary-fixed-variant": "#574500",
+                        "inverse-on-surface": "#f0f1f2",
+                        "secondary-fixed-dim": "#eec200",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "inverse-primary": "#b4c5ff",
+                        "secondary-fixed": "#ffe083",
+                        "secondary": "#735c00",
+                        "primary-fixed": "#dbe1ff",
+                        "surface-elevated-dark": "#27272A",
+                        "on-surface-variant": "#434655",
+                        "tertiary": "#4e5566",
+                        "secondary-container": "#fed01b",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed-dim": "#c0c6db",
+                        "on-tertiary-container": "#ecf0ff",
+                        "on-primary-container": "#eeefff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-fixed": "#231b00",
+                        "on-secondary-container": "#6f5900",
+                        "tertiary-fixed": "#dce2f7",
+                        "surface-container": "#edeeef",
+                        "surface-dark": "#18181B",
+                        "on-tertiary-fixed": "#141b2b",
+                        "background": "#f8f9fa",
+                        "text-secondary-dark": "#A1A1AA",
+                        "on-background": "#191c1d",
+                        "surface-container-low": "#f3f4f5",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "text-secondary-light": "#6B7280",
+                        "outline-variant": "#c3c6d7",
+                        "on-secondary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "detail-panel-width": "384px",
+                        "container-padding-mobile": "1rem",
+                        "container-padding": "3rem",
+                        "sidebar-width": "288px",
+                        "gutter-md": "1rem",
+                        "stack-gap": "0.25rem"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Geist"],
+                        "body-lg": ["Inter"],
+                        "task-item": ["Inter"],
+                        "display-xl-mobile": ["Geist"],
+                        "display-xl": ["Geist"],
+                        "headline-md": ["Geist"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "task-item": ["15px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "display-xl-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "display-xl": ["36px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface">
+<!-- Column 1: SideNavBar -->
+<nav class="w-sidebar-width h-screen fixed left-0 top-0 border-r border-border-subtle-light bg-surface/80 glass-effect flex flex-col h-full py-8 px-4 z-50" id="sidebar">
+<div class="mb-10 px-4">
+<h1 class="font-headline-md text-headline-md font-bold text-primary">FocusFlow</h1>
+<p class="font-body-md text-body-md text-text-secondary-light opacity-70">Productivity Workspace</p>
+</div>
+<div class="flex-grow space-y-2">
+<!-- Navigation Items -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-surface-container-high/50 transition-all duration-300 text-on-surface-variant group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors" data-icon="dashboard">dashboard</span>
+<span class="font-body-md text-body-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-surface-container-high/50 transition-all duration-300 text-on-surface-variant group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors" data-icon="check_circle">check_circle</span>
+<span class="font-body-md text-body-md">Tasks</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-surface-container-high/50 transition-all duration-300 text-on-surface-variant group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors" data-icon="inbox">inbox</span>
+<span class="font-body-md text-body-md">Inbox</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-surface-container-high/50 transition-all duration-300 text-on-surface-variant group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors" data-icon="insights">insights</span>
+<span class="font-body-md text-body-md">Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-primary font-bold border-l-4 border-primary bg-surface-container-low transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+<span class="font-body-md text-body-md">Help Center</span>
+</a>
+</div>
+<div class="mt-auto px-4 pt-6">
+<button class="w-full py-3 bg-primary-container text-on-primary font-geist font-bold rounded-xl shadow-lg shadow-primary-container/20 hover:scale-98 active:opacity-80 transition-all">
+                Upgrade to Pro
+            </button>
+<div class="flex items-center gap-3 mt-8">
+<img alt="User Profile" class="w-10 h-10 rounded-full object-cover" data-alt="Close-up professional portrait of a confident man with a clean beard, wearing a minimal neutral-colored shirt. The background is a soft-focus office interior with airy morning light, reflecting a calm and productive atmosphere using a palette of soft whites and cool grays." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAr18UfSaMVqeKCJDRPIkB2DJcTGoGEfx1zQzPG75XtedIpn_3ukX73laUGplX6L2x1tZBShmJ5rn2Fq9iyOgYVm2u0CynCvXTB_o60KvQdJV_QE5oBo9J5nwhLR_pNKL0AjbO4o9-2jE3JeqERAC1rv7Y9YOAmtvp_ziAFWHUT3JWl5YxMP0TqBgZVXJHHAtDGmV47u3kDntecwrECDvIePtJheHG8i5YQ8nK9ZwbxTcSYiZriSF427VYbrDCA8a5UXm46Qi6n1Dmu">
+<div class="overflow-hidden">
+<p class="font-geist text-sm font-bold truncate">Alex Morgan</p>
+<p class="text-xs text-text-secondary-light truncate">Premium Member</p>
+</div>
+</div>
+</div>
+</nav>
+<!-- Top AppBar -->
+<header class="fixed top-0 right-0 w-[calc(100%-288px)] h-16 bg-background/80 glass-effect z-40 flex justify-between items-center px-12">
+<h2 class="font-headline-md text-headline-md font-bold text-on-surface">FocusFlow Help</h2>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-4 text-on-surface-variant">
+<button class="p-2 hover:bg-surface-container-highest/20 rounded-full transition-all duration-300">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 hover:bg-surface-container-highest/20 rounded-full transition-all duration-300">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Workspace -->
+<main class="ml-sidebar-width mr-detail-panel-width pt-16 min-h-screen">
+<div class="p-12 max-w-5xl mx-auto">
+<!-- Hero Section -->
+<section class="py-12 flex flex-col items-center text-center">
+<h3 class="font-display-xl text-display-xl text-on-surface mb-8">How can we help you today?</h3>
+<div class="w-full max-w-2xl relative group">
+<span class="material-symbols-outlined absolute left-5 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors" data-icon="search">search</span>
+<input class="w-full h-14 pl-14 pr-6 rounded-full border border-outline-variant bg-surface-container-lowest focus:ring-4 focus:ring-primary/10 focus:border-primary transition-all duration-300 outline-none shadow-sm" placeholder="Search for articles, guides, or troubleshooting..." type="text">
+</div>
+</section>
+<!-- Help Categories Grid -->
+<section class="mt-12">
+<div class="grid grid-cols-2 gap-6">
+<!-- Category Card -->
+<div class="p-8 rounded-2xl bg-surface-container-lowest border border-border-subtle-light hover:border-primary/30 hover:shadow-xl transition-all duration-500 cursor-pointer group">
+<div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary mb-6 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" data-icon="rocket_launch">rocket_launch</span>
+</div>
+<h4 class="font-headline-md text-headline-md mb-2">Getting Started</h4>
+<p class="text-text-secondary-light font-body-md text-body-md">Master the basics of FocusFlow in under 5 minutes with our quickstart guide.</p>
+</div>
+<!-- Category Card -->
+<div class="p-8 rounded-2xl bg-surface-container-lowest border border-border-subtle-light hover:border-primary/30 hover:shadow-xl transition-all duration-500 cursor-pointer group">
+<div class="w-12 h-12 rounded-xl bg-secondary-container/20 flex items-center justify-center text-secondary mb-6 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" data-icon="check_circle">check_circle</span>
+</div>
+<h4 class="font-headline-md text-headline-md mb-2">Tasks &amp; Lists</h4>
+<p class="text-text-secondary-light font-body-md text-body-md">Learn how to organize, tag, and prioritize your workflow effectively.</p>
+</div>
+<!-- Category Card -->
+<div class="p-8 rounded-2xl bg-surface-container-lowest border border-border-subtle-light hover:border-primary/30 hover:shadow-xl transition-all duration-500 cursor-pointer group">
+<div class="w-12 h-12 rounded-xl bg-tertiary-fixed/40 flex items-center justify-center text-tertiary mb-6 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" data-icon="shield">shield</span>
+</div>
+<h4 class="font-headline-md text-headline-md mb-2">Sync &amp; Privacy</h4>
+<p class="text-text-secondary-light font-body-md text-body-md">Keep your data safe across all devices with our encryption protocols.</p>
+</div>
+<!-- Category Card -->
+<div class="p-8 rounded-2xl bg-surface-container-lowest border border-border-subtle-light hover:border-primary/30 hover:shadow-xl transition-all duration-500 cursor-pointer group">
+<div class="w-12 h-12 rounded-xl bg-error-container/40 flex items-center justify-center text-error mb-6 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" data-icon="credit_card">credit_card</span>
+</div>
+<h4 class="font-headline-md text-headline-md mb-2">Account &amp; Billing</h4>
+<p class="text-text-secondary-light font-body-md text-body-md">Manage your subscription, invoices, and profile preferences easily.</p>
+</div>
+</div>
+</section>
+<!-- Featured Articles -->
+<section class="mt-20">
+<div class="flex items-center justify-between mb-8">
+<h3 class="font-headline-md text-headline-md">Featured Articles</h3>
+<button class="text-primary font-geist font-bold flex items-center gap-1 hover:gap-2 transition-all">
+                        View all articles <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+<div class="space-y-4">
+<!-- Article Item -->
+<div class="p-5 rounded-xl bg-surface-container-lowest border border-border-subtle-light hover:bg-surface-container-low transition-all cursor-pointer flex items-center justify-between group shadow-sm">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-outline" data-icon="description">description</span>
+<span class="font-body-md text-body-md font-medium">Setting up your first smart workflow</span>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors" data-icon="chevron_right">chevron_right</span>
+</div>
+<!-- Article Item -->
+<div class="p-5 rounded-xl bg-surface-container-lowest border border-border-subtle-light hover:bg-surface-container-low transition-all cursor-pointer flex items-center justify-between group shadow-sm">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-outline" data-icon="description">description</span>
+<span class="font-body-md text-body-md font-medium">How to use multi-device sync seamlessly</span>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors" data-icon="chevron_right">chevron_right</span>
+</div>
+<!-- Article Item -->
+<div class="p-5 rounded-xl bg-surface-container-lowest border border-border-subtle-light hover:bg-surface-container-low transition-all cursor-pointer flex items-center justify-between group shadow-sm">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-outline" data-icon="description">description</span>
+<span class="font-body-md text-body-md font-medium">Recovering deleted tasks and archives</span>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors" data-icon="chevron_right">chevron_right</span>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Column 3: Detail/Support Panel -->
+<aside class="w-detail-panel-width h-screen fixed right-0 top-0 border-l border-border-subtle-light bg-surface/60 glass-effect p-8 flex flex-col z-30 pt-24 overflow-y-auto custom-scrollbar" id="detail-panel">
+<!-- Support Card -->
+<div class="p-6 rounded-2xl bg-primary text-on-primary shadow-xl shadow-primary/20 mb-10">
+<h4 class="font-headline-md text-headline-md mb-2">Need more help?</h4>
+<p class="text-on-primary/80 font-body-md text-body-md mb-6">Our dedicated support team is available 24/7 to assist you.</p>
+<div class="space-y-3">
+<button class="w-full py-3 bg-white text-primary font-bold rounded-xl flex items-center justify-center gap-2 hover:bg-on-primary-container transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="chat" style="font-variation-settings: 'FILL' 1;">chat</span>
+                    Chat with Support
+                </button>
+<button class="w-full py-3 bg-transparent border border-white/30 text-white font-bold rounded-xl flex items-center justify-center gap-2 hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="mail">mail</span>
+                    Contact Email
+                </button>
+</div>
+</div>
+<!-- System Status -->
+<div class="mb-10">
+<h5 class="text-xs font-bold uppercase tracking-widest text-outline mb-4">Live System Status</h5>
+<div class="p-4 rounded-xl bg-surface-container-low border border-border-subtle-light flex items-center gap-3">
+<span class="relative flex h-3 w-3">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+<span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+</span>
+<span class="font-body-md text-body-md font-medium">All systems operational</span>
+</div>
+</div>
+<!-- Resource Links -->
+<div class="space-y-8">
+<div>
+<h5 class="text-xs font-bold uppercase tracking-widest text-outline mb-4">Resources</h5>
+<ul class="space-y-4">
+<li>
+<a class="flex items-center justify-between group" href="#">
+<div class="flex items-center gap-3 text-on-surface-variant group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="forum">forum</span>
+<span class="font-body-md text-body-md">Community Forum</span>
+</div>
+<span class="material-symbols-outlined text-outline opacity-0 group-hover:opacity-100 transition-opacity" data-icon="open_in_new">open_in_new</span>
+</a>
+</li>
+<li>
+<a class="flex items-center justify-between group" href="#">
+<div class="flex items-center gap-3 text-on-surface-variant group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="play_circle">play_circle</span>
+<span class="font-body-md text-body-md">Video Tutorials</span>
+</div>
+<span class="material-symbols-outlined text-outline opacity-0 group-hover:opacity-100 transition-opacity" data-icon="open_in_new">open_in_new</span>
+</a>
+</li>
+<li>
+<a class="flex items-center justify-between group" href="#">
+<div class="flex items-center gap-3 text-on-surface-variant group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="history_edu">history_edu</span>
+<span class="font-body-md text-body-md">Release Notes</span>
+</div>
+<span class="material-symbols-outlined text-outline opacity-0 group-hover:opacity-100 transition-opacity" data-icon="open_in_new">open_in_new</span>
+</a>
+</li>
+</ul>
+</div>
+<!-- Visual Asset -->
+<div class="relative h-48 rounded-2xl overflow-hidden mt-4 group">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A clean, minimalist workspace with a large window showing soft daylight. The environment features light wood furniture, white walls, and a few healthy green plants, creating a serene and focused atmosphere. The lighting is ethereal and airy, dominated by neutral gray and crisp white tones with a sense of calm order." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4_S4wgAxEhsbXy31QHie5ATbnjEF9e9ObVCsXku8fk48_lfqH5OfBOQW7eQzqHvIHEsSRmfQmT_jGbwu6FQ9tbVEI1EiijNDUwizt9vkfPulbQw-pwt2nIrUBQjauQuPKNgioeL-BNEHoNkhs-ICBGvXq78v8lXijU2IlusgBTm9jBxsxfxLBNjT56ikSn6wJwKPAhx4one_Hvlnol0vxyr7C8Q9G2LZ6ldZFckFnMaUPTUs6pPxViolqXvhpnCMkdO-wFfz8Ieq-">
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex flex-col justify-end p-5">
+<p class="text-white font-bold text-sm">Focus Sessions Guide</p>
+<p class="text-white/70 text-xs">Learn to enter deep work faster.</p>
+</div>
+</div>
+</div>
+</aside>
+<script>
+        // Micro-interaction for the search bar focus
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('focus', () => {
+            searchInput.parentElement.classList.add('scale-[1.02]');
+        });
+        searchInput.addEventListener('blur', () => {
+            searchInput.parentElement.classList.remove('scale-[1.02]');
+        });
+
+        // Simple smooth scroll for sidebar interaction simulation
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                // Keep it visual for now
+                if(this.getAttribute('href') === '#') e.preventDefault();
+            });
+        });
+    </script>
+</body></html>

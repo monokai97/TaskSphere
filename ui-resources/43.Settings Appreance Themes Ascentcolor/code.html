@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FocusFlow - Appearance Settings</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Geist:wght@400;500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Inter:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                "text-secondary-light": "#6B7280",
+                "on-background": "#191c1d",
+                "surface-dim": "#d9dadb",
+                "secondary": "#735c00",
+                "on-primary": "#ffffff",
+                "on-error": "#ffffff",
+                "on-surface-variant": "#434655",
+                "surface-container-highest": "#e1e3e4",
+                "surface-elevated-dark": "#27272A",
+                "secondary-fixed-dim": "#eec200",
+                "error": "#ba1a1a",
+                "outline-variant": "#c3c6d7",
+                "surface-container-lowest": "#ffffff",
+                "tertiary-fixed-dim": "#c0c6db",
+                "surface-bright": "#f8f9fa",
+                "secondary-container": "#fed01b",
+                "on-tertiary-container": "#ecf0ff",
+                "border-subtle-dark": "rgba(39, 39, 42, 0.5)",
+                "error-container": "#ffdad6",
+                "on-surface": "#191c1d",
+                "on-primary-fixed": "#00174b",
+                "canvas-dark": "#09090B",
+                "tertiary-container": "#666d7f",
+                "on-error-container": "#93000a",
+                "border-subtle-light": "#F3F4F6",
+                "surface": "#f8f9fa",
+                "tertiary": "#4e5566",
+                "background": "#f8f9fa",
+                "on-tertiary-fixed": "#141b2b",
+                "on-secondary-fixed": "#231b00",
+                "inverse-on-surface": "#f0f1f2",
+                "primary-container": "#2563eb",
+                "on-secondary": "#ffffff",
+                "inverse-primary": "#b4c5ff",
+                "on-secondary-container": "#6f5900",
+                "surface-container-low": "#f3f4f5",
+                "primary-fixed": "#dbe1ff",
+                "surface-tint": "#0053db",
+                "surface-dark": "#18181B",
+                "on-tertiary": "#ffffff",
+                "primary-fixed-dim": "#b4c5ff",
+                "surface-container-high": "#e7e8e9",
+                "on-tertiary-fixed-variant": "#404758",
+                "text-secondary-dark": "#A1A1AA",
+                "primary": "#004ac6",
+                "on-secondary-fixed-variant": "#574500",
+                "secondary-fixed": "#ffe083",
+                "inverse-surface": "#2e3132",
+                "surface-variant": "#e1e3e4",
+                "surface-container": "#edeeef",
+                "on-primary-fixed-variant": "#003ea8",
+                "on-primary-container": "#eeefff",
+                "outline": "#737686",
+                "tertiary-fixed": "#dce2f7"
+              },
+              "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+              },
+              "spacing": {
+                "container-padding": "3rem",
+                "stack-gap": "0.25rem",
+                "gutter-md": "1rem",
+                "detail-panel-width": "384px",
+                "container-padding-mobile": "1rem",
+                "sidebar-width": "288px"
+              },
+              "fontFamily": {
+                "task-item": ["Inter"],
+                "display-xl": ["Geist"],
+                "label-sm": ["Geist"],
+                "headline-md": ["Geist"],
+                "body-md": ["Inter"],
+                "display-xl-mobile": ["Geist"],
+                "body-lg": ["Inter"]
+              },
+              "fontSize": {
+                "task-item": ["15px", {"lineHeight": "20px", "fontWeight": "400"}],
+                "display-xl": ["36px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                "display-xl-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .active-ring {
+            box-shadow: 0 0 0 2px white, 0 0 0 4px #2563eb;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-primary/20">
+<div class="flex h-screen overflow-hidden">
+<!-- COLUMN 1: LEFT SIDEBAR (SideNavBar) -->
+<aside class="w-sidebar-width h-screen sticky top-0 left-0 flex flex-col bg-surface/80 glass-panel border-r border-border-subtle-light z-50">
+<div class="p-6">
+<div class="flex items-center gap-3 mb-8">
+<div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">bolt</span>
+</div>
+<div>
+<h1 class="text-headline-md font-headline-md text-primary tracking-tight">FocusFlow</h1>
+<p class="text-label-sm font-label-sm text-text-secondary-light">Productivity Workspace</p>
+</div>
+</div>
+<nav class="space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-xl group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">sunny</span>
+<span class="font-body-md">My Day</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-xl group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">star</span>
+<span class="font-body-md">Important</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-xl group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">calendar_month</span>
+<span class="font-body-md">Planned</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-xl group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">check_circle</span>
+<span class="font-body-md">Tasks</span>
+</a>
+</nav>
+</div>
+<div class="mt-auto p-6 border-t border-border-subtle-light">
+<nav class="space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 bg-primary-container/10 text-primary font-bold border-l-4 border-primary rounded-r-xl" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">settings</span>
+<span class="font-body-md">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-xl group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">help</span>
+<span class="font-body-md">Help</span>
+</a>
+</nav>
+<div class="mt-6 flex items-center gap-3 px-4">
+<img class="w-10 h-10 rounded-full border-2 border-white shadow-sm" data-alt="A professional headshot of a young creative professional with a warm smile, set against a soft-focus studio background with warm neutral tones. High-quality portrait photography with natural lighting that highlights clear skin and friendly eyes, fitting the modern minimalist aesthetic of a high-end productivity application." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5z1x4TIiFsOp3KNOsVV8i6tezEzdLSV-0o_65nShyETmWMV-t2L_Cxcn7C-B-pp1v38CsXawDTsmucsofyxcbAln_APGSMGKs8MuGwxUUG67IFjGPtgJCPLvfBcVh_WGVyqX-n-ckaZPJcribJK3xmQ-GbpVYBixeTKXGdjPbniIPlb8QSIvicRcMs3vBhvLS-oMdkzgDnoKTq94vc6jL1w55szIUSlQkjxfs6FNvbt3wq0RoqHqaWywrJEXfQ2P72fmp6ILlud_N"/>
+<div class="overflow-hidden">
+<p class="text-label-sm font-bold truncate">Alex Morgan</p>
+<p class="text-[10px] text-text-secondary-light truncate">alex@focusflow.io</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- COLUMN 2: MIDDLE PANEL (Sub-settings navigation) -->
+<div class="w-sidebar-width h-screen bg-surface-container-low border-r border-border-subtle-light flex flex-col overflow-y-auto">
+<div class="p-8">
+<h2 class="text-label-sm font-label-sm text-text-secondary-light tracking-widest mb-6">APPEARANCE</h2>
+<nav class="space-y-2">
+<a class="flex items-center justify-between px-4 py-3 bg-white shadow-sm rounded-xl text-primary font-semibold" href="#">
+<span>Theme</span>
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</a>
+<a class="flex items-center justify-between px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-xl group" href="#">
+<span>Layout</span>
+<span class="material-symbols-outlined text-[18px] opacity-0 group-hover:opacity-100 transition-opacity">chevron_right</span>
+</a>
+<a class="flex items-center justify-between px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-xl group" href="#">
+<span>Typography</span>
+<span class="material-symbols-outlined text-[18px] opacity-0 group-hover:opacity-100 transition-opacity">chevron_right</span>
+</a>
+<a class="flex items-center justify-between px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-xl group" href="#">
+<span>Accessibility</span>
+<span class="material-symbols-outlined text-[18px] opacity-0 group-hover:opacity-100 transition-opacity">chevron_right</span>
+</a>
+</nav>
+<h2 class="text-label-sm font-label-sm text-text-secondary-light tracking-widest mt-12 mb-6">GENERAL</h2>
+<nav class="space-y-2">
+<a class="flex items-center justify-between px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-xl group" href="#">
+<span>Account</span>
+</a>
+<a class="flex items-center justify-between px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-xl group" href="#">
+<span>Notifications</span>
+</a>
+<a class="flex items-center justify-between px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-xl group" href="#">
+<span>Privacy & Security</span>
+</a>
+</nav>
+</div>
+</div>
+<!-- COLUMN 3: RIGHT MAIN CONTENT AREA -->
+<main class="flex-1 h-screen overflow-y-auto bg-background p-12 scrollbar-hide">
+<div class="max-w-4xl mx-auto">
+<!-- Header & Breadcrumbs -->
+<header class="mb-12">
+<nav class="flex items-center gap-2 text-label-sm text-text-secondary-light mb-2">
+<span>Settings</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span>Appearance</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-primary font-bold">Theme</span>
+</nav>
+<h1 class="text-display-xl font-display-xl text-on-background">Appearance & Themes</h1>
+<p class="text-body-lg text-text-secondary-light mt-2">Customize how FocusFlow looks and feels on your device.</p>
+</header>
+<!-- Section 1: Theme Selection -->
+<section class="mb-16">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-headline-md font-headline-md text-on-surface">Interface Theme</h3>
+<span class="text-label-sm text-primary font-bold px-3 py-1 bg-primary/10 rounded-full">3 Options</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Light Mode -->
+<button class="group relative flex flex-col text-left focus:outline-none">
+<div class="w-full aspect-[4/3] rounded-xl bg-white border-2 border-primary shadow-lg overflow-hidden p-3 transition-transform group-hover:scale-[1.02] active:scale-[0.98]">
+<div class="w-full h-full bg-slate-50 rounded-lg border border-slate-100 flex gap-2 p-2">
+<div class="w-12 h-full bg-white border-r border-slate-100"></div>
+<div class="flex-1 flex flex-col gap-2">
+<div class="h-3 w-2/3 bg-slate-200 rounded"></div>
+<div class="h-8 w-full bg-white border border-slate-100 rounded-lg shadow-sm"></div>
+<div class="h-8 w-full bg-white border border-slate-100 rounded-lg shadow-sm"></div>
+</div>
+</div>
+<div class="absolute top-4 right-4 w-6 h-6 bg-primary rounded-full flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+</div>
+<span class="mt-4 font-bold text-on-surface">Light Mode</span>
+<span class="text-label-sm text-text-secondary-light">Optimized for daytime focus.</span>
+</button>
+<!-- Dark Mode -->
+<button class="group relative flex flex-col text-left focus:outline-none">
+<div class="w-full aspect-[4/3] rounded-xl bg-zinc-900 border-2 border-transparent hover:border-zinc-700 transition-all overflow-hidden p-3 group-hover:scale-[1.02] active:scale-[0.98]">
+<div class="w-full h-full bg-zinc-800 rounded-lg border border-zinc-700 flex gap-2 p-2">
+<div class="w-12 h-full bg-zinc-900 border-r border-zinc-700"></div>
+<div class="flex-1 flex flex-col gap-2">
+<div class="h-3 w-2/3 bg-zinc-700 rounded"></div>
+<div class="h-8 w-full bg-zinc-900 border border-zinc-700 rounded-lg"></div>
+<div class="h-8 w-full bg-zinc-900 border border-zinc-700 rounded-lg"></div>
+</div>
+</div>
+</div>
+<span class="mt-4 font-bold text-on-surface">Dark Mode</span>
+<span class="text-label-sm text-text-secondary-light">Easy on the eyes in low light.</span>
+</button>
+<!-- System Default -->
+<button class="group relative flex flex-col text-left focus:outline-none">
+<div class="w-full aspect-[4/3] rounded-xl bg-slate-200 border-2 border-transparent hover:border-slate-300 transition-all overflow-hidden p-3 group-hover:scale-[1.02] active:scale-[0.98]">
+<div class="w-full h-full flex rounded-lg overflow-hidden border border-slate-300">
+<div class="w-1/2 h-full bg-white p-2 flex flex-col gap-2">
+<div class="h-3 w-2/3 bg-slate-100 rounded"></div>
+<div class="h-8 w-full bg-slate-50 border border-slate-100 rounded-lg"></div>
+</div>
+<div class="w-1/2 h-full bg-zinc-900 p-2 flex flex-col gap-2">
+<div class="h-3 w-2/3 bg-zinc-800 rounded"></div>
+<div class="h-8 w-full bg-zinc-800 border border-zinc-700 rounded-lg"></div>
+</div>
+</div>
+</div>
+<span class="mt-4 font-bold text-on-surface">System Sync</span>
+<span class="text-label-sm text-text-secondary-light">Match your OS settings automatically.</span>
+</button>
+</div>
+</section>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+<div class="space-y-12">
+<!-- Section 2: Accent Color -->
+<section>
+<h3 class="text-headline-md font-headline-md text-on-surface mb-2">Accent Color</h3>
+<p class="text-body-md text-text-secondary-light mb-6">Choose a primary color for buttons and active states.</p>
+<div class="flex flex-wrap gap-4">
+<button class="w-12 h-12 rounded-full bg-[#2563eb] active-ring transition-transform hover:scale-110 active:scale-95 flex items-center justify-center text-white" title="Blue">
+<span class="material-symbols-outlined text-[20px]">check</span>
+</button>
+<button class="w-12 h-12 rounded-full bg-[#9333ea] transition-transform hover:scale-110 active:scale-95" title="Purple"></button>
+<button class="w-12 h-12 rounded-full bg-[#059669] transition-transform hover:scale-110 active:scale-95" title="Emerald"></button>
+<button class="w-12 h-12 rounded-full bg-[#e11d48] transition-transform hover:scale-110 active:scale-95" title="Rose"></button>
+<button class="w-12 h-12 rounded-full bg-[#d97706] transition-transform hover:scale-110 active:scale-95" title="Amber"></button>
+<button class="w-12 h-12 rounded-full bg-[#475569] transition-transform hover:scale-110 active:scale-95" title="Slate"></button>
+</div>
+</section>
+<!-- Section 3: Density -->
+<section>
+<h3 class="text-headline-md font-headline-md text-on-surface mb-2">Interface Density</h3>
+<p class="text-body-md text-text-secondary-light mb-6">Adjust the spacing between items in your lists.</p>
+<div class="flex bg-surface-container-high p-1 rounded-xl w-full max-w-sm">
+<button class="flex-1 py-2 text-label-sm font-bold text-on-surface-variant hover:text-on-surface transition-colors rounded-lg">Compact</button>
+<button class="flex-1 py-2 text-label-sm font-bold bg-white shadow-sm text-primary rounded-lg">Comfortable</button>
+<button class="flex-1 py-2 text-label-sm font-bold text-on-surface-variant hover:text-on-surface transition-colors rounded-lg">Spacious</button>
+</div>
+</section>
+</div>
+<!-- Live Preview Panel -->
+<aside class="space-y-6">
+<div class="bg-surface-container rounded-3xl p-8 border border-border-subtle-light shadow-sm sticky top-12">
+<h4 class="text-label-sm font-bold text-text-secondary-light tracking-widest mb-6">LIVE PREVIEW</h4>
+<div class="space-y-4">
+<div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex items-center gap-4 transition-all duration-300">
+<div class="w-6 h-6 rounded-full border-2 border-primary/30 flex items-center justify-center hover:border-primary transition-colors cursor-pointer"></div>
+<div class="flex-1">
+<p class="text-task-item font-task-item text-on-surface">Update brand identity assets</p>
+<p class="text-[12px] text-text-secondary-light">Due Tomorrow • Design</p>
+</div>
+<span class="material-symbols-outlined text-primary text-[20px]">star</span>
+</div>
+<div class="bg-white p-4 rounded-xl border border-primary shadow-md flex items-center gap-4 scale-[1.02] transition-all duration-300">
+<div class="w-6 h-6 rounded-full bg-primary flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<div class="flex-1">
+<p class="text-task-item font-task-item text-on-surface line-through opacity-50">Morning meditation session</p>
+<div class="flex items-center gap-2 mt-1">
+<span class="px-2 py-0.5 bg-primary/10 text-primary text-[10px] rounded font-bold uppercase tracking-wider">Health</span>
+</div>
+</div>
+</div>
+<div class="mt-8 pt-8 border-t border-slate-200">
+<div class="bg-primary/5 rounded-xl p-4 flex items-center gap-3 text-primary">
+<span class="material-symbols-outlined">info</span>
+<p class="text-label-sm italic">Showing 'Blue' accent with 'Comfortable' density in 'Light Mode'.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="flex justify-end gap-3 pt-6">
+<button class="px-6 py-2 text-label-sm font-bold text-on-surface-variant hover:bg-surface-container-high rounded-xl transition-all">Reset to Defaults</button>
+<button class="px-8 py-2 bg-primary text-white text-label-sm font-bold rounded-xl shadow-lg shadow-primary/20 hover:shadow-primary/40 hover:-translate-y-0.5 active:translate-y-0 transition-all">Save Changes</button>
+</div>
+</aside>
+</div>
+</div>
+</main>
+</div>
+<!-- Micro-interaction Script -->
+<script>
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const rect = button.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const ripple = document.createElement('span');
+                ripple.style.position = 'absolute';
+                ripple.style.width = '0px';
+                ripple.style.height = '0px';
+                ripple.style.background = 'rgba(255, 255, 255, 0.4)';
+                ripple.style.borderRadius = '50%';
+                ripple.style.left = `${x}px`;
+                ripple.style.top = `${y}px`;
+                ripple.style.transform = 'translate(-50%, -50%)';
+                ripple.style.pointerEvents = 'none';
+                ripple.style.transition = 'all 0.5s ease-out';
+                
+                button.style.overflow = 'hidden';
+                button.style.position = button.style.position || 'relative';
+                button.appendChild(ripple);
+                
+                requestAnimationFrame(() => {
+                    ripple.style.width = '200px';
+                    ripple.style.height = '200px';
+                    ripple.style.opacity = '0';
+                });
+                
+                setTimeout(() => ripple.remove(), 500);
+            });
+        });
+    </script>
+</body></html>

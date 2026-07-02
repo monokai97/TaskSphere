@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FocusFlow | List Privacy &amp; Sharing</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Geist:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-error": "#ffffff",
+                    "canvas-dark": "#09090B",
+                    "surface": "#f8f9fa",
+                    "on-surface": "#191c1d",
+                    "surface-tint": "#0053db",
+                    "on-primary": "#ffffff",
+                    "surface-dim": "#d9dadb",
+                    "on-tertiary-container": "#ecf0ff",
+                    "on-primary-fixed": "#00174b",
+                    "tertiary-fixed-dim": "#c0c6db",
+                    "on-secondary": "#ffffff",
+                    "surface-bright": "#f8f9fa",
+                    "secondary": "#735c00",
+                    "surface-container-highest": "#e1e3e4",
+                    "background": "#f8f9fa",
+                    "border-subtle-light": "#F3F4F6",
+                    "text-secondary-dark": "#A1A1AA",
+                    "surface-container-low": "#f3f4f5",
+                    "surface-elevated-dark": "#27272A",
+                    "on-secondary-container": "#6f5900",
+                    "inverse-surface": "#2e3132",
+                    "secondary-fixed-dim": "#eec200",
+                    "surface-dark": "#18181B",
+                    "tertiary-container": "#666d7f",
+                    "border-subtle-dark": "rgba(39, 39, 42, 0.5)",
+                    "on-secondary-fixed-variant": "#574500",
+                    "outline": "#737686",
+                    "error": "#ba1a1a",
+                    "primary": "#004ac6",
+                    "on-background": "#191c1d",
+                    "tertiary-fixed": "#dce2f7",
+                    "surface-container-high": "#e7e8e9",
+                    "secondary-fixed": "#ffe083",
+                    "on-primary-container": "#eeefff",
+                    "text-secondary-light": "#6B7280",
+                    "on-tertiary": "#ffffff",
+                    "inverse-primary": "#b4c5ff",
+                    "on-tertiary-fixed-variant": "#404758",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-fixed": "#231b00",
+                    "inverse-on-surface": "#f0f1f2",
+                    "surface-variant": "#e1e3e4",
+                    "primary-container": "#2563eb",
+                    "primary-fixed": "#dbe1ff",
+                    "tertiary": "#4e5566",
+                    "secondary-container": "#fed01b",
+                    "on-primary-fixed-variant": "#003ea8",
+                    "on-tertiary-fixed": "#141b2b",
+                    "surface-container": "#edeeef",
+                    "on-surface-variant": "#434655",
+                    "error-container": "#ffdad6",
+                    "primary-fixed-dim": "#b4c5ff",
+                    "on-error-container": "#93000a",
+                    "outline-variant": "#c3c6d7"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-padding-mobile": "1rem",
+                    "container-padding": "3rem",
+                    "detail-panel-width": "384px",
+                    "sidebar-width": "288px",
+                    "stack-gap": "0.25rem",
+                    "gutter-md": "1rem"
+            },
+            "fontFamily": {
+                    "task-item": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "display-xl-mobile": ["Geist"],
+                    "display-xl": ["Geist"],
+                    "body-md": ["Inter"],
+                    "headline-md": ["Geist"],
+                    "label-sm": ["Geist"]
+            },
+            "fontSize": {
+                    "task-item": ["15px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "display-xl-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "display-xl": ["36px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            user-select: none;
+        }
+        .glass-sidebar {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #e2e8f0;
+            border-radius: 10px;
+        }
+        .toggle-switch:checked + .toggle-bg {
+            background-color: #2563eb;
+        }
+        .toggle-switch:checked + .toggle-bg .toggle-circle {
+            transform: translateX(1.25rem);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- Sidebar Navigation (From JSON Authority) -->
+<aside class="w-sidebar-width h-screen fixed left-0 top-0 bg-surface/80 glass-sidebar border-r border-border-subtle-light flex flex-col py-8 px-4 z-40">
+<div class="mb-10 px-2 flex items-center gap-3">
+<div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-[20px]">fluorescent</span>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary">FocusFlow</h1>
+<p class="text-[11px] font-label-sm text-text-secondary-light tracking-wider uppercase">Productivity Workspace</p>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high/50 transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-body-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high/50 transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="check_circle">check_circle</span>
+<span class="font-body-md">Tasks</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high/50 transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="inbox">inbox</span>
+<span class="font-body-md">Inbox</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high/50 transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="insights">insights</span>
+<span class="font-body-md">Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-primary font-bold border-l-4 border-primary bg-surface-container-low" href="#">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+<span class="font-body-md">Help Center</span>
+</a>
+</nav>
+<div class="mt-auto px-2">
+<div class="bg-primary/5 rounded-xl p-4 border border-primary/10">
+<p class="text-[13px] font-medium text-primary mb-2">Workspace limit: 85%</p>
+<div class="w-full bg-primary/10 h-1.5 rounded-full overflow-hidden mb-3">
+<div class="bg-primary h-full w-[85%]"></div>
+</div>
+<button class="w-full py-2 bg-primary text-white font-label-sm rounded-lg hover:bg-primary-container transition-colors shadow-sm active:scale-95 transition-transform">Upgrade to Pro</button>
+</div>
+<div class="mt-6 flex items-center gap-3 px-2">
+<img class="w-10 h-10 rounded-full bg-surface-dim object-cover shadow-sm" data-alt="A professional close-up portrait of a high-performance business executive in a minimalist studio environment. The lighting is soft and directional, highlighting a clean, high-fashion aesthetic. The background is a neutral, light-gray tone that feels organized and focused, perfectly matching the productivity app's zen atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQ_aeR4x35zDnIRFG2UZQoCPURlk5BTN1SlLoHeaqVINZNV8aLB19f01TFJMcLB6s11fSUkrBBmsOLFG6N-TzZ9wzcvfsZ0gtnxduCO4jCpAZzs_NnDjZsMi8oQm9MHnw5eQCNIjEg5QPKMTOgS3vvYH8SqCJtUA0MFncyxUvVry3nyxU2W_IBeIoZncM1pI23XTPyy4iLikGD6Lt6nj8-8580UhPf3JsA_p3mCuQN_0cXprZmtNLs3oEuQv5FpmpIukvPSjHaaYg6"/>
+<div class="flex-1">
+<p class="text-sm font-bold truncate">Alex Sterling</p>
+<p class="text-[11px] text-text-secondary-light">alex@focusflow.io</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Settings Sub-navigation (Column 2) -->
+<nav class="w-[288px] h-screen fixed left-[288px] top-0 border-r border-border-subtle-light bg-surface-container-lowest z-30 pt-16 px-6 hidden lg:flex flex-col">
+<h2 class="text-[11px] font-label-sm text-text-secondary-light tracking-widest uppercase mb-6 mt-8">System Settings</h2>
+<div class="space-y-4">
+<a class="group flex items-center justify-between text-on-surface-variant hover:text-primary transition-colors" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[20px]" data-icon="person">person</span>
+<span class="font-body-md">Profile Info</span>
+</div>
+</a>
+<a class="group flex items-center justify-between text-on-surface-variant hover:text-primary transition-colors" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[20px]" data-icon="security">security</span>
+<span class="font-body-md">Security</span>
+</div>
+</a>
+<a class="group flex items-center justify-between text-on-surface-variant hover:text-primary transition-colors" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[20px]" data-icon="notifications">notifications</span>
+<span class="font-body-md">Notifications</span>
+</div>
+</a>
+<a class="group flex items-center justify-between text-primary font-bold" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[20px] font-bold" data-icon="lock_open">lock_open</span>
+<span class="font-body-md">Privacy &amp; Sharing</span>
+</div>
+<div class="w-1.5 h-1.5 bg-primary rounded-full"></div>
+</a>
+<a class="group flex items-center justify-between text-on-surface-variant hover:text-primary transition-colors" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[20px]" data-icon="palette">palette</span>
+<span class="font-body-md">Appearance</span>
+</div>
+</a>
+<a class="group flex items-center justify-between text-on-surface-variant hover:text-primary transition-colors" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[20px]" data-icon="cloud_sync">cloud_sync</span>
+<span class="font-body-md">Sync &amp; Integrations</span>
+</div>
+</a>
+</div>
+</nav>
+<!-- Main Content Area (Column 3) -->
+<main class="ml-[288px] lg:ml-[576px] min-h-screen p-12 bg-background max-w-[1200px]">
+<!-- Breadcrumbs -->
+<nav class="mb-8">
+<ol class="flex items-center gap-2 text-label-sm text-text-secondary-light">
+<li><a class="hover:text-primary transition-colors" href="#">Settings</a></li>
+<li><span class="material-symbols-outlined text-[14px]">chevron_right</span></li>
+<li><a class="hover:text-primary transition-colors" href="#">Privacy &amp; Security</a></li>
+<li><span class="material-symbols-outlined text-[14px]">chevron_right</span></li>
+<li class="text-on-surface font-semibold">List Privacy</li>
+</ol>
+</nav>
+<!-- Header -->
+<header class="mb-12">
+<h1 class="font-display-xl text-display-xl text-on-surface mb-2">List Privacy &amp; Sharing</h1>
+<p class="text-body-lg text-text-secondary-light">Manage who can view and edit your personal and shared lists.</p>
+</header>
+<div class="space-y-12">
+<!-- Default List Visibility Section -->
+<section class="max-w-3xl">
+<div class="flex items-start gap-4 mb-6">
+<div class="p-2 bg-primary/5 rounded-lg">
+<span class="material-symbols-outlined text-primary" data-icon="visibility">visibility</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md mb-1">Default List Visibility</h3>
+<p class="text-sm text-text-secondary-light">Choose the initial privacy state for all newly created lists.</p>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Private Option -->
+<label class="relative flex flex-col p-5 border-2 border-primary bg-surface-container-lowest rounded-xl cursor-pointer hover:shadow-sm transition-all group">
+<input checked="" class="absolute right-4 top-4 w-4 h-4 text-primary focus:ring-primary" name="default_visibility" type="radio" value="private"/>
+<span class="material-symbols-outlined text-primary mb-3" data-icon="lock">lock</span>
+<span class="font-bold text-on-surface mb-1">Private (Only Me)</span>
+<span class="text-xs text-text-secondary-light">Only you can access and modify tasks in this list by default.</span>
+</label>
+<!-- Shared Option -->
+<label class="relative flex flex-col p-5 border border-border-subtle-light bg-surface-container-lowest rounded-xl cursor-pointer hover:border-primary/50 hover:shadow-sm transition-all group">
+<input class="absolute right-4 top-4 w-4 h-4 text-primary focus:ring-primary" name="default_visibility" type="radio" value="shared"/>
+<span class="material-symbols-outlined text-on-surface-variant mb-3 group-hover:text-primary" data-icon="groups">groups</span>
+<span class="font-bold text-on-surface mb-1">Shared</span>
+<span class="text-xs text-text-secondary-light">Lists are created with workspace-level viewing permissions.</span>
+</label>
+</div>
+</section>
+<!-- Global Sharing Settings Section -->
+<section class="max-w-3xl border-t border-border-subtle-light pt-12">
+<div class="flex items-start gap-4 mb-8">
+<div class="p-2 bg-primary/5 rounded-lg">
+<span class="material-symbols-outlined text-primary" data-icon="settings_suggest">settings_suggest</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md mb-1">Global Sharing Settings</h3>
+<p class="text-sm text-text-secondary-light">Universal controls that apply across all your FocusFlow lists.</p>
+</div>
+</div>
+<div class="space-y-4">
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded-xl border border-transparent hover:border-border-subtle-light transition-all">
+<div class="flex-1">
+<h4 class="font-semibold text-on-surface">Allow access requests</h4>
+<p class="text-xs text-text-secondary-light">Let others in your workspace request access to private lists.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only toggle-switch" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-dim rounded-full transition-colors toggle-bg relative">
+<div class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-transform toggle-circle"></div>
+</div>
+</label>
+</div>
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded-xl border border-transparent hover:border-border-subtle-light transition-all">
+<div class="flex-1">
+<h4 class="font-semibold text-on-surface">Show activity in shared lists</h4>
+<p class="text-xs text-text-secondary-light">Members of shared lists can see when you edit or complete tasks.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only toggle-switch" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-dim rounded-full transition-colors toggle-bg relative">
+<div class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-transform toggle-circle"></div>
+</div>
+</label>
+</div>
+</div>
+</section>
+<!-- Individual List Controls -->
+<section class="max-w-4xl border-t border-border-subtle-light pt-12">
+<div class="flex items-center justify-between mb-8">
+<div class="flex items-start gap-4">
+<div class="p-2 bg-primary/5 rounded-lg">
+<span class="material-symbols-outlined text-primary" data-icon="list_alt">list_alt</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md mb-1">Individual List Controls</h3>
+<p class="text-sm text-text-secondary-light">Modify specific permissions for your active task lists.</p>
+</div>
+</div>
+<div class="flex gap-2">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-secondary-light text-[18px]">search</span>
+<input class="pl-9 pr-4 py-1.5 bg-surface-container-low border-none rounded-lg text-sm focus:ring-2 focus:ring-primary/20 w-48" placeholder="Filter lists..." type="text"/>
+</div>
+</div>
+</div>
+<div class="overflow-hidden rounded-xl border border-border-subtle-light bg-surface-container-lowest">
+<table class="w-full text-left">
+<thead class="bg-surface-container-low border-b border-border-subtle-light">
+<tr>
+<th class="px-6 py-4 text-xs font-label-sm text-text-secondary-light uppercase tracking-wider">List Name</th>
+<th class="px-6 py-4 text-xs font-label-sm text-text-secondary-light uppercase tracking-wider">Privacy State</th>
+<th class="px-6 py-4 text-xs font-label-sm text-text-secondary-light uppercase tracking-wider">Members</th>
+<th class="px-6 py-4 text-right"></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-subtle-light">
+<!-- Work Projects -->
+<tr class="hover:bg-surface-container-low/30 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-blue-500"></div>
+<span class="font-medium text-on-surface">Work Projects</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-primary-container/10 text-primary-container text-xs font-semibold">
+<span class="material-symbols-outlined text-[14px]">groups</span>
+                                        Shared
+                                    </span>
+</td>
+<td class="px-6 py-4">
+<div class="flex -space-x-2">
+<div class="w-6 h-6 rounded-full border-2 border-white bg-surface-dim" title="User 1"></div>
+<div class="w-6 h-6 rounded-full border-2 border-white bg-surface-dim" title="User 2"></div>
+<div class="w-6 h-6 rounded-full border-2 border-white bg-primary-fixed flex items-center justify-center text-[10px] font-bold text-on-primary-fixed">+4</div>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-primary hover:underline text-sm font-semibold">Edit Permissions</button>
+</td>
+</tr>
+<!-- Grocery List -->
+<tr class="hover:bg-surface-container-low/30 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-emerald-500"></div>
+<span class="font-medium text-on-surface">Grocery List</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-dim text-on-surface-variant text-xs font-semibold">
+<span class="material-symbols-outlined text-[14px]">lock</span>
+                                        Private
+                                    </span>
+</td>
+<td class="px-6 py-4 text-text-secondary-light text-xs italic">Only me</td>
+<td class="px-6 py-4 text-right">
+<button class="text-primary hover:underline text-sm font-semibold">Edit Permissions</button>
+</td>
+</tr>
+<!-- Fitness -->
+<tr class="hover:bg-surface-container-low/30 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-orange-500"></div>
+<span class="font-medium text-on-surface">Fitness</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-dim text-on-surface-variant text-xs font-semibold">
+<span class="material-symbols-outlined text-[14px]">lock</span>
+                                        Private
+                                    </span>
+</td>
+<td class="px-6 py-4 text-text-secondary-light text-xs italic">Only me</td>
+<td class="px-6 py-4 text-right">
+<button class="text-primary hover:underline text-sm font-semibold">Edit Permissions</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- Danger Zone -->
+<section class="max-w-3xl border-t border-border-subtle-light pt-12 pb-24">
+<div class="p-6 bg-red-50 rounded-xl border border-red-100">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-red-600" data-icon="report_problem">report_problem</span>
+<h4 class="font-bold text-red-900">Revoke Shared Access</h4>
+</div>
+<p class="text-sm text-red-800 mb-6 leading-relaxed">Instantly make all your shared lists private. This will remove all existing collaborators and revoke all invitation links. This action cannot be undone.</p>
+<button class="px-6 py-2.5 bg-red-600 text-white rounded-lg font-bold text-sm hover:bg-red-700 transition-colors shadow-sm">Revoke Global Access</button>
+</div>
+</section>
+</div>
+</main>
+<!-- Detailed Task Panel (Column 3 - Slide-in Mockup) -->
+<aside class="fixed right-0 top-0 w-detail-panel-width h-screen bg-surface/80 glass-sidebar border-l border-border-subtle-light z-40 translate-x-full lg:translate-x-0 hidden lg:flex flex-col p-8">
+<div class="flex items-center justify-between mb-10">
+<h3 class="font-bold text-lg">Privacy Insights</h3>
+<button class="p-1 hover:bg-surface-container-high rounded-full">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="flex-1 space-y-8 overflow-y-auto custom-scrollbar pr-2">
+<div class="space-y-4">
+<div class="aspect-video rounded-xl bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A clean, conceptual 3D abstract visualization of data security and encryption. Glowing translucent blue spheres are connected by fine, shimmering lines in a minimalist white space. The image conveys a sense of high-tech safety, order, and digital protection, fitting for a privacy settings screen in a modern productivity app." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBo2f28-s9kEz-Uk6QG_-3YhXqvFOFIINlUigtIqSKE7d4rX9AJXIhCm_4QCb18k2xabmRzNqUVQCAR42feeGtVE64Ks4HoBm7utXsFCxK-1XcjczwGx6r0uX9P-1QcVxnAu210fMj_gbr1ems1r93YZxILX6uKFn9PCHb6PqWRj7Ribws_TPqtdtg_6nXwdQ3exJSZp_UR3ncDxP0EP03iJ0cc9I2PwyzwOQSXluhiiZPPrvghi2j45WETkAppxqPDa9ZgUejDVHPO"/>
+</div>
+<div>
+<h4 class="font-bold mb-2">How sharing works</h4>
+<p class="text-sm text-text-secondary-light leading-relaxed">FocusFlow uses end-to-end encryption for list content. When you share a list, a secure key is exchanged with authorized members only.</p>
+</div>
+</div>
+<div class="p-4 bg-primary/5 rounded-xl border border-primary/10">
+<div class="flex items-center gap-3 mb-3">
+<span class="material-symbols-outlined text-primary text-[20px]">verified_user</span>
+<span class="font-bold text-sm text-primary">Security Recommendation</span>
+</div>
+<p class="text-xs text-text-secondary-light mb-4 leading-relaxed">We noticed you have 4 lists shared with people outside your primary organization.</p>
+<button class="text-xs font-bold text-primary hover:underline">Review External Access →</button>
+</div>
+<div>
+<h4 class="font-bold text-sm mb-4">Recent Privacy Activity</h4>
+<div class="space-y-4">
+<div class="flex gap-3">
+<div class="w-1.5 h-1.5 mt-2 rounded-full bg-primary flex-shrink-0"></div>
+<div class="text-xs">
+<p class="font-medium text-on-surface">Updated 'Work Projects' to Shared</p>
+<p class="text-text-secondary-light">2 hours ago</p>
+</div>
+</div>
+<div class="flex gap-3">
+<div class="w-1.5 h-1.5 mt-2 rounded-full bg-surface-dim flex-shrink-0"></div>
+<div class="text-xs">
+<p class="font-medium text-on-surface">Denied access request for 'Grocery List'</p>
+<p class="text-text-secondary-light">Yesterday, 4:15 PM</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-auto pt-6 border-t border-border-subtle-light">
+<p class="text-[10px] text-text-secondary-light uppercase font-bold tracking-widest mb-2">Privacy Policy</p>
+<a class="text-xs text-primary hover:underline" href="#">Learn more about FocusFlow Privacy</a>
+</div>
+</aside>
+<script>
+        // Simple interaction for the radio buttons
+        document.querySelectorAll('input[name="default_visibility"]').forEach(input => {
+            input.addEventListener('change', function() {
+                // Reset all labels
+                document.querySelectorAll('label').forEach(label => {
+                    label.classList.remove('border-primary', 'bg-surface-container-lowest');
+                    label.classList.add('border-border-subtle-light');
+                });
+                
+                // Set active label
+                if (this.checked) {
+                    this.parentElement.classList.add('border-primary');
+                    this.parentElement.classList.remove('border-border-subtle-light');
+                }
+            });
+        });
+
+        // Toggle micro-interaction
+        document.querySelectorAll('.toggle-switch').forEach(toggle => {
+            toggle.addEventListener('change', function() {
+                const bg = this.nextElementSibling;
+                if (this.checked) {
+                    bg.classList.add('bg-primary');
+                    bg.classList.remove('bg-surface-dim');
+                } else {
+                    bg.classList.remove('bg-primary');
+                    bg.classList.add('bg-surface-dim');
+                }
+            });
+        });
+    </script>
+</body></html>

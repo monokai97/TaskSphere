@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FocusFlow - iCal Integration</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Geist:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed": "#dce2f7",
+                        "inverse-surface": "#2e3132",
+                        "secondary-container": "#fed01b",
+                        "on-error-container": "#93000a",
+                        "outline-variant": "#c3c6d7",
+                        "on-tertiary": "#ffffff",
+                        "primary-container": "#2563eb",
+                        "on-secondary-fixed": "#231b00",
+                        "on-error": "#ffffff",
+                        "surface-container-low": "#f3f4f5",
+                        "on-primary-container": "#eeefff",
+                        "tertiary-fixed-dim": "#c0c6db",
+                        "surface": "#f8f9fa",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "surface-dark": "#18181B",
+                        "on-tertiary-fixed": "#141b2b",
+                        "inverse-on-surface": "#f0f1f2",
+                        "surface-container-highest": "#e1e3e4",
+                        "outline": "#737686",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed-variant": "#574500",
+                        "error": "#ba1a1a",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "secondary-fixed": "#ffe083",
+                        "tertiary": "#4e5566",
+                        "on-primary-fixed": "#00174b",
+                        "primary": "#004ac6",
+                        "on-background": "#191c1d",
+                        "on-primary": "#ffffff",
+                        "border-subtle-dark": "rgba(39, 39, 42, 0.5)",
+                        "primary-fixed": "#dbe1ff",
+                        "canvas-dark": "#09090B",
+                        "tertiary-container": "#666d7f",
+                        "surface-container-high": "#e7e8e9",
+                        "surface-container-lowest": "#ffffff",
+                        "text-secondary-dark": "#A1A1AA",
+                        "on-tertiary-container": "#ecf0ff",
+                        "on-secondary-container": "#6f5900",
+                        "surface-elevated-dark": "#27272A",
+                        "on-tertiary-fixed-variant": "#404758",
+                        "surface-bright": "#f8f9fa",
+                        "surface-dim": "#d9dadb",
+                        "surface-tint": "#0053db",
+                        "secondary": "#735c00",
+                        "border-subtle-light": "#F3F4F6",
+                        "inverse-primary": "#b4c5ff",
+                        "on-surface": "#191c1d",
+                        "on-surface-variant": "#434655",
+                        "surface-container": "#edeeef",
+                        "surface-variant": "#e1e3e4",
+                        "secondary-fixed-dim": "#eec200",
+                        "text-secondary-light": "#6B7280",
+                        "background": "#f8f9fa"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter-md": "1rem",
+                        "container-padding-mobile": "1rem",
+                        "container-padding": "3rem",
+                        "stack-gap": "0.25rem",
+                        "sidebar-width": "288px",
+                        "detail-panel-width": "384px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "display-xl": ["Geist"],
+                        "label-sm": ["Geist"],
+                        "headline-md": ["Geist"],
+                        "body-lg": ["Inter"],
+                        "task-item": ["Inter"],
+                        "display-xl-mobile": ["Geist"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "display-xl": ["36px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "task-item": ["15px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "display-xl-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #f8f9fa;
+            color: #191c1d;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #e1e3e4;
+            border-radius: 10px;
+        }
+
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: #004ac6;
+        }
+        .toggle-checkbox:checked + .toggle-label::after {
+            transform: translateX(1.25rem);
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md">
+<!-- Navigation Sidebar -->
+<aside class="fixed left-0 top-0 h-screen w-sidebar-width bg-surface/80 backdrop-blur-md z-40 flex flex-col gap-gutter-md p-6">
+<div class="mb-8">
+<h1 class="font-headline-md text-headline-md font-bold text-on-surface">FocusFlow</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant opacity-70 uppercase tracking-widest">Digital Zen</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-surface-container-highest transition-colors duration-200 text-on-surface-variant font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span>Profile</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-surface-container-highest transition-colors duration-200 text-on-surface-variant font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span>Notifications</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-surface-container-highest transition-colors duration-200 text-on-surface-variant font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="palette">palette</span>
+<span>Appearance</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 active:scale-[0.98] text-primary font-bold border-l-4 border-primary bg-surface-container-low" href="#">
+<span class="material-symbols-outlined" data-icon="extension">extension</span>
+<span>Integrations</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-surface-container-highest transition-colors duration-200 text-on-surface-variant font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="lock">lock</span>
+<span>Privacy</span>
+</a>
+</nav>
+<div class="mt-auto pt-6 border-t border-outline-variant/30 flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-variant overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A clean, professional portrait of a calm individual looking directly at the camera, wearing a neutral-colored linen shirt. The background is a soft, out-of-focus minimalist office with natural light, reflecting the disciplined and zen FocusFlow brand aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgcZbhcBxacJO7C7eIFisfFheKq4BjtdDDwC7bBrVbH3LdhPH9k5n3qUEj-Wr4FMoNJw_GTZ5K_zn5a3Ym8M0gMAiAJUGUWIYszJoCboQI1nPidWWUP-8p1_tlMs_nOmEzVuTO6yzJYyv_NIHB8kuEtn6okfk9TVWu_kqATtX3zkAF8piIMIDkR6ivLsY4KKIdyJpX51hP0zvKWBo34M-nUUFLzN-z136xaVKLEL7PzxGKTV3HpZkTu0F5K1vG35bEGj1M8vQf2pYM"/>
+</div>
+<div>
+<p class="font-label-sm text-label-sm font-bold text-on-surface">Alex Rivera</p>
+<p class="text-[10px] text-on-surface-variant">Pro Plan</p>
+</div>
+</div>
+</aside>
+<!-- Top Bar -->
+<header class="fixed top-0 right-0 w-[calc(100%-288px)] h-16 bg-background/50 backdrop-blur-sm z-30 flex items-center justify-between px-12 border-b border-outline-variant">
+<div class="flex items-center gap-4">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Settings</span>
+<span class="material-symbols-outlined text-[14px] text-outline">chevron_right</span>
+<span class="font-label-sm text-label-sm text-on-surface font-semibold">Integrations</span>
+<span class="material-symbols-outlined text-[14px] text-outline">chevron_right</span>
+<span class="font-label-sm text-label-sm text-on-surface font-semibold">iCal</span>
+</div>
+<div class="flex items-center gap-6">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors" data-icon="help">help</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors" data-icon="settings">settings</button>
+</div>
+</header>
+<!-- Main Content Layout -->
+<main class="ml-sidebar-width pt-16 flex min-h-screen">
+<!-- Center Column (Workspace) -->
+<section class="flex-1 p-12 custom-scrollbar overflow-y-auto max-w-4xl mx-auto">
+<div class="animate-fade-in">
+<div class="flex items-center gap-4 mb-2">
+<div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[32px]" data-icon="calendar_today">calendar_today</span>
+</div>
+<div>
+<h2 class="font-display-xl text-display-xl text-on-surface">iCal Integration</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Connect any external calendar that provides a public or private .ics URL.</p>
+</div>
+</div>
+<div class="mt-12 space-y-8">
+<!-- URL Input Section -->
+<div class="bg-surface-container-lowest p-8 rounded-xl border border-outline-variant shadow-sm transition-all hover:shadow-md">
+<label class="block font-label-sm text-label-sm text-on-surface font-bold uppercase tracking-wider mb-4" for="ical-url">Calendar URL</label>
+<div class="flex gap-3">
+<input class="flex-1 bg-surface-container-low border-none rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary-container text-on-surface font-body-md outline-none" id="ical-url" placeholder="https://p01-calendar.icloud.com/published/2/..." type="text"/>
+<button class="bg-primary hover:bg-primary-container text-white px-8 py-3 rounded-lg font-semibold transition-all active:scale-[0.97]">
+                                Connect
+                            </button>
+</div>
+<div class="mt-6 flex gap-4 p-4 rounded-lg bg-surface-container-low/50">
+<span class="material-symbols-outlined text-outline text-[20px]">info</span>
+<div class="text-label-sm text-on-surface-variant leading-relaxed">
+<p class="font-bold text-on-surface mb-1">How to find your URL:</p>
+<ul class="list-disc list-inside space-y-1">
+<li><span class="font-medium">Apple Calendar:</span> Right-click your calendar → Public Calendar → Copy Link.</li>
+<li><span class="font-medium">Other Services:</span> Look for "Publish Calendar" or "Secret address in iCal format" settings.</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- Preferences Section -->
+<div class="space-y-6">
+<h3 class="font-headline-md text-headline-md text-on-surface">Synchronization Preferences</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Toggle 1 -->
+<div class="flex items-center justify-between p-5 bg-surface-container-lowest border border-outline-variant rounded-xl">
+<div class="flex flex-col">
+<span class="font-body-md font-semibold text-on-surface">Import events as tasks</span>
+<span class="text-[12px] text-on-surface-variant">Automatically create FocusFlow tasks for new events.</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only toggle-checkbox" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-surface-variant rounded-full toggle-label after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
+</label>
+</div>
+<!-- Toggle 2 -->
+<div class="flex items-center justify-between p-5 bg-surface-container-lowest border border-outline-variant rounded-xl">
+<div class="flex flex-col">
+<span class="font-body-md font-semibold text-on-surface">Auto-refresh calendar</span>
+<span class="text-[12px] text-on-surface-variant">Keep your task list in sync with background updates.</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only toggle-checkbox" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-surface-variant rounded-full toggle-label after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
+</label>
+</div>
+</div>
+<!-- Dropdown -->
+<div class="p-5 bg-surface-container-lowest border border-outline-variant rounded-xl max-w-md">
+<label class="block font-label-sm text-label-sm text-on-surface font-bold uppercase mb-3">Sync Frequency</label>
+<div class="relative">
+<select class="w-full appearance-none bg-surface-container-low border border-outline-variant rounded-lg px-4 py-2.5 text-on-surface focus:ring-2 focus:ring-primary-container outline-none pr-10">
+<option>Every 15 minutes</option>
+<option selected="">Every hour</option>
+<option>Daily</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-outline">expand_more</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Right Column (Detail Panel) -->
+<aside class="w-detail-panel-width bg-surface/80 backdrop-blur-md border-l border-outline-variant p-8 flex flex-col gap-8 custom-scrollbar overflow-y-auto">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="visibility">visibility</span>
+                    Live Preview
+                </h3>
+<div class="space-y-4">
+<p class="text-label-sm text-on-surface-variant font-medium">How it will appear in your list:</p>
+<!-- Task Item Mockup -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 shadow-sm group hover:border-primary/40 transition-all">
+<div class="flex items-start gap-3">
+<div class="w-5 h-5 rounded-full border-2 border-outline-variant mt-1 group-hover:border-primary transition-colors"></div>
+<div class="flex-1">
+<div class="flex items-center justify-between">
+<h4 class="font-task-item text-task-item font-semibold text-on-surface">External Sync Meeting</h4>
+<span class="material-symbols-outlined text-[16px] text-primary" data-weight="fill">link</span>
+</div>
+<div class="flex items-center gap-2 mt-1">
+<span class="material-symbols-outlined text-[14px] text-outline">schedule</span>
+<span class="text-[12px] text-on-surface-variant">2:00 PM - 3:00 PM</span>
+</div>
+<div class="mt-3 flex gap-2">
+<span class="px-2 py-0.5 bg-tertiary-fixed text-on-tertiary-fixed text-[10px] rounded-full font-bold uppercase tracking-tight">iCal Source</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- FocusFlow Tip Card -->
+<div class="mt-auto bg-primary-container p-6 rounded-2xl text-white relative overflow-hidden group">
+<div class="absolute -right-4 -bottom-4 opacity-10 group-hover:scale-110 transition-transform duration-500">
+<span class="material-symbols-outlined text-[120px]" data-icon="lightbulb">lightbulb</span>
+</div>
+<h4 class="font-headline-md text-headline-md mb-3 flex items-center gap-2">
+<span class="material-symbols-outlined">auto_awesome</span>
+                    FocusFlow Tip
+                </h4>
+<p class="text-on-primary-container leading-relaxed">
+                    By centralizing your external calendars, you reduce context switching by 40%. Manage your meetings and deep-work sessions in one unified, zen interface.
+                </p>
+<button class="mt-6 text-white font-bold text-label-sm flex items-center gap-2 hover:underline">
+                    Learn about Unified Workflow
+                    <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</button>
+</div>
+<!-- Visual Decoration -->
+<div class="h-48 rounded-2xl bg-surface-container border border-dashed border-outline-variant flex items-center justify-center p-8 text-center">
+<div class="space-y-2">
+<span class="material-symbols-outlined text-outline/40 text-[48px]">sync_alt</span>
+<p class="text-label-sm text-outline font-medium">Safe &amp; Secure End-to-End Encryption</p>
+</div>
+</div>
+</aside>
+</main>
+<script>
+        // Micro-interactions
+        document.querySelectorAll('input[type="text"]').forEach(input => {
+            input.addEventListener('focus', () => {
+                input.parentElement.classList.add('ring-2', 'ring-primary/20');
+            });
+            input.addEventListener('blur', () => {
+                input.parentElement.classList.remove('ring-2', 'ring-primary/20');
+            });
+        });
+
+        // Simple animation trigger for the content
+        window.addEventListener('DOMContentLoaded', () => {
+            const workspace = document.querySelector('section');
+            workspace.style.opacity = '0';
+            workspace.style.transform = 'translateY(10px)';
+            
+            setTimeout(() => {
+                workspace.style.transition = 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+                workspace.style.opacity = '1';
+                workspace.style.transform = 'translateY(0)';
+            }, 100);
+        });
+    </script>
+</body></html>

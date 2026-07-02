@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Ethereal Focus - Configuración de Fondo</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Geist:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .preview-shadow {
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-tint": "#0053db",
+                        "error-container": "#ffdad6",
+                        "on-primary-fixed": "#00174b",
+                        "surface-container-high": "#e7e8e9",
+                        "surface-elevated-dark": "#27272A",
+                        "on-secondary-fixed-variant": "#574500",
+                        "primary-container": "#2563eb",
+                        "on-tertiary": "#ffffff",
+                        "inverse-surface": "#2e3132",
+                        "tertiary-fixed-dim": "#c0c6db",
+                        "on-surface-variant": "#434655",
+                        "on-tertiary-container": "#ecf0ff",
+                        "on-tertiary-fixed": "#141b2b",
+                        "text-secondary-light": "#6B7280",
+                        "secondary-fixed": "#ffe083",
+                        "tertiary-fixed": "#dce2f7",
+                        "surface-container-highest": "#e1e3e4",
+                        "secondary": "#735c00",
+                        "surface-variant": "#e1e3e4",
+                        "surface-bright": "#f8f9fa",
+                        "secondary-fixed-dim": "#eec200",
+                        "secondary-container": "#fed01b",
+                        "tertiary": "#4e5566",
+                        "surface": "#f8f9fa",
+                        "on-error": "#ffffff",
+                        "surface-container": "#edeeef",
+                        "on-surface": "#191c1d",
+                        "canvas-dark": "#09090B",
+                        "tertiary-container": "#666d7f",
+                        "surface-container-low": "#f3f4f5",
+                        "primary-fixed": "#dbe1ff",
+                        "outline-variant": "#c3c6d7",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-dim": "#d9dadb",
+                        "on-error-container": "#93000a",
+                        "outline": "#737686",
+                        "error": "#ba1a1a",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "inverse-on-surface": "#f0f1f2",
+                        "inverse-primary": "#b4c5ff",
+                        "border-subtle-dark": "rgba(39, 39, 42, 0.5)",
+                        "on-secondary-fixed": "#231b00",
+                        "background": "#f8f9fa",
+                        "on-secondary": "#ffffff",
+                        "text-secondary-dark": "#A1A1AA",
+                        "surface-dark": "#18181B",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "on-background": "#191c1d",
+                        "border-subtle-light": "#F3F4F6",
+                        "on-primary-container": "#eeefff",
+                        "primary": "#004ac6",
+                        "on-tertiary-fixed-variant": "#404758",
+                        "on-primary": "#ffffff",
+                        "on-secondary-container": "#6f5900"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-gap": "0.25rem",
+                        "container-padding": "3rem",
+                        "sidebar-width": "288px",
+                        "container-padding-mobile": "1rem",
+                        "detail-panel-width": "384px",
+                        "gutter-md": "1rem"
+                    },
+                    "fontFamily": {
+                        "task-item": ["Inter"],
+                        "display-xl-mobile": ["Geist"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Geist"],
+                        "label-sm": ["Geist"],
+                        "display-xl": ["Geist"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "task-item": ["15px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "display-xl-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "display-xl": ["36px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background font-body-md text-on-surface min-h-screen">
+<div class="flex h-screen overflow-hidden">
+<!-- COLUMN 1: SIDEBAR NAVIGATION -->
+<aside class="w-sidebar-width glass-panel bg-white/80 border-r border-border-subtle-light flex flex-col h-full z-50">
+<div class="px-8 py-10">
+<div class="flex items-center gap-3 mb-10">
+<div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-lg" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+</div>
+<h1 class="font-display-xl text-headline-md font-bold text-primary tracking-tight">Ethereal Focus</h1>
+</div>
+<nav class="space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant/50 transition-colors rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="sunny">sunny</span>
+<span class="font-body-md">Mi Día</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant/50 transition-colors rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="star">star</span>
+<span class="font-body-md">Importante</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant/50 transition-colors rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_month">calendar_month</span>
+<span class="font-body-md">Planeado</span>
+</a>
+<div class="pt-6 pb-2">
+<p class="px-4 text-label-sm font-label-sm text-outline uppercase tracking-widest">Configuración</p>
+</div>
+<a class="flex items-center gap-3 px-4 py-3 bg-primary-container/10 text-primary font-semibold border-l-4 border-primary rounded-r-xl" href="#">
+<span class="material-symbols-outlined" data-icon="palette" style="font-variation-settings: 'FILL' 1;">palette</span>
+<span class="font-body-md">Apariencia</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant/50 transition-colors rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-body-md">General</span>
+</a>
+</nav>
+</div>
+<div class="mt-auto p-8">
+<div class="flex items-center gap-3 p-3 rounded-2xl bg-surface-container-low border border-border-subtle-light">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="A professional studio portrait of a young creative professional with a serene expression, wearing minimalist neutral clothing, set against a soft, out-of-focus modern office background with high-key lighting and clean lines." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDuEUZES2X0oXUAxzm17T6_KJhErQyyzMM4DSbCCb2g_tyE7h0kp9CPoGV1RYhCQySLcV_0NIwdA6PrqC0lFywoZfFs6VGMry3jtpIA3uVKqc0VAyGnnNjulaw0Ivtu4RQ1dxbKhk4xjpsqjk-d8RK9_EHhi8gizvuhjW-ibYxy77qcFNXEEu1gyNQYLM2R85-IvcYhNXwb0zJW4pcSQHDr_jWliQPMhpXXyM6uPna4M7qsZ0nIC6TRG5Nd4H_QjJBHG8DPTe8e1jIi"/>
+<div class="flex flex-col">
+<span class="font-label-sm text-on-surface font-bold">Alex Rivera</span>
+<span class="text-[10px] text-outline">Plan Pro</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- COLUMN 2: BACKGROUND CONFIGURATION -->
+<main class="flex-1 overflow-y-auto no-scrollbar bg-white">
+<div class="max-w-3xl mx-auto px-12 py-16">
+<!-- Header -->
+<header class="mb-12">
+<div class="flex items-center gap-2 text-primary font-label-sm uppercase tracking-widest mb-2">
+<a class="hover:underline" href="#">Ajustes</a>
+<span>/</span>
+<span>Apariencia</span>
+</div>
+<h2 class="font-display-xl text-display-xl text-on-surface mb-4">Fondo</h2>
+<p class="font-body-lg text-text-secondary-light max-w-xl">
+                        Personaliza tu espacio de trabajo con texturas, degradados o colores sólidos que mejoren tu concentración.
+                    </p>
+</header>
+<div class="space-y-12">
+<!-- Section 1: Mode -->
+<section>
+<h3 class="font-headline-md text-headline-md mb-6">Modo de Fondo</h3>
+<div class="grid grid-cols-4 gap-4">
+<button class="flex flex-col items-center gap-3 p-4 rounded-2xl border-2 border-primary bg-primary-container/5 transition-all group">
+<div class="w-12 h-12 rounded-xl bg-white border border-outline-variant flex items-center justify-center group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-primary" data-icon="rectangle">rectangle</span>
+</div>
+<span class="font-label-sm text-primary font-bold">Sólido</span>
+</button>
+<button class="flex flex-col items-center gap-3 p-4 rounded-2xl border-2 border-transparent hover:border-outline-variant transition-all group">
+<div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-primary-fixed to-secondary-fixed border border-outline-variant flex items-center justify-center group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-white" data-icon="gradient">gradient</span>
+</div>
+<span class="font-label-sm text-outline">Degradado</span>
+</button>
+<button class="flex flex-col items-center gap-3 p-4 rounded-2xl border-2 border-transparent hover:border-outline-variant transition-all group">
+<div class="w-12 h-12 rounded-xl bg-surface-container-high border border-outline-variant flex items-center justify-center group-hover:scale-105 transition-transform relative overflow-hidden">
+<div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(#000 1px, transparent 1px); background-size: 4px 4px;"></div>
+<span class="material-symbols-outlined text-outline" data-icon="texture">texture</span>
+</div>
+<span class="font-label-sm text-outline">Textura</span>
+</button>
+<button class="flex flex-col items-center gap-3 p-4 rounded-2xl border-2 border-transparent hover:border-outline-variant transition-all group">
+<div class="w-12 h-12 rounded-xl bg-surface-container border border-outline-variant flex items-center justify-center group-hover:scale-105 transition-transform overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A minimalist landscape photography of a calm foggy lake at dawn, featuring soft blue and grey tones, reflecting a peaceful and disciplined atmosphere, clean composition with lots of negative space." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkGHtHZ2aoRCEIzyj7jvawsDn3zI09flGGjp9nRh1zNuaGnlM0MxCSZymsDMlQD2h0LZbdJoC9U5BgNMn77WDdJyCTpjvmvb4ymFs-4Q2XdqYnIzIYtPNp0qlV6O673VPYrH8hszc8vRNJXpQugHuYeeI3VV5gGFCKGeWZCsxIrjhlUgW7iHAe0a1SPFyCI9v3T767JNl7jk9_jv9LnpuPMgJvLwvEPtXpfC49KvoOyD59zCltIjaizJ4jmlv8pxI8MU7FB5Pkv9t2"/>
+</div>
+<span class="font-label-sm text-outline">Imagen</span>
+</button>
+</div>
+</section>
+<!-- Section 2: Solid Colors -->
+<section>
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-headline-md text-headline-md">Colores Sólidos</h3>
+<button class="text-primary font-label-sm hover:underline">Ver todos</button>
+</div>
+<div class="grid grid-cols-6 gap-4">
+<div class="aspect-square rounded-full bg-surface-container-lowest border-2 border-primary cursor-pointer ring-4 ring-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'wght' 700;">check</span>
+</div>
+<div class="aspect-square rounded-full bg-surface-container-low border border-border-subtle-light cursor-pointer hover:scale-110 transition-transform"></div>
+<div class="aspect-square rounded-full bg-primary-container/20 border border-border-subtle-light cursor-pointer hover:scale-110 transition-transform"></div>
+<div class="aspect-square rounded-full bg-secondary-container/20 border border-border-subtle-light cursor-pointer hover:scale-110 transition-transform"></div>
+<div class="aspect-square rounded-full bg-tertiary-fixed/30 border border-border-subtle-light cursor-pointer hover:scale-110 transition-transform"></div>
+<div class="aspect-square rounded-full bg-outline-variant/20 border border-border-subtle-light cursor-pointer hover:scale-110 transition-transform"></div>
+</div>
+</section>
+<!-- Section 3: Gradients -->
+<section>
+<h3 class="font-headline-md text-headline-md mb-6">Degradados Predeterminados</h3>
+<div class="grid grid-cols-3 gap-4">
+<div class="group cursor-pointer">
+<div class="h-24 rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-100 border border-border-subtle-light mb-2 group-hover:shadow-lg transition-all"></div>
+<span class="font-label-sm text-on-surface">Neblina Oceánica</span>
+</div>
+<div class="group cursor-pointer">
+<div class="h-24 rounded-2xl bg-gradient-to-br from-orange-50 to-rose-100 border border-border-subtle-light mb-2 group-hover:shadow-lg transition-all"></div>
+<span class="font-label-sm text-on-surface">Brillo del Atardecer</span>
+</div>
+<div class="group cursor-pointer">
+<div class="h-24 rounded-2xl bg-gradient-to-br from-zinc-100 to-slate-300 border border-border-subtle-light mb-2 group-hover:shadow-lg transition-all"></div>
+<span class="font-label-sm text-on-surface">Aurora de Medianoche</span>
+</div>
+</div>
+</section>
+<!-- Section 4: Opacity & Effects -->
+<section class="p-8 bg-surface-container-low rounded-3xl">
+<h3 class="font-headline-md text-headline-md mb-8">Opacidad y Efectos</h3>
+<div class="space-y-8">
+<div class="space-y-4">
+<div class="flex justify-between items-center">
+<label class="font-label-sm text-on-surface-variant font-bold">Desenfoque de Fondo</label>
+<span class="font-label-sm text-primary">12px</span>
+</div>
+<input class="w-full h-1.5 bg-outline-variant rounded-lg appearance-none cursor-pointer accent-primary" max="40" min="0" type="range" value="12"/>
+</div>
+<div class="space-y-4">
+<div class="flex justify-between items-center">
+<label class="font-label-sm text-on-surface-variant font-bold">Opacidad de Capa</label>
+<span class="font-label-sm text-primary">85%</span>
+</div>
+<input class="w-full h-1.5 bg-outline-variant rounded-lg appearance-none cursor-pointer accent-primary" max="100" min="0" type="range" value="85"/>
+</div>
+</div>
+</section>
+</div>
+</div>
+</main>
+<!-- COLUMN 3: LIVE PREVIEW -->
+<aside class="w-detail-panel-width bg-surface-container-low p-8 flex flex-col items-center justify-center relative overflow-hidden">
+<!-- Decorative background elements for preview -->
+<div class="absolute inset-0 bg-white z-0"></div>
+<div class="z-10 w-full text-center mb-8">
+<span class="font-label-sm text-primary uppercase tracking-tighter font-bold">Vista Previa en Vivo</span>
+</div>
+<!-- The Preview Canvas -->
+<div class="w-full aspect-[3/4] bg-white rounded-[2rem] border border-border-subtle-light shadow-2xl relative overflow-hidden flex flex-col p-6 transition-all duration-500" id="preview-canvas">
+<!-- Inner simulated UI -->
+<div class="flex items-center justify-between mb-8">
+<div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-xs" data-icon="menu">menu</span>
+</div>
+<div class="w-20 h-2 bg-outline-variant/30 rounded-full"></div>
+<div class="w-8 h-8 rounded-full bg-surface-variant"></div>
+</div>
+<div class="space-y-4">
+<div class="p-4 bg-white/60 backdrop-blur-md rounded-2xl border border-white/40 preview-shadow">
+<div class="flex items-center gap-3 mb-2">
+<div class="w-4 h-4 rounded-full border-2 border-primary"></div>
+<div class="w-32 h-2.5 bg-on-surface rounded-full"></div>
+</div>
+<div class="ml-7 w-24 h-2 bg-outline-variant/40 rounded-full"></div>
+</div>
+<div class="p-4 bg-white/60 backdrop-blur-md rounded-2xl border border-white/40 preview-shadow opacity-60">
+<div class="flex items-center gap-3 mb-2">
+<div class="w-4 h-4 rounded-full bg-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[10px] text-white" style="font-variation-settings: 'wght' 700;">check</span>
+</div>
+<div class="w-40 h-2.5 bg-on-surface/40 rounded-full line-through"></div>
+</div>
+</div>
+<div class="p-4 bg-primary/5 rounded-2xl border border-primary/10 border-dashed flex flex-col items-center justify-center gap-2 mt-4">
+<span class="material-symbols-outlined text-primary/40" data-icon="add_circle">add_circle</span>
+<div class="w-16 h-2 bg-primary/20 rounded-full"></div>
+</div>
+</div>
+<!-- Floating task box mock -->
+<div class="mt-auto p-4 bg-white rounded-xl shadow-xl border border-border-subtle-light flex items-center gap-3">
+<div class="w-3 h-3 rounded-full bg-outline-variant"></div>
+<div class="flex-1 h-2 bg-outline-variant/20 rounded-full"></div>
+<div class="w-6 h-6 rounded-lg bg-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-xs" data-icon="arrow_upward">arrow_upward</span>
+</div>
+</div>
+</div>
+<div class="z-10 mt-10 w-full">
+<button class="w-full py-4 bg-on-surface text-white rounded-2xl font-label-sm font-bold hover:bg-on-surface-variant transition-all active:scale-[0.98]">
+                    Aplicar Cambios
+                </button>
+<button class="w-full mt-3 py-4 text-on-surface-variant font-label-sm hover:bg-surface-variant/20 rounded-2xl transition-all">
+                    Restablecer a Predeterminado
+                </button>
+</div>
+</aside>
+</div>
+<!-- Micro-interaction for preview selection -->
+<script>
+        document.querySelectorAll('.group.cursor-pointer, .aspect-square.cursor-pointer').forEach(item => {
+            item.addEventListener('click', function() {
+                const preview = document.getElementById('preview-canvas');
+                
+                // If it's a gradient
+                if (this.querySelector('.bg-gradient-to-br')) {
+                    const gradientClasses = Array.from(this.querySelector('.bg-gradient-to-br').classList)
+                                                .filter(cls => cls.startsWith('bg-gradient-to-br') || cls.startsWith('from-') || cls.startsWith('to-'));
+                    
+                    preview.className = preview.className.replace(/bg-\S+/g, '').replace(/from-\S+/g, '').replace(/to-\S+/g, '');
+                    preview.classList.add(...gradientClasses);
+                } 
+                // If it's a solid color
+                else if (this.classList.contains('aspect-square')) {
+                    const colorClass = Array.from(this.classList).find(cls => cls.startsWith('bg-'));
+                    preview.className = preview.className.replace(/bg-\S+/g, '').replace(/from-\S+/g, '').replace(/to-\S+/g, '');
+                    preview.classList.add(colorClass);
+                }
+            });
+        });
+    </script>
+</body></html>

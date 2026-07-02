@@ -1,0 +1,306 @@
+<!DOCTYPE html><html class="light" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;family=Inter:wght@100..900&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .bento-item {
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .bento-item:hover {
+            transform: translateY(-2px);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-variant": "#e1e3e4",
+                        "error-container": "#ffdad6",
+                        "surface-dark": "#18181B",
+                        "secondary-container": "#fed01b",
+                        "on-tertiary-fixed": "#141b2b",
+                        "border-subtle-dark": "rgba(39, 39, 42, 0.5)",
+                        "outline": "#737686",
+                        "on-tertiary-container": "#ecf0ff",
+                        "canvas-dark": "#09090B",
+                        "primary-fixed": "#dbe1ff",
+                        "text-secondary-dark": "#A1A1AA",
+                        "outline-variant": "#c3c6d7",
+                        "surface-container-highest": "#e1e3e4",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "surface-dim": "#d9dadb",
+                        "on-surface": "#191c1d",
+                        "surface-container-high": "#e7e8e9",
+                        "tertiary-fixed": "#dce2f7",
+                        "on-error": "#ffffff",
+                        "secondary-fixed-dim": "#eec200",
+                        "tertiary-fixed-dim": "#c0c6db",
+                        "on-tertiary-fixed-variant": "#404758",
+                        "on-primary-fixed": "#00174b",
+                        "surface-container-low": "#f3f4f5",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-fixed": "#231b00",
+                        "on-surface-variant": "#434655",
+                        "on-secondary-fixed-variant": "#574500",
+                        "inverse-surface": "#2e3132",
+                        "inverse-primary": "#b4c5ff",
+                        "primary-container": "#2563eb",
+                        "secondary": "#735c00",
+                        "text-secondary-light": "#6B7280",
+                        "background": "#f8f9fa",
+                        "secondary-fixed": "#ffe083",
+                        "on-primary-container": "#eeefff",
+                        "primary": "#004ac6",
+                        "on-error-container": "#93000a",
+                        "on-secondary-container": "#6f5900",
+                        "surface-tint": "#0053db",
+                        "on-tertiary": "#ffffff",
+                        "surface-bright": "#f8f9fa",
+                        "tertiary-container": "#666d7f",
+                        "surface": "#f8f9fa",
+                        "error": "#ba1a1a",
+                        "surface-container": "#edeeef",
+                        "tertiary": "#4e5566",
+                        "on-background": "#191c1d",
+                        "on-primary": "#ffffff",
+                        "border-subtle-light": "#F3F4F6",
+                        "surface-elevated-dark": "#27272A",
+                        "inverse-on-surface": "#f0f1f2",
+                        "primary-fixed-dim": "#b4c5ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-gap": "0.25rem",
+                        "detail-panel-width": "384px",
+                        "sidebar-width": "288px",
+                        "gutter-md": "1rem",
+                        "container-padding": "3rem",
+                        "container-padding-mobile": "1rem"
+                    },
+                    "fontFamily": {
+                        "display-xl": ["Geist"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-sm": ["Geist"],
+                        "headline-md": ["Geist"],
+                        "task-item": ["Inter"]
+                    },
+                    "fontSize": {
+                        "display-xl": ["36px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "task-item": ["15px", {"lineHeight": "20px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background font-body-md text-on-surface min-h-screen">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full w-sidebar-width border-r border-border-subtle-light bg-white/80 backdrop-blur-md z-50 flex flex-col py-8 hidden md:flex">
+<div class="px-6 mb-10">
+<h1 class="font-display-xl text-display-xl font-bold text-primary">Ethereal Focus</h1>
+<p class="font-body-md text-body-md text-text-secondary-light">Stay productive</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 bg-primary-container/10 text-primary font-semibold border-l-4 border-primary" href="#">
+<span class="material-symbols-outlined" data-icon="sunny">sunny</span>
+<span class="font-headline-md text-headline-md">My Day</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant/50 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="star">star</span>
+<span class="font-headline-md text-headline-md">Important</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant/50 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_month">calendar_month</span>
+<span class="font-headline-md text-headline-md">Planned</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant/50 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="task_alt">task_alt</span>
+<span class="font-headline-md text-headline-md">Tasks</span>
+</a>
+</nav>
+<div class="px-4 mt-auto space-y-4">
+<button class="w-full py-3 px-4 bg-primary text-white rounded-xl font-headline-md flex items-center justify-center gap-2 shadow-sm hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined">add</span>
+                New List
+            </button>
+<div class="pt-4 border-t border-border-subtle-light space-y-1">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-variant/50 transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-body-md text-body-md">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-variant/50 transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="font-body-md text-body-md">Help</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Workspace -->
+<main class="md:ml-sidebar-width flex flex-col min-h-screen relative">
+<!-- TopAppBar -->
+<header class="sticky top-0 z-40 w-full px-4 md:px-12 py-4 bg-background/50 backdrop-blur-sm flex justify-between items-center">
+<div class="flex items-center gap-4 flex-1">
+<button class="md:hidden p-2 text-on-surface-variant">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="relative w-full max-w-md hidden md:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full bg-surface-container-low border-none rounded-full py-2 pl-10 pr-4 focus:ring-2 focus:ring-primary/20 text-body-md" placeholder="Search tasks..." type="text">
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="hidden md:flex items-center px-4 py-2 bg-primary text-white rounded-full font-label-sm text-label-sm shadow-sm hover:bg-primary/90 transition-colors">
+                    Add Task
+                </button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-variant rounded-full transition-colors relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-variant rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border-2 border-primary/20 ml-2">
+<img alt="User avatar" class="w-full h-full object-cover" data-alt="A professional close-up portrait of a young creative professional in a bright, modern studio. The lighting is soft and natural, emphasizing a calm and focused expression. The background is a minimalist office space with soft-focus greenery, maintaining the clean, high-performance aesthetic of the Ethereal Focus brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAeSTdSTDaYJRHlH3nRMbGKcHaThKdZ-hPoKKSuIosfaBsHWv6GRduehcLRlVh3kAyTQdhQyOZhqaKlR1K01Oh1iZDAUiuqMws94FWDUhuRrH-L0cJuqgKfU2bc34naWY9k8sODOPDBZfY_D_3p32CBR16OVRndWYpSg79KQWQykUJkA608v0VX2akwl0y1qTrGI6hNHYT6ChYw4HqR2Z7vVOMwHWRTc2VJVN5AzSeFJjYyF_W8Q9PMcazbBf62Tb7PVT-iSB5rvjCy">
+</div>
+</div>
+</header>
+<!-- Vento Layout Empty State -->
+<section class="flex-1 p-4 md:p-12 flex items-center justify-center">
+<div class="max-w-6xl w-full grid grid-cols-1 md:grid-cols-4 grid-rows-6 gap-6 h-[600px] relative">
+<!-- Background Logo Layer (Asymmetric & Low Opacity) -->
+<div class="absolute inset-0 flex items-center justify-center opacity-[0.03] pointer-events-none select-none overflow-hidden">
+<span class="material-symbols-outlined text-[600px] leading-none" style="font-variation-settings: 'FILL' 1;">bubble_chart</span>
+</div>
+<!-- Bento Item 1: Wide Top (Greeting) -->
+<div class="md:col-span-4 md:row-span-2 bento-item glass-panel bg-white/40 rounded-3xl border border-white/60 p-12 flex flex-col items-center justify-center text-center z-10 shadow-sm">
+<h2 class="font-display-xl text-display-xl text-primary mb-2">Tu día está despejado</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-md">Relájate o añade una tarea para empezar</p>
+</div>
+<!-- Bento Item 2: Vertical Highlight -->
+<div class="md:col-span-1 md:row-span-4 bento-item glass-panel bg-primary-container/5 rounded-3xl border border-primary/10 p-8 flex flex-col justify-end gap-4 shadow-sm group">
+<div class="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary transition-transform group-hover:scale-110">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">self_improvement</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-primary">Zen Moment</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant opacity-70">Encuentra foco en el silencio.</p>
+</div>
+</div>
+<!-- Bento Item 3: Center Feature (Decorative Graphic) -->
+<div class="md:col-span-2 md:row-span-3 bento-item overflow-hidden rounded-3xl border border-surface-variant/40 shadow-xl group">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A peaceful, minimalist workspace scene featuring a single ceramic cup on a smooth wooden desk. Soft morning sunlight streams through a sheer curtain, casting gentle shadows. The palette is dominated by off-whites, warm woods, and soft grays, creating a feeling of digital zen and mental clarity consistent with a focused workflow." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBU4ajLdqrIa1dsNED-KEX5f6DanuX7yu-o2IAneO-kTJTI_UfcMrTkPgI-LPRqfrqCy6aB-KJX39MTiE7GTejsBpfyYMQrDgp5Uw1AJBLeqlG--Fak8iE9byovmwEypuSOCLoHuDZpSwtKQYq3Br77HHG8tmV7VC44UD6xK5xj55c-yaQB4PRepq_NWUrg4z_waJtBdrBgA-WK_M9mrzBfNexvvQymTOK9lz75B8NWEKDEXUB4xI3YKREnP55m6yro4B5EP68i0YJ-">
+</div>
+<!-- Bento Item 4: Small Stat/Metric -->
+<div class="md:col-span-1 md:row-span-2 bento-item glass-panel bg-white/60 rounded-3xl border border-white/80 p-6 flex flex-col justify-between shadow-sm">
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant">Productivity</span>
+<div class="flex items-baseline gap-1">
+<span class="font-display-xl text-display-xl text-primary">100%</span>
+<span class="material-symbols-outlined text-primary text-sm">trending_up</span>
+</div>
+</div>
+<!-- Bento Item 5: Quick Action/Tip -->
+<div class="md:col-span-1 md:row-span-2 bento-item glass-panel bg-secondary-fixed/10 rounded-3xl border border-secondary-fixed/20 p-6 flex flex-col justify-center gap-2 shadow-sm">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">lightbulb</span>
+<p class="font-label-sm text-label-sm text-on-secondary-fixed-variant">Tip: Usa la técnica Pomodoro para proyectos largos.</p>
+</div>
+<!-- Bento Item 6: Horizontal Bottom -->
+<div class="md:col-span-2 md:row-span-1 bento-item glass-panel bg-white/40 rounded-3xl border border-white/60 px-8 flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Ready for new tasks</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant/30">more_horiz</span>
+</div>
+</div>
+</section>
+<!-- Sticky Add Task Box -->
+<footer class="sticky bottom-0 w-full px-4 md:px-12 pb-12 pt-4 bg-gradient-to-t from-background via-background/90 to-transparent pointer-events-none">
+<div class="max-w-4xl mx-auto w-full pointer-events-auto">
+<div class="glass-panel bg-white/90 rounded-2xl shadow-2xl border border-primary/10 overflow-hidden transition-all duration-300 focus-within:ring-2 focus-within:ring-primary/20">
+<div class="flex items-center p-4 gap-4">
+<button class="text-primary hover:bg-primary/5 p-2 rounded-lg transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 600;">add</span>
+</button>
+<input class="flex-1 bg-transparent border-none focus:ring-0 text-body-md placeholder:text-on-surface-variant/50" placeholder="Add a task to 'My Day'" type="text">
+<div class="flex items-center gap-2 text-on-surface-variant/60">
+<button class="p-2 hover:bg-surface-variant/50 rounded-lg transition-colors">
+<span class="material-symbols-outlined">calendar_today</span>
+</button>
+<button class="p-2 hover:bg-surface-variant/50 rounded-lg transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+</div>
+<!-- Expanded metadata toolbar (hidden until focus) -->
+<div class="px-4 py-2 bg-surface-container-low/50 flex justify-between items-center border-t border-border-subtle-light hidden" id="task-metadata">
+<div class="flex gap-2">
+<button class="px-3 py-1 rounded-full bg-white border border-border-subtle-light text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">sell</span>
+                                Category
+                             </button>
+<button class="px-3 py-1 rounded-full bg-white border border-border-subtle-light text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">priority_high</span>
+                                Priority
+                             </button>
+</div>
+<button class="bg-primary text-white px-4 py-1.5 rounded-lg font-label-sm shadow-sm opacity-50 cursor-not-allowed">
+                            Add
+                        </button>
+</div>
+</div>
+</div>
+</footer>
+</main>
+<script>
+        // Simple micro-interaction for the add task input
+        const taskInput = document.querySelector('input[placeholder="Add a task to \'My Day\'"]');
+        const metadataToolbar = document.getElementById('task-metadata');
+        
+        taskInput.addEventListener('focus', () => {
+            metadataToolbar.classList.remove('hidden');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!taskInput.contains(e.target) && !metadataToolbar.contains(e.target)) {
+                metadataToolbar.classList.add('hidden');
+            }
+        });
+
+        // Atmospheric parallax effect for bento items
+        document.addEventListener('mousemove', (e) => {
+            const items = document.querySelectorAll('.bento-item');
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            
+            items.forEach((item, index) => {
+                const speed = (index + 1) * 0.5;
+                const xOffset = (x - 0.5) * 15 * speed;
+                const yOffset = (y - 0.5) * 15 * speed;
+                // Subtle move only for floating effect
+                // item.style.transform = `translate(${xOffset}px, ${yOffset}px)`;
+            });
+        });
+    </script>
+</body></html>

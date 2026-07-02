@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FocusFlow | Account Role &amp; Plan</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Geist:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed": "#231b00",
+                        "secondary-container": "#fed01b",
+                        "on-tertiary-container": "#ecf0ff",
+                        "on-primary-fixed": "#00174b",
+                        "on-secondary-container": "#6f5900",
+                        "surface-container-high": "#e7e8e9",
+                        "surface-elevated-dark": "#27272A",
+                        "on-surface": "#191c1d",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "tertiary": "#4e5566",
+                        "on-background": "#191c1d",
+                        "outline": "#737686",
+                        "tertiary-fixed": "#dce2f7",
+                        "tertiary-container": "#666d7f",
+                        "border-subtle-light": "#F3F4F6",
+                        "surface-container-highest": "#e1e3e4",
+                        "primary-container": "#2563eb",
+                        "secondary-fixed-dim": "#eec200",
+                        "on-tertiary-fixed-variant": "#404758",
+                        "outline-variant": "#c3c6d7",
+                        "on-tertiary": "#ffffff",
+                        "border-subtle-dark": "rgba(39, 39, 42, 0.5)",
+                        "surface-tint": "#0053db",
+                        "canvas-dark": "#09090B",
+                        "surface-dim": "#d9dadb",
+                        "primary": "#004ac6",
+                        "error-container": "#ffdad6",
+                        "error": "#ba1a1a",
+                        "surface-variant": "#e1e3e4",
+                        "background": "#f8f9fa",
+                        "inverse-on-surface": "#f0f1f2",
+                        "on-error": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed": "#dbe1ff",
+                        "on-surface-variant": "#434655",
+                        "tertiary-fixed-dim": "#c0c6db",
+                        "on-tertiary-fixed": "#141b2b",
+                        "text-secondary-dark": "#A1A1AA",
+                        "surface-container-low": "#f3f4f5",
+                        "on-secondary-fixed-variant": "#574500",
+                        "surface": "#f8f9fa",
+                        "text-secondary-light": "#6B7280",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "surface-dark": "#18181B",
+                        "surface-bright": "#f8f9fa",
+                        "on-primary": "#ffffff",
+                        "secondary": "#735c00",
+                        "on-primary-container": "#eeefff",
+                        "secondary-fixed": "#ffe083",
+                        "on-error-container": "#93000a",
+                        "surface-container": "#edeeef",
+                        "inverse-primary": "#b4c5ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sidebar-width": "288px",
+                        "stack-gap": "0.25rem",
+                        "gutter-md": "1rem",
+                        "container-padding-mobile": "1rem",
+                        "container-padding": "3rem",
+                        "detail-panel-width": "384px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Geist"],
+                        "body-lg": ["Inter"],
+                        "task-item": ["Inter"],
+                        "display-xl-mobile": ["Geist"],
+                        "display-xl": ["Geist"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Geist"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "task-item": ["15px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "display-xl-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "display-xl": ["36px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { background-color: #f8f9fa; color: #191c1d; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .glass-sidebar {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .bento-card {
+            transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .bento-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md overflow-hidden">
+<!-- Main 3-Column Layout Wrapper -->
+<div class="flex h-screen w-full">
+<!-- Column 1: Main SideNavBar (Immutable Content from JSON) -->
+<aside class="w-sidebar-width h-screen fixed left-0 top-0 bg-surface/80 dark:bg-surface-dark/80 backdrop-blur-md border-r border-border-subtle-light dark:border-border-subtle-dark flex flex-col h-full py-8 px-4 z-50">
+<div class="mb-12 px-2">
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed">FocusFlow</h1>
+<p class="text-xs text-on-surface-variant/70 tracking-wide uppercase font-semibold mt-1">Productivity Workspace</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant dark:text-text-secondary-dark hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container-high/50 dark:hover:bg-surface-elevated-dark/50 transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant dark:text-text-secondary-dark hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container-high/50 dark:hover:bg-surface-elevated-dark/50 transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="check_circle">check_circle</span>
+<span class="font-medium">Tasks</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant dark:text-text-secondary-dark hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container-high/50 dark:hover:bg-surface-elevated-dark/50 transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="inbox">inbox</span>
+<span class="font-medium">Inbox</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant dark:text-text-secondary-dark hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container-high/50 dark:hover:bg-surface-elevated-dark/50 transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="insights">insights</span>
+<span class="font-medium">Analytics</span>
+</a>
+<div class="pt-4 mt-4 border-t border-border-subtle-light">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-primary dark:text-primary-fixed font-bold border-l-4 border-primary dark:border-primary-fixed bg-surface-container-low dark:bg-surface-elevated-dark" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-medium">Help Center</span>
+</a>
+</div>
+</nav>
+<div class="mt-auto px-2">
+<button class="w-full py-3 bg-primary-container text-white rounded-xl font-bold scale-98 active:opacity-80 transition-transform shadow-lg shadow-primary/20">
+                    Upgrade to Pro
+                </button>
+<div class="flex items-center gap-3 mt-8 p-2">
+<img class="w-10 h-10 rounded-full bg-gray-200" data-alt="A professional close-up studio portrait of a young man with a confident, calm expression, short dark hair, wearing a clean charcoal grey sweater against a neutral soft-lit studio background. The style is modern corporate photography with high-end lighting and sharp focus, reflecting a professional digital workspace environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBL9WAZ9guGP81X8aE7f5jXJYK7AFcVHmtSQkg6gtoRoTXXCLdm_GvX7waeJUTj3gjarI2MxUibuKcP0vgqch6ExtEmQFW54CUQyi6YodsVVEYJ1bz3o2ZmNKzbluyexfyWlcAtFZbDteriiAPQZKgoUKNYQ_8CFbLicvAxhtm4P0Tcr1nxtp5OufHw_YkhgDGEbfUGhb7iOn7okHKwr6ezD_BFMD32addpJXkJnl1au2EnkKEvxDyAiY89s6TgUenTsGSPkJ_nTPDC"/>
+<div class="overflow-hidden">
+<p class="text-sm font-bold truncate">Alex Rivera</p>
+<p class="text-xs text-on-surface-variant truncate">Pro Member</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Column 2: Settings Sub-navigation (384px Fixed Width - Reusing structural logic) -->
+<aside class="w-[320px] h-screen fixed left-[288px] top-0 bg-surface-container-lowest border-r border-border-subtle-light flex flex-col py-8 px-6 z-40">
+<h2 class="font-headline-md text-headline-md font-bold mb-8 text-on-surface">Settings</h2>
+<nav class="space-y-6">
+<div>
+<h3 class="text-xs font-bold text-on-surface-variant/50 uppercase tracking-widest mb-4">Personal</h3>
+<ul class="space-y-1">
+<li><a class="block px-4 py-2 text-on-surface-variant hover:bg-surface-container-low rounded-lg transition-colors" href="#">Profile Information</a></li>
+<li><a class="block px-4 py-2 text-on-surface-variant hover:bg-surface-container-low rounded-lg transition-colors" href="#">Notifications</a></li>
+<li><a class="block px-4 py-2 text-on-surface-variant hover:bg-surface-container-low rounded-lg transition-colors" href="#">Security</a></li>
+</ul>
+</div>
+<div>
+<h3 class="text-xs font-bold text-on-surface-variant/50 uppercase tracking-widest mb-4">Workspace</h3>
+<ul class="space-y-1">
+<li><a class="block px-4 py-3 bg-primary/5 text-primary font-semibold rounded-lg flex items-center justify-between" href="#">
+                            Role &amp; Plan
+                            <span class="material-symbols-outlined text-sm" data-icon="chevron_right">chevron_right</span>
+</a></li>
+<li><a class="block px-4 py-2 text-on-surface-variant hover:bg-surface-container-low rounded-lg transition-colors" href="#">Billing</a></li>
+<li><a class="block px-4 py-2 text-on-surface-variant hover:bg-surface-container-low rounded-lg transition-colors" href="#">Team Members</a></li>
+<li><a class="block px-4 py-2 text-on-surface-variant hover:bg-surface-container-low rounded-lg transition-colors" href="#">Integrations</a></li>
+</ul>
+</div>
+</nav>
+</aside>
+<!-- Column 3: Main Workspace (Fluid Content) -->
+<main class="flex-1 ml-[608px] h-screen overflow-y-auto bg-background p-12">
+<div class="max-w-4xl mx-auto">
+<!-- Header -->
+<header class="mb-12">
+<h1 class="font-display-xl text-display-xl font-bold text-on-surface mb-2">Account Role &amp; Plan</h1>
+<p class="text-body-lg text-text-secondary-light">Manage your organizational identity and access controls. Your role determines which dashboards and workspace tools are visible to you.</p>
+</header>
+<!-- Content Grid -->
+<div class="grid grid-cols-1 gap-8">
+<!-- Current Role Section -->
+<section class="bg-surface-container-lowest border border-border-subtle-light rounded-2xl p-8 bento-card shadow-sm">
+<div class="flex justify-between items-start mb-6">
+<div>
+<h3 class="font-headline-md text-headline-md font-bold mb-1">Workspace Identity</h3>
+<p class="text-sm text-text-secondary-light">Current role within the FocusFlow organizational chart.</p>
+</div>
+<div class="bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Active Status</div>
+</div>
+<div class="flex items-center gap-6 bg-surface-container-low p-6 rounded-xl border border-border-subtle-light">
+<div class="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-white">
+<span class="material-symbols-outlined" data-icon="shield_person">shield_person</span>
+</div>
+<div class="flex-1">
+<label class="block text-xs font-bold text-on-surface-variant/70 uppercase tracking-wide mb-1">Assigned Role</label>
+<div class="relative w-full max-w-xs">
+<select class="w-full bg-transparent border-none p-0 font-headline-md text-headline-md font-bold focus:ring-0 appearance-none cursor-pointer">
+<option selected="" value="designer">Product Designer</option>
+<option value="admin">Workspace Admin</option>
+<option value="manager">Project Manager</option>
+<option value="viewer">Guest Contributor</option>
+</select>
+<span class="material-symbols-outlined absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant" data-icon="unfold_more">unfold_more</span>
+</div>
+</div>
+</div>
+<p class="mt-4 text-xs text-text-secondary-light flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="info">info</span>
+                            Changing your role may require approval from your Workspace Admin if switching to an administrative tier.
+                        </p>
+</section>
+<!-- Plan Overview -->
+<section class="relative overflow-hidden bg-primary-container rounded-2xl p-8 text-white shadow-xl shadow-primary/10">
+<div class="relative z-10">
+<div class="flex justify-between items-start mb-8">
+<div>
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined" data-icon="auto_awesome">auto_awesome</span>
+<span class="text-sm font-bold uppercase tracking-widest">Premium Tier</span>
+</div>
+<h3 class="font-display-xl text-display-xl font-bold">Pro Plan</h3>
+</div>
+<div class="text-right">
+<div class="text-2xl font-bold">$19</div>
+<div class="text-xs opacity-70">per user / month</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-white/10 backdrop-blur-sm p-4 rounded-xl border border-white/20">
+<span class="material-symbols-outlined mb-2 block" data-icon="all_inclusive">all_inclusive</span>
+<h4 class="font-bold text-sm mb-1">Unlimited Tasks</h4>
+<p class="text-xs opacity-80 leading-relaxed">No caps on project or task creation.</p>
+</div>
+<div class="bg-white/10 backdrop-blur-sm p-4 rounded-xl border border-white/20">
+<span class="material-symbols-outlined mb-2 block" data-icon="monitoring">monitoring</span>
+<h4 class="font-bold text-sm mb-1">Advanced Analytics</h4>
+<p class="text-xs opacity-80 leading-relaxed">Granular productivity heatmaps and exports.</p>
+</div>
+<div class="bg-white/10 backdrop-blur-sm p-4 rounded-xl border border-white/20">
+<span class="material-symbols-outlined mb-2 block" data-icon="support_agent">support_agent</span>
+<h4 class="font-bold text-sm mb-1">Priority Support</h4>
+<p class="text-xs opacity-80 leading-relaxed">24/7 dedicated assistance with &lt; 1hr response.</p>
+</div>
+</div>
+<button class="mt-8 w-full py-4 bg-white text-primary font-bold rounded-xl transition-all hover:bg-on-primary-fixed-variant hover:text-white">
+                                Manage Subscription
+                            </button>
+</div>
+<!-- Background Pattern -->
+<div class="absolute -right-20 -bottom-20 w-80 h-80 bg-white/10 rounded-full blur-3xl"></div>
+<div class="absolute -left-20 -top-20 w-60 h-60 bg-blue-400/20 rounded-full blur-3xl"></div>
+</section>
+<!-- Workspace Details -->
+<section class="bg-surface-container-lowest border border-border-subtle-light rounded-2xl p-8 bento-card shadow-sm">
+<h3 class="font-headline-md text-headline-md font-bold mb-6">Assigned Workspace</h3>
+<div class="space-y-4">
+<div class="flex items-center justify-between p-4 border border-border-subtle-light rounded-xl hover:bg-surface-container-low transition-colors group cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined" data-icon="corporate_fare">corporate_fare</span>
+</div>
+<div>
+<p class="font-bold">Design Systems HQ</p>
+<p class="text-xs text-text-secondary-light">Alex's primary workspace (32 members)</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-xs font-bold text-primary">Active</span>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:translate-x-1 transition-transform" data-icon="chevron_right">chevron_right</span>
+</div>
+</div>
+<div class="flex items-center justify-between p-4 border border-border-subtle-light rounded-xl hover:bg-surface-container-low transition-colors group cursor-pointer opacity-70">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-tertiary-container flex items-center justify-center text-white">
+<span class="material-symbols-outlined" data-icon="science">science</span>
+</div>
+<div>
+<p class="font-bold">Labs &amp; Prototyping</p>
+<p class="text-xs text-text-secondary-light">Experimental projects (4 members)</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-xs font-bold text-on-surface-variant/50">Switch</span>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:translate-x-1 transition-transform" data-icon="chevron_right">chevron_right</span>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Footer Actions -->
+<footer class="mt-12 pt-8 border-t border-border-subtle-light flex justify-end items-center gap-4">
+<button class="px-6 py-2.5 rounded-xl font-bold text-on-surface-variant hover:bg-surface-container-high transition-colors">Cancel</button>
+<button class="px-8 py-2.5 rounded-xl font-bold bg-primary text-white shadow-lg shadow-primary/20 hover:opacity-90 active:scale-95 transition-all">Save Changes</button>
+</footer>
+</div>
+</main>
+</div>
+<!-- Micro-interaction Scripts -->
+<script>
+        // Simple ripple effect or selection feedback logic
+        document.querySelectorAll('a, button').forEach(el => {
+            el.addEventListener('mousedown', function() {
+                this.classList.add('opacity-80');
+            });
+            el.addEventListener('mouseup', function() {
+                this.classList.remove('opacity-80');
+            });
+        });
+
+        // Theme toggle logic (placeholder for actual functionality)
+        function toggleTheme() {
+            document.documentElement.classList.toggle('dark');
+        }
+    </script>
+</body></html>

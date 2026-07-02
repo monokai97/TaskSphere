@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FocusFlow | GitHub &amp; GitLab Integration</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Geist:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed": "#dce2f7",
+                    "primary": "#004ac6",
+                    "on-tertiary-fixed-variant": "#404758",
+                    "surface-container-lowest": "#ffffff",
+                    "surface": "#f8f9fa",
+                    "on-error-container": "#93000a",
+                    "on-tertiary": "#ffffff",
+                    "border-subtle-light": "#F3F4F6",
+                    "on-primary-container": "#eeefff",
+                    "on-secondary-container": "#6f5900",
+                    "tertiary-container": "#666d7f",
+                    "surface-variant": "#e1e3e4",
+                    "surface-elevated-dark": "#27272A",
+                    "on-surface": "#191c1d",
+                    "surface-container-low": "#f3f4f5",
+                    "surface-container-highest": "#e1e3e4",
+                    "on-surface-variant": "#434655",
+                    "on-error": "#ffffff",
+                    "border-subtle-dark": "rgba(39, 39, 42, 0.5)",
+                    "surface-bright": "#f8f9fa",
+                    "on-primary-fixed": "#00174b",
+                    "inverse-primary": "#b4c5ff",
+                    "error": "#ba1a1a",
+                    "text-secondary-dark": "#A1A1AA",
+                    "outline": "#737686",
+                    "surface-container-high": "#e7e8e9",
+                    "inverse-surface": "#2e3132",
+                    "surface-container": "#edeeef",
+                    "on-background": "#191c1d",
+                    "primary-fixed-dim": "#b4c5ff",
+                    "inverse-on-surface": "#f0f1f2",
+                    "tertiary": "#4e5566",
+                    "error-container": "#ffdad6",
+                    "on-primary-fixed-variant": "#003ea8",
+                    "tertiary-fixed-dim": "#c0c6db",
+                    "secondary-fixed": "#ffe083",
+                    "on-primary": "#ffffff",
+                    "surface-dim": "#d9dadb",
+                    "background": "#f8f9fa",
+                    "secondary-container": "#fed01b",
+                    "on-secondary": "#ffffff",
+                    "text-secondary-light": "#6B7280",
+                    "surface-tint": "#0053db",
+                    "canvas-dark": "#09090B",
+                    "secondary-fixed-dim": "#eec200",
+                    "primary-fixed": "#dbe1ff",
+                    "on-tertiary-container": "#ecf0ff",
+                    "outline-variant": "#c3c6d7",
+                    "on-tertiary-fixed": "#141b2b",
+                    "secondary": "#735c00",
+                    "primary-container": "#2563eb",
+                    "surface-dark": "#18181B",
+                    "on-secondary-fixed": "#231b00",
+                    "on-secondary-fixed-variant": "#574500"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "sidebar-width": "288px",
+                    "gutter-md": "1rem",
+                    "container-padding": "3rem",
+                    "container-padding-mobile": "1rem",
+                    "detail-panel-width": "384px",
+                    "stack-gap": "0.25rem"
+            },
+            "fontFamily": {
+                    "body-md": ["Inter"],
+                    "label-sm": ["Geist"],
+                    "headline-md": ["Geist"],
+                    "display-xl-mobile": ["Geist"],
+                    "display-xl": ["Geist"],
+                    "body-lg": ["Inter"],
+                    "task-item": ["Inter"]
+            },
+            "fontSize": {
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "display-xl-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "display-xl": ["36px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "task-item": ["15px", {"lineHeight": "20px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #f8f9fa;
+            color: #191c1d;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+        .glass-panel {
+            background: rgba(248, 249, 250, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .active-tab-indicator {
+            position: absolute;
+            left: 0;
+            width: 4px;
+            height: 24px;
+            background-color: #004ac6;
+            border-radius: 0 4px 4px 0;
+        }
+        input:checked ~ .dot {
+            transform: translateX(100%);
+            background-color: #ffffff;
+        }
+        input:checked ~ .block {
+            background-color: #004ac6;
+        }
+    </style>
+</head>
+<body class="flex min-h-screen">
+<!-- SIDEBAR NAVIGATION -->
+<aside class="fixed left-0 top-0 h-full w-sidebar-width glass-panel border-r border-surface-variant/30 z-50 flex flex-col py-6 px-4">
+<div class="mb-10 px-4">
+<h1 class="font-headline-md text-headline-md font-bold text-primary">FocusFlow</h1>
+<p class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-widest mt-1">Ethereal Focus</p>
+</div>
+<nav class="flex-1 space-y-1">
+<!-- Nav Item -->
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high/50 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px]">sunny</span>
+<span class="font-body-md text-body-md">My Day</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high/50 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px]">star</span>
+<span class="font-body-md text-body-md">Important</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high/50 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px]">calendar_today</span>
+<span class="font-body-md text-body-md">Planned</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high/50 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px]">check_circle</span>
+<span class="font-body-md text-body-md">Tasks</span>
+</a>
+<div class="pt-4 pb-2 px-4">
+<div class="h-px bg-surface-variant/50 w-full"></div>
+</div>
+<a class="relative flex items-center gap-3 px-4 py-2.5 rounded-lg text-primary font-bold bg-surface-container-low transition-colors group" href="#">
+<div class="active-tab-indicator"></div>
+<span class="material-symbols-outlined text-[20px]">settings</span>
+<span class="font-body-md text-body-md">Settings</span>
+</a>
+</nav>
+<div class="px-4 mt-auto">
+<button class="w-full flex items-center justify-center gap-2 py-3 px-4 bg-primary text-white rounded-xl shadow-sm hover:opacity-90 active:scale-[0.98] transition-all">
+<span class="material-symbols-outlined">add</span>
+<span class="font-label-sm text-label-sm">New List</span>
+</button>
+<div class="mt-6 flex flex-col gap-1">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">help</span>
+<span class="font-label-sm text-label-sm">Help</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">rate_review</span>
+<span class="font-label-sm text-label-sm">Feedback</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- MAIN WORKSPACE -->
+<main class="ml-sidebar-width flex-1 min-h-screen p-12 bg-surface">
+<div class="max-w-4xl mx-auto">
+<!-- Breadcrumbs -->
+<nav class="flex items-center gap-2 text-label-sm font-label-sm text-on-surface-variant mb-6">
+<a class="hover:text-primary transition-colors" href="#">Settings</a>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<a class="hover:text-primary transition-colors" href="#">Integrations</a>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-on-surface font-semibold">GitHub &amp; GitLab</span>
+</nav>
+<!-- Header Section -->
+<header class="flex items-center justify-between mb-10">
+<div class="flex items-center gap-4">
+<div class="flex -space-x-2">
+<div class="w-12 h-12 rounded-full bg-white border-2 border-surface flex items-center justify-center shadow-sm">
+<img alt="GitHub Logo" class="w-7 h-7" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJWHRc6igghBdNmCuQQw3VSuGl-TjuZuMtT2ifS3nKHmm9lwo3XQpAEJ6x_srPOGqOvekY1CNfpMCpVZNfnDFmzTKz8n3CfZsLp-gI7_d2OUJtLwLkiDWWvXli4_A0-d8nbRrCRyw14tl5MQOo4kGli7Cv-81mbYed3a31XGmHgjfLL4DYHeHBoJSvthaD29bRCo4e3EzrA49_WKwi-Ux48JgyZiQZyCSBfioq7osU7Q825bC7OpeekH9A5wctIi3AShCOU1uqWA9z"/>
+</div>
+<div class="w-12 h-12 rounded-full bg-white border-2 border-surface flex items-center justify-center shadow-sm">
+<img alt="GitLab Logo" class="w-7 h-7" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZYAyb_Cn6h_ozTJqhtt3xXCPcJutt9tq72dTEZkFnRIZAoHewWl5sv0A33hT82lVBzeKaNjjt8av5CBXgurN5JusnCoxVtzIOw8xAo0rhu-qAXwyPnbNB3HtBpgUjzDgWHM5zIfJEAwfRvLYDVLeD_tlSrTrstMzC0GlyCiNR_1bbA5IViY_mjIJk9p1OcdF9qeuqGK79UQ0nViFdhM0zi9oCTAJXAeocyjEfCsq3H2EeKtpHoP_7Z9NihFENeuCDtwC0IzEO4ly6"/>
+</div>
+</div>
+<div>
+<h2 class="font-display-xl text-display-xl text-on-surface leading-tight">GitHub &amp; GitLab Integration</h2>
+<p class="text-body-md text-on-surface-variant">Manage your development workflow within your task manager.</p>
+</div>
+</div>
+</header>
+<!-- Connection Status -->
+<section class="bg-white rounded-xl p-6 border border-surface-variant/40 shadow-sm mb-8 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a Hispanic male software engineer with short dark hair and a friendly expression, set against a blurred modern office background with soft blue tones. The lighting is bright and clean, matching a high-end minimalist design aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIij6WCU8O0b-5pT9FzWBqIcAth1HZhDoXW0Sr-PiYpuGJI254TzxK0AgYq16k_I3C6VEUkJaOtYdZe05B-fArvqffxg5L2d3TSQblzSqAaxWYj4gSaiFCpy8PYKrt3F1bG7N54WsTRAEml4Cmi0EYvd5BZjwl6hPlHvuDBgeRDZ_s8SOd5i6t2IeiaLufUlfF8ZKt0vuRrrl3YMhkMT_ifcU2HIK3ItIDfqtBNcAVYAYTAL4WkUeqsBIRSve57ieQLRMwACPzaFTe"/>
+</div>
+<div>
+<p class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">Connected Account</p>
+<h3 class="font-headline-md text-headline-md text-on-surface">@alexrivera</h3>
+</div>
+</div>
+<button class="px-6 py-2.5 border border-error text-error font-label-sm text-label-sm rounded-xl hover:bg-error/5 transition-colors">
+                    Disconnect
+                </button>
+</section>
+<!-- Sync Preferences -->
+<section class="mb-12">
+<h4 class="font-headline-md text-headline-md mb-6 px-1">Sync Preferences</h4>
+<div class="bg-white rounded-xl border border-surface-variant/40 overflow-hidden divide-y divide-surface-variant/30">
+<!-- Toggle 1 -->
+<label class="flex items-center justify-between p-6 hover:bg-surface-container-low/30 transition-colors cursor-pointer group">
+<div class="flex flex-col">
+<span class="font-body-md text-body-md font-semibold text-on-surface">Import Issues as Tasks</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant">Automatically create FocusFlow tasks for assigned issues across selected repos.</span>
+</div>
+<div class="relative inline-block w-12 mr-2 align-middle select-none">
+<input checked="" class="sr-only" id="toggle1" name="toggle" type="checkbox"/>
+<div class="block bg-surface-container-high w-12 h-7 rounded-full transition-colors duration-200"></div>
+<div class="dot absolute left-1 top-1 bg-white w-5 h-5 rounded-full transition-transform duration-200"></div>
+</div>
+</label>
+<!-- Toggle 2 -->
+<label class="flex items-center justify-between p-6 hover:bg-surface-container-low/30 transition-colors cursor-pointer">
+<div class="flex flex-col">
+<span class="font-body-md text-body-md font-semibold text-on-surface">Sync Pull Request Reviews</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant">Get notified and create ephemeral tasks when a PR requires your attention.</span>
+</div>
+<div class="relative inline-block w-12 mr-2 align-middle select-none">
+<input checked="" class="sr-only" id="toggle2" name="toggle" type="checkbox"/>
+<div class="block bg-surface-container-high w-12 h-7 rounded-full transition-colors duration-200"></div>
+<div class="dot absolute left-1 top-1 bg-white w-5 h-5 rounded-full transition-transform duration-200"></div>
+</div>
+</label>
+<!-- Toggle 3 -->
+<label class="flex items-center justify-between p-6 hover:bg-surface-container-low/30 transition-colors cursor-pointer">
+<div class="flex flex-col">
+<span class="font-body-md text-body-md font-semibold text-on-surface">Update Status on Commit</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant">Automatically mark tasks as complete when a linked commit is pushed.</span>
+</div>
+<div class="relative inline-block w-12 mr-2 align-middle select-none">
+<input class="sr-only" id="toggle3" name="toggle" type="checkbox"/>
+<div class="block bg-surface-container-high w-12 h-7 rounded-full transition-colors duration-200"></div>
+<div class="dot absolute left-1 top-1 bg-white w-5 h-5 rounded-full transition-transform duration-200"></div>
+</div>
+</label>
+</div>
+</section>
+<!-- Repository Mapping -->
+<section>
+<div class="flex items-center justify-between mb-6 px-1">
+<h4 class="font-headline-md text-headline-md">Repository Mapping</h4>
+<button class="text-primary font-label-sm text-label-sm flex items-center gap-1 hover:underline">
+<span class="material-symbols-outlined text-[18px]">sync</span> Refresh List
+                    </button>
+</div>
+<div class="relative mb-4">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-on-surface-variant/60">search</span>
+<input class="w-full pl-11 pr-4 py-3 bg-white border border-surface-variant/40 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all placeholder:text-on-surface-variant/40" placeholder="Search repositories..." type="text"/>
+</div>
+<div class="space-y-2">
+<!-- Repo Item -->
+<div class="flex items-center justify-between p-4 bg-white border border-surface-variant/40 rounded-xl hover:border-primary/40 transition-colors">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant">book</span>
+<div>
+<p class="font-body-md text-body-md font-semibold text-on-surface">focus-flow/mobile-core</p>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Last synced 2m ago</p>
+</div>
+</div>
+<div class="relative inline-block w-12 mr-2 align-middle select-none scale-90">
+<input checked="" class="sr-only" name="repo" type="checkbox"/>
+<div class="block bg-surface-container-high w-12 h-7 rounded-full transition-colors duration-200"></div>
+<div class="dot absolute left-1 top-1 bg-white w-5 h-5 rounded-full transition-transform duration-200"></div>
+</div>
+</div>
+<!-- Repo Item -->
+<div class="flex items-center justify-between p-4 bg-white border border-surface-variant/40 rounded-xl hover:border-primary/40 transition-colors">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant">book</span>
+<div>
+<p class="font-body-md text-body-md font-semibold text-on-surface">alexrivera/personal-blog</p>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Disconnected</p>
+</div>
+</div>
+<div class="relative inline-block w-12 mr-2 align-middle select-none scale-90">
+<input class="sr-only" name="repo" type="checkbox"/>
+<div class="block bg-surface-container-high w-12 h-7 rounded-full transition-colors duration-200"></div>
+<div class="dot absolute left-1 top-1 bg-white w-5 h-5 rounded-full transition-transform duration-200"></div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- LIVE PREVIEW PANEL -->
+<aside class="fixed right-0 top-0 h-full w-detail-panel-width glass-panel border-l border-surface-variant/30 z-40 p-8 flex flex-col">
+<h4 class="font-label-sm text-label-sm font-bold text-on-surface-variant uppercase tracking-widest mb-8">Live Preview</h4>
+<div class="flex-1 flex flex-col gap-8">
+<!-- Sync Card Preview -->
+<div class="bg-white rounded-xl shadow-xl p-5 border border-primary/10 relative overflow-hidden group">
+<div class="absolute top-0 left-0 w-1 h-full bg-primary"></div>
+<div class="flex items-start justify-between mb-3">
+<div class="flex items-center gap-2">
+<div class="bg-surface-container-high text-on-surface px-2 py-0.5 rounded text-[10px] font-bold flex items-center gap-1">
+<img alt="GitHub Icon" class="w-3 h-3 grayscale contrast-125" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCj0wSHCZerZfu-UPO1S8aGudIkKpOnMGbNE39rcIksiTnNy4RUSwXiHdtimutUc6sfViLd-HKtupSAiDH9XLC1k7EdJq90GrZvslgS6ezpRAN33856oa_lULKtim6_45FwhRobZzOQlOt3241nLwYeUMgUsBrVupPZn3aGBgMxgByCWdtV04YhdH5nEfCylGSH-qmfWuY9W4marDQs6lzZxqS4VTW859QbUGK4oMf_JJC7z1KUe_3QMX9QaRqO1FqA9ESnMvL8lxfK"/>
+                            GITHUB
+                        </div>
+<span class="text-label-sm font-label-sm text-on-surface-variant/60">#402</span>
+</div>
+<a class="text-on-surface-variant/40 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">open_in_new</span>
+</a>
+</div>
+<h5 class="font-task-item text-task-item font-semibold text-on-surface mb-4">Fix: Layout reflow issues on Safari mobile during sidebar collapse animation</h5>
+<div class="flex items-center gap-3">
+<div class="flex -space-x-1">
+<div class="w-6 h-6 rounded-full border-2 border-white overflow-hidden bg-slate-200">
+<img class="w-full h-full object-cover" data-alt="Close-up of a diverse group of avatar icons represented by soft-colored circles, highlighting a collaborative software development environment. Minimalist and clean aesthetic with light blue and soft gray tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHL5pg9QH9BE0kbdkqJYHsHBvlwRe9iU2iAKegYPmTYiXgCYWKkZcln6YUydTtCfAvdgNGlnQEpwmCJEGnfKs4qOYnTNw3N7rQeHDPNRhF9V2ml5PMZFcS8b-wra2JBLLqtLVO86mkk-AmccXHP2YBt-KC9Jx_8HB1vvFXLmkegJdLpRO5yyp97KDQZ7eV03W2lQClnQreNhpnc9RIjvTk_ECljftZh1qEDCFkpi5V_URTyZsZ-VRJF8CfqFjrNddU1SIVSLjnxNp6"/>
+</div>
+</div>
+<span class="text-[11px] font-label-sm text-on-surface-variant">Assigned to you</span>
+</div>
+</div>
+<!-- Tip Section -->
+<div class="mt-4 bg-primary/5 rounded-xl p-6 border border-primary/10">
+<div class="flex items-center gap-2 text-primary mb-3">
+<span class="material-symbols-outlined text-[20px]">lightbulb</span>
+<h6 class="font-label-sm text-label-sm font-bold uppercase tracking-wider">FocusFlow Tip</h6>
+</div>
+<p class="text-body-md text-on-surface-variant mb-4 leading-relaxed">
+                    Automate your workflow by including the task ID in your branch names. Pushing <code class="bg-primary/10 px-1 rounded text-primary">feat/fix-sidebar-402</code> will automatically link your progress and move the task to 'In Review'.
+                </p>
+<button class="text-primary font-semibold text-label-sm hover:underline">Learn more about triggers →</button>
+</div>
+<!-- Stats/Engagement -->
+<div class="bg-white border border-surface-variant/40 rounded-xl p-6">
+<p class="text-label-sm font-label-sm text-on-surface-variant mb-4 uppercase">Integrations Health</p>
+<div class="flex items-end gap-2 mb-2">
+<span class="text-3xl font-bold text-on-surface">98.2%</span>
+<span class="text-green-600 text-label-sm font-bold pb-1 flex items-center">
+<span class="material-symbols-outlined text-[16px]">arrow_upward</span> 2.1%
+                    </span>
+</div>
+<p class="text-label-sm text-on-surface-variant/70">Successful sync operations over the last 30 days.</p>
+<div class="mt-6 flex gap-1 h-2 w-full rounded-full overflow-hidden bg-surface-container">
+<div class="h-full bg-primary w-[98%]"></div>
+<div class="h-full bg-surface-variant w-[2%]"></div>
+</div>
+</div>
+</div>
+<footer class="mt-auto pt-8 border-t border-surface-variant/30 flex items-center justify-between text-on-surface-variant/50 text-[11px]">
+<span>Version 2.4.1</span>
+<span>API Stable</span>
+</footer>
+</aside>
+<!-- MICRO-INTERACTION SCRIPT -->
+<script>
+        // Handle toggles visual state
+        const toggles = document.querySelectorAll('input[type="checkbox"]');
+        toggles.forEach(toggle => {
+            toggle.addEventListener('change', function() {
+                const block = this.nextElementSibling;
+                if (this.checked) {
+                    block.classList.replace('bg-surface-container-high', 'bg-primary');
+                } else {
+                    block.classList.replace('bg-primary', 'bg-surface-container-high');
+                }
+            });
+            // Initial state set
+            if (toggle.checked) {
+                toggle.nextElementSibling.classList.replace('bg-surface-container-high', 'bg-primary');
+            }
+        });
+
+        // Search highlight simulation
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('focus', () => {
+            searchInput.parentElement.classList.add('scale-[1.01]');
+        });
+        searchInput.addEventListener('blur', () => {
+            searchInput.parentElement.classList.remove('scale-[1.01]');
+        });
+    </script>
+</body></html>

@@ -1,0 +1,333 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Integrations - Ethereal Focus</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Geist:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-fixed": "#dbe1ff",
+                    "border-subtle-dark": "rgba(39, 39, 42, 0.5)",
+                    "on-tertiary-fixed-variant": "#404758",
+                    "surface-variant": "#e1e3e4",
+                    "text-secondary-dark": "#A1A1AA",
+                    "surface": "#f8f9fa",
+                    "secondary": "#735c00",
+                    "secondary-container": "#fed01b",
+                    "on-background": "#191c1d",
+                    "surface-container-high": "#e7e8e9",
+                    "error": "#ba1a1a",
+                    "primary-container": "#2563eb",
+                    "on-primary-fixed-variant": "#003ea8",
+                    "surface-bright": "#f8f9fa",
+                    "on-error-container": "#93000a",
+                    "on-tertiary": "#ffffff",
+                    "tertiary-container": "#666d7f",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-fixed": "#231b00",
+                    "surface-dim": "#d9dadb",
+                    "error-container": "#ffdad6",
+                    "secondary-fixed": "#ffe083",
+                    "inverse-primary": "#b4c5ff",
+                    "border-subtle-light": "#F3F4F6",
+                    "surface-container-highest": "#e1e3e4",
+                    "outline": "#737686",
+                    "on-secondary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "on-secondary-fixed-variant": "#574500",
+                    "surface-tint": "#0053db",
+                    "surface-elevated-dark": "#27272A",
+                    "on-primary-fixed": "#00174b",
+                    "inverse-on-surface": "#f0f1f2",
+                    "on-primary-container": "#eeefff",
+                    "canvas-dark": "#09090B",
+                    "primary": "#004ac6",
+                    "tertiary": "#4e5566",
+                    "on-surface-variant": "#434655",
+                    "on-primary": "#ffffff",
+                    "inverse-surface": "#2e3132",
+                    "surface-dark": "#18181B",
+                    "tertiary-fixed": "#dce2f7",
+                    "secondary-fixed-dim": "#eec200",
+                    "surface-container-low": "#f3f4f5",
+                    "on-surface": "#191c1d",
+                    "on-tertiary-container": "#ecf0ff",
+                    "text-secondary-light": "#6B7280",
+                    "on-secondary-container": "#6f5900",
+                    "surface-container": "#edeeef",
+                    "background": "#f8f9fa",
+                    "primary-fixed-dim": "#b4c5ff",
+                    "outline-variant": "#c3c6d7",
+                    "on-tertiary-fixed": "#141b2b",
+                    "tertiary-fixed-dim": "#c0c6db"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "detail-panel-width": "384px",
+                    "container-padding": "3rem",
+                    "gutter-md": "1rem",
+                    "stack-gap": "0.25rem",
+                    "container-padding-mobile": "1rem",
+                    "sidebar-width": "288px"
+            },
+            "fontFamily": {
+                    "task-item": ["Inter"],
+                    "headline-md": ["Geist"],
+                    "label-sm": ["Geist"],
+                    "display-xl": ["Geist"],
+                    "body-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "display-xl-mobile": ["Geist"]
+            },
+            "fontSize": {
+                    "task-item": ["15px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "display-xl": ["36px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "display-xl-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #e1e3e4;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #c3c6d7;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface min-h-screen overflow-hidden">
+<!-- 3-Column Architecture Container -->
+<div class="flex h-screen w-full">
+<!-- Column 1: SideNavBar (Authority: JSON) -->
+<aside class="fixed left-0 top-0 h-full w-sidebar-width border-r border-border-subtle-light bg-white/80 backdrop-blur-md z-50 flex flex-col py-8">
+<div class="px-6 mb-10">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-primary-container flex items-center justify-center text-white shadow-lg">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">blur_on</span>
+</div>
+<div>
+<h1 class="font-display-xl text-headline-md font-bold text-primary">Ethereal Focus</h1>
+<p class="font-body-md text-label-sm text-text-secondary-light">Stay productive</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<!-- Nav Items mapping from JSON -->
+<a class="flex items-center gap-3 px-6 py-3 text-on-surface-variant hover:bg-surface-variant/50 transition-colors" href="#">
+<span class="material-symbols-outlined">sunny</span>
+<span class="font-body-md text-body-md">My Day</span>
+</a>
+<a class="flex items-center gap-3 px-6 py-3 text-on-surface-variant hover:bg-surface-variant/50 transition-colors" href="#">
+<span class="material-symbols-outlined">star</span>
+<span class="font-body-md text-body-md">Important</span>
+</a>
+<a class="flex items-center gap-3 px-6 py-3 text-on-surface-variant hover:bg-surface-variant/50 transition-colors" href="#">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="font-body-md text-body-md">Planned</span>
+</a>
+<a class="flex items-center gap-3 px-6 py-3 text-on-surface-variant hover:bg-surface-variant/50 transition-colors" href="#">
+<span class="material-symbols-outlined">task_alt</span>
+<span class="font-body-md text-body-md">Tasks</span>
+</a>
+</nav>
+<div class="mt-auto space-y-1">
+<!-- Settings Active State Logic -->
+<a class="flex items-center gap-3 px-6 py-3 bg-primary-container/10 text-primary font-semibold border-l-4 border-primary" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">settings</span>
+<span class="font-body-md text-body-md">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-6 py-3 text-on-surface-variant hover:bg-surface-variant/50 transition-colors" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-body-md text-body-md">Help</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area (Scrollable) -->
+<div class="flex-1 ml-sidebar-width flex overflow-hidden">
+<!-- Column 2: Settings Menu -->
+<aside class="w-80 border-r border-border-subtle-light bg-surface-container-low/30 backdrop-blur-sm overflow-y-auto">
+<div class="p-8">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-6">Settings</h2>
+<ul class="space-y-2">
+<li>
+<button class="w-full text-left px-4 py-2.5 rounded-lg font-body-md text-body-md text-on-surface-variant hover:bg-surface-variant/50 transition-all">Profile</button>
+</li>
+<li>
+<button class="w-full text-left px-4 py-2.5 rounded-lg font-body-md text-body-md text-on-surface-variant hover:bg-surface-variant/50 transition-all">Account Security</button>
+</li>
+<li>
+<button class="w-full text-left px-4 py-2.5 rounded-lg font-body-md text-body-md text-on-surface-variant hover:bg-surface-variant/50 transition-all">Notifications</button>
+</li>
+<li>
+<button class="w-full text-left px-4 py-2.5 rounded-lg font-body-md text-body-md text-on-surface-variant hover:bg-surface-variant/50 transition-all">Focus Sessions</button>
+</li>
+<li>
+<button class="w-full text-left px-4 py-2.5 rounded-lg font-body-md text-body-md bg-white shadow-sm border border-border-subtle-light text-primary font-semibold transition-all">Integrations</button>
+</li>
+<li>
+<button class="w-full text-left px-4 py-2.5 rounded-lg font-body-md text-body-md text-on-surface-variant hover:bg-surface-variant/50 transition-all">Language &amp; Region</button>
+</li>
+</ul>
+</div>
+</aside>
+<!-- Column 3: Main Workspace (Fluid) -->
+<main class="flex-1 overflow-y-auto bg-white">
+<!-- Header -->
+<header class="p-12 pb-6">
+<h1 class="font-display-xl text-display-xl text-on-surface mb-2">Integrations</h1>
+<p class="font-body-md text-body-lg text-text-secondary-light max-w-2xl">Connect FocusFlow with your favorite tools to automate your workflow, sync your schedule, and stay in the zone without switching tabs.</p>
+</header>
+<!-- Integration Content -->
+<div class="px-12 pb-24 space-y-12">
+<!-- Section: Calendars -->
+<section>
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary">calendar_today</span>
+<h3 class="font-headline-md text-headline-md text-on-surface">Calendars</h3>
+</div>
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
+<!-- Card: Google Calendar -->
+<div class="group p-6 rounded-xl border border-border-subtle-light hover:border-primary-container/30 hover:shadow-xl transition-all duration-300 bg-surface-container-lowest relative overflow-hidden">
+<div class="flex justify-between items-start mb-4">
+<div class="w-12 h-12 rounded-lg bg-blue-50 flex items-center justify-center">
+<img alt="Google Calendar" class="w-7 h-7" data-alt="The official Google Calendar logo icon featuring a stylized blue calendar with the number thirty-one at the center, rendered in a crisp vector format. The design is modern and professional, fitting perfectly into a clean light-mode dashboard interface focused on productivity and time management." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBL-VLF_sHLj7Y2HSjSLuoDS2vr91z_h9uRTpSxA_EjJ63GWMHuxHM6qAX6kfxyGE2lo5vjW5E_cSG-pJe8ETMzA2WVlB49XeLvu6Iruf13cQPvVLexZf-m9Dwdgg9GVMrgYvc9vmEVG47FDucSYNPXY_EFrgt32W01yOg1ZorVxe7x-EWVMca5jFtSYX42a08DSMUSGAhrrOYMeDYPv-Dx-_G6hOV2Cxc4rVfrgLMvsB1l812lF6SWYHneLCC5A2y4yXczwlF8Yyi-">
+</div>
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-green-50 text-green-600 text-label-sm font-label-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-green-600"></span>
+                                        Connected
+                                    </span>
+</div>
+<h4 class="font-headline-md text-headline-md text-on-surface mb-2">Google Calendar</h4>
+<p class="font-body-md text-body-md text-text-secondary-light mb-6">Automatically block focus time in your calendar and sync events as FocusFlow tasks.</p>
+<button class="w-full py-2.5 rounded-lg border border-border-subtle-light text-on-surface-variant font-body-md text-body-md hover:bg-surface-variant transition-colors">Manage Connection</button>
+</div>
+<!-- Card: Outlook -->
+<div class="group p-6 rounded-xl border border-border-subtle-light hover:border-primary-container/30 hover:shadow-xl transition-all duration-300 bg-surface-container-lowest">
+<div class="flex justify-between items-start mb-4">
+<div class="w-12 h-12 rounded-lg bg-blue-50 flex items-center justify-center">
+<img alt="Outlook" class="w-7 h-7" data-alt="The Microsoft Outlook brand icon displayed as a stylized blue 'O' with an envelope, emphasizing professional communication and scheduling. The visual style is sleek and integrated into a high-fidelity digital workspace environment that values clarity and corporate efficiency." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxPNd0GHvLUHMyh7XOkxfNBqyIFYmPE1EZzjJlrJxzU_EEqpHbxRbEkBsWgrZLtGrm4kcN3--gKIcRGUGB0IJxVcQj5v7kur_Y1oraEI6dYBNWzKH7ed5nbiEyjWG-IbuszuzbBzVHpybg0c7A0MU1jmTF8SIeCMvtXUC4KRKBYlMCJLFx9vCxRuN5efJSchRD7OZoY3vCYM_4cbL98_KUHPUA3wwsujN690eNMaIBTXtMFePtg9_imfSeSngZaMDcGOfDIUZ7iTep">
+</div>
+</div>
+<h4 class="font-headline-md text-headline-md text-on-surface mb-2">Outlook Calendar</h4>
+<p class="font-body-md text-body-md text-text-secondary-light mb-6">Sync your Outlook meetings and appointments to visualize your daily focus windows.</p>
+<button class="w-full py-2.5 rounded-lg bg-primary text-white font-body-md text-body-md hover:bg-primary/90 shadow-md transition-all">Connect Account</button>
+</div>
+</div>
+</section>
+<!-- Section: Communication -->
+<section>
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary">forum</span>
+<h3 class="font-headline-md text-headline-md text-on-surface">Communication</h3>
+</div>
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
+<!-- Card: Slack -->
+<div class="group p-6 rounded-xl border border-border-subtle-light hover:border-primary-container/30 hover:shadow-xl transition-all duration-300 bg-surface-container-lowest">
+<div class="flex justify-between items-start mb-4">
+<div class="w-12 h-12 rounded-lg bg-orange-50 flex items-center justify-center">
+<img alt="Slack" class="w-7 h-7" data-alt="The modern Slack logo icon featuring a colorful quartet of speech bubbles, representing team collaboration and communication. The image is crisp and isolated against a clean background, designed to be used in a minimalist software settings interface with professional lighting and soft shadows." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgrhqnjKoXz62_4aIBzPowP-UuXShaErcjQx_IMywJNAsftJ9R1fKEHe-nkoC4X4LsYhO34po-czHqsdbIflL69ekKtDtA3-6mDmYfPx4hFEcYms7p-UlbIYxoLWaf3oJgOsBCxJ2sLLzt1zuE329eVXinPlRguh0No3LnIQZUMfdIN9YlIsAnuoNF4H6Hif--2X45svcgK0Qrfj9HhUqbk58h8ZEE5qO4KviC9hSM9BdMVMamZ93sK53_xHkhb6LzW79be7BhY_R9">
+</div>
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-green-50 text-green-600 text-label-sm font-label-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-green-600"></span>
+                                        Connected
+                                    </span>
+</div>
+<h4 class="font-headline-md text-headline-md text-on-surface mb-2">Slack</h4>
+<p class="font-body-md text-body-md text-text-secondary-light mb-6">Set your status to 'Do Not Disturb' automatically when you start a Focus Session.</p>
+<button class="w-full py-2.5 rounded-lg border border-border-subtle-light text-on-surface-variant font-body-md text-body-md hover:bg-surface-variant transition-colors">Manage Notifications</button>
+</div>
+<!-- Card: Microsoft Teams -->
+<div class="group p-6 rounded-xl border border-border-subtle-light hover:border-primary-container/30 hover:shadow-xl transition-all duration-300 bg-surface-container-lowest">
+<div class="flex justify-between items-start mb-4">
+<div class="w-12 h-12 rounded-lg bg-indigo-50 flex items-center justify-center">
+<img alt="Teams" class="w-7 h-7" data-alt="The Microsoft Teams application icon showing two purple stylized figures against a white background, symbolizing digital teamwork and meeting platforms. The icon is rendered with high resolution for a premium dashboard look in a light-themed productivity suite." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtuQoU_ehPj_-_Nmasy4W5bx1zMzu0Ow54vZMeavEJfHjVJp0zMjfF9fi4TdBbWbyGo8gL-_AI0lHMRznGxsloXumHRQdVlIHd_-AGh95EQ3VfB2Y7lf7ob-iyLdxOnUfZpr6kosf665_ApR1QqAeGxL15GOth1vDaVbrCqX7qvHvJJ-IGfbBJud--QY_f_mcCq7tGeEADtyopEE-RVeFAk3lLvvgG0aBV1Z9C8cX4MGFb1GuZGBZJ9gsMcN17xBHlgOC_vuVhF-R6">
+</div>
+</div>
+<h4 class="font-headline-md text-headline-md text-on-surface mb-2">Microsoft Teams</h4>
+<p class="font-body-md text-body-md text-text-secondary-light mb-6">Update your Teams availability and presence based on your active FocusFlow timer.</p>
+<button class="w-full py-2.5 rounded-lg bg-primary text-white font-body-md text-body-md hover:bg-primary/90 shadow-md transition-all">Connect Account</button>
+</div>
+</div>
+</section>
+<!-- Section: Automation -->
+<section>
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary">auto_fix_high</span>
+<h3 class="font-headline-md text-headline-md text-on-surface">Automation</h3>
+</div>
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
+<!-- Card: Zapier -->
+<div class="group p-6 rounded-xl border border-border-subtle-light hover:border-primary-container/30 hover:shadow-xl transition-all duration-300 bg-surface-container-lowest">
+<div class="flex justify-between items-start mb-4">
+<div class="w-12 h-12 rounded-lg bg-orange-50 flex items-center justify-center">
+<img alt="Zapier" class="w-7 h-7" data-alt="The Zapier logo icon representing automation and connectivity between different web applications. The orange asterisk-like symbol is clear and vibrant, suitable for a technical settings screen in a modern software-as-a-service application that emphasizes streamlined workflows." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4UbOJ5Uq-xv5vNZ89WBAvLQN4bYCDXPD7-rj6Kx4-WspX4VONrk5NXfB1ROoMaugzNEzwU_JyPM6gaeYAhUpp-CEzOkFpuoK6iZftXn6nqbwqy3eGZwl5pQHhFnJyi4vjhyl3TZyFnOWtnUB9rgHJhUCO2hpMFqjR8hlRFWOK1_eaWAekQ0OQ9LAUNADFkjIIUAVFGXXmbBbnhWYanMPBvey2ssldnuFiXYE6UhgBl2rAlsXjALQ09bSB6-pMtfvkab4M2paf9uC_">
+</div>
+</div>
+<h4 class="font-headline-md text-headline-md text-on-surface mb-2">Zapier</h4>
+<p class="font-body-md text-body-md text-text-secondary-light mb-6">Connect FocusFlow to 5,000+ apps. Create custom triggers for every task you finish.</p>
+<button class="w-full py-2.5 rounded-lg bg-primary text-white font-body-md text-body-md hover:bg-primary/90 shadow-md transition-all">Setup Zaps</button>
+</div>
+<!-- Suggestion Card -->
+<div class="p-6 rounded-xl border border-dashed border-border-subtle-light bg-surface-container-low/20 flex flex-col items-center justify-center text-center">
+<span class="material-symbols-outlined text-outline-variant text-4xl mb-3">add_circle</span>
+<h4 class="font-headline-md text-body-lg text-on-surface-variant">Request Integration</h4>
+<p class="font-body-md text-label-sm text-text-secondary-light mt-1">Don't see your favorite tool? Let us know.</p>
+<button class="mt-4 text-primary font-body-md text-body-md hover:underline">Submit a request</button>
+</div>
+</div>
+</section>
+</div>
+</main>
+</div>
+</div>
+<!-- Floating Action Button (JSON Logic: Contextual Suppression) -->
+<!-- FAB is suppressed on Settings screens as per mandate -->
+<script>
+        // Micro-interaction for cards
+        document.querySelectorAll('.group').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-4px)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Search Bar Mock Interaction
+        function toggleSearch() {
+            console.log('Search focused');
+        }
+    </script>
+</body></html>

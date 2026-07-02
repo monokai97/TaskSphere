@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Ethereal Focus - Create Category</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Inter:wght@100..900&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Inter:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#004ac6",
+                        "surface-container-highest": "#e1e3e4",
+                        "error-container": "#ffdad6",
+                        "inverse-on-surface": "#f0f1f2",
+                        "text-secondary-dark": "#A1A1AA",
+                        "on-error": "#ffffff",
+                        "secondary": "#735c00",
+                        "tertiary-fixed-dim": "#c0c6db",
+                        "surface-container-low": "#f3f4f5",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "surface-bright": "#f8f9fa",
+                        "on-primary-fixed": "#00174b",
+                        "surface-dark": "#18181B",
+                        "border-subtle-dark": "rgba(39, 39, 42, 0.5)",
+                        "on-secondary-container": "#6f5900",
+                        "on-secondary-fixed-variant": "#574500",
+                        "surface-dim": "#d9dadb",
+                        "tertiary-container": "#666d7f",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed": "#dbe1ff",
+                        "on-error-container": "#93000a",
+                        "primary-container": "#2563eb",
+                        "secondary-fixed-dim": "#eec200",
+                        "on-tertiary-fixed": "#141b2b",
+                        "on-tertiary-fixed-variant": "#404758",
+                        "on-secondary": "#ffffff",
+                        "surface-container": "#edeeef",
+                        "on-surface": "#191c1d",
+                        "on-primary-container": "#eeefff",
+                        "tertiary": "#4e5566",
+                        "on-primary": "#ffffff",
+                        "surface": "#f8f9fa",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "secondary-container": "#fed01b",
+                        "error": "#ba1a1a",
+                        "on-surface-variant": "#434655",
+                        "text-secondary-light": "#6B7280",
+                        "outline": "#737686",
+                        "outline-variant": "#c3c6d7",
+                        "tertiary-fixed": "#dce2f7",
+                        "secondary-fixed": "#ffe083",
+                        "on-background": "#191c1d",
+                        "background": "#f8f9fa",
+                        "surface-variant": "#e1e3e4",
+                        "surface-tint": "#0053db",
+                        "surface-container-high": "#e7e8e9",
+                        "surface-elevated-dark": "#27272A",
+                        "inverse-surface": "#2e3132",
+                        "on-secondary-fixed": "#231b00",
+                        "border-subtle-light": "#F3F4F6",
+                        "on-tertiary-container": "#ecf0ff",
+                        "on-tertiary": "#ffffff",
+                        "canvas-dark": "#09090B",
+                        "inverse-primary": "#b4c5ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sidebar-width": "288px",
+                        "stack-gap": "0.25rem",
+                        "container-padding": "3rem",
+                        "container-padding-mobile": "1rem",
+                        "gutter-md": "1rem",
+                        "detail-panel-width": "384px"
+                    },
+                    "fontFamily": {
+                        "display-xl": ["Geist"],
+                        "label-sm": ["Geist"],
+                        "task-item": ["Inter"],
+                        "display-xl-mobile": ["Geist"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Geist"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "display-xl": ["36px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "task-item": ["15px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "display-xl-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .color-preset:hover {
+            transform: scale(1.1);
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .active-color {
+            box-shadow: 0 0 0 2px white, 0 0 0 4px currentColor;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-hidden">
+<!-- Mock Background for Screen 18 Context -->
+<div class="fixed inset-0 flex items-center justify-center pointer-events-none opacity-40">
+<div class="w-full max-w-4xl h-[819px] bg-white border border-border-subtle-light rounded-2xl shadow-2xl flex flex-col p-12">
+<div class="h-10 w-48 bg-surface-container mb-8 rounded"></div>
+<div class="space-y-4">
+<div class="h-12 w-full bg-surface-container-low rounded-lg"></div>
+<div class="h-32 w-full bg-surface-container-low rounded-lg"></div>
+</div>
+</div>
+</div>
+<!-- Overlay Backdrop -->
+<div class="fixed inset-0 bg-on-surface/10 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+<!-- Create Category Submodal -->
+<div class="glass-panel w-full max-w-md border border-outline-variant/30 rounded-xl shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-300">
+<!-- Header -->
+<div class="px-6 py-5 border-b border-border-subtle-light flex items-center justify-between">
+<h2 class="font-headline-md text-headline-md text-on-surface">New Category</h2>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<!-- Content -->
+<div class="p-6 space-y-6">
+<!-- Category Name Input -->
+<div class="space-y-2">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider" for="category-name">Category Name</label>
+<input class="w-full px-4 py-3 rounded-lg border border-outline-variant bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-body-md font-body-md" id="category-name" placeholder="e.g. Deep Work, Personal, Fitness" type="text"/>
+</div>
+<!-- Icon Selector (Mockup) -->
+<div class="space-y-3">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Select Icon</label>
+<div class="grid grid-cols-6 gap-3">
+<button class="h-10 w-10 flex items-center justify-center rounded-lg bg-primary-container/10 text-primary border border-primary/20">
+<span class="material-symbols-outlined" data-icon="category">category</span>
+</button>
+<button class="h-10 w-10 flex items-center justify-center rounded-lg hover:bg-surface-variant transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="rocket_launch">rocket_launch</span>
+</button>
+<button class="h-10 w-10 flex items-center justify-center rounded-lg hover:bg-surface-variant transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="auto_awesome">auto_awesome</span>
+</button>
+<button class="h-10 w-10 flex items-center justify-center rounded-lg hover:bg-surface-variant transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="work">work</span>
+</button>
+<button class="h-10 w-10 flex items-center justify-center rounded-lg hover:bg-surface-variant transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="fitness_center">fitness_center</span>
+</button>
+<button class="h-10 w-10 flex items-center justify-center rounded-lg hover:bg-surface-variant transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="more_horiz">more_horiz</span>
+</button>
+</div>
+</div>
+<!-- Color Grid -->
+<div class="space-y-3">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Category Color</label>
+<div class="grid grid-cols-8 gap-3">
+<!-- Modern Presets -->
+<button class="color-preset h-8 w-8 rounded-full bg-blue-500 active-color text-blue-500"></button>
+<button class="color-preset h-8 w-8 rounded-full bg-indigo-500 text-indigo-500"></button>
+<button class="color-preset h-8 w-8 rounded-full bg-purple-500 text-purple-500"></button>
+<button class="color-preset h-8 w-8 rounded-full bg-pink-500 text-pink-500"></button>
+<button class="color-preset h-8 w-8 rounded-full bg-red-500 text-red-500"></button>
+<button class="color-preset h-8 w-8 rounded-full bg-orange-500 text-orange-500"></button>
+<button class="color-preset h-8 w-8 rounded-full bg-amber-500 text-amber-500"></button>
+<button class="color-preset h-8 w-8 rounded-full bg-emerald-500 text-emerald-500"></button>
+<button class="color-preset h-8 w-8 rounded-full bg-teal-500 text-teal-500"></button>
+<button class="color-preset h-8 w-8 rounded-full bg-cyan-500 text-cyan-500"></button>
+<button class="color-preset h-8 w-8 rounded-full bg-zinc-400 text-zinc-400"></button>
+<button class="color-preset h-8 w-8 rounded-full bg-zinc-900 text-zinc-900"></button>
+</div>
+</div>
+</div>
+<!-- Footer Actions -->
+<div class="px-6 py-5 bg-surface-container-low border-t border-border-subtle-light flex items-center justify-end gap-3">
+<button class="px-5 py-2.5 rounded-lg font-body-md text-on-surface-variant hover:bg-surface-variant transition-all">
+                    Cancel
+                </button>
+<button class="px-6 py-2.5 rounded-lg bg-primary text-white font-headline-md shadow-lg shadow-primary/20 hover:bg-primary-container hover:scale-[1.02] active:scale-[0.98] transition-all">
+                    Create Category
+                </button>
+</div>
+</div>
+</div>
+<!-- Background Atmospheric Effect -->
+<div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
+<div class="absolute -top-[20%] -left-[10%] w-[50%] h-[50%] bg-primary/5 blur-[120px] rounded-full"></div>
+<div class="absolute -bottom-[20%] -right-[10%] w-[50%] h-[50%] bg-secondary-container/5 blur-[120px] rounded-full"></div>
+</div>
+<script>
+        // Simple Micro-interactions for Color Selection
+        document.querySelectorAll('.color-preset').forEach(button => {
+            button.addEventListener('click', () => {
+                document.querySelectorAll('.color-preset').forEach(b => b.classList.remove('active-color'));
+                button.classList.add('active-color');
+            });
+        });
+
+        // Icon Selection Micro-interaction
+        const iconButtons = document.querySelectorAll('.grid-cols-6 button');
+        iconButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                iconButtons.forEach(b => {
+                    b.classList.remove('bg-primary-container/10', 'text-primary', 'border-primary/20');
+                    b.classList.add('hover:bg-surface-variant', 'text-on-surface-variant');
+                });
+                btn.classList.add('bg-primary-container/10', 'text-primary', 'border-primary/20');
+                btn.classList.remove('hover:bg-surface-variant', 'text-on-surface-variant');
+            });
+        });
+    </script>
+</body></html>

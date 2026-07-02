@@ -1,0 +1,213 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang2058{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\f0\fs22\lang10 Migrations\par
+Payload exposes a full suite of migration controls available for your use. Migration commands are accessible via the npm run payload command in your project directory.\par
+\par
+Ensure you have an npm script called "payload" in your package.json file.\par
+\par
+\{\par
+  "scripts": \{\par
+    "payload": "cross-env PAYLOAD_CONFIG_PATH=src/payload.config.ts payload"\par
+  \}\par
+\}\par
+Note that you need to run Payload migrations through the package manager that you are using, because Payload should not be globally installed on your system.\par
+\par
+Migration file contents\par
+Payload stores all created migrations in a folder that you can specify. By default, migrations are stored in ./src/migrations.\par
+\par
+A migration file has two exports - an up function, which is called when a migration is executed, and a down function that will be called if for some reason the migration fails to complete successfully. The up function should contain all changes that you attempt to make within the migration, and the down should ideally revert any changes you make.\par
+\par
+Here is an example migration file:\par
+\par
+import \{ MigrateUpArgs, MigrateDownArgs \} from '@payloadcms/your-db-adapter'\par
+\par
+export async function up(\{ payload, req \}: MigrateUpArgs): Promise<void> \{\par
+  // Perform changes to your database here.\par
+  // You have access to `payload` as an argument, and\par
+  // everything is done in TypeScript.\par
+\}\par
+\par
+export async function down(\{ payload, req \}: MigrateDownArgs): Promise<void> \{\par
+  // Do whatever you need to revert changes if the `up` function fails\par
+\}\par
+Using Transactions\par
+When migrations are run, each migration is performed in a new transaction for you. All you need to do is pass the req object to any Local API or direct database calls, such as payload.db.updateMany(), to make database changes inside the transaction. Assuming no errors were thrown, the transaction is committed after your up or down function runs. If the migration errors at any point or fails to commit, it is caught and the transaction gets aborted. This way no change is made to the database if the migration fails.\par
+\par
+Using database directly with the transaction\par
+Additionally, you can bypass Payload's layer entirely and perform operations directly on your underlying database within the active transaction:\par
+\par
+MongoDB:\par
+import \{ type MigrateUpArgs \} from '@payloadcms/db-mongodb'\par
+\par
+export async function up(\{\par
+  session,\par
+  payload,\par
+  req,\par
+\}: MigrateUpArgs): Promise<void> \{\par
+  const posts = await payload.db.collections.posts.collection\par
+    .find(\{ session \})\par
+    .toArray()\par
+\}\par
+Postgres:\par
+import \{ type MigrateUpArgs, sql \} from '@payloadcms/db-postgres'\par
+\par
+export async function up(\{ db, payload, req \}: MigrateUpArgs): Promise<void> \{\par
+  const \{ rows: posts \} = await db.execute(sql`SELECT * from posts`)\par
+\}\par
+SQLite:\par
+In SQLite, transactions are disabled by default. More.\par
+\par
+import \{ type MigrateUpArgs, sql \} from '@payloadcms/db-sqlite'\par
+\par
+export async function up(\{ db, payload, req \}: MigrateUpArgs): Promise<void> \{\par
+  const \{ rows: posts \} = await db.run(sql`SELECT * from posts`)\par
+\}\par
+Migrations Directory\par
+Each DB adapter has an optional property migrationDir where you can override where you want your migrations to be stored/read. If this is not specified, Payload will check the default and possibly make a best effort to find your migrations directory by searching in common locations ie. ./src/migrations, ./dist/migrations, ./migrations, etc.\par
+\par
+All database adapters should implement similar migration patterns, but there will be small differences based on the adapter and its specific needs. Below is a list of all migration commands that should be supported by your database adapter.\par
+\par
+Commands\par
+Migrate\par
+The migrate command will run any migrations that have not yet been run.\par
+\par
+npm run payload migrate\par
+Create\par
+Create a new migration file in the migrations directory. You can optionally name the migration that will be created. By default, migrations will be named using a timestamp.\par
+\par
+npm run payload migrate:create optional-name-here\par
+Flags:\par
+\par
+--skip-empty: with Postgres, it skips the "no schema changes detected. Would you like to create a blank migration file?" prompt which can be useful for generating migration in CI.\par
+--force-accept-warning: accepts any command prompts, creates a blank migration even if there weren't any changes to the schema.\par
+Status\par
+The migrate:status command will check the status of migrations and output a table of which migrations have been run, and which migrations have not yet run.\par
+\par
+payload migrate:status\par
+\par
+npm run payload migrate:status\par
+Down\par
+Roll back the last batch of migrations.\par
+\par
+npm run payload migrate:down\par
+Refresh\par
+Roll back all migrations that have been run, and run them again.\par
+\par
+npm run payload migrate:refresh\par
+Reset\par
+Roll back all migrations.\par
+\par
+npm run payload migrate:reset\par
+Fresh\par
+Drops all entities from the database and re-runs all migrations from scratch.\par
+\par
+npm run payload migrate:fresh\par
+When to run migrations\par
+Depending on which Database Adapter you use, your migration workflow might differ subtly.\par
+\par
+In relational databases, migrations will be required for non-development database environments. But with MongoDB, you might only need to run migrations once in a while (or never even need them).\par
+\par
+MongoDB\par
+In MongoDB, you'll only ever really need to run migrations for times where you change your database shape, and you have lots of existing data that you'd like to transform from Shape A to Shape B.\par
+\par
+In this case, you can create a migration by running pnpm payload migrate:create, and then write the logic that you need to perform to migrate your documents to their new shape. You can then either run your migrations in CI before you build / deploy, or you can run them locally, against your production database, by using your production database connection string on your local computer and running the pnpm payload migrate command.\par
+\par
+Postgres\par
+In relational databases like Postgres, migrations are a bit more important, because each time you add a new field or a new collection, you'll need to update the shape of your database to match your Payload Config (otherwise you'll see errors upon trying to read / write your data).\par
+\par
+That means that Postgres users of Payload should become familiar with the entire migration workflow from top to bottom.\par
+\par
+Here is an overview of a common workflow for working locally against a development database, creating migrations, and then running migrations against your production database before deploying.\par
+\par
+1 - work locally using push mode\par
+\par
+Payload uses Drizzle ORM's powerful push mode to automatically sync data changes to your database for you while in development mode. By default, this is enabled and is the suggested workflow to using Postgres and Payload while doing local development.\par
+\par
+You can disable this setting and solely use migrations to manage your local development database (pass push: false to your Postgres adapter), but if you do disable it, you may see frequent errors while running development mode. This is because Payload will have updated to your new data shape, but your local database will not have updated.\par
+\par
+For this reason, we suggest that you leave push as its default setting and treat your local dev database as a sandbox.\par
+\par
+For more information about push mode and prototyping in development, click here.\par
+\par
+The typical workflow in Payload is to build out your Payload configs, install plugins, and make progress in development mode - allowing Drizzle to push your changes to your local database for you. Once you're finished, you can create a migration.\par
+\par
+But importantly, you do not need to run migrations against your development database, because Drizzle will have already pushed your changes to your database for you.\par
+\par
+Warning: do not mix "push" and migrations with your local development database. If you use "push" locally, and then try to migrate, Payload will throw a warning, telling you that these two methods are not meant to be used interchangeably.\par
+\par
+2 - create a migration\par
+\par
+Once you're done with working in your Payload Config, you can create a migration. It's best practice to try and complete a specific task or fully build out a feature before you create a migration.\par
+\par
+But once you're ready, you can run pnpm payload migrate:create, which will perform the following steps for you:\par
+\par
+We will look for any existing migrations, and automatically generate SQL changes necessary to convert your schema from its prior state to the new state of your Payload Config\par
+We will then create a new migration file in your /migrations folder that contains all the SQL necessary to be run\par
+We won't immediately run this migration for you, however.\par
+\par
+Tip: migrations created by Payload are relatively programmatic in nature, so there should not be any surprises, but before you check in the created migration it's a good idea to always double-check the contents of the migration files.\par
+\par
+3 - set up your build process to run migrations\par
+\par
+Generally, you want to run migrations before you build Payload for production. This typically happens in your CI pipeline and can usually be configured on platforms like Payload Cloud, Vercel, or Netlify by specifying your build script.\par
+\par
+A common set of scripts in a package.json, set up to run migrations in CI, might look like this:\par
+\par
+"scripts": \{\par
+    // For running in dev mode\par
+    "dev": "next dev",\par
+\par
+    // To build your Next + Payload app for production\par
+    "build": "next build",\par
+\par
+    // A "tie-in" to Payload's CLI for convenience\par
+    // this helps you run `pnpm payload migrate:create` and similar\par
+    "payload": "cross-env NODE_OPTIONS=--no-deprecation payload",\par
+\par
+    // This command is what you'd set your `build script` to.\par
+    // Notice how it runs `payload migrate` and then `pnpm build`?\par
+    // This will run all migrations for you before building, in your CI,\par
+    // against your production database\par
+    "ci": "payload migrate && pnpm build",\par
+  \},\par
+In the example above, we've specified a ci script which we can use as our "build script" in the platform that we are deploying to production with.\par
+\par
+This will require that your build pipeline can connect to your database, and it will simply run the payload migrate command prior to starting the build process. By calling payload migrate, Payload will automatically execute any migrations in your /migrations folder that have not yet been executed against your production database, in the order that they were created.\par
+\par
+If it fails, the deployment will be rejected. But now, with your build script set up to run your migrations, you will be all set! Next time you deploy, your CI will execute the required migrations for you, and your database will be caught up with the shape that your Payload Config requires.\par
+\par
+Running migrations in production\par
+In certain cases, you might want to run migrations at runtime when the server starts. Running them during build time may be impossible due to not having access to your database connection while building or similar reasoning.\par
+\par
+If you're using a long-running server or container where your Node server starts up one time and then stays initialized, you might prefer to run migrations on server startup instead of within your CI.\par
+\par
+In order to run migrations at runtime, on initialization, you can pass your migrations to your database adapter under the prodMigrations key as follows:\par
+\par
+// Import your migrations from the `index.ts` file\par
+// that Payload generates for you\par
+import \{ migrations \} from './migrations'\par
+import \{ buildConfig \} from 'payload'\par
+\par
+export default buildConfig(\{\par
+  // your config here\par
+  db: postgresAdapter(\{\par
+    //  your adapter config here\par
+    prodMigrations: migrations,\par
+  \}),\par
+\})\par
+Passing your migrations as shown above will tell Payload, in production only, to execute any migrations that need to be run prior to completing the initialization of Payload. This is ideal for long-running services where Payload will only be initialized at startup.\par
+\par
+Warning: if Payload is instructed to run migrations in production, this may slow down serverless cold starts on platforms such as Vercel. Generally, this option should only be used for long-running servers / containers.\par
+\par
+Environment-Specific Configurations and Migrations\par
+Your configuration may include environment-specific settings (e.g., enabling a plugin only in production). If you generate migrations without considering the environment, it can lead to discrepancies and issues. When running migrations locally, Payload uses the development environment, which might miss production-specific configurations. Similarly, running migrations in production could miss development-specific entities.\par
+\par
+This is an easy oversight, so be mindful of any environment-specific logic in your config when handling migrations.\par
+\par
+Ways to address this:\par
+\par
+Manually update your migration file after it is generated to include any environment-specific configurations.\par
+Temporarily enable any required production environment variables in your local setup when generating the migration to capture the necessary updates.\par
+Use separate migration files for each environment to ensure the correct migration is executed in the corresponding environment.\par
+}
+ 

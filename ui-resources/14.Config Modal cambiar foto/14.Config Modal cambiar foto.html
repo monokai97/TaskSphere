@@ -1,0 +1,322 @@
+<!DOCTYPE html><html lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Geist:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-sidebar {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error-container": "#ffdad6",
+                        "surface-dark": "#18181B",
+                        "on-tertiary-fixed-variant": "#404758",
+                        "on-secondary-container": "#6f5900",
+                        "on-primary": "#ffffff",
+                        "surface-container-highest": "#e1e3e4",
+                        "border-subtle-light": "#F3F4F6",
+                        "tertiary": "#4e5566",
+                        "surface-elevated-dark": "#27272A",
+                        "secondary-fixed-dim": "#eec200",
+                        "on-secondary-fixed-variant": "#574500",
+                        "canvas-dark": "#09090B",
+                        "outline": "#737686",
+                        "surface": "#f8f9fa",
+                        "surface-container-high": "#e7e8e9",
+                        "tertiary-fixed-dim": "#c0c6db",
+                        "inverse-surface": "#2e3132",
+                        "primary-container": "#2563eb",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface": "#191c1d",
+                        "background": "#f8f9fa",
+                        "error": "#ba1a1a",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed": "#231b00",
+                        "surface-bright": "#f8f9fa",
+                        "surface-container-low": "#f3f4f5",
+                        "border-subtle-dark": "rgba(39, 39, 42, 0.5)",
+                        "on-tertiary-fixed": "#141b2b",
+                        "secondary-container": "#fed01b",
+                        "secondary": "#735c00",
+                        "on-error": "#ffffff",
+                        "text-secondary-dark": "#A1A1AA",
+                        "on-background": "#191c1d",
+                        "inverse-primary": "#b4c5ff",
+                        "surface-tint": "#0053db",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "on-primary-fixed": "#00174b",
+                        "primary": "#004ac6",
+                        "on-error-container": "#93000a",
+                        "surface-variant": "#e1e3e4",
+                        "secondary-fixed": "#ffe083",
+                        "primary-fixed": "#dbe1ff",
+                        "on-tertiary-container": "#ecf0ff",
+                        "on-primary-container": "#eeefff",
+                        "tertiary-fixed": "#dce2f7",
+                        "on-surface-variant": "#434655",
+                        "inverse-on-surface": "#f0f1f2",
+                        "text-secondary-light": "#6B7280",
+                        "tertiary-container": "#666d7f",
+                        "outline-variant": "#c3c6d7",
+                        "surface-dim": "#d9dadb",
+                        "on-secondary": "#ffffff",
+                        "surface-container": "#edeeef"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-gap": "0.25rem",
+                        "sidebar-width": "288px",
+                        "container-padding": "3rem",
+                        "detail-panel-width": "384px",
+                        "container-padding-mobile": "1rem",
+                        "gutter-md": "1rem"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "label-sm": ["Geist"],
+                        "headline-md": ["Geist"],
+                        "task-item": ["Inter"],
+                        "display-xl": ["Geist"],
+                        "display-xl-mobile": ["Geist"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "task-item": ["15px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "display-xl": ["36px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "display-xl-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background font-body-md text-on-surface antialiased overflow-hidden">
+<!-- Main App Layout (Background Content) -->
+<div class="flex h-screen w-full">
+<!-- SIDEBAR -->
+<aside class="hidden lg:flex flex-col w-[288px] h-full py-8 bg-surface/80 backdrop-blur-md border-r border-outline-variant/30 fixed left-0 top-0 z-10">
+<div class="px-6 mb-10">
+<span class="font-display-xl text-display-xl font-bold text-primary">FocusFlow</span>
+</div>
+<nav class="flex-1 px-4 space-y-1">
+<div class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-xl cursor-pointer">
+<span class="material-symbols-outlined" data-icon="light_mode">light_mode</span>
+<span class="font-body-md text-body-md">My Day</span>
+</div>
+<div class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-xl cursor-pointer">
+<span class="material-symbols-outlined" data-icon="star">star</span>
+<span class="font-body-md text-body-md">Important</span>
+</div>
+<div class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-xl cursor-pointer">
+<span class="material-symbols-outlined" data-icon="calendar_month">calendar_month</span>
+<span class="font-body-md text-body-md">Planned</span>
+</div>
+<div class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-xl cursor-pointer">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-body-md text-body-md">Tasks</span>
+</div>
+</nav>
+<div class="px-4 pt-4 border-t border-outline-variant/20">
+<div class="flex items-center gap-3 px-4 py-3 bg-primary-container/10 text-primary font-semibold border-l-4 border-primary rounded-r-xl">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-body-md text-body-md">Settings</span>
+</div>
+<div class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-xl cursor-pointer">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="font-body-md text-body-md">Help</span>
+</div>
+</div>
+<div class="mt-auto px-6 pt-6">
+<div class="flex items-center gap-4">
+<img alt="Alex Rivera" class="w-10 h-10 rounded-full object-cover" data-alt="Close-up portrait of a professional man with a friendly expression, soft natural office lighting, minimalist modern corporate photography style, cool blue and warm skin tone palette, shallow depth of field with a clean white architectural background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBDvrQOnN_Bo_bUKUk0GgJ_BArZdz0i8E6AGp8XT6E_1ltTfCL6k4e2U-PVBv4V9vPMUXR7qAdyfuw4rT0duO90DiZ4U3QwD4qqmSnv9VhjYDIVrEpJ3kIa1AXnJawjottpnhBnQG4TRk8JVqWV7FGloUZYaIcjmty0JcKqgxFlQ0MUv6cBNGpDwbL08HOB7oWVW1Rxf0XdtYeQdkyp5RkP9sw4uFuOF8CofMeNa4MlNV5RR_ZAlauzGcJnXfEG58fw8O2PrKr4pS1o">
+<div>
+<p class="font-headline-md text-headline-md leading-tight">Alex Rivera</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Deep Work Mode</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- MAIN WORKSPACE (Blurred Background) -->
+<main class="flex-1 ml-0 lg:ml-[288px] h-full overflow-y-auto bg-background p-12">
+<div class="max-w-4xl mx-auto">
+<header class="mb-12">
+<h1 class="font-display-xl text-display-xl text-on-surface mb-2">Configuración</h1>
+<p class="text-text-secondary-light font-body-lg text-body-lg">Gestiona tu cuenta y preferencias de FocusFlow.</p>
+</header>
+<div class="space-y-8">
+<section class="bg-surface-container-lowest rounded-2xl p-8 border border-outline-variant/30 shadow-sm">
+<h2 class="font-headline-md text-headline-md mb-6">Perfil</h2>
+<div class="flex items-center gap-8">
+<div class="relative group">
+<img alt="Profile picture preview" class="w-32 h-32 rounded-full object-cover border-4 border-surface shadow-md" data-alt="A clean, professional headshot of a person with a serene and focused expression, captured in high-resolution photography. The lighting is soft and directional, typical of a professional studio, with a minimalist neutral gray background that emphasizes the subject's calm and disciplined personality." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUIvrjykOxXWJlJiLB5NO72_OAKBCtIdNnZlvFEhiugL3KPFdsCUuwuC2HToVzEaSXJgnBzEJmptkyC1KrinnAfkopO87rlDbhDwV8qcvBxk8DDUCnKJgM6bkC-0q7rGoDo845wA4_BINb2ebFyxv5XZ6kJRXaaJR7HbAm9-PYhO3FdQaQK2wPXuYLckMf4wXKp7seaVE4KOvrpE1Z3oUOPGfuP7J6b4VIstwUa-BVNrmjemF-0oNA-7d2vMbptcLxdP-6F4labmWN">
+<div class="absolute inset-0 bg-black/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center cursor-pointer">
+<span class="material-symbols-outlined text-white" data-icon="edit">edit</span>
+</div>
+</div>
+<div class="flex-1">
+<p class="font-headline-md text-headline-md">Alex Rivera</p>
+<p class="text-text-secondary-light font-body-md text-body-md">alex.rivera@focusflow.app</p>
+<div class="mt-4 flex gap-3">
+<button class="bg-primary text-on-primary px-6 py-2.5 rounded-xl font-label-sm text-label-sm shadow-sm hover:opacity-90 transition-all">Cambiar foto</button>
+<button class="border border-outline-variant text-on-surface-variant px-6 py-2.5 rounded-xl font-label-sm text-label-sm hover:bg-surface-container transition-all">Editar perfil</button>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+</main>
+</div>
+<!-- MODAL OVERLAY -->
+<div class="fixed inset-0 z-50 flex items-center justify-center bg-inverse-surface/40 backdrop-blur-sm transition-opacity duration-300" id="modal-overlay">
+<!-- MODAL CONTAINER -->
+<div class="bg-surface-container-lowest w-full max-w-lg mx-container-padding-mobile rounded-2xl shadow-2xl overflow-hidden transform transition-all animate-in fade-in zoom-in duration-300">
+<!-- Modal Header -->
+<div class="px-8 pt-8 pb-4 flex justify-between items-center">
+<h3 class="font-headline-md text-headline-md text-on-surface">Cambiar foto de perfil</h3>
+<button class="text-on-surface-variant hover:text-on-surface transition-colors p-2 rounded-full hover:bg-surface-container-high" onclick="closeModal()">
+<span class="material-symbols-outlined" data-icon="close">close</span>
+</button>
+</div>
+<!-- Modal Content -->
+<div class="px-8 py-6 space-y-8">
+<!-- Large Preview Area -->
+<div class="flex flex-col items-center justify-center gap-6">
+<div class="w-48 h-48 rounded-full border-4 border-surface-container shadow-inner bg-surface-container-low overflow-hidden relative">
+<img alt="Current profile image" class="w-full h-full object-cover" data-alt="A macro detail shot of a professional profile picture being displayed on a high-resolution retina screen. The image shows the soft, realistic skin tones and sharp details of a man's portrait, set within a perfect circular UI crop against a minimalist white application interface background." id="preview-image" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCEglLoJRNHxGmdAz6jkN_6KXEMy0EWm8vd7sWKeEyrSixZ8hrMZH3EadLX9gS8zNvyjot5ebZqZI5QAN9Xu7gPO1bElpSy8h4SxMrGs4sBW1olmqc5-it3WYF5-1MAj7o6VaUfDWh28IFXgdSWLdZ8jhbGl3h7UtA3TJyPC40uLi5yC-p8NiSR8XVNg6vt_luGmvkS8Mp7UWoCMzvm_BXHqd1vDsZqX2ZHpn8VsAV02flrf9ZGPOazvvNBXgemYyGPSwGQh5hCkBnW">
+<div class="absolute inset-0 bg-surface/60 backdrop-blur-[2px] hidden flex items-center justify-center" id="loading-overlay">
+<div class="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+</div>
+</div>
+<div class="flex gap-4">
+<button class="flex items-center gap-2 px-6 py-2.5 bg-primary text-on-primary rounded-xl font-label-sm text-label-sm shadow-md hover:bg-primary/90 transition-all">
+<span class="material-symbols-outlined text-[18px]" data-icon="upload">upload</span>
+                            Subir foto
+                        </button>
+<button class="flex items-center gap-2 px-6 py-2.5 border border-error text-error rounded-xl font-label-sm text-label-sm hover:bg-error-container/20 transition-all">
+<span class="material-symbols-outlined text-[18px]" data-icon="delete">delete</span>
+                            Eliminar foto actual
+                        </button>
+</div>
+</div>
+<!-- Drag & Drop Zone -->
+<div class="border-2 border-dashed border-outline-variant/50 rounded-2xl p-10 flex flex-col items-center justify-center gap-3 bg-surface-container-lowest hover:bg-surface-container-low hover:border-primary/50 transition-all cursor-pointer group" id="drop-zone">
+<div class="w-12 h-12 rounded-full bg-primary-container/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[28px]" data-icon="cloud_upload">cloud_upload</span>
+</div>
+<div class="text-center">
+<p class="font-body-md text-body-md text-on-surface font-medium">Arrastra y suelta tu imagen aquí</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">Soportamos JPG, PNG y WebP (Max. 5MB)</p>
+</div>
+</div>
+</div>
+<!-- Modal Actions -->
+<div class="px-8 py-6 bg-surface-container-low flex items-center justify-end gap-3">
+<button class="px-6 py-2.5 text-on-surface-variant font-label-sm text-label-sm hover:text-on-surface transition-colors" onclick="closeModal()">
+                    Cancelar
+                </button>
+<button class="px-8 py-2.5 bg-primary text-on-primary rounded-xl font-label-sm text-label-sm shadow-lg hover:shadow-primary/20 hover:opacity-95 active:scale-95 transition-all" onclick="saveChanges()">
+                    Guardar cambios
+                </button>
+</div>
+</div>
+</div>
+<!-- Bottom Nav for Mobile (Reflow) -->
+<nav class="fixed bottom-0 left-0 w-full z-40 flex lg:hidden justify-around items-center h-16 px-4 bg-surface-container-lowest/90 backdrop-blur-lg border-t border-outline-variant/20 shadow-xl">
+<div class="flex flex-col items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-sm text-[10px]">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="event_note">event_note</span>
+<span class="font-label-sm text-[10px]">Planned</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="grade">grade</span>
+<span class="font-label-sm text-[10px]">Starred</span>
+</div>
+<div class="flex flex-col items-center justify-center text-primary bg-primary-container/20 rounded-xl px-4 py-1">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-sm text-[10px]">Settings</span>
+</div>
+</nav>
+<script>
+        function closeModal() {
+            const modal = document.getElementById('modal-overlay');
+            modal.classList.add('opacity-0');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        function saveChanges() {
+            const btn = event.target;
+            const originalText = btn.innerText;
+            btn.disabled = true;
+            btn.innerHTML = `<span class="flex items-center gap-2"><div class="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div> Guardando...</span>`;
+            
+            setTimeout(() => {
+                closeModal();
+                // Reset for demo
+                btn.disabled = false;
+                btn.innerText = originalText;
+            }, 1200);
+        }
+
+        // Simple Drag & Drop Visuals
+        const dropZone = document.getElementById('drop-zone');
+        const loadingOverlay = document.getElementById('loading-overlay');
+
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.classList.add('bg-primary-container/10', 'border-primary');
+        });
+
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.classList.remove('bg-primary-container/10', 'border-primary');
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('bg-primary-container/10', 'border-primary');
+            
+            // Show loading simulation
+            loadingOverlay.classList.remove('hidden');
+            setTimeout(() => {
+                loadingOverlay.classList.add('hidden');
+            }, 1500);
+        });
+
+        // Open modal on click (for demo purposes)
+        document.querySelector('main button.bg-primary').addEventListener('click', () => {
+            const modal = document.getElementById('modal-overlay');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+            }, 10);
+        });
+    </script>
+</body></html>

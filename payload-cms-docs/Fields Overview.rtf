@@ -1,0 +1,1169 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang2058{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil Calibri;}}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\f0\fs22\lang10 Fields Overview\par
+Fields are the building blocks of Payload. They define the schema of the Documents that will be stored in the Database, as well as automatically generate the corresponding UI within the Admin Panel.\par
+\par
+There are many Field Types to choose from, ranging anywhere from simple text strings to nested arrays and blocks. Most fields save data to the database, while others are strictly presentational. Fields can have Custom Validations, Conditional Logic, Access Control, Hooks, and so much more.\par
+\par
+Fields can be endlessly customized in their appearance and behavior without affecting their underlying data structure. Fields are designed to withstand heavy modification or even complete replacement through the use of Custom Field Components.\par
+\par
+To configure fields, use the fields property in your Collection or Global config:\par
+\par
+import type \{ CollectionConfig \} from 'payload'\par
+\par
+export const Page: CollectionConfig = \{\par
+  // ...\par
+  fields: [\par
+    \par
+    // ...\par
+  ],\par
+\}\par
+Field Types\par
+Payload provides a wide variety of built-in Field Types, each with its own unique properties and behaviors that determine which values it can accept, how it is presented in the API, and how it will be rendered in the Admin Panel.\par
+\par
+To configure fields, use the fields property in your Collection or Global config:\par
+\par
+import type \{ CollectionConfig \} from 'payload'\par
+\par
+export const Page: CollectionConfig = \{\par
+  slug: 'pages',\par
+  fields: [\par
+    \{\par
+      name: 'field',\par
+      type: 'text',\par
+    \},\par
+  ],\par
+\}\par
+Reminder: Each field is an object with at least the type property. This matches the field to its corresponding Field Type. More details.\par
+\par
+There are three main categories of fields in Payload:\par
+\par
+Data Fields\par
+Presentational Fields\par
+Virtual Fields\par
+To begin writing fields, first determine which Field Type best supports your application. Then author your field accordingly using the Field Options for your chosen field type.\par
+\par
+Data Fields\par
+Data Fields are used to store data in the Database. All Data Fields have a name property. This is the key that will be used to store the field's value.\par
+\par
+Here are the available Data Fields:\par
+\par
+Array - for repeating content, supports nested fields\par
+Blocks - for block-based content, supports nested fields\par
+Checkbox - saves boolean true / false values\par
+Code - renders a code editor interface that saves a string\par
+Date - renders a date picker and saves a timestamp\par
+Email - ensures the value is a properly formatted email address\par
+Group - nests fields within a keyed object\par
+JSON - renders a JSON editor interface that saves a JSON object\par
+Number - saves numeric values\par
+Point - for location data, saves geometric coordinates\par
+Radio - renders a radio button group that allows only one value to be selected\par
+Relationship - assign relationships to other collections\par
+Rich Text - renders a fully extensible rich text editor\par
+Select - renders a dropdown / picklist style value selector\par
+Tabs (Named) - similar to group, but renders nested fields within a tabbed layout\par
+Text - simple text input that saves a string\par
+Textarea - similar to text, but allows for multi-line input\par
+Upload - allows local file and image upload\par
+Presentational Fields\par
+Presentational Fields do not store data in the database. Instead, they are used to organize and present other fields in the Admin Panel, or to add custom UI components.\par
+\par
+Here are the available Presentational Fields:\par
+\par
+Collapsible - nests fields within a collapsible component\par
+Row - aligns fields horizontally\par
+Tabs (Unnamed) - nests fields within a tabbed layout. It is not presentational if the tab has a name.\par
+Group (Unnamed) - nests fields within a keyed object. It is not presentational if the group has a name.\par
+UI - blank field for custom UI components\par
+Virtual Fields\par
+Virtual fields display data that is not stored in the database, but is computed or derived from other fields.\par
+\par
+Here are the available Virtual Fields:\par
+\par
+Join - achieves two-way data binding between fields\par
+Tip: Don't see a built-in field type that you need? Build it! Using a combination of Field Validations and Custom Components, you can override the entirety of how a component functions within the Admin Panel to effectively create your own field type.\par
+\par
+Virtual Field Configuration\par
+While Join fields are purpose-built virtual field types, any field type can be made virtual by adding the virtual property to its configuration. This allows you to create computed or relationship-derived fields that appear in API responses without being stored in the database.\par
+\par
+Virtual fields are populated during API responses and can be used in the Admin Panel, but their values are not persisted to the database. This makes them ideal for displaying read-only computed data, relationship summaries, or formatted versions of existing field data.\par
+\par
+Configuring Virtual Fields\par
+Any field type can be made virtual by adding the virtual property to the field configuration. The virtual property can be configured in two ways:\par
+\par
+Boolean Virtual Fields\par
+When virtual is set to true, the field becomes virtual but doesn't automatically populate any data. You'll typically use Field-level Hooks to compute and populate the field's value:\par
+\par
+\{\par
+  name: 'fullName',\par
+  type: 'text',\par
+  virtual: true,\par
+  hooks: \{\par
+    afterRead: [\par
+      (\{ siblingData \}) => \{\par
+        return `$\{siblingData.firstName\} $\{siblingData.lastName\}`\par
+      \}\par
+    ]\par
+  \}\par
+\}\par
+String Path Virtual Fields\par
+When virtual is set to a string path, it creates a "virtual relationship field" that automatically resolves to data from another field in the document. This is particularly useful for displaying relationship data:\par
+\par
+\{\par
+  name: 'authorName',\par
+  type: 'text',\par
+  virtual: 'author.name' // Resolves to the 'name' field of the 'author' relationship\par
+\}\par
+Virtual Path Syntax\par
+Virtual paths use dot notation to traverse relationships and nested data:\par
+\par
+author.name - Gets the name field from the author relationship\par
+author.profile.bio - Gets the bio field from a nested profile object within the author relationship\par
+categories.title - For hasMany relationships, returns an array of title values\par
+request.additionalStakeholders.email - Traverses multiple relationship levels\par
+Important Requirements for Virtual Path Fields:\par
+\par
+Source Relationship Required: The document must have a relationship field that corresponds to the first part of the virtual path. For example, if using virtual: 'author.name', there must be an author relationship field defined in the same collection.\par
+Path Resolution: Virtual paths resolve at query time by following the relationships and extracting the specified field values.\par
+Array Handling: When the virtual path traverses a hasMany relationship, the result will be an array of values.\par
+Common Use Cases\par
+Displaying Relationship Names\par
+Instead of just showing relationship IDs, display the actual names or titles:\par
+\par
+// Original relationship field\par
+\{\par
+  name: 'author',\par
+  type: 'relationship',\par
+  relationTo: 'users'\par
+\},\par
+// Virtual field to display author's name\par
+\{\par
+  name: 'authorName',\par
+  type: 'text',\par
+  virtual: 'author.name'\par
+\}\par
+Multiple Relationship Values\par
+For hasMany relationships, virtual fields return arrays:\par
+\par
+// Original relationship field\par
+\{\par
+  name: 'categories',\par
+  type: 'relationship',\par
+  relationTo: 'categories',\par
+  hasMany: true\par
+\},\par
+// Virtual field to display category titles\par
+\{\par
+  name: 'categoryTitles',\par
+  type: 'text',\par
+  virtual: 'categories.title' // Returns ['Tech', 'News', 'Updates']\par
+\}\par
+Computed Values\par
+Use hooks to create computed virtual fields:\par
+\par
+\{\par
+  name: 'wordCount',\par
+  type: 'number',\par
+  virtual: true,\par
+  hooks: \{\par
+    afterRead: [\par
+      (\{ siblingData \}) => \{\par
+        const content = siblingData.content || ''\par
+        return content.split(/\\s+/).length\par
+      \}\par
+    ]\par
+  \}\par
+\}\par
+Virtual Fields in API Responses\par
+Virtual fields appear in API responses alongside regular fields:\par
+\par
+\{\par
+  "id": "123",\par
+  "title": "My Post",\par
+  "author": "64f1234567890abcdef12345",\par
+  "authorName": "John Doe", // Virtual field\par
+  "categories": ["64f9876543210fedcba67890", "64f5432109876543210abcdef"],\par
+  "categoryTitles": ["Tech", "News"], // Virtual field\par
+  "wordCount": 450 // Virtual field\par
+\}\par
+Important: When using virtual path fields, ensure that the referenced relationship field exists in your schema. Virtual paths like author.name require an author relationship field to be defined, otherwise the virtual field will not resolve properly.\par
+\par
+Field Options\par
+All fields require at least the type property. This matches the field to its corresponding Field Type to determine its appearance and behavior within the Admin Panel. Each Field Type has its own unique set of options based on its own type.\par
+\par
+To set a field's type, use the type property in your Field Config:\par
+\par
+import type \{ Field \} from 'payload'\par
+\par
+export const MyField: Field = \{\par
+  type: 'text', \par
+  name: 'myField',\par
+\}\par
+For a full list of configuration options, see the documentation for each Field Type.\par
+\par
+Field Names\par
+All Data Fields require a name property. This is the key that will be used to store and retrieve the field's value in the database. This property must be unique amongst this field's siblings.\par
+\par
+To set a field's name, use the name property in your Field Config:\par
+\par
+import type \{ Field \} from 'payload'\par
+\par
+export const MyField: Field = \{\par
+  type: 'text',\par
+  name: 'myField', \par
+\}\par
+Since field names map directly to keys in API response objects and to column names in the database, they should follow JavaScript identifier conventions: start with a letter or underscore, and contain only letters, numbers, and underscores. Just like all Payload field names are strings, all Payload response objects use strings as their keys \f1\emdash  so treat field names as you would a JavaScript variable name.\par
+\par
+Avoid field names that start with a digit (e.g. '1', '2field') or contain hyphens (e.g. 'field-name'). While these are valid strings in TypeScript, they can cause unexpected behavior when Payload accesses data using dot-notation paths, generates GraphQL schemas, or maps fields to database columns. GraphQL identifiers do not allow hyphens, so hyphenated field names will cause schema generation to fail.\par
+\par
+Payload reserves various field names for internal use. Using reserved field names will result in your field being sanitized from the config.\par
+\par
+The following field names are forbidden and cannot be used:\par
+\par
+__v\par
+salt\par
+hash\par
+file\par
+status - with Postgres Adapter and when drafts are enabled\par
+Field-level Hooks\par
+In addition to being able to define Hooks on a document-level, you can define extremely granular logic field-by-field.\par
+\par
+To define Field-level Hooks, use the hooks property in your Field Config:\par
+\par
+import type \{ Field \} from 'payload'\par
+\par
+export const MyField: Field = \{\par
+  type: 'text',\par
+  name: 'myField',\par
+  hooks: \{\par
+    // ...\par
+  \},\par
+\}\par
+For full details on Field-level Hooks, see the Field Hooks documentation.\par
+\par
+Field-level Access Control\par
+In addition to being able to define Access Control on a document-level, you can define extremely granular permissions field-by-field.\par
+\par
+To define Field-level Access Control, use the access property in your Field Config:\par
+\par
+import type \{ Field \} from 'payload'\par
+\par
+export const MyField: Field = \{\par
+  type: 'text',\par
+  name: 'myField',\par
+  access: \{\par
+    // ...\par
+  \},\par
+\}\par
+For full details on Field-level Access Control, see the Field Access Control documentation.\par
+\par
+Default Values\par
+Fields can be optionally prefilled with initial values. This is used in both the Admin Panel as well as API requests to populate missing or undefined field values during the create or update operations.\par
+\par
+To set a field's default value, use the defaultValue property in your Field Config:\par
+\par
+import type \{ Field \} from 'payload'\par
+\par
+export const MyField: Field = \{\par
+  type: 'text',\par
+  name: 'myField',\par
+  defaultValue: 'Hello, World!', \par
+\}\par
+Default values can be defined as a static value or a function that returns a value. When a defaultValue is defined statically, Payload's Database Adapters will apply it to the database schema or models.\par
+\par
+Functions can be written to make use of the following argument properties:\par
+\par
+user - the authenticated user object\par
+locale - the currently selected locale string\par
+req - the PayloadRequest object\par
+Here is an example of a defaultValue function:\par
+\par
+import type \{ Field \} from 'payload'\par
+\par
+const translation: \{\par
+  en: 'Written by'\par
+  es: 'Escrito por'\par
+\}\par
+\par
+export const myField: Field = \{\par
+  name: 'attribution',\par
+  type: 'text',\par
+  defaultValue: (\{ user, locale, req \}) =>\par
+    `$\{translation[locale]\} $\{user.name\}`,\par
+\}\par
+Tip: You can use async defaultValue functions to fill fields with data from API requests or Local API using req.payload.\par
+\par
+Validation\par
+Fields are automatically validated based on their Field Type and other Field Options such as required or min and max value constraints. If needed, however, field validations can be customized or entirely replaced by providing your own custom validation functions.\par
+\par
+To set a custom field validation function, use the validate property in your Field Config:\par
+\par
+import type \{ Field \} from 'payload'\par
+\par
+export const MyField: Field = \{\par
+  type: 'text',\par
+  name: 'myField',\par
+  validate: (value) => Boolean(value) || 'This field is required', \par
+\}\par
+Custom validation functions should return either true or a string representing the error message to display in API responses.\par
+\par
+The following arguments are provided to the validate function:\par
+\par
+Argument\par
+\par
+Description\par
+\par
+value\par
+\par
+The value of the field being validated.\par
+\par
+ctx\par
+\par
+An object with additional data and context. More details\par
+\par
+Validation Context\par
+The ctx argument contains full document data, sibling field data, the current operation, and other useful information such as currently authenticated user:\par
+\par
+import type \{ Field \} from 'payload'\par
+\par
+export const MyField: Field = \{\par
+  type: 'text',\par
+  name: 'myField',\par
+  validate: (val, \{ user \}) =>\par
+    Boolean(user) || 'You must be logged in to save this field',\par
+\}\par
+The following additional properties are provided in the ctx object:\par
+\par
+Property\par
+\par
+Description\par
+\par
+data\par
+\par
+An object containing the full collection or global document currently being edited.\par
+\par
+siblingData\par
+\par
+An object containing document data that is scoped to only fields within the same parent of this field.\par
+\par
+operation\par
+\par
+Will be create or update depending on the UI action or API call.\par
+\par
+path\par
+\par
+The full path to the field in the schema, represented as an array of string segments, including array indexes. I.e ['group', 'myArray', '1', 'textField'].\par
+\par
+id\par
+\par
+The id of the current document being edited. id is undefined during the create operation.\par
+\par
+req\par
+\par
+The current HTTP request object. Contains payload, user, etc.\par
+\par
+event\par
+\par
+Either onChange or submit depending on the current action. Used as a performance opt-in. More details.\par
+\par
+Localized and Built-in Error Messages\par
+You can return localized error messages by utilizing the translation function provided in the req object:\par
+\par
+import type \{ Field \} from 'payload'\par
+\par
+export const MyField: Field = \{\par
+  type: 'text',\par
+  name: 'myField',\par
+  validate: (value, \{ req: \{ t \} \}) =>\par
+    Boolean(value) || t('validation:required'), \par
+\}\par
+This way you can use Custom Translations as well as Payload's built in error messages (like validation:required used in the example above). For a full list of available translation strings, see the english translation file of Payload.\par
+\par
+Reusing Default Field Validations\par
+When using custom validation functions, Payload will use yours in place of the default. However, you might want to simply augment the default validation with your own custom logic.\par
+\par
+To reuse default field validations, call them from within your custom validation function:\par
+\par
+import \{ text \} from 'payload/shared'\par
+\par
+const field: Field = \{\par
+  name: 'notBad',\par
+  type: 'text',\par
+  validate: (val, args) => \{\par
+    if (val === 'bad') return 'This cannot be "bad"'\par
+    return text(val, args) \par
+  \},\par
+\}\par
+Here is a list of all default field validation functions:\par
+\par
+import \{\par
+  array,\par
+  blocks,\par
+  checkbox,\par
+  code,\par
+  date,\par
+  email,\par
+  json,\par
+  number,\par
+  point,\par
+  radio,\par
+  relationship,\par
+  richText,\par
+  select,\par
+  tabs,\par
+  text,\par
+  textarea,\par
+  upload,\par
+\} from 'payload/shared'\par
+Validation Performance\par
+When writing async or computationally heavy validation functions, it is important to consider the performance implications. Within the Admin Panel, validations are executed on every change to the field, so they should be as lightweight as possible and only run when necessary.\par
+\par
+If you need to perform expensive validations, such as querying the database, consider using the event property in the ctx object to only run that particular validation on form submission.\par
+\par
+To write asynchronous validation functions, use the async keyword to define your function:\par
+\par
+import type \{ CollectionConfig \} from 'payload'\par
+\par
+export const Orders: CollectionConfig = \{\par
+  slug: 'orders',\par
+  fields: [\par
+    \{\par
+      name: 'customerNumber',\par
+      type: 'text',\par
+      validate: async (val, \{ event \}) => \{\par
+        if (event === 'onChange') \{\par
+          return true\par
+        \}\par
+\par
+        // only perform expensive validation when the form is submitted\par
+        const response = await fetch(`https://your-api.com/customers/$\{val\}`)\par
+\par
+        if (response.ok) \{\par
+          return true\par
+        \}\par
+\par
+        return 'The customer number provided does not match any customers within our records.'\par
+      \},\par
+    \},\par
+  ],\par
+\}\par
+For more performance tips, see the Performance documentation.\par
+\par
+Custom ID Fields\par
+All Collections automatically generate their own ID field. If needed, you can override this behavior by providing an explicit ID field to your config. This field should either be required or have a hook to generate the ID dynamically.\par
+\par
+To define a custom ID field, add a top-level field with the name property set to id:\par
+\par
+import type \{ CollectionConfig \} from 'payload'\par
+\par
+export const MyCollection: CollectionConfig = \{\par
+  // ...\par
+  fields: [\par
+    \{\par
+      name: 'id', \par
+      required: true,\par
+      type: 'number',\par
+    \},\par
+  ],\par
+\}\par
+Reminder: The Custom ID Fields can only be of type Number or Text. Custom ID fields with type text must not contain / or . characters.\par
+\par
+Admin Options\par
+You can customize the appearance and behavior of fields within the Admin Panel through the admin property of any Field Config:\par
+\par
+import type \{ CollectionConfig \} from 'payload'\par
+\par
+export const CollectionConfig: CollectionConfig = \{\par
+  // ...\par
+  fields: [\par
+    // ...\par
+    \{\par
+      name: 'myField',\par
+      type: 'text',\par
+      admin: \{\par
+        \par
+        // ...\par
+      \},\par
+    \},\par
+  ],\par
+\}\par
+The following options are available:\par
+\par
+Option\par
+\par
+Description\par
+\par
+condition\par
+\par
+Programmatically show / hide fields based on other fields. More details.\par
+\par
+components\par
+\par
+All Field Components can be swapped out for Custom Components that you define.\par
+\par
+description\par
+\par
+Helper text to display alongside the field to provide more information for the editor. More details.\par
+\par
+position\par
+\par
+Use 'sidebar' to render the field in the sidebar or 'main' (default) to keep it in the main area.\par
+\par
+width\par
+\par
+Restrict the width of a field. You can pass any string-based value here, be it pixels, percentages, etc. This property is especially useful when fields are nested within a Row type where they can be organized horizontally.\par
+\par
+style\par
+\par
+CSS Properties to inject into the root element of the field.\par
+\par
+className\par
+\par
+Attach a CSS class attribute to the root DOM element of a field.\par
+\par
+readOnly\par
+\par
+Setting a field to readOnly has no effect on the API whatsoever but disables the admin component's editability to prevent editors from modifying the field's value.\par
+\par
+disabled\par
+\par
+If a field is disabled, it is completely omitted from the Admin Panel entirely.\par
+\par
+disableBulkEdit\par
+\par
+Set disableBulkEdit to true to prevent fields from appearing in the select options when making edits for multiple documents. Defaults to true for UI fields.\par
+\par
+disableGroupBy\par
+\par
+Set disableGroupBy to true to prevent fields from appearing in the list view groupBy options. Defaults to false.\par
+\par
+disableListColumn\par
+\par
+Set disableListColumn to true to prevent fields from appearing in the list view column selector. Defaults to false.\par
+\par
+disableListFilter\par
+\par
+Set disableListFilter to true to prevent fields from appearing in the list view filter options. Defaults to false.\par
+\par
+hidden\par
+\par
+Will transform the field into a hidden input type. Its value will still submit with requests in the Admin Panel, but the field itself will not be visible to editors.\par
+\par
+Field Descriptions\par
+Field Descriptions are used to provide additional information to the editor about a field, such as special instructions. Their placement varies from field to field, but typically are displayed with subtle style differences beneath the field inputs.\par
+\par
+A description can be configured in three ways:\par
+\par
+As a string.\par
+As a function which returns a string. More details.\par
+As a React component. More details.\par
+To add a Custom Description to a field, use the admin.description property in your Field Config:\par
+\par
+import type \{ CollectionConfig \} from 'payload'\par
+\par
+export const MyCollectionConfig: CollectionConfig = \{\par
+  // ...\par
+  fields: [\par
+    // ...\par
+    \{\par
+      name: 'myField',\par
+      type: 'text',\par
+      admin: \{\par
+        description: 'Hello, world!', \par
+      \},\par
+    \},\par
+  ],\par
+\}\par
+Reminder: To replace the Field Description with a Custom Component, use the admin.components.Description property. More details.\par
+\par
+Description Functions\par
+Custom Descriptions can also be defined as a function. Description Functions are executed on the server and can be used to format simple descriptions based on the user's current Locale.\par
+\par
+To add a Description Function to a field, set the admin.description property to a function in your Field Config:\par
+\par
+import type \{ CollectionConfig \} from 'payload'\par
+\par
+export const MyCollectionConfig: CollectionConfig = \{\par
+  // ...\par
+  fields: [\par
+    // ...\par
+    \{\par
+      name: 'myField',\par
+      type: 'text',\par
+      admin: \{\par
+        description: (\{ t \}) => `$\{t('Hello, world!')\}`, \par
+      \},\par
+    \},\par
+  ],\par
+\}\par
+All Description Functions receive the following arguments:\par
+\par
+Argument\par
+\par
+Description\par
+\par
+t\par
+\par
+The t function used to internationalize the Admin Panel. More details\par
+\par
+Note: If you need to subscribe to live updates within your form, use a Description Component instead. More details.\par
+\par
+Conditional Logic\par
+You can show and hide fields based on what other fields are doing by utilizing conditional logic on a field by field basis. The condition property on a field's admin config accepts a function which takes the following arguments:\par
+\par
+Argument\par
+\par
+Description\par
+\par
+data\par
+\par
+The entire document's data that is currently being edited.\par
+\par
+siblingData\par
+\par
+Only the fields that are direct siblings to the field with the condition.\par
+\par
+ctx\par
+\par
+An object containing additional information about the field\rquote s location and user.\par
+\par
+The ctx object:\par
+\par
+Property\par
+\par
+Description\par
+\par
+blockData\par
+\par
+The nearest parent block's data. If the field is not inside a block, this will be undefined.\par
+\par
+operation\par
+\par
+A string relating to which operation the field type is currently executing within.\par
+\par
+path\par
+\par
+The full path to the field in the schema, represented as an array of string segments, including array indexes. I.e ['group', 'myArray', '1', 'textField'].\par
+\par
+user\par
+\par
+The currently authenticated user object.\par
+\par
+The condition function should return a boolean that will control if the field should be displayed or not.\par
+\par
+Example:\par
+\par
+\{\par
+  fields: [\par
+    \{\par
+      name: 'enableGreeting',\par
+      type: 'checkbox',\par
+      defaultValue: false,\par
+    \},\par
+    \{\par
+      name: 'greeting',\par
+      type: 'text',\par
+      admin: \{\par
+        condition: (data, siblingData, \{ blockData, path, user \}) => \{\par
+          if (data.enableGreeting) \{\par
+            return true\par
+          \} else \{\par
+            return false\par
+          \}\par
+        \},\par
+      \},\par
+    \},\par
+  ]\par
+\}\par
+Custom Components\par
+Within the Admin Panel, fields are represented in three distinct places:\par
+\par
+Field - The actual form field rendered in the Edit View.\par
+Cell - The table cell component rendered in the List View.\par
+Filter - The filter component rendered in the List View.\par
+Diff - The Diff component rendered in the Version Diff View\par
+To swap in Field Components with your own, use the admin.components property in your Field Config:\par
+\par
+import type \{ CollectionConfig \} from 'payload'\par
+\par
+export const CollectionConfig: CollectionConfig = \{\par
+  // ...\par
+  fields: [\par
+    // ...\par
+    \{\par
+      // ...\par
+      admin: \{\par
+        components: \{\par
+          \par
+          // ...\par
+        \},\par
+      \},\par
+    \},\par
+  ],\par
+\}\par
+The following options are available:\par
+\par
+Component\par
+\par
+Description\par
+\par
+Field\par
+\par
+The form field rendered of the Edit View. More details.\par
+\par
+Cell\par
+\par
+The table cell rendered of the List View. More details.\par
+\par
+Filter\par
+\par
+The filter component rendered in the List View. More details.\par
+\par
+Label\par
+\par
+Override the default Label of the Field Component. More details.\par
+\par
+Error\par
+\par
+Override the default Error of the Field Component. More details.\par
+\par
+Diff\par
+\par
+Override the default Diff component rendered in the Version Diff View. More details.\par
+\par
+Description\par
+\par
+Override the default Description of the Field Component. More details.\par
+\par
+beforeInput\par
+\par
+An array of elements that will be added before the input of the Field Component. More details.\par
+\par
+afterInput\par
+\par
+An array of elements that will be added after the input of the Field Component. More details.\par
+\par
+Field\par
+The Field Component is the actual form field rendered in the Edit View. This is the input that user's will interact with when editing a document.\par
+\par
+To swap in your own Field Component, use the admin.components.Field property in your Field Config:\par
+\par
+import type \{ CollectionConfig \} from 'payload'\par
+\par
+export const CollectionConfig: CollectionConfig = \{\par
+  // ...\par
+  fields: [\par
+    // ...\par
+    \{\par
+      // ...\par
+      admin: \{\par
+        components: \{\par
+          Field: '/path/to/MyFieldComponent', \par
+        \},\par
+      \},\par
+    \},\par
+  ],\par
+\}\par
+For details on how to build Custom Components, see Building Custom Components.\par
+\par
+Instead of replacing the entire Field Component, you can alternately replace or slot-in only specific parts by using the Label, Error, beforeInput, and afterInput properties.\par
+\par
+Default Props\par
+All Field Components receive the following props by default:\par
+\par
+Property\par
+\par
+Description\par
+\par
+docPreferences\par
+\par
+An object that contains the Preferences for the document.\par
+\par
+field\par
+\par
+In Client Components, this is the sanitized Client Field Config. In Server Components, this is the original Field Config. Server Components will also receive the sanitized field config through theclientField prop (see below).\par
+\par
+locale\par
+\par
+The locale of the field. More details.\par
+\par
+readOnly\par
+\par
+A boolean value that represents if the field is read-only or not.\par
+\par
+user\par
+\par
+The currently authenticated user. More details.\par
+\par
+validate\par
+\par
+A function that can be used to validate the field.\par
+\par
+path\par
+\par
+A string representing the direct, dynamic path to the field at runtime, i.e. myGroup.myArray.0.myField.\par
+\par
+schemaPath\par
+\par
+A string representing the direct, static path to the Field Config, i.e. posts.myGroup.myArray.myField.\par
+\par
+indexPath\par
+\par
+A hyphen-notated string representing the path to the field within the nearest named ancestor field, i.e. 0-0\par
+\par
+In addition to the above props, all Server Components will also receive the following props:\par
+\par
+Property\par
+\par
+Description\par
+\par
+clientField\par
+\par
+The serializable Client Field Config.\par
+\par
+field\par
+\par
+The Field Config.\par
+\par
+data\par
+\par
+The current document being edited.\par
+\par
+i18n\par
+\par
+The i18n object.\par
+\par
+payload\par
+\par
+The Payload class.\par
+\par
+permissions\par
+\par
+The field permissions based on the currently authenticated user.\par
+\par
+siblingData\par
+\par
+The data of the field's siblings.\par
+\par
+user\par
+\par
+The currently authenticated user. More details.\par
+\par
+value\par
+\par
+The value of the field at render-time.\par
+\par
+Sending and receiving values from the form\par
+When swapping out the Field component, you are responsible for sending and receiving the field's value from the form itself.\par
+\par
+To do so, import the useField hook from @payloadcms/ui and use it to manage the field's value:\par
+\par
+'use client'\par
+import \{ useField \} from '@payloadcms/ui'\par
+\par
+export const CustomTextField: React.FC = () => \{\par
+  const \{ value, setValue \} = useField() \par
+\par
+  return <input onChange=\{(e) => setValue(e.target.value)\} value=\{value\} />\par
+\}\par
+For a complete list of all available React hooks, see the Payload React Hooks documentation. For additional help, see Building Custom Components.\par
+\par
+TypeScript\par
+When building Custom Field Components, you can import the client field props to ensure type safety in your component. There is an explicit type for the Field Component, one for every Field Type and server/client environment. The convention is to prepend the field type onto the target type, i.e. TextFieldClientComponent:\par
+\par
+import type \{\par
+  TextFieldClientComponent,\par
+  TextFieldServerComponent,\par
+  TextFieldClientProps,\par
+  TextFieldServerProps,\par
+  // ...and so on for each Field Type\par
+\} from 'payload'\par
+See each individual Field Type for exact type imports.\par
+\par
+Cell\par
+The Cell Component is rendered in the table of the List View. It represents the value of the field when displayed in a table cell.\par
+\par
+To swap in your own Cell Component, use the admin.components.Cell property in your Field Config:\par
+\par
+import type \{ Field \} from 'payload'\par
+\par
+export const myField: Field = \{\par
+  name: 'myField',\par
+  type: 'text',\par
+  admin: \{\par
+    components: \{\par
+      Cell: '/path/to/MyCustomCellComponent', \par
+    \},\par
+  \},\par
+\}\par
+Example: Custom Cell Component\par
+'use client'\par
+import type \{ DefaultCellComponentProps \} from 'payload'\par
+\par
+export const MyCustomCellComponent: React.FC<DefaultCellComponentProps> = (\{\par
+  cellData,\par
+  field,\par
+  rowData,\par
+\}) => \{\par
+  const price = cellData as number\par
+  const currency = rowData.currency || 'USD'\par
+\par
+  return (\par
+    <span>\par
+      \{new Intl.NumberFormat('en-US', \{\par
+        style: 'currency',\par
+        currency,\par
+      \}).format(price)\}\par
+    </span>\par
+  )\par
+\}\par
+Important: Use DefaultCellComponentProps for client components (with 'use client' directive) and DefaultServerCellComponentProps for server components. Omitting 'use client' will change the expected prop types.\par
+\par
+All Cell Components receive the following props:\par
+\par
+Property\par
+\par
+Description\par
+\par
+cellData\par
+\par
+The data value for this specific cell.\par
+\par
+collectionSlug\par
+\par
+The slug of the collection being rendered.\par
+\par
+field\par
+\par
+The field configuration object.\par
+\par
+rowData\par
+\par
+An object containing all data for the current row.\par
+\par
+className\par
+\par
+Optional CSS class name for styling the cell.\par
+\par
+columnIndex\par
+\par
+Optional index number of the column.\par
+\par
+customCellProps\par
+\par
+Optional additional custom props passed to the cell.\par
+\par
+link\par
+\par
+Optional boolean representing whether this cell should be wrapped in a link.\par
+\par
+linkURL\par
+\par
+Optional URL string for the link.\par
+\par
+onClick\par
+\par
+Optional function called when the cell is clicked.\par
+\par
+viewType\par
+\par
+Optional string representing the type of view being rendered.\par
+\par
+Note: Cell components receive a different set of props than Field components, optimized specifically for rendering data in the List View. They do not receive the standard Field component props like docPreferences, validate, or path.\par
+\par
+For details on how to build Custom Components themselves, see Building Custom Components.\par
+\par
+Filter\par
+The Filter Component is the actual input element rendered within the "Filter By" dropdown of the List View used to represent this field when building filters.\par
+\par
+All Custom Filter Components receive the following props:\par
+\par
+Property\par
+\par
+Description\par
+\par
+disabled\par
+\par
+Boolean indicating whether the filter is disabled.\par
+\par
+onChange\par
+\par
+Function to call when the filter value changes.\par
+\par
+operator\par
+\par
+The comparison operator being used for the filter.\par
+\par
+value\par
+\par
+The current value of the filter.\par
+\par
+To swap in your own Filter Component, use the admin.components.Filter property in your Field Config:\par
+\par
+import type \{ Field \} from 'payload'\par
+\par
+export const myField: Field = \{\par
+  name: 'myField',\par
+  type: 'text',\par
+  admin: \{\par
+    components: \{\par
+      Filter: '/path/to/MyCustomFilterComponent', \par
+    \},\par
+  \},\par
+\}\par
+All Custom Filter Components receive the same Default Field Component Props.\par
+\par
+For details on how to build Custom Components themselves, see Building Custom Components.\par
+\par
+Label\par
+The Label Component is rendered anywhere a field needs to be represented by a label. This is typically used in the Edit View, but can also be used in the List View and elsewhere.\par
+\par
+To swap in your own Label Component, use the admin.components.Label property in your Field Config:\par
+\par
+import type \{ Field \} from 'payload'\par
+\par
+export const myField: Field = \{\par
+  name: 'myField',\par
+  type: 'text',\par
+  admin: \{\par
+    components: \{\par
+      Label: '/path/to/MyCustomLabelComponent', \par
+    \},\par
+  \},\par
+\}\par
+All Custom Label Components receive the same Default Field Component Props.\par
+\par
+For details on how to build Custom Components themselves, see Building Custom Components.\par
+\par
+TypeScript\par
+When building Custom Label Components, you can import the component types to ensure type safety in your component. There is an explicit type for the Label Component, one for every Field Type and server/client environment. The convention is to append LabelServerComponent or LabelClientComponent to the type of field, i.e. TextFieldLabelClientComponent.\par
+\par
+import type \{\par
+  TextFieldLabelServerComponent,\par
+  TextFieldLabelClientComponent,\par
+  // ...and so on for each Field Type\par
+\} from 'payload'\par
+Description\par
+Alternatively to the Description Property, you can also use a Custom Component as the Field Description. This can be useful when you need to provide more complex feedback to the user, such as rendering dynamic field values or other interactive elements.\par
+\par
+To add a Description Component to a field, use the admin.components.Description property in your Field Config:\par
+\par
+import type \{ CollectionConfig \} from 'payload'\par
+\par
+export const MyCollectionConfig: CollectionConfig = \{\par
+  // ...\par
+  fields: [\par
+    // ...\par
+    \{\par
+      name: 'myField',\par
+      type: 'text',\par
+      admin: \{\par
+        components: \{\par
+          Description: '/path/to/MyCustomDescriptionComponent', \par
+        \},\par
+      \},\par
+    \},\par
+  ],\par
+\}\par
+All Custom Description Components receive the same Default Field Component Props.\par
+\par
+For details on how to build a Custom Components themselves, see Building Custom Components.\par
+\par
+TypeScript\par
+When building Custom Description Components, you can import the component props to ensure type safety in your component. There is an explicit type for the Description Component, one for every Field Type and server/client environment. The convention is to append DescriptionServerComponent or DescriptionClientComponent to the type of field, i.e. TextFieldDescriptionClientComponent.\par
+\par
+import type \{\par
+  TextFieldDescriptionServerComponent,\par
+  TextFieldDescriptionClientComponent,\par
+  // And so on for each Field Type\par
+\} from 'payload'\par
+Error\par
+The Error Component is rendered when a field fails validation. It is typically displayed beneath the field input in a visually-compelling style.\par
+\par
+To swap in your own Error Component, use the admin.components.Error property in your Field Config:\par
+\par
+import type \{ Field \} from 'payload'\par
+\par
+export const myField: Field = \{\par
+  name: 'myField',\par
+  type: 'text',\par
+  admin: \{\par
+    components: \{\par
+      Error: '/path/to/MyCustomErrorComponent', \par
+    \},\par
+  \},\par
+\}\par
+All Error Components receive the Default Field Component Props.\par
+\par
+For details on how to build Custom Components themselves, see Building Custom Components.\par
+\par
+TypeScript\par
+When building Custom Error Components, you can import the component types to ensure type safety in your component. There is an explicit type for the Error Component, one for every Field Type and server/client environment. The convention is to append ErrorServerComponent or ErrorClientComponent to the type of field, i.e. TextFieldErrorClientComponent.\par
+\par
+import type \{\par
+  TextFieldErrorServerComponent,\par
+  TextFieldErrorClientComponent,\par
+  // And so on for each Field Type\par
+\} from 'payload'\par
+Diff\par
+The Diff Component is rendered in the Version Diff view. It will only be visible in entities with versioning enabled,\par
+\par
+To swap in your own Diff Component, use the admin.components.Diff property in your Field Config:\par
+\par
+import type \{ Field \} from 'payload'\par
+\par
+export const myField: Field = \{\par
+  name: 'myField',\par
+  type: 'text',\par
+  admin: \{\par
+    components: \{\par
+      Diff: '/path/to/MyCustomDiffComponent', \par
+    \},\par
+  \},\par
+\}\par
+All Error Components receive the Default Field Component Props.\par
+\par
+For details on how to build Custom Components themselves, see Building Custom Components.\par
+\par
+TypeScript\par
+When building Custom Diff Components, you can import the component types to ensure type safety in your component. There is an explicit type for the Diff Component, one for every Field Type and server/client environment. The convention is to append DiffServerComponent or DiffClientComponent to the type of field, i.e. TextFieldDiffClientComponent.\par
+\par
+import type \{\par
+  TextFieldDiffServerComponent,\par
+  TextFieldDiffClientComponent,\par
+  // And so on for each Field Type\par
+\} from 'payload'\par
+afterInput and beforeInput\par
+With these properties you can add multiple components before and after the input element, as their name suggests. This is useful when you need to render additional elements alongside the field without replacing the entire field component.\par
+\par
+To add components before and after the input element, use the admin.components.beforeInput and admin.components.afterInput properties in your Field Config:\par
+\par
+import type \{ CollectionConfig \} from 'payload'\par
+\par
+export const MyCollectionConfig: CollectionConfig = \{\par
+  // ...\par
+  fields: [\par
+    // ...\par
+    \{\par
+      name: 'myField',\par
+      type: 'text',\par
+      admin: \{\par
+        components: \{\par
+          beforeInput: ['/path/to/MyCustomComponent'],\par
+          afterInput: ['/path/to/MyOtherCustomComponent'],\par
+        \},\par
+      \},\par
+    \},\par
+  ],\par
+\}\par
+All afterInput and beforeInput Components receive the same Default Field Component Props.\par
+\par
+For details on how to build Custom Components, see Building Custom Components.\par
+\par
+TypeScript\par
+You can import the Payload Field type as well as other common types from the payload package. More details.\par
+\par
+import type \{ Field \} from 'payload'\f0\par
+}
+ 

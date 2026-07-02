@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FocusFlow | Configuración de Google Calendar</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Geist:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline": "#737686",
+                    "on-tertiary-fixed": "#141b2b",
+                    "on-background": "#191c1d",
+                    "primary-fixed-dim": "#b4c5ff",
+                    "outline-variant": "#c3c6d7",
+                    "error-container": "#ffdad6",
+                    "surface-dim": "#d9dadb",
+                    "on-tertiary": "#ffffff",
+                    "primary-fixed": "#dbe1ff",
+                    "on-secondary-container": "#6f5900",
+                    "secondary-fixed": "#ffe083",
+                    "secondary-container": "#fed01b",
+                    "surface-bright": "#f8f9fa",
+                    "inverse-on-surface": "#f0f1f2",
+                    "surface-dark": "#18181B",
+                    "surface-variant": "#e1e3e4",
+                    "border-subtle-dark": "rgba(39, 39, 42, 0.5)",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary-fixed": "#dce2f7",
+                    "inverse-surface": "#2e3132",
+                    "surface-container-highest": "#e1e3e4",
+                    "tertiary-fixed-dim": "#c0c6db",
+                    "tertiary": "#4e5566",
+                    "surface-container-low": "#f3f4f5",
+                    "on-error": "#ffffff",
+                    "text-secondary-dark": "#A1A1AA",
+                    "on-primary-fixed-variant": "#003ea8",
+                    "secondary": "#735c00",
+                    "on-error-container": "#93000a",
+                    "tertiary-container": "#666d7f",
+                    "on-tertiary-container": "#ecf0ff",
+                    "primary": "#004ac6",
+                    "on-tertiary-fixed-variant": "#404758",
+                    "on-secondary-fixed-variant": "#574500",
+                    "on-secondary-fixed": "#231b00",
+                    "text-secondary-light": "#6B7280",
+                    "primary-container": "#2563eb",
+                    "surface-container": "#edeeef",
+                    "secondary-fixed-dim": "#eec200",
+                    "surface-container-high": "#e7e8e9",
+                    "surface": "#f8f9fa",
+                    "border-subtle-light": "#F3F4F6",
+                    "on-surface-variant": "#434655",
+                    "surface-elevated-dark": "#27272A",
+                    "error": "#ba1a1a",
+                    "on-surface": "#191c1d",
+                    "on-primary-container": "#eeefff",
+                    "on-secondary": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "on-primary-fixed": "#00174b",
+                    "inverse-primary": "#b4c5ff",
+                    "background": "#f8f9fa",
+                    "surface-tint": "#0053db",
+                    "canvas-dark": "#09090B"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-gap": "0.25rem",
+                    "container-padding": "3rem",
+                    "sidebar-width": "288px",
+                    "detail-panel-width": "384px",
+                    "container-padding-mobile": "1rem",
+                    "gutter-md": "1rem"
+            },
+            "fontFamily": {
+                    "label-sm": ["Geist"],
+                    "task-item": ["Inter"],
+                    "body-md": ["Inter"],
+                    "display-xl-mobile": ["Geist"],
+                    "headline-md": ["Geist"],
+                    "body-lg": ["Inter"],
+                    "display-xl": ["Geist"]
+            },
+            "fontSize": {
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "task-item": ["15px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "display-xl-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "display-xl": ["36px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #f8f9fa;
+            color: #191c1d;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+        .glass-panel {
+            background: rgba(248, 249, 250, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .active-nav-indicator {
+            position: absolute;
+            left: 0;
+            width: 4px;
+            height: 24px;
+            background-color: #004ac6;
+            border-radius: 0 4px 4px 0;
+        }
+        input:checked + .toggle-dot {
+            transform: translateX(100%);
+            background-color: #ffffff;
+        }
+        input:checked + .toggle-bg {
+            background-color: #2563eb;
+        }
+    </style>
+</head>
+<body class="h-screen flex overflow-hidden">
+<!-- Column 1: SideNavBar -->
+<aside class="fixed left-0 top-0 h-full w-sidebar-width bg-surface/80 backdrop-blur-md flex flex-col border-r border-outline-variant/30 z-30">
+<div class="p-8">
+<h1 class="font-headline-md text-headline-md font-bold text-primary">FocusFlow</h1>
+<p class="text-on-surface-variant text-xs opacity-70">Productivity Zen</p>
+</div>
+<nav class="flex-1 px-4 space-y-1">
+<a class="flex items-center px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3">wb_sunny</span>
+<span class="font-label-sm text-label-sm">My Day</span>
+</a>
+<a class="flex items-center px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3">star</span>
+<span class="font-label-sm text-label-sm">Important</span>
+</a>
+<a class="flex items-center px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3">calendar_today</span>
+<span class="font-label-sm text-label-sm">Planned</span>
+</a>
+<a class="flex items-center px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3">check_circle</span>
+<span class="font-label-sm text-label-sm">Tasks</span>
+</a>
+<div class="pt-8 pb-2 px-4 text-[10px] font-bold uppercase tracking-widest text-outline">System</div>
+<a class="flex items-center px-4 py-3 rounded-lg bg-surface-container text-primary border-l-4 border-primary relative" href="#">
+<span class="material-symbols-outlined mr-3">settings</span>
+<span class="font-label-sm text-label-sm">Settings</span>
+</a>
+<a class="flex items-center px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3">help_outline</span>
+<span class="font-label-sm text-label-sm">Help</span>
+</a>
+</nav>
+<div class="p-6">
+<button class="w-full py-3 bg-primary text-white rounded-xl font-medium shadow-md active:scale-[0.98] transition-transform flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">add</span>
+<span>New Task</span>
+</button>
+</div>
+</aside>
+<!-- Column 2: Settings Workspace -->
+<main class="flex-1 ml-sidebar-width h-full flex flex-col bg-background">
+<!-- Top Nav Bar for Context -->
+<header class="flex justify-between items-center px-container-padding h-16 border-b border-outline-variant/20 bg-surface">
+<div class="flex items-center gap-4">
+<span class="text-on-surface-variant text-sm">Configuración</span>
+<span class="material-symbols-outlined text-outline text-xs">chevron_right</span>
+<span class="text-on-surface font-semibold text-sm">Integraciones</span>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative group">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-error rounded-full"></span>
+</div>
+<img class="w-8 h-8 rounded-full border border-outline-variant" data-alt="A clean professional studio portrait of a modern productivity expert with short hair, wearing a neutral grey linen shirt, looking directly at the camera with a friendly and focused expression. The lighting is bright and airy, reflecting a high-end minimalist tech aesthetic. The background is a soft, out-of-focus modern office space with natural light." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCR9Kw7XbsbyEJIBPJ1_7J-UYaNV3Qjug-J_Gx0N53xd3KLAfhDQWA_JfNkt_ORC324HeCkfrLsYePMzy0i-shVJn-sbhWMRAPpCQhzraw-sPCbaiANH1ckIfX98NCkRfMnD6Z-9j1Iyd-ID44fBro0nReeSmtlYoOEmkeXQTQfU4TQPoYWKDsqdVal1NMkz2hV5AEr_vzOlZNFVHZewIb1EvwxZtzyf93Kac71b8tpRkEokA9H6pZUUdtmOTYBexonMJyM8zSV1EWf"/>
+</div>
+</header>
+<!-- Two-pane settings content -->
+<div class="flex flex-1 overflow-hidden">
+<!-- Settings Sub-nav -->
+<nav class="w-64 border-r border-outline-variant/10 p-6 space-y-6">
+<div>
+<h3 class="text-xs font-bold text-outline uppercase tracking-wider mb-4 px-2">General</h3>
+<ul class="space-y-1">
+<li><a class="block px-3 py-2 text-sm text-on-surface-variant hover:bg-surface-container-low rounded-lg" href="#">Perfil</a></li>
+<li><a class="block px-3 py-2 text-sm text-on-surface-variant hover:bg-surface-container-low rounded-lg" href="#">Notificaciones</a></li>
+<li><a class="block px-3 py-2 text-sm text-on-surface-variant hover:bg-surface-container-low rounded-lg" href="#">Apariencia</a></li>
+</ul>
+</div>
+<div>
+<h3 class="text-xs font-bold text-outline uppercase tracking-wider mb-4 px-2">Conexiones</h3>
+<ul class="space-y-1">
+<li><a class="block px-3 py-2 text-sm text-primary font-semibold bg-primary/5 rounded-lg flex items-center justify-between" href="#">
+                            Integraciones
+                            <span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+</a></li>
+<li><a class="block px-3 py-2 text-sm text-on-surface-variant hover:bg-surface-container-low rounded-lg" href="#">API Access</a></li>
+</ul>
+</div>
+</nav>
+<!-- Settings Detail Content -->
+<section class="flex-1 overflow-y-auto p-12 max-w-4xl">
+<div class="flex items-center gap-4 mb-2">
+<div class="w-12 h-12 rounded-2xl bg-primary-container/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-3xl">calendar_today</span>
+</div>
+<div>
+<h2 class="font-display-xl text-display-xl text-on-surface">Google Calendar</h2>
+<p class="text-text-secondary-light text-body-md mt-1">Sincroniza tus tareas con Google Calendar para mantener el control de tu agenda.</p>
+</div>
+</div>
+<div class="mt-8 p-6 rounded-2xl bg-surface-container-lowest border border-outline-variant/30 flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-4">
+<div class="relative">
+<img class="w-10 h-10" data-alt="A small circular Google Calendar logo with the number 31 prominently displayed, styled in a modern, clean vector format that matches a professional productivity app interface. The colors are the standard Google brand colors but softened to fit a minimalist aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCz_I-fKNrbN4QH8rSET_zwSjdXcSbBmgzQcpLLBuZ3h2Z6XBrxCC_KxCknKBB7WeoMsejUGsXnQG7xleXCjL1DY4FS_cXIz9GJgqSBJBR9UGjeoH2TGwLx9gQE3ErWIuYerDIJmIU5N5gl1dtMgzvw9GiJ7V_MioZQ7FnRH0uCF9U5bpY0FFzymgp5Ev-J3WphURqQB2Be6465kTsQ2OuRfj4xP1UMT-YE7O626szFA8dx7eNk32ezpHLTonh2XEjBC86UaNkjb17v"/>
+<span class="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 border-2 border-white rounded-full"></span>
+</div>
+<div>
+<p class="font-medium text-on-surface">Conectado como alex.rivera@gmail.com</p>
+<p class="text-xs text-text-secondary-light">Última sincronización: Hace 2 minutos</p>
+</div>
+</div>
+<button class="px-4 py-2 text-error font-medium hover:bg-error-container/20 rounded-lg transition-colors text-sm">
+                        Desconectar
+                    </button>
+</div>
+<div class="mt-12 space-y-8">
+<div>
+<h3 class="text-lg font-semibold text-on-surface mb-6 border-b border-outline-variant/10 pb-2">Preferencias de Sincronización</h3>
+<div class="space-y-6">
+<!-- Toggle 1 -->
+<div class="flex items-center justify-between">
+<div>
+<p class="font-medium text-on-surface">Importar eventos como tareas</p>
+<p class="text-sm text-text-secondary-light">Los eventos del calendario aparecerán automáticamente en tu lista 'My Day'.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<!-- Toggle 2 -->
+<div class="flex items-center justify-between">
+<div>
+<p class="font-medium text-on-surface">Sincronizar tareas completadas</p>
+<p class="text-sm text-text-secondary-light">Marcar una tarea como completada en FocusFlow la marcará como tal en el calendario.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<!-- Dropdown 1 -->
+<div class="flex items-center justify-between gap-12">
+<div class="flex-1">
+<p class="font-medium text-on-surface">Calendario Principal</p>
+<p class="text-sm text-text-secondary-light">Selecciona el calendario donde se crearán las nuevas tareas.</p>
+</div>
+<select class="bg-surface-container-low border border-outline-variant/30 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-primary/20 outline-none w-64">
+<option>Trabajo (alex.rivera@gmail.com)</option>
+<option>Personal</option>
+<option>FocusFlow Tasks</option>
+</select>
+</div>
+<!-- Dropdown 2 -->
+<div class="flex items-center justify-between gap-12">
+<div class="flex-1">
+<p class="font-medium text-on-surface">Frecuencia de Sincronización</p>
+<p class="text-sm text-text-secondary-light">Con qué frecuencia FocusFlow buscará actualizaciones.</p>
+</div>
+<select class="bg-surface-container-low border border-outline-variant/30 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-primary/20 outline-none w-64">
+<option>En tiempo real (Push)</option>
+<option>Cada 15 minutos</option>
+<option>Cada hora</option>
+<option>Manualmente</option>
+</select>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-16 flex items-center gap-4 pt-8 border-t border-outline-variant/10">
+<button class="px-8 py-3 bg-primary text-white rounded-xl font-semibold shadow-lg shadow-primary/20 hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 transition-all">
+                        Guardar Cambios
+                    </button>
+<button class="px-8 py-3 bg-surface-container text-on-surface-variant rounded-xl font-semibold hover:bg-surface-container-high transition-colors">
+                        Cancelar
+                    </button>
+</div>
+</section>
+</div>
+</main>
+<!-- Column 3: Detail Panel / Live Preview -->
+<aside class="w-detail-panel-width glass-panel border-l border-outline-variant/30 h-full flex flex-col relative z-20">
+<div class="p-8 border-b border-outline-variant/10">
+<h3 class="font-headline-md text-headline-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">visibility</span>
+                Vista Previa
+            </h3>
+<p class="text-sm text-text-secondary-light mt-1">Así es como verás tus eventos sincronizados.</p>
+</div>
+<div class="flex-1 p-8 overflow-y-auto">
+<div class="space-y-6">
+<div class="relative">
+<p class="text-[10px] font-bold text-outline uppercase tracking-widest mb-3">Hoy - 14:00</p>
+<!-- Live Preview Card -->
+<div class="group relative bg-white border border-outline-variant/20 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all">
+<div class="absolute top-0 left-0 w-1 h-full bg-primary rounded-l-2xl"></div>
+<div class="flex items-start justify-between">
+<div class="flex items-start gap-3">
+<div class="mt-1 w-5 h-5 rounded-full border-2 border-primary/30 flex items-center justify-center hover:bg-primary/5 cursor-pointer">
+<div class="w-2.5 h-2.5 rounded-full bg-primary opacity-0 group-hover:opacity-40 transition-opacity"></div>
+</div>
+<div>
+<h4 class="font-task-item text-task-item font-semibold text-on-surface">Reunión de Diseño Trimestral</h4>
+<div class="flex items-center gap-4 mt-2">
+<div class="flex items-center gap-1.5 text-xs text-text-secondary-light">
+<span class="material-symbols-outlined text-sm">schedule</span>
+                                            14:00 - 15:30
+                                        </div>
+<div class="flex items-center gap-1.5 text-xs text-primary font-medium bg-primary/5 px-2 py-0.5 rounded-full">
+<span class="material-symbols-outlined text-sm">event</span>
+                                            Google Calendar
+                                        </div>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-4 pt-4 border-t border-outline-variant/5">
+<div class="flex items-center gap-2">
+<img class="h-6 w-12 object-cover opacity-60" data-alt="A small group of blurred colorful profile avatars of team members representing attendees in a calendar event." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqo7yDp7vibEr6Ks1vA498yvb_cqOXNSylza8NYU-nHLLJdp0s09TC614SwqyNLM5AOgOv8h6jxK2wYSyVbFM6AdoONo3h2audVxrmzNTIzcvHrP_ebd34jy3cSmNXoqLHQdCpWU0LtwC1D3Ah8qpsrWb7tCW6KYpY5e29L6Z040R7-edOAl0gYe7zeQ5ecAhm325mBNZIpCM-1ovC6i0YapAXHKayPF9lSILuLxZ3jNaf5nCozXZ3FUVHDMbgFZZB_o0bTLbmRROP"/>
+<span class="text-[10px] text-text-secondary-light">+3 asistentes</span>
+</div>
+</div>
+</div>
+</div>
+<div class="opacity-40 select-none grayscale pointer-events-none">
+<p class="text-[10px] font-bold text-outline uppercase tracking-widest mb-3">Hoy - 16:30</p>
+<div class="bg-white/50 border border-outline-variant/10 rounded-2xl p-5 shadow-sm">
+<div class="flex items-start gap-3">
+<div class="mt-1 w-5 h-5 rounded-full border-2 border-outline-variant/30"></div>
+<div>
+<h4 class="font-task-item text-task-item font-medium text-on-surface">Revisión de métricas semanales</h4>
+<div class="flex items-center gap-2 mt-1 text-xs text-text-secondary-light">
+<span class="material-symbols-outlined text-sm">link</span>
+                                    meet.google.com/abc-defg
+                                </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Pro Tip Box -->
+<div class="mt-12 p-6 rounded-2xl bg-primary/5 border border-primary/10 relative overflow-hidden">
+<div class="absolute -right-4 -bottom-4 opacity-5">
+<span class="material-symbols-outlined text-8xl text-primary">tips_and_updates</span>
+</div>
+<h5 class="text-primary font-bold text-sm mb-2">Consejo FocusFlow</h5>
+<p class="text-sm text-on-surface-variant leading-relaxed">
+                    Puedes usar el comando <code class="bg-white px-1 rounded border">/cal</code> en cualquier tarea para vincularla rápidamente a un evento existente de tu calendario sincronizado.
+                </p>
+</div>
+</div>
+<div class="p-8 bg-surface-container-low/50">
+<div class="flex items-center justify-between text-xs text-text-secondary-light">
+<span>Versión Pro</span>
+<span class="text-primary font-bold">ACTIVA</span>
+</div>
+<div class="mt-2 w-full h-1 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="w-full h-full bg-primary"></div>
+</div>
+</div>
+</aside>
+<script>
+        // Micro-interactions for toggles and UI
+        document.querySelectorAll('input[type="checkbox"]').forEach(toggle => {
+            toggle.addEventListener('change', function() {
+                const parent = this.closest('.flex');
+                if(this.checked) {
+                    parent.style.opacity = "1";
+                } else {
+                    // Subtle visual cue for disabled states if needed
+                }
+            });
+        });
+
+        // Simulating a dynamic update on the preview when primary calendar changes
+        document.querySelector('select').addEventListener('change', function(e) {
+            const previewCard = document.querySelector('.group.relative.bg-white');
+            previewCard.classList.add('animate-pulse');
+            setTimeout(() => {
+                previewCard.classList.remove('animate-pulse');
+            }, 500);
+        });
+    </script>
+</body></html>

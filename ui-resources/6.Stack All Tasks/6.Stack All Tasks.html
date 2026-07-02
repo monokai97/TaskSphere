@@ -1,0 +1,432 @@
+<!DOCTYPE html><html lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>FocusFlow - Tareas</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;family=Inter:wght@100..900&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .glass-effect {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #e1e3e4;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #737686;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary-fixed-dim": "#c0c6db",
+                      "surface": "#f8f9fa",
+                      "surface-container-high": "#e7e8e9",
+                      "inverse-primary": "#b4c5ff",
+                      "surface-bright": "#f8f9fa",
+                      "primary": "#004ac6",
+                      "on-primary-fixed": "#00174b",
+                      "on-tertiary": "#ffffff",
+                      "surface-tint": "#0053db",
+                      "on-tertiary-fixed-variant": "#404758",
+                      "surface-variant": "#e1e3e4",
+                      "surface-container-lowest": "#ffffff",
+                      "on-secondary-fixed-variant": "#574500",
+                      "error": "#ba1a1a",
+                      "on-secondary-fixed": "#231b00",
+                      "background": "#f8f9fa",
+                      "secondary-fixed-dim": "#eec200",
+                      "primary-fixed-dim": "#b4c5ff",
+                      "tertiary-fixed": "#dce2f7",
+                      "surface-dark": "#18181B",
+                      "on-primary-fixed-variant": "#003ea8",
+                      "inverse-surface": "#2e3132",
+                      "outline-variant": "#c3c6d7",
+                      "border-subtle-light": "#F3F4F6",
+                      "text-secondary-light": "#6B7280",
+                      "on-background": "#191c1d",
+                      "surface-container-low": "#f3f4f5",
+                      "tertiary": "#4e5566",
+                      "on-error": "#ffffff",
+                      "surface-container": "#edeeef",
+                      "on-primary": "#ffffff",
+                      "inverse-on-surface": "#f0f1f2",
+                      "secondary-fixed": "#ffe083",
+                      "primary-fixed": "#dbe1ff",
+                      "secondary-container": "#fed01b",
+                      "on-tertiary-container": "#ecf0ff",
+                      "on-secondary-container": "#6f5900",
+                      "on-primary-container": "#eeefff",
+                      "surface-dim": "#d9dadb",
+                      "tertiary-container": "#666d7f",
+                      "secondary": "#735c00",
+                      "on-surface-variant": "#434655",
+                      "surface-container-highest": "#e1e3e4",
+                      "on-error-container": "#93000a",
+                      "surface-elevated-dark": "#27272A",
+                      "on-surface": "#191c1d",
+                      "outline": "#737686",
+                      "text-secondary-dark": "#A1A1AA",
+                      "on-secondary": "#ffffff",
+                      "canvas-dark": "#09090B",
+                      "on-tertiary-fixed": "#141b2b",
+                      "error-container": "#ffdad6",
+                      "border-subtle-dark": "rgba(39, 39, 42, 0.5)",
+                      "primary-container": "#2563eb"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "sidebar-width": "288px",
+                      "gutter-md": "1rem",
+                      "detail-panel-width": "384px",
+                      "container-padding": "3rem",
+                      "stack-gap": "0.25rem",
+                      "container-padding-mobile": "1rem"
+              },
+              "fontFamily": {
+                      "body-md": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "display-xl-mobile": ["Geist"],
+                      "task-item": ["Inter"],
+                      "label-sm": ["Geist"],
+                      "display-xl": ["Geist"],
+                      "headline-md": ["Geist"]
+              },
+              "fontSize": {
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "display-xl-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                      "task-item": ["15px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                      "display-xl": ["36px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}]
+              }
+            },
+          },
+        }
+      </script>
+</head>
+<body class="bg-surface text-on-surface font-body-md min-h-screen overflow-hidden flex">
+<!-- Sidebar Navigation -->
+<aside class="hidden lg:flex flex-col w-[288px] h-screen py-8 bg-surface/80 glass-effect border-r border-outline-variant/30 fixed left-0 top-0 z-30" id="SideNavBar">
+<div class="px-6 mb-10">
+<h1 class="font-display-xl text-display-xl font-bold text-primary">FocusFlow</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">Deep Work Mode</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-6 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="light_mode">light_mode</span>
+<span class="font-body-md text-body-md">My Day</span>
+</a>
+<a class="flex items-center gap-3 px-6 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="star">star</span>
+<span class="font-body-md text-body-md">Important</span>
+</a>
+<a class="flex items-center gap-3 px-6 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_month">calendar_month</span>
+<span class="font-body-md text-body-md">Planned</span>
+</a>
+<a class="flex items-center gap-3 px-6 py-3 bg-primary-container/10 text-primary font-semibold border-l-4 border-primary" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-body-md text-body-md">Tasks</span>
+</a>
+</nav>
+<div class="px-6 mt-auto space-y-4">
+<button class="w-full flex items-center justify-center gap-2 bg-primary text-on-primary py-3 px-4 rounded-xl font-semibold shadow-sm hover:opacity-90 transition-all">
+<span class="material-symbols-outlined">add</span>
+                New List
+            </button>
+<div class="pt-4 border-t border-outline-variant/20">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-sm text-label-sm">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="font-label-sm text-label-sm">Help</span>
+</a>
+</div>
+<div class="flex items-center gap-3 mt-4 px-2">
+<img alt="User profile avatar" class="w-10 h-10 rounded-full bg-surface-container-highest" data-alt="A professional close-up portrait of a serene young man with short dark hair and a friendly expression, set against a blurred minimalist architectural background with soft natural lighting and a cool blue and white color palette to match a digital zen aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_iJOAA6_3Lwzkcy0qW4kKFwinMcdNNXIA1qwPFdVCM-q8IEK0hPrfn-f-CO9iUGqDWeY1-Oq9TuPq_NGgxRtei0dTmIyiG4rkys9qpzzLUddkRj68YED-3Kk4iikOZbo80qOREVpoLs8Tb7TgfHVvOiljnBRWa_vaXBjGx7tFkaDJw3uwWYB17yMZ5ZKUfxn_0Udh4bLfzieLiCqnnNRbCT5QA0K37rDBPbPRjCGAG3Pc8cDCHDVLVJ6I0hxJpNNQSX1VDd7n5Gnm">
+<div>
+<p class="font-label-sm text-label-sm font-bold">Alex Rivera</p>
+<p class="text-[10px] text-on-surface-variant">Focusing...</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Top Bar Mobile -->
+<header class="flex lg:hidden justify-between items-center w-full px-4 h-16 z-40 fixed top-0 bg-surface/60 glass-effect border-b border-outline-variant/10">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">menu</span>
+<span class="font-headline-md text-headline-md font-bold text-primary">FocusFlow</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant">search</span>
+<img alt="User avatar" class="w-8 h-8 rounded-full" data-alt="Close-up headshot of a person with a clean-cut look, smiling gently in a bright, modern studio. The lighting is ethereal and high-key, emphasizing a feeling of digital productivity and calm order, perfectly aligning with a minimalist UI branding." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1J1l05E3NrS8p4_B8iouEUZi6Gk-C1VRKOa4-A_Yom0uVkY3bOXQE3LaFG85Q0zVnVkmz9m1AiBjNWFJrRMTMy7HZLLY1VXa9ieMHLYkr1Kc0zQvgRfbygb7oZ4caaZtCrSpUGaeNFHYKWB6tfoR8ABXP3vvcmjViMZSzgcOBYUitQjYEUDdB4DWCE6LXR99aK4ksZtxGsga3yoTh-kwWR0_Nvpn-izjVgjHPoddL6WKmaklrJPL5mJ0XpcjidwS2lnKvC-AOyKjr">
+</div>
+</header>
+<!-- Main Content Workspace -->
+<main class="flex-1 ml-0 lg:ml-[288px] mr-0 lg:mr-[384px] h-screen overflow-y-auto bg-surface flex flex-col relative">
+<div class="p-6 md:p-12 max-w-4xl mx-auto w-full flex flex-col h-full">
+<!-- Header Section -->
+<header class="mb-10 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-2xl bg-primary-container/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-3xl">home</span>
+</div>
+<div>
+<h2 class="font-display-xl text-display-xl font-bold tracking-tight text-on-surface">Tareas</h2>
+<p class="text-on-surface-variant font-body-md text-body-md">Gestión central de tus flujos de trabajo</p>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container rounded-lg transition-colors">
+<span class="material-symbols-outlined">filter_list</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container rounded-lg transition-colors">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</div>
+</header>
+<!-- Tasks List Section -->
+<section class="space-y-4 flex-1 mb-24">
+<!-- Task Category Label -->
+<div class="flex items-center gap-2 px-2 py-1">
+<span class="material-symbols-outlined text-xs text-on-surface-variant">expand_more</span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant">Pendientes</span>
+</div>
+<!-- Active Task (Selected) -->
+<div class="group relative flex items-center gap-4 p-4 bg-surface-container-lowest rounded-xl border-2 border-primary shadow-sm cursor-pointer transition-all duration-200">
+<div class="w-6 h-6 rounded-full border-2 border-primary/30 flex items-center justify-center hover:border-primary transition-colors">
+<div class="w-2 h-2 rounded-full bg-transparent group-hover:bg-primary/20"></div>
+</div>
+<div class="flex-1 min-w-0">
+<h4 class="font-task-item text-task-item font-semibold text-on-surface truncate">Finalizar propuesta de diseño de interfaz</h4>
+<div class="flex items-center gap-3 mt-1">
+<span class="flex items-center gap-1 text-[11px] text-primary bg-primary-container/10 px-2 py-0.5 rounded-full font-bold uppercase">Urgente</span>
+<span class="flex items-center gap-1 text-[11px] text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">event</span> Hoy
+                            </span>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity">star</span>
+</div>
+<!-- Task Item 2 -->
+<div class="group flex items-center gap-4 p-4 bg-surface-container-lowest rounded-xl border border-transparent hover:border-outline-variant/30 shadow-sm cursor-pointer transition-all duration-200">
+<div class="w-6 h-6 rounded-full border-2 border-outline/30 flex items-center justify-center hover:border-primary transition-colors"></div>
+<div class="flex-1 min-w-0">
+<h4 class="font-task-item text-task-item text-on-surface truncate">Investigación de mercado para Proyecto X</h4>
+<p class="text-xs text-on-surface-variant mt-0.5">FocusFlow &gt; Investigaciones</p>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant text-lg">attach_file</span>
+<span class="material-symbols-outlined text-on-surface-variant opacity-0 group-hover:opacity-100">star</span>
+</div>
+</div>
+<!-- Task Item 3 -->
+<div class="group flex items-center gap-4 p-4 bg-surface-container-lowest rounded-xl border border-transparent hover:border-outline-variant/30 shadow-sm cursor-pointer transition-all duration-200">
+<div class="w-6 h-6 rounded-full border-2 border-outline/30 flex items-center justify-center hover:border-primary transition-colors"></div>
+<div class="flex-1 min-w-0">
+<h4 class="font-task-item text-task-item text-on-surface truncate">Preparar presentación de inversores</h4>
+<div class="flex items-center gap-3 mt-1">
+<span class="flex items-center gap-1 text-[11px] text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">event</span> Mañana, 10:00
+                            </span>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant opacity-0 group-hover:opacity-100">star</span>
+</div>
+<!-- Task Category Label (Completed) -->
+<div class="flex items-center gap-2 px-2 py-1 mt-8">
+<span class="material-symbols-outlined text-xs text-on-surface-variant">expand_more</span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant">Completadas (2)</span>
+</div>
+<!-- Completed Task 1 -->
+<div class="group flex items-center gap-4 p-4 bg-surface-container-low/50 rounded-xl opacity-50 cursor-pointer">
+<div class="w-6 h-6 rounded-full bg-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-sm" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<div class="flex-1 min-w-0">
+<h4 class="font-task-item text-task-item text-on-surface line-through">Revisar correos electrónicos de la mañana</h4>
+</div>
+</div>
+<!-- Completed Task 2 -->
+<div class="group flex items-center gap-4 p-4 bg-surface-container-low/50 rounded-xl opacity-50 cursor-pointer">
+<div class="w-6 h-6 rounded-full bg-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-sm" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<div class="flex-1 min-w-0">
+<h4 class="font-task-item text-task-item text-on-surface line-through">Sincronización semanal con el equipo de ventas</h4>
+</div>
+</div>
+</section>
+<!-- Add Task Box (Floating Bottom) -->
+<div class="sticky bottom-8 mt-auto mx-auto w-full max-w-2xl z-20">
+<div class="bg-surface-container-highest/80 glass-effect border border-outline-variant/30 rounded-2xl shadow-2xl p-2 transition-all focus-within:ring-2 focus-within:ring-primary/20">
+<div class="flex items-center px-4 py-2 gap-3">
+<span class="material-symbols-outlined text-primary">add</span>
+<input class="bg-transparent border-none focus:ring-0 w-full text-on-surface font-body-md placeholder:text-on-surface-variant" placeholder="Añadir una tarea en 'Tareas'" type="text">
+</div>
+<div class="flex items-center justify-between px-4 pb-2">
+<div class="flex items-center gap-4">
+<button class="p-1.5 text-on-surface-variant hover:bg-surface-container rounded-md transition-colors"><span class="material-symbols-outlined text-xl">event</span></button>
+<button class="p-1.5 text-on-surface-variant hover:bg-surface-container rounded-md transition-colors"><span class="material-symbols-outlined text-xl">notifications</span></button>
+<button class="p-1.5 text-on-surface-variant hover:bg-surface-container rounded-md transition-colors"><span class="material-symbols-outlined text-xl">repeat</span></button>
+</div>
+<button class="text-primary font-semibold text-sm px-4 py-1.5 hover:bg-primary-container/10 rounded-lg">Guardar</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Detail Panel -->
+<aside class="hidden lg:flex flex-col w-[384px] h-screen bg-surface/80 glass-effect border-l border-outline-variant/30 fixed right-0 top-0 z-30">
+<div class="p-8 h-full flex flex-col overflow-y-auto">
+<div class="flex items-center justify-between mb-8">
+<span class="text-xs font-bold uppercase tracking-widest text-primary">Detalles de Tarea</span>
+<button class="p-1.5 text-on-surface-variant hover:bg-surface-container rounded-full transition-colors">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="flex-1 space-y-8">
+<!-- Task Title in Detail -->
+<div>
+<h3 class="font-headline-md text-headline-md font-bold text-on-surface leading-tight mb-4">Finalizar propuesta de diseño de interfaz</h3>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-lg">folder</span>
+<span class="font-label-sm text-label-sm">Diseño de Producto</span>
+</div>
+</div>
+<!-- Detail Metadata -->
+<div class="space-y-4">
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded-xl border border-outline-variant/10">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">light_mode</span>
+<span class="font-body-md text-body-md">Añadido a Mi Día</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer">close</span>
+</div>
+<div class="p-4 bg-surface-container-low rounded-xl border border-outline-variant/10 space-y-3">
+<div class="flex items-center gap-3 text-on-surface">
+<span class="material-symbols-outlined">notifications</span>
+<span class="font-body-md text-body-md">Recordarme</span>
+</div>
+<div class="h-px bg-outline-variant/20"></div>
+<div class="flex items-center gap-3 text-primary">
+<span class="material-symbols-outlined">event</span>
+<span class="font-body-md text-body-md">Vence hoy</span>
+</div>
+<div class="h-px bg-outline-variant/20"></div>
+<div class="flex items-center gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined">repeat</span>
+<span class="font-body-md text-body-md">Repetir</span>
+</div>
+</div>
+</div>
+<!-- Sub-steps -->
+<div class="space-y-4">
+<h4 class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant">Subtareas</h4>
+<div class="space-y-2">
+<div class="flex items-center gap-3 p-2 group">
+<div class="w-5 h-5 rounded-full border border-outline/30 flex items-center justify-center"></div>
+<span class="flex-1 text-on-surface font-body-md">Definir paleta de colores</span>
+<span class="material-symbols-outlined opacity-0 group-hover:opacity-100 text-on-surface-variant text-lg">close</span>
+</div>
+<div class="flex items-center gap-3 p-2 group">
+<div class="w-5 h-5 rounded-full bg-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-[10px]" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<span class="flex-1 text-on-surface-variant font-body-md line-through">Crear bocetos iniciales</span>
+<span class="material-symbols-outlined opacity-0 group-hover:opacity-100 text-on-surface-variant text-lg">close</span>
+</div>
+<button class="flex items-center gap-3 p-2 text-primary hover:bg-primary-container/10 rounded-lg w-full transition-colors">
+<span class="material-symbols-outlined text-lg">add</span>
+<span class="font-body-md text-body-md">Añadir paso</span>
+</button>
+</div>
+</div>
+<!-- Notes -->
+<div class="space-y-2">
+<h4 class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant">Notas</h4>
+<textarea class="w-full bg-surface-container-low border border-outline-variant/10 rounded-xl p-4 text-on-surface font-body-md placeholder:text-on-surface-variant focus:ring-1 focus:ring-primary h-32 resize-none" placeholder="Añadir una nota..."></textarea>
+</div>
+</div>
+<!-- Footer Action -->
+<div class="mt-auto pt-6 flex items-center justify-between text-on-surface-variant">
+<p class="text-[11px]">Creado hace 2 horas</p>
+<button class="p-2 hover:bg-error-container/20 text-error hover:text-error rounded-lg transition-colors">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+</div>
+</aside>
+<!-- Bottom Navigation Mobile -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-16 px-4 bg-surface-container-lowest/90 glass-effect border-t border-outline-variant/20 rounded-t-xl lg:hidden" id="BottomNavBar">
+<a class="flex flex-col items-center justify-center text-primary bg-primary-container/20 rounded-xl px-4 py-1" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant" href="#">
+<span class="material-symbols-outlined" data-icon="event_note">event_note</span>
+<span class="font-label-sm text-label-sm">Planned</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant" href="#">
+<span class="material-symbols-outlined" data-icon="grade">grade</span>
+<span class="font-label-sm text-label-sm">Starred</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-sm text-label-sm">Settings</span>
+</a>
+</nav>
+<script>
+        // Micro-interactions and hover effects
+        document.querySelectorAll('.group').forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                item.classList.add('scale-[1.01]');
+            });
+            item.addEventListener('mouseleave', () => {
+                item.classList.remove('scale-[1.01]');
+            });
+        });
+
+        // Simple visibility toggle for add task toolbar (simulated)
+        const taskInput = document.querySelector('input[type="text"]');
+        const taskActions = taskInput.closest('.bg-surface-container-highest').querySelector('.flex.items-center.justify-between.px-4.pb-2');
+        
+        taskInput.addEventListener('focus', () => {
+            taskInput.closest('.bg-surface-container-highest').classList.remove('rounded-2xl');
+            taskInput.closest('.bg-surface-container-highest').classList.add('rounded-t-2xl');
+        });
+
+        taskInput.addEventListener('blur', () => {
+            // Delay to allow clicking "Guardar"
+            setTimeout(() => {
+                taskInput.closest('.bg-surface-container-highest').classList.add('rounded-2xl');
+                taskInput.closest('.bg-surface-container-highest').classList.remove('rounded-t-2xl');
+            }, 200);
+        });
+    </script>
+</body></html>

@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FocusFlow | Date &amp; Time Picker</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Geist:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed-dim": "#b4c5ff",
+                        "inverse-primary": "#b4c5ff",
+                        "on-tertiary-fixed-variant": "#404758",
+                        "on-secondary-fixed-variant": "#574500",
+                        "on-secondary-fixed": "#231b00",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "inverse-surface": "#2e3132",
+                        "on-primary-container": "#eeefff",
+                        "secondary": "#735c00",
+                        "canvas-dark": "#09090B",
+                        "text-secondary-dark": "#A1A1AA",
+                        "outline-variant": "#c3c6d7",
+                        "surface-container-low": "#f3f4f5",
+                        "surface-elevated-dark": "#27272A",
+                        "outline": "#737686",
+                        "on-secondary-container": "#6f5900",
+                        "tertiary-fixed": "#dce2f7",
+                        "on-surface-variant": "#434655",
+                        "on-background": "#191c1d",
+                        "primary-fixed": "#dbe1ff",
+                        "on-primary": "#ffffff",
+                        "secondary-container": "#fed01b",
+                        "text-secondary-light": "#6B7280",
+                        "surface-dark": "#18181B",
+                        "primary-container": "#2563eb",
+                        "on-primary-fixed": "#00174b",
+                        "surface-container": "#edeeef",
+                        "surface-variant": "#e1e3e4",
+                        "secondary-fixed": "#ffe083",
+                        "background": "#f8f9fa",
+                        "surface-container-highest": "#e1e3e4",
+                        "on-tertiary-container": "#ecf0ff",
+                        "tertiary-container": "#666d7f",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed-dim": "#c0c6db",
+                        "surface": "#f8f9fa",
+                        "on-tertiary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "on-surface": "#191c1d",
+                        "surface-dim": "#d9dadb",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed": "#141b2b",
+                        "on-secondary": "#ffffff",
+                        "border-subtle-dark": "rgba(39, 39, 42, 0.5)",
+                        "error-container": "#ffdad6",
+                        "surface-tint": "#0053db",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-on-surface": "#f0f1f2",
+                        "surface-bright": "#f8f9fa",
+                        "primary": "#004ac6",
+                        "tertiary": "#4e5566",
+                        "secondary-fixed-dim": "#eec200",
+                        "border-subtle-light": "#F3F4F6",
+                        "surface-container-high": "#e7e8e9"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-gap": "0.25rem",
+                        "sidebar-width": "288px",
+                        "gutter-md": "1rem",
+                        "detail-panel-width": "384px",
+                        "container-padding-mobile": "1rem",
+                        "container-padding": "3rem"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "task-item": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-sm": ["Geist"],
+                        "headline-md": ["Geist"],
+                        "display-xl": ["Geist"],
+                        "display-xl-mobile": ["Geist"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "task-item": ["15px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "display-xl": ["36px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "display-xl-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.95) translateY(10px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        .animate-scale-in {
+            animation: scaleIn 0.3s ease-out forwards;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4">
+<!-- Mock Background for Context -->
+<div class="fixed inset-0 z-0">
+
+<!-- Main Sidebar Anchor -->
+<nav class="hidden md:flex flex-col h-full py-8 px-4 w-sidebar-width fixed left-0 top-0 bg-surface/80 backdrop-blur-md border-r border-border-subtle-light z-10">
+<div class="mb-12 px-4">
+<span class="font-headline-md text-headline-md font-bold text-primary">FocusFlow</span>
+<p class="text-on-surface-variant font-label-sm text-label-sm mt-1">Productivity Workspace</p>
+</div>
+<div class="space-y-2">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-primary font-bold border-l-4 border-primary bg-surface-container-low transition-all duration-300" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body-md text-body-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high/50 transition-all duration-300" href="#">
+<span class="material-symbols-outlined">check_circle</span>
+<span class="font-body-md text-body-md">Tasks</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high/50 transition-all duration-300" href="#">
+<span class="material-symbols-outlined">inbox</span>
+<span class="font-body-md text-body-md">Inbox</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Area Mockup -->
+<main class="ml-sidebar-width w-[calc(100%-288px)] p-12">
+<div class="max-w-4xl mx-auto space-y-8 blur-sm">
+<div class="flex justify-between items-center">
+<h1 class="font-display-xl text-display-xl text-on-surface">Good Morning, Alex</h1>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border border-border-subtle-light h-64">
+<div class="w-full h-full bg-surface-container-low rounded-lg animate-pulse"></div>
+</div>
+</div>
+</main>
+</div>
+<!-- Modal Backdrop -->
+<div class="fixed inset-0 bg-on-surface/10 backdrop-blur-sm z-40 flex items-center justify-center p-4">
+<!-- Custom Date & Time Picker Modal -->
+<div class="glass-panel w-full max-w-md rounded-xl shadow-2xl border border-surface-container-highest overflow-hidden animate-scale-in z-50">
+<!-- Header -->
+<div class="flex items-center justify-between px-6 py-4 border-b border-border-subtle-light">
+<h2 class="font-headline-md text-headline-md text-on-surface">Pick a Date &amp; Time</h2>
+<button aria-label="Close" class="p-2 rounded-full hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant">close</span>
+</button>
+</div>
+<div class="p-6 space-y-8">
+<!-- Date Picker Section -->
+<section class="date-picker-container">
+<div class="flex items-center justify-between mb-4 px-2">
+<span class="font-body-lg text-body-lg font-semibold text-on-surface">September 2024</span>
+<div class="flex gap-1">
+<button class="p-1.5 rounded-full hover:bg-surface-container-high transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="p-1.5 rounded-full hover:bg-surface-container-high transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Calendar Grid -->
+<div class="grid grid-cols-7 text-center">
+<!-- Days Header -->
+<div class="font-label-sm text-label-sm text-text-secondary-light py-2">Su</div>
+<div class="font-label-sm text-label-sm text-text-secondary-light py-2">Mo</div>
+<div class="font-label-sm text-label-sm text-text-secondary-light py-2">Tu</div>
+<div class="font-label-sm text-label-sm text-text-secondary-light py-2">We</div>
+<div class="font-label-sm text-label-sm text-text-secondary-light py-2">Th</div>
+<div class="font-label-sm text-label-sm text-text-secondary-light py-2">Fr</div>
+<div class="font-label-sm text-label-sm text-text-secondary-light py-2">Sa</div>
+<!-- Days Example (September 2024) -->
+<div class="py-2 text-on-surface-variant/40 font-body-md text-body-md">25</div>
+<div class="py-2 text-on-surface-variant/40 font-body-md text-body-md">26</div>
+<div class="py-2 text-on-surface-variant/40 font-body-md text-body-md">27</div>
+<div class="py-2 text-on-surface-variant/40 font-body-md text-body-md">28</div>
+<div class="py-2 text-on-surface-variant/40 font-body-md text-body-md">29</div>
+<div class="py-2 text-on-surface-variant/40 font-body-md text-body-md">30</div>
+<button class="py-2 hover:bg-surface-container-low rounded-lg transition-colors font-body-md text-body-md text-on-surface">1</button>
+<button class="py-2 hover:bg-surface-container-low rounded-lg transition-colors font-body-md text-body-md text-on-surface">2</button>
+<button class="py-2 hover:bg-surface-container-low rounded-lg transition-colors font-body-md text-body-md text-on-surface">3</button>
+<button class="py-2 hover:bg-surface-container-low rounded-lg transition-colors font-body-md text-body-md text-on-surface">4</button>
+<button class="py-2 hover:bg-surface-container-low rounded-lg transition-colors font-body-md text-body-md text-on-surface">5</button>
+<button class="py-2 hover:bg-surface-container-low rounded-lg transition-colors font-body-md text-body-md text-on-surface">6</button>
+<button class="py-2 hover:bg-surface-container-low rounded-lg transition-colors font-body-md text-body-md text-on-surface">7</button>
+<button class="py-2 hover:bg-surface-container-low rounded-lg transition-colors font-body-md text-body-md text-on-surface">8</button>
+<button class="py-2 hover:bg-surface-container-low rounded-lg transition-colors font-body-md text-body-md text-on-surface">9</button>
+<button class="py-2 hover:bg-surface-container-low rounded-lg transition-colors font-body-md text-body-md text-on-surface">10</button>
+<button class="py-2 hover:bg-surface-container-low rounded-lg transition-colors font-body-md text-body-md text-on-surface">11</button>
+<!-- Selected Date -->
+<button class="py-2 bg-primary text-white rounded-lg font-body-md text-body-md shadow-lg shadow-primary/20">12</button>
+<button class="py-2 hover:bg-surface-container-low rounded-lg transition-colors font-body-md text-body-md text-on-surface">13</button>
+<button class="py-2 hover:bg-surface-container-low rounded-lg transition-colors font-body-md text-body-md text-on-surface">14</button>
+<button class="py-2 hover:bg-surface-container-low rounded-lg transition-colors font-body-md text-body-md text-on-surface">15</button>
+<button class="py-2 hover:bg-surface-container-low rounded-lg transition-colors font-body-md text-body-md text-on-surface">16</button>
+<button class="py-2 hover:bg-surface-container-low rounded-lg transition-colors font-body-md text-body-md text-on-surface">17</button>
+<button class="py-2 hover:bg-surface-container-low rounded-lg transition-colors font-body-md text-body-md text-on-surface">18</button>
+<button class="py-2 hover:bg-surface-container-low rounded-lg transition-colors font-body-md text-body-md text-on-surface">19</button>
+<button class="py-2 hover:bg-surface-container-low rounded-lg transition-colors font-body-md text-body-md text-on-surface">20</button>
+<button class="py-2 hover:bg-surface-container-low rounded-lg transition-colors font-body-md text-body-md text-on-surface">21</button>
+<button class="py-2 hover:bg-surface-container-low rounded-lg transition-colors font-body-md text-body-md text-on-surface">22</button>
+</div>
+</section>
+<!-- Time Picker Section -->
+<section class="time-picker-container border-t border-border-subtle-light pt-6">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2 bg-surface-container p-1 rounded-xl">
+<!-- Scrollable Hour/Min Selector Simulation -->
+<div class="flex items-center gap-1 px-3 py-2 bg-surface-container-lowest rounded-lg shadow-sm border border-surface-container-highest">
+<input class="w-10 text-center bg-transparent border-none focus:ring-0 font-headline-md text-headline-md text-primary p-0" type="text" value="09"/>
+<span class="text-on-surface-variant font-bold">:</span>
+<input class="w-10 text-center bg-transparent border-none focus:ring-0 font-headline-md text-headline-md text-primary p-0" type="text" value="30"/>
+</div>
+<!-- AM/PM Toggle -->
+<div class="flex bg-surface-container-low rounded-lg p-1">
+<button class="px-4 py-1.5 rounded-md font-label-sm text-label-sm bg-surface-container-lowest shadow-sm text-primary font-bold transition-all" id="am-btn" onclick="togglePeriod('AM')">AM</button>
+<button class="px-4 py-1.5 rounded-md font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-all" id="pm-btn" onclick="togglePeriod('PM')">PM</button>
+</div>
+</div>
+<!-- Helper Text -->
+<div class="hidden sm:block text-right">
+<span class="font-label-sm text-label-sm text-text-secondary-light block">Local Time</span>
+<span class="font-body-md text-body-md text-on-surface-variant">GMT-4</span>
+</div>
+</div>
+</section>
+</div>
+<!-- Action Footer -->
+<div class="px-6 py-4 bg-surface-container-low/50 flex justify-end gap-3">
+<button class="px-6 py-2.5 rounded-xl font-body-md text-body-md text-on-surface-variant hover:bg-surface-container-high transition-all active:scale-95">
+                    Cancel
+                </button>
+<button class="px-8 py-2.5 rounded-xl font-body-md text-body-md bg-primary text-white shadow-lg shadow-primary/30 hover:bg-primary/90 transition-all active:scale-95">
+                    Save Task
+                </button>
+</div>
+</div>
+</div>
+<!-- Micro-Interactions Script -->
+<script>
+        function togglePeriod(period) {
+            const amBtn = document.getElementById('am-btn');
+            const pmBtn = document.getElementById('pm-btn');
+            
+            if (period === 'AM') {
+                amBtn.className = "px-4 py-1.5 rounded-md font-label-sm text-label-sm bg-surface-container-lowest shadow-sm text-primary font-bold transition-all";
+                pmBtn.className = "px-4 py-1.5 rounded-md font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-all";
+            } else {
+                pmBtn.className = "px-4 py-1.5 rounded-md font-label-sm text-label-sm bg-surface-container-lowest shadow-sm text-primary font-bold transition-all";
+                amBtn.className = "px-4 py-1.5 rounded-md font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-all";
+            }
+        }
+
+        // Close modal placeholder functionality
+        document.querySelectorAll('button[aria-label="Close"], button:contains("Cancel")').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const modal = btn.closest('.fixed.inset-0');
+                modal.classList.add('opacity-0');
+                setTimeout(() => modal.style.display = 'none', 300);
+            });
+        });
+    </script>
+</body></html>

@@ -1,0 +1,402 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>FocusFlow | Push Settings</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Geist:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .glass-effect {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        input:checked + .toggle-bg {
+            background-color: #004ac6;
+        }
+        input:checked + .toggle-bg .toggle-dot {
+            transform: translateX(100%);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed": "#00174b",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed": "#231b00",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "surface-elevated-dark": "#27272A",
+                        "text-secondary-dark": "#A1A1AA",
+                        "tertiary": "#4e5566",
+                        "surface-tint": "#0053db",
+                        "primary-fixed": "#dbe1ff",
+                        "border-subtle-dark": "rgba(39, 39, 42, 0.5)",
+                        "secondary": "#735c00",
+                        "outline": "#737686",
+                        "tertiary-container": "#666d7f",
+                        "error-container": "#ffdad6",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container": "#edeeef",
+                        "inverse-primary": "#b4c5ff",
+                        "secondary-container": "#fed01b",
+                        "on-surface-variant": "#434655",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "on-background": "#191c1d",
+                        "secondary-fixed": "#ffe083",
+                        "surface-dark": "#18181B",
+                        "tertiary-fixed-dim": "#c0c6db",
+                        "surface-container-highest": "#e1e3e4",
+                        "on-error": "#ffffff",
+                        "outline-variant": "#c3c6d7",
+                        "on-surface": "#191c1d",
+                        "surface-dim": "#d9dadb",
+                        "primary-container": "#2563eb",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-container": "#ecf0ff",
+                        "on-tertiary-fixed-variant": "#404758",
+                        "on-secondary-container": "#6f5900",
+                        "inverse-on-surface": "#f0f1f2",
+                        "on-primary-container": "#eeefff",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed": "#141b2b",
+                        "error": "#ba1a1a",
+                        "primary": "#004ac6",
+                        "surface-container-low": "#f3f4f5",
+                        "on-secondary-fixed-variant": "#574500",
+                        "text-secondary-light": "#6B7280",
+                        "on-primary": "#ffffff",
+                        "surface-container-high": "#e7e8e9",
+                        "background": "#f8f9fa",
+                        "surface": "#f8f9fa",
+                        "border-subtle-light": "#F3F4F6",
+                        "surface-bright": "#f8f9fa",
+                        "tertiary-fixed": "#dce2f7",
+                        "canvas-dark": "#09090B",
+                        "surface-variant": "#e1e3e4",
+                        "inverse-surface": "#2e3132",
+                        "secondary-fixed-dim": "#eec200"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-gap": "0.25rem",
+                        "gutter-md": "1rem",
+                        "detail-panel-width": "384px",
+                        "container-padding": "3rem",
+                        "sidebar-width": "288px",
+                        "container-padding-mobile": "1rem"
+                    },
+                    "fontFamily": {
+                        "display-xl": ["Geist"],
+                        "display-xl-mobile": ["Geist"],
+                        "label-sm": ["Geist"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Geist"],
+                        "task-item": ["Inter"]
+                    },
+                    "fontSize": {
+                        "display-xl": ["36px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "display-xl-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "task-item": ["15px", {"lineHeight": "20px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background font-body-md text-on-background selection:bg-primary-fixed selection:text-on-primary-fixed overflow-hidden">
+<!-- Sidebar Navigation -->
+<aside class="w-sidebar-width h-screen fixed left-0 top-0 bg-surface/80 glass-effect border-r border-border-subtle-light z-30 flex flex-col py-8 px-4">
+<div class="mb-10 px-2 flex items-center gap-3">
+<div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-[20px]" data-icon="auto_awesome">auto_awesome</span>
+</div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary">FocusFlow</h1>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high/50 transition-all rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary" data-icon="dashboard">dashboard</span>
+<span class="font-body-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high/50 transition-all rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary" data-icon="check_circle">check_circle</span>
+<span class="font-body-md">Tasks</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high/50 transition-all rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary" data-icon="inbox">inbox</span>
+<span class="font-body-md">Inbox</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high/50 transition-all rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary" data-icon="insights">insights</span>
+<span class="font-body-md">Analytics</span>
+</a>
+<div class="pt-6 pb-2 px-4 uppercase tracking-widest text-[10px] font-bold text-on-surface-variant/60">System</div>
+<a class="flex items-center gap-3 px-4 py-3 text-primary font-bold border-l-4 border-primary bg-surface-container-low transition-all rounded-r-lg group" href="#">
+<span class="material-symbols-outlined" data-icon="settings" style="font-variation-settings: 'FILL' 1;">settings</span>
+<span class="font-body-md">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high/50 transition-all rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary" data-icon="help_outline">help_outline</span>
+<span class="font-body-md">Help Center</span>
+</a>
+</nav>
+<div class="mt-auto px-2">
+<div class="p-4 bg-primary-fixed rounded-xl flex flex-col gap-3">
+<p class="font-label-sm text-on-primary-fixed">Unlock premium metrics</p>
+<button class="w-full py-2 bg-on-primary-fixed text-white rounded-lg font-bold text-[13px] hover:opacity-90 transition-opacity">Upgrade to Pro</button>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-[288px] h-screen overflow-y-auto bg-background p-12">
+<!-- Top App Bar (Search/Profile) -->
+<header class="flex justify-between items-center mb-12">
+<div class="flex items-center gap-2 text-on-surface-variant font-body-md">
+<a class="hover:text-primary transition-colors" href="#">Settings</a>
+<span class="material-symbols-outlined text-[16px]" data-icon="chevron_right">chevron_right</span>
+<a class="hover:text-primary transition-colors" href="#">Notifications</a>
+<span class="material-symbols-outlined text-[16px]" data-icon="chevron_right">chevron_right</span>
+<span class="text-on-surface font-semibold">Push Settings</span>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative group">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline" data-icon="search">search</span>
+<input class="pl-10 pr-4 py-2 bg-surface-container-low border-none rounded-full w-64 focus:ring-2 focus:ring-primary/20 transition-all text-sm outline-none" placeholder="Search settings..." type="text">
+</div>
+<div class="flex items-center gap-4">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-highest/20 transition-all">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<div class="w-10 h-10 rounded-full bg-surface-container-highest overflow-hidden cursor-pointer border-2 border-white shadow-sm hover:scale-105 transition-transform">
+<img class="w-full h-full object-cover" data-alt="A professional studio portrait of a modern office worker in their late 20s. They are smiling warmly at the camera, wearing clean minimalist attire. The lighting is bright and high-key, with a soft-focus background that hints at a serene, minimalist workspace with light wood accents and lush green indoor plants." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBg77Fn5ACgBU7_F7MaD8nMHVRNXsE8qzDEB5PFZAZZs8rWDNs2c-dRw97iLY3a5ogBOBMI9Pgrtxhr-r5936y3agnjGtTjNimdbRqP-shVxYQN1_wCGRh8L6fKTMdGafwpThk8To-3jQ9f-sZD-QWbu2dUojn2ZzDKW9NIwkHl1zdEFIMGugG8afp-rut7kC1VVUzWv2Azy7XskBBTRDCM_iYVqfFtL1Ffa7UEMAuiOxLS2IZgOH0VSInTMOYfXr3-_1JMnzD-jZye">
+</div>
+</div>
+</div>
+</header>
+<!-- Page Header -->
+<div class="max-w-4xl mb-10">
+<h2 class="font-display-xl text-display-xl text-on-surface mb-2">Push Notifications</h2>
+<p class="font-body-lg text-text-secondary-light">Manage how you receive real-time alerts on your mobile and desktop devices.</p>
+</div>
+<!-- Settings Grid -->
+<div class="max-w-4xl space-y-12 pb-24">
+<!-- Device Status -->
+<section>
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-primary" data-icon="devices">devices</span>
+<h3 class="font-headline-md text-headline-md">Device Status</h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- iPhone 15 Pro -->
+<div class="p-6 bg-white border border-border-subtle-light rounded-2xl shadow-sm hover:shadow-md transition-shadow flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-surface-container-low rounded-xl flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="smartphone">smartphone</span>
+</div>
+<div>
+<h4 class="font-semibold text-on-surface">iPhone 15 Pro</h4>
+<p class="text-[13px] text-text-secondary-light">Last active 2m ago</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox">
+<div class="w-11 h-6 bg-surface-container-highest rounded-full peer-checked:bg-primary transition-colors relative">
+<div class="absolute top-[2px] left-[2px] bg-white border border-gray-300 rounded-full h-5 w-5 transition-all peer-checked:translate-x-full"></div>
+</div>
+</label>
+</div>
+<!-- MacBook Pro -->
+<div class="p-6 bg-white border border-border-subtle-light rounded-2xl shadow-sm hover:shadow-md transition-shadow flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-surface-container-low rounded-xl flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="laptop_mac">laptop_mac</span>
+</div>
+<div>
+<h4 class="font-semibold text-on-surface">MacBook Pro</h4>
+<p class="text-[13px] text-text-secondary-light">Current device</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox">
+<div class="w-11 h-6 bg-surface-container-highest rounded-full peer-checked:bg-primary transition-colors relative">
+<div class="absolute top-[2px] left-[2px] bg-white border border-gray-300 rounded-full h-5 w-5 transition-all peer-checked:translate-x-full"></div>
+</div>
+</label>
+</div>
+</div>
+</section>
+<!-- Alert Types -->
+<section>
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-primary" data-icon="notifications_active">notifications_active</span>
+<h3 class="font-headline-md text-headline-md">Alert Types</h3>
+</div>
+<div class="bg-white border border-border-subtle-light rounded-2xl shadow-sm overflow-hidden divide-y divide-border-subtle-light">
+<!-- Task Reminders -->
+<div class="p-5 flex items-center justify-between group hover:bg-surface-container-low/30 transition-colors">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-error" data-icon="priority_high">priority_high</span>
+<div>
+<h4 class="font-semibold text-on-surface">Task Reminders (High Priority)</h4>
+<p class="text-sm text-text-secondary-light">Notifications for tasks marked as critical.</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox">
+<div class="w-11 h-6 bg-surface-container-highest rounded-full peer-checked:bg-primary transition-colors relative">
+<div class="absolute top-[2px] left-[2px] bg-white border border-gray-300 rounded-full h-5 w-5 transition-all peer-checked:translate-x-full"></div>
+</div>
+</label>
+</div>
+<!-- Due Date Alerts -->
+<div class="p-5 flex items-center justify-between group hover:bg-surface-container-low/30 transition-colors">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary" data-icon="event_upcoming">event_upcoming</span>
+<div>
+<h4 class="font-semibold text-on-surface">Due Date Alerts</h4>
+<p class="text-sm text-text-secondary-light">Reminders when tasks are approaching their deadlines.</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox">
+<div class="w-11 h-6 bg-surface-container-highest rounded-full peer-checked:bg-primary transition-colors relative">
+<div class="absolute top-[2px] left-[2px] bg-white border border-gray-300 rounded-full h-5 w-5 transition-all peer-checked:translate-x-full"></div>
+</div>
+</label>
+</div>
+<!-- Shared List Activity -->
+<div class="p-5 flex items-center justify-between group hover:bg-surface-container-low/30 transition-colors">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-secondary" data-icon="groups">groups</span>
+<div>
+<h4 class="font-semibold text-on-surface">Shared List Activity</h4>
+<p class="text-sm text-text-secondary-light">Alerts when collaborators add or complete shared tasks.</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox">
+<div class="w-11 h-6 bg-surface-container-highest rounded-full peer-checked:bg-primary transition-colors relative">
+<div class="absolute top-[2px] left-[2px] bg-white border border-gray-300 rounded-full h-5 w-5 transition-all peer-checked:translate-x-full"></div>
+</div>
+</label>
+</div>
+<!-- Focus Session Completion -->
+<div class="p-5 flex items-center justify-between group hover:bg-surface-container-low/30 transition-colors">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-tertiary" data-icon="timer">timer</span>
+<div>
+<h4 class="font-semibold text-on-surface">Focus Session Completion</h4>
+<p class="text-sm text-text-secondary-light">Daily summary after your scheduled deep work blocks.</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox">
+<div class="w-11 h-6 bg-surface-container-highest rounded-full peer-checked:bg-primary transition-colors relative">
+<div class="absolute top-[2px] left-[2px] bg-white border border-gray-300 rounded-full h-5 w-5 transition-all peer-checked:translate-x-full"></div>
+</div>
+</label>
+</div>
+</div>
+</section>
+<!-- Do Not Disturb -->
+<section>
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-primary" data-icon="do_not_disturb_on">do_not_disturb_on</span>
+<h3 class="font-headline-md text-headline-md">Do Not Disturb</h3>
+</div>
+<div class="p-8 bg-white border border-border-subtle-light rounded-2xl shadow-sm">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-8">
+<div class="flex-1">
+<h4 class="font-semibold text-on-surface mb-2">Scheduled Silence</h4>
+<p class="text-sm text-text-secondary-light">Specify a time range when you won't receive any push notifications.</p>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex flex-col">
+<span class="text-[11px] font-bold uppercase tracking-wider text-outline mb-1">From</span>
+<input class="bg-surface-container-low border-none rounded-lg font-semibold p-3 focus:ring-2 focus:ring-primary/20 transition-all" type="time" value="22:00">
+</div>
+<span class="material-symbols-outlined text-outline mt-5" data-icon="arrow_forward">arrow_forward</span>
+<div class="flex flex-col">
+<span class="text-[11px] font-bold uppercase tracking-wider text-outline mb-1">To</span>
+<input class="bg-surface-container-low border-none rounded-lg font-semibold p-3 focus:ring-2 focus:ring-primary/20 transition-all" type="time" value="07:00">
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Quiet Days -->
+<section>
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-primary" data-icon="calendar_month">calendar_month</span>
+<h3 class="font-headline-md text-headline-md">Quiet Days</h3>
+</div>
+<div class="p-8 bg-white border border-border-subtle-light rounded-2xl shadow-sm">
+<h4 class="font-semibold text-on-surface mb-2">Weekly Rest Days</h4>
+<p class="text-sm text-text-secondary-light mb-8">Disable all non-critical alerts on selected days to fully disconnect.</p>
+<div class="flex flex-wrap gap-3">
+<button class="w-12 h-12 rounded-full border border-border-subtle-light flex items-center justify-center font-bold text-on-surface-variant hover:border-primary hover:text-primary transition-all">M</button>
+<button class="w-12 h-12 rounded-full border border-border-subtle-light flex items-center justify-center font-bold text-on-surface-variant hover:border-primary hover:text-primary transition-all">T</button>
+<button class="w-12 h-12 rounded-full border border-border-subtle-light flex items-center justify-center font-bold text-on-surface-variant hover:border-primary hover:text-primary transition-all">W</button>
+<button class="w-12 h-12 rounded-full border border-border-subtle-light flex items-center justify-center font-bold text-on-surface-variant hover:border-primary hover:text-primary transition-all">T</button>
+<button class="w-12 h-12 rounded-full border border-border-subtle-light flex items-center justify-center font-bold text-on-surface-variant hover:border-primary hover:text-primary transition-all">F</button>
+<button class="w-12 h-12 rounded-full border-2 border-primary bg-primary-fixed flex items-center justify-center font-bold text-primary transition-all shadow-sm">S</button>
+<button class="w-12 h-12 rounded-full border-2 border-primary bg-primary-fixed flex items-center justify-center font-bold text-primary transition-all shadow-sm">S</button>
+</div>
+</div>
+</section>
+<!-- Action Buttons Footer -->
+<div class="flex items-center justify-end gap-4 pt-8">
+<button class="px-6 py-2.5 rounded-full font-semibold text-on-surface-variant hover:bg-surface-container-high transition-all">Discard Changes</button>
+<button class="px-8 py-2.5 rounded-full font-semibold bg-primary text-white shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all">Save Preferences</button>
+</div>
+</div>
+</main>
+<!-- Visual Atmosphere: Subtle Gradient Background Shader Placeholder -->
+<div class="fixed top-0 left-0 w-full h-full -z-10 pointer-events-none opacity-40">
+
+</div>
+<script>
+        // Simple micro-interaction for Quiet Days selection
+        document.querySelectorAll('.flex-wrap button').forEach(button => {
+            button.addEventListener('click', function() {
+                this.classList.toggle('border-border-subtle-light');
+                this.classList.toggle('text-on-surface-variant');
+                this.classList.toggle('border-2');
+                this.classList.toggle('border-primary');
+                this.classList.toggle('bg-primary-fixed');
+                this.classList.toggle('text-primary');
+                this.classList.toggle('shadow-sm');
+            });
+        });
+
+        // Toggle state simulation
+        document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const parentCard = this.closest('.p-6, .p-5');
+                if (parentCard) {
+                    if (this.checked) {
+                        parentCard.classList.remove('opacity-60');
+                    } else {
+                        parentCard.classList.add('opacity-60');
+                    }
+                }
+            });
+        });
+    </script>
+</body></html>

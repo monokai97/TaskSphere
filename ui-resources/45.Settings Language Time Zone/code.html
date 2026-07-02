@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Ethereal Focus - Configuración de Zona Horaria</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;family=Inter:wght@100..900&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "text-secondary-light": "#6B7280",
+                    "on-primary-fixed-variant": "#003ea8",
+                    "on-tertiary-fixed": "#141b2b",
+                    "canvas-dark": "#09090B",
+                    "surface-bright": "#f8f9fa",
+                    "on-error": "#ffffff",
+                    "on-background": "#191c1d",
+                    "background": "#f8f9fa",
+                    "border-subtle-light": "#F3F4F6",
+                    "surface-dark": "#18181B",
+                    "inverse-surface": "#2e3132",
+                    "primary-fixed": "#dbe1ff",
+                    "primary-fixed-dim": "#b4c5ff",
+                    "secondary": "#735c00",
+                    "tertiary-fixed": "#dce2f7",
+                    "primary-container": "#2563eb",
+                    "surface-container": "#edeeef",
+                    "inverse-primary": "#b4c5ff",
+                    "tertiary-container": "#666d7f",
+                    "on-primary": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "surface-variant": "#e1e3e4",
+                    "on-secondary-fixed": "#231b00",
+                    "on-primary-container": "#eeefff",
+                    "on-tertiary-container": "#ecf0ff",
+                    "secondary-container": "#fed01b",
+                    "surface-dim": "#d9dadb",
+                    "on-primary-fixed": "#00174b",
+                    "error": "#ba1a1a",
+                    "error-container": "#ffdad6",
+                    "on-surface-variant": "#434655",
+                    "border-subtle-dark": "rgba(39, 39, 42, 0.5)",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "outline-variant": "#c3c6d7",
+                    "text-secondary-dark": "#A1A1AA",
+                    "tertiary-fixed-dim": "#c0c6db",
+                    "surface-tint": "#0053db",
+                    "outline": "#737686",
+                    "secondary-fixed-dim": "#eec200",
+                    "surface-elevated-dark": "#27272A",
+                    "on-surface": "#191c1d",
+                    "on-secondary-fixed-variant": "#574500",
+                    "on-error-container": "#93000a",
+                    "inverse-on-surface": "#f0f1f2",
+                    "on-tertiary-fixed-variant": "#404758",
+                    "surface-container-high": "#e7e8e9",
+                    "surface-container-low": "#f3f4f5",
+                    "tertiary": "#4e5566",
+                    "secondary-fixed": "#ffe083",
+                    "on-secondary-container": "#6f5900",
+                    "primary": "#004ac6",
+                    "surface-container-highest": "#e1e3e4",
+                    "surface": "#f8f9fa"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "sidebar-width": "288px",
+                    "gutter-md": "1rem",
+                    "detail-panel-width": "384px",
+                    "container-padding": "3rem",
+                    "container-padding-mobile": "1rem",
+                    "stack-gap": "0.25rem"
+            },
+            "fontFamily": {
+                    "display-xl-mobile": ["Geist"],
+                    "task-item": ["Inter"],
+                    "label-sm": ["Geist"],
+                    "body-md": ["Inter"],
+                    "headline-md": ["Geist"],
+                    "body-lg": ["Inter"],
+                    "display-xl": ["Geist"]
+            },
+            "fontSize": {
+                    "display-xl-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "task-item": ["15px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "display-xl": ["36px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+        }
+        .sidebar-active {
+            border-left: 4px solid #004ac6;
+            background-color: rgba(37, 99, 235, 0.05);
+            color: #004ac6;
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #e1e3e4;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="text-on-surface overflow-hidden">
+<div class="flex h-screen w-full">
+<!-- Navigation (Sidebar) - Shared Component SideNavBar -->
+<aside class="fixed left-0 top-0 h-full w-sidebar-width border-r border-border-subtle-light bg-white/80 backdrop-blur-md flex flex-col py-8 z-50">
+<div class="px-6 mb-10">
+<h1 class="font-display-xl text-display-xl font-bold text-primary">Ethereal Focus</h1>
+<p class="font-body-md text-label-sm text-text-secondary-light">Stay productive</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-6 py-3 text-on-surface-variant hover:bg-surface-variant/50 transition-colors" href="#">
+<span class="material-symbols-outlined">sunny</span>
+<span class="font-body-md">My Day</span>
+</a>
+<a class="flex items-center gap-3 px-6 py-3 text-on-surface-variant hover:bg-surface-variant/50 transition-colors" href="#">
+<span class="material-symbols-outlined">star</span>
+<span class="font-body-md">Important</span>
+</a>
+<a class="flex items-center gap-3 px-6 py-3 text-on-surface-variant hover:bg-surface-variant/50 transition-colors" href="#">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="font-body-md">Planned</span>
+</a>
+<a class="flex items-center gap-3 px-6 py-3 text-on-surface-variant hover:bg-surface-variant/50 transition-colors" href="#">
+<span class="material-symbols-outlined">task_alt</span>
+<span class="font-body-md">Tasks</span>
+</a>
+</nav>
+<div class="mt-auto px-6 py-4 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 bg-primary-container/10 text-primary font-semibold border-l-4 border-primary" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-md">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant/50 transition-colors" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-body-md">Help</span>
+</a>
+</div>
+</aside>
+<!-- Main Layout Container (3-Column) -->
+<main class="flex-1 ml-sidebar-width flex">
+<!-- Sub-navigation (Center-Left) -->
+<section class="w-80 border-r border-border-subtle-light bg-surface-container-low flex flex-col">
+<div class="p-8 border-b border-border-subtle-light">
+<h2 class="font-headline-md text-headline-md text-on-surface">Language &amp; Region</h2>
+</div>
+<nav class="p-4 space-y-2">
+<button class="w-full text-left px-4 py-3 rounded-xl font-body-md text-on-surface-variant hover:bg-surface-variant transition-all">
+                        Language
+                    </button>
+<button class="w-full text-left px-4 py-3 rounded-xl font-body-md text-on-surface-variant hover:bg-surface-variant transition-all">
+                        Date Format
+                    </button>
+<button class="w-full text-left px-4 py-3 rounded-xl font-body-md text-primary bg-white shadow-sm border border-border-subtle-light font-semibold transition-all">
+                        Time Zone
+                    </button>
+</nav>
+</section>
+<!-- Workspace (Main Content Center) -->
+<section class="flex-1 overflow-y-auto bg-white flex flex-col">
+<div class="max-w-3xl mx-auto w-full p-12 flex-1">
+<div class="mb-10">
+<h2 class="font-display-xl text-display-xl font-bold text-on-surface mb-2">Zona Horaria</h2>
+<p class="font-body-md text-text-secondary-light">Personaliza la zona horaria para que tus recordatorios y tareas se sincronicen correctamente con tu ubicación local.</p>
+</div>
+<div class="space-y-8">
+<!-- Automatic Toggle -->
+<div class="flex items-center justify-between p-6 bg-surface-container-lowest border border-border-subtle-light rounded-2xl shadow-sm">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">location_on</span>
+</div>
+<div>
+<h3 class="font-headline-md text-on-surface">Detectar automáticamente</h3>
+<p class="text-sm text-text-secondary-light">Sincroniza según tu ubicación actual</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<!-- Manual Selector -->
+<div class="space-y-4">
+<label class="block font-headline-md text-on-surface px-1">Seleccionar manualmente</label>
+<div class="relative group">
+<div class="absolute inset-y-0 left-4 flex items-center pointer-events-none text-text-secondary-light group-focus-within:text-primary transition-colors">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="w-full pl-12 pr-4 py-4 bg-surface-container-lowest border border-border-subtle-light rounded-2xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all font-body-md" type="text" value="(GMT+01:00) Madrid, Paris, Berlin"/>
+</div>
+<div class="grid gap-2 mt-4">
+<div class="p-4 rounded-xl border border-primary bg-primary/5 flex items-center justify-between">
+<span class="font-body-md text-primary font-medium">(GMT+01:00) Madrid, España</span>
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="p-4 rounded-xl border border-transparent hover:border-border-subtle-light hover:bg-surface-container-low flex items-center justify-between cursor-pointer transition-all">
+<span class="font-body-md text-on-surface-variant">(GMT-05:00) Eastern Time (US &amp; Canada)</span>
+</div>
+<div class="p-4 rounded-xl border border-transparent hover:border-border-subtle-light hover:bg-surface-container-low flex items-center justify-between cursor-pointer transition-all">
+<span class="font-body-md text-on-surface-variant">(GMT+00:00) London, Lisbon, Casablanca</span>
+</div>
+</div>
+</div>
+<!-- Current Time Preview -->
+<div class="mt-12 p-8 rounded-3xl bg-slate-900 text-white relative overflow-hidden">
+
+<div class="relative z-10">
+<p class="text-slate-400 font-label-sm uppercase tracking-widest mb-4">Hora Local Actual</p>
+<div class="flex items-baseline gap-4">
+<span class="text-6xl font-bold font-display-xl" id="current-time">14:45</span>
+<span class="text-2xl text-slate-400">CET</span>
+</div>
+<p class="mt-4 text-slate-300 font-body-md">Viernes, 24 de Mayo de 2024</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Actions -->
+<footer class="sticky bottom-0 p-8 border-t border-border-subtle-light bg-white/80 backdrop-blur-sm flex justify-end gap-4">
+<button class="px-8 py-3 rounded-xl font-body-md text-on-surface-variant hover:bg-surface-variant transition-all">
+                        Cancelar
+                    </button>
+<button class="px-8 py-3 rounded-xl font-body-md bg-primary text-white shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all">
+                        Guardar cambios
+                    </button>
+</footer>
+</section>
+<!-- Detail Panel (Right Panel - Live Preview) -->
+<section class="w-detail-panel-width border-l border-border-subtle-light glass-panel p-10 flex flex-col gap-8">
+<div class="space-y-4">
+<h3 class="font-headline-md text-on-surface">Vista previa de tarea</h3>
+<p class="text-sm text-text-secondary-light">Así se verán tus recordatorios con la zona horaria seleccionada.</p>
+</div>
+<!-- Preview Card -->
+<div class="p-6 rounded-2xl bg-white shadow-xl shadow-gray-200/50 border border-border-subtle-light space-y-6">
+<div class="flex items-start justify-between">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-secondary-container">event</span>
+</div>
+<div class="flex -space-x-2">
+<img class="w-8 h-8 rounded-full border-2 border-white object-cover" data-alt="A professional business headshot of a woman with a confident smile, warm studio lighting, minimalist corporate background, neutral tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCOGx320BIwznsWuuQTtPgduASdNpNM8xqsLarVXe4DrDtMYQEwYDZNmEQ2Zapx0JtyKLr61fNePeBdPEuUbTx4TB9jAmqgD7V8TsdDCWsIsx_5N7At7dpD0vqa_PCP78Jr9WFw8LeFLv__1IKMDzRAkyXbk5Nc_zQC-qXw27ElMDJ-kHCyqBw9iCrrCQlO6iSr5Hr4rCS4lxI4vyoX8IuONZY9ujw6f3qvgCaLa2ex8mQMmgZjA80Ay8KuAGaE-gcWVtQmP1UHwsP"/>
+<img class="w-8 h-8 rounded-full border-2 border-white object-cover" data-alt="A diverse group of professional team members in a blurred modern office setting, bright and airy atmosphere, high-end commercial photography style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjqGMo3_ix9dea57asvDYxWqZEjAp3ILms1So2BH6Bmk-t28grzsYj7POpWeIviJ9185-H0T1fwZZbqzORMxhhJrQrOTRPuduEFGhw_BXFLw7XzrFxPlkW0-HzCkfZEae207duRumGgDtOziCY1tMcWp8Mo21LEDL6PTxBtB7kdpZP4Yvl3wNjMMU7GNXtp1sriDyX6E0mTlQcKQQHbYeq9_v8zfKqofHnHPgTOT7MkI7a1MYkGWxaSLkXlC189ojFoJYELrk2N6Tg"/>
+</div>
+</div>
+<div>
+<h4 class="font-headline-md text-on-surface mb-1">Reunión de Sincronización</h4>
+<p class="text-sm text-text-secondary-light">Discutir objetivos del Q3 con el equipo de diseño.</p>
+</div>
+<div class="p-4 rounded-xl bg-primary/5 border border-primary/10 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-xl">schedule</span>
+<div>
+<p class="text-sm font-semibold text-primary">Vence a las 17:00</p>
+<p class="text-[10px] text-primary/60 uppercase font-bold tracking-tight">Hora Local (Madrid)</p>
+</div>
+</div>
+</div>
+<div class="mt-auto p-6 rounded-2xl border border-dashed border-border-subtle-light bg-surface-container-low/50">
+<div class="flex gap-4 items-center">
+<span class="material-symbols-outlined text-text-secondary-light">info</span>
+<p class="text-xs text-text-secondary-light leading-relaxed">
+                            Cambiar la zona horaria afectará a todos los dispositivos sincronizados con tu cuenta de FocusFlow.
+                        </p>
+</div>
+</div>
+</section>
+</main>
+</div>
+<script>
+        // Simple micro-interaction for the clock preview
+        function updateClock() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const timeDisplay = document.getElementById('current-time');
+            if (timeDisplay) {
+                timeDisplay.textContent = `${hours}:${minutes}`;
+            }
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // Active state transition for timezone list items
+        document.querySelectorAll('.cursor-pointer').forEach(item => {
+            item.addEventListener('click', () => {
+                // This is a mockup interaction
+                console.log('Timezone selected');
+            });
+        });
+    </script>
+</body></html>

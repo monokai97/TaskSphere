@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Two-Factor Authentication (2FA) | FocusFlow</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Geist:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-effect {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed": "#141b2b",
+                        "on-secondary": "#ffffff",
+                        "surface-dim": "#d9dadb",
+                        "on-tertiary": "#ffffff",
+                        "border-subtle-light": "#F3F4F6",
+                        "border-subtle-dark": "rgba(39, 39, 42, 0.5)",
+                        "on-error-container": "#93000a",
+                        "error": "#ba1a1a",
+                        "surface-container": "#edeeef",
+                        "secondary-container": "#fed01b",
+                        "primary": "#004ac6",
+                        "secondary": "#735c00",
+                        "on-secondary-fixed": "#231b00",
+                        "surface-bright": "#f8f9fa",
+                        "surface-elevated-dark": "#27272A",
+                        "primary-container": "#2563eb",
+                        "on-primary": "#ffffff",
+                        "outline-variant": "#c3c6d7",
+                        "primary-fixed": "#dbe1ff",
+                        "surface": "#f8f9fa",
+                        "error-container": "#ffdad6",
+                        "text-secondary-light": "#6B7280",
+                        "outline": "#737686",
+                        "tertiary-fixed-dim": "#c0c6db",
+                        "on-primary-fixed": "#00174b",
+                        "canvas-dark": "#09090B",
+                        "tertiary-container": "#666d7f",
+                        "surface-tint": "#0053db",
+                        "on-secondary-container": "#6f5900",
+                        "on-error": "#ffffff",
+                        "background": "#f8f9fa",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "surface-dark": "#18181B",
+                        "surface-container-low": "#f3f4f5",
+                        "tertiary": "#4e5566",
+                        "on-primary-container": "#eeefff",
+                        "on-secondary-fixed-variant": "#574500",
+                        "secondary-fixed-dim": "#eec200",
+                        "on-background": "#191c1d",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface": "#191c1d",
+                        "inverse-primary": "#b4c5ff",
+                        "inverse-on-surface": "#f0f1f2",
+                        "text-secondary-dark": "#A1A1AA",
+                        "surface-container-highest": "#e1e3e4",
+                        "secondary-fixed": "#ffe083",
+                        "on-surface-variant": "#434655",
+                        "on-tertiary-fixed-variant": "#404758",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "tertiary-fixed": "#dce2f7",
+                        "surface-variant": "#e1e3e4",
+                        "on-tertiary-container": "#ecf0ff",
+                        "surface-container-high": "#e7e8e9",
+                        "inverse-surface": "#2e3132"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-padding-mobile": "1rem",
+                        "stack-gap": "0.25rem",
+                        "gutter-md": "1rem",
+                        "container-padding": "3rem",
+                        "sidebar-width": "288px",
+                        "detail-panel-width": "384px"
+                    },
+                    "fontFamily": {
+                        "task-item": ["Inter"],
+                        "display-xl-mobile": ["Geist"],
+                        "headline-md": ["Geist"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "display-xl": ["Geist"],
+                        "label-sm": ["Geist"]
+                    },
+                    "fontSize": {
+                        "task-item": ["15px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "display-xl-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "display-xl": ["36px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen">
+<div class="flex h-screen overflow-hidden">
+<!-- SIDE NAVIGATION (Column 1) -->
+<aside class="w-sidebar-width h-screen fixed left-0 top-0 bg-surface/80 dark:bg-surface-dark/80 backdrop-blur-md border-r border-border-subtle-light flex flex-col py-8 px-4 z-50">
+<div class="mb-10 px-4">
+<h1 class="font-headline-md text-headline-md font-bold text-primary">FocusFlow</h1>
+<p class="text-on-surface-variant font-label-sm text-label-sm opacity-70">Productivity Workspace</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high/50 transition-all duration-300" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high/50 transition-all duration-300" href="#">
+<span class="material-symbols-outlined">check_circle</span>
+<span class="font-body-md">Tasks</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high/50 transition-all duration-300" href="#">
+<span class="material-symbols-outlined">inbox</span>
+<span class="font-body-md">Inbox</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high/50 transition-all duration-300" href="#">
+<span class="material-symbols-outlined">insights</span>
+<span class="font-body-md">Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-primary font-bold border-l-4 border-primary bg-surface-container-low" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">settings</span>
+<span class="font-body-md">Settings</span>
+</a>
+</nav>
+<div class="mt-auto space-y-4 px-4">
+<button class="w-full py-2.5 px-4 bg-primary text-on-primary rounded-xl font-bold text-label-sm hover:opacity-90 transition-all">
+                    Upgrade to Pro
+                </button>
+<div class="flex items-center gap-3 pt-6 border-t border-border-subtle-light">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="A professional headshot of Alex Rivera, a focused young professional with a warm smile, set against a soft blurred office background with cool blue tones and high-key lighting. The style is clean and modern, fitting a high-performance productivity application's minimalist aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCEnxsozhMQPvOwmnn22tYeJOFEPuIpqEHb1ZuSrx7yM96qaqc3aLD1Hec_A20bPcfUMDlMNP_zDMK6m5eCIjEzT1EBqsuf2-BmRYcxpa3mUl8nfQ-nY1j0ZHjclBAUtceimWG3-2Bl3uqtQDElNnAXQIgY6U9FPUmZMQXVPJfOBXQnbDHwzcHuY82nMQsls4JOsZ9xtMxxLi6PaIRaEoJNulz5nk4p3Xty8xsPVlLt3r9q_LQEYGYdUvERavZPf59v61AqrKsWV0jk"/>
+<div class="overflow-hidden">
+<p class="font-bold text-on-surface truncate">Alex Rivera</p>
+<p class="text-label-sm text-text-secondary-light truncate">alex@focusflow.io</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- SETTINGS SUBMENU (Column 2) -->
+<aside class="fixed left-sidebar-width top-0 w-72 h-screen bg-surface-container-low/50 border-r border-border-subtle-light py-8 z-40 hidden md:block">
+<div class="px-8 mb-6">
+<h2 class="font-headline-md text-headline-md font-bold">Settings</h2>
+</div>
+<nav class="space-y-0.5">
+<a class="flex items-center px-8 py-3 text-on-surface-variant hover:bg-surface-container-high/50 transition-colors" href="#">
+                    General
+                </a>
+<a class="flex items-center px-8 py-3 bg-surface-container-highest/40 text-primary font-bold" href="#">
+                    Privacy &amp; Security
+                </a>
+<a class="flex items-center px-8 py-3 text-on-surface-variant hover:bg-surface-container-high/50 transition-colors" href="#">
+                    Notifications
+                </a>
+<a class="flex items-center px-8 py-3 text-on-surface-variant hover:bg-surface-container-high/50 transition-colors" href="#">
+                    Connected Apps
+                </a>
+<a class="flex items-center px-8 py-3 text-on-surface-variant hover:bg-surface-container-high/50 transition-colors" href="#">
+                    Billing
+                </a>
+</nav>
+</aside>
+<!-- MAIN CONTENT AREA (Column 3) -->
+<main class="flex-1 ml-[288px] md:ml-[576px] h-screen overflow-y-auto bg-background">
+<!-- Top App Bar Integrated Search Placeholder -->
+<header class="h-16 flex items-center justify-between px-12 sticky top-0 bg-background/80 backdrop-blur-md z-30">
+<div class="flex items-center gap-2 text-text-secondary-light text-label-sm">
+<span>Settings</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span>Privacy &amp; Security</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-on-surface font-medium">Two-Factor Authentication (2FA)</span>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="pl-10 pr-4 py-1.5 bg-surface-container-high/40 border-none rounded-full text-label-sm focus:ring-2 focus:ring-primary/20 w-64 transition-all" placeholder="Search settings..." type="text"/>
+</div>
+<button class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-surface-container-highest/50">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+</button>
+</div>
+</header>
+<div class="p-12 max-w-3xl mx-auto">
+<!-- Title & Description -->
+<div class="mb-10">
+<div class="flex items-center gap-4 mb-3">
+<div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[32px]">verified_user</span>
+</div>
+<h2 class="font-display-xl text-display-xl tracking-tight">Two-Factor Authentication (2FA)</h2>
+</div>
+<p class="text-body-lg text-on-surface-variant leading-relaxed">
+                        Add an extra layer of security to your account. In addition to your password, you will need to enter a code from your mobile device to sign in.
+                    </p>
+</div>
+<!-- Status Card -->
+<div class="bg-surface-container-lowest border border-border-subtle-light rounded-xl p-6 mb-8 flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center">
+<span class="material-symbols-outlined text-outline">shield</span>
+</div>
+<div>
+<p class="font-bold text-on-surface">Current Status</p>
+<p class="text-label-sm text-text-secondary-light">Your account is currently protected by password only.</p>
+</div>
+</div>
+<span class="px-3 py-1 bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm rounded-full">
+                        Currently Disabled
+                    </span>
+</div>
+<!-- Configuration Methods -->
+<div class="space-y-6">
+<h3 class="font-headline-md text-headline-md font-bold mb-4">Verification Methods</h3>
+<!-- Method 1: Authenticator -->
+<div class="bg-surface-container-lowest border border-border-subtle-light rounded-xl p-6 hover:border-primary/30 transition-all duration-300 group">
+<div class="flex items-start justify-between">
+<div class="flex gap-4">
+<div class="w-12 h-12 rounded-xl bg-primary text-on-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined">phonelink_lock</span>
+</div>
+<div>
+<h4 class="font-bold text-on-surface flex items-center gap-2">
+                                        Authenticator App (Recommended)
+                                        <span class="text-[10px] bg-secondary-container text-on-secondary-container px-2 py-0.5 rounded uppercase tracking-wider font-bold">Best Security</span>
+</h4>
+<p class="text-body-md text-on-surface-variant mt-1 max-w-md">
+                                        Use an app like Google Authenticator or Authy to generate secure verification codes on your mobile device.
+                                    </p>
+</div>
+</div>
+<button class="px-6 py-2 bg-primary text-on-primary rounded-lg font-bold text-label-sm hover:shadow-lg hover:shadow-primary/20 transition-all active:scale-95" onclick="this.innerHTML='Configuring...'">
+                                Enable
+                            </button>
+</div>
+</div>
+<!-- Method 2: Backup Codes -->
+<div class="bg-surface-container-lowest border border-border-subtle-light rounded-xl p-6 opacity-60">
+<div class="flex items-start justify-between">
+<div class="flex gap-4">
+<div class="w-12 h-12 rounded-xl bg-surface-container-high text-on-surface-variant flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined">vpn_key</span>
+</div>
+<div>
+<h4 class="font-bold text-on-surface">Backup Codes</h4>
+<p class="text-body-md text-on-surface-variant mt-1 max-w-md">
+                                        Generate a set of single-use recovery codes to use if you lose access to your primary mobile device.
+                                    </p>
+</div>
+</div>
+<button class="px-6 py-2 bg-surface-container-highest text-outline rounded-lg font-bold text-label-sm cursor-not-allowed" disabled="">
+                                Generate
+                            </button>
+</div>
+<div class="mt-4 flex items-center gap-2 text-[13px] text-text-secondary-light italic px-16">
+<span class="material-symbols-outlined text-[16px]">info</span>
+                            Enable an authenticator app first to generate backup codes.
+                        </div>
+</div>
+</div>
+<!-- Best Practices Info Box -->
+<div class="mt-12 p-6 bg-surface-container-low rounded-xl border-l-4 border-primary/40">
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-primary">tips_and_updates</span>
+<div>
+<p class="font-bold text-on-surface text-label-sm">Security Best Practices</p>
+<p class="text-body-md text-on-surface-variant mt-1">
+                                2FA significantly reduces the risk of unauthorized access to your workspace. Always store your backup codes in a secure, physical location or a password manager that is separate from your FocusFlow account.
+                            </p>
+</div>
+</div>
+</div>
+<!-- Sticky Footer Action (Optional context for large forms) -->
+<div class="mt-16 pt-8 border-t border-border-subtle-light flex justify-between items-center">
+<button class="text-on-surface-variant font-medium hover:text-primary transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">arrow_back</span>
+                        Back to Privacy
+                    </button>
+<p class="text-label-sm text-text-secondary-light">Last security check: 2 days ago</p>
+</div>
+</div>
+</main>
+<!-- Right Detail Panel (Empty for this view or for help context) -->
+<aside class="w-detail-panel-width h-screen bg-surface/80 backdrop-blur-md border-l border-border-subtle-light p-8 hidden xl:block overflow-y-auto">
+<h3 class="font-headline-md text-headline-md font-bold mb-6">Security Overview</h3>
+<div class="space-y-6">
+<div class="bg-surface-container-lowest p-4 rounded-xl shadow-sm border border-border-subtle-light">
+<p class="font-bold text-label-sm mb-2 uppercase tracking-widest text-text-secondary-light">Account Strength</p>
+<div class="w-full bg-surface-container-high h-2 rounded-full overflow-hidden">
+<div class="bg-secondary-fixed-dim w-1/3 h-full"></div>
+</div>
+<p class="mt-3 text-body-md text-on-surface-variant">Your account security score is <strong>Moderate</strong>. Enabling 2FA will boost this to <strong>High</strong>.</p>
+</div>
+<div>
+<h4 class="font-bold text-on-surface mb-4">Frequently Asked Questions</h4>
+<div class="space-y-4">
+<details class="group border-b border-border-subtle-light pb-3 cursor-pointer">
+<summary class="list-none flex justify-between items-center font-bold text-label-sm">
+                                What if I lose my phone?
+                                <span class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
+</summary>
+<p class="mt-2 text-body-md text-on-surface-variant">You can use one of your pre-generated backup codes to sign in and reset your 2FA settings.</p>
+</details>
+<details class="group border-b border-border-subtle-light pb-3 cursor-pointer">
+<summary class="list-none flex justify-between items-center font-bold text-label-sm">
+                                Can I use multiple apps?
+                                <span class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
+</summary>
+<p class="mt-2 text-body-md text-on-surface-variant">Yes, you can scan the same QR code with multiple devices or apps during the setup process.</p>
+</details>
+</div>
+</div>
+<div class="p-4 bg-primary/5 rounded-xl border border-primary/10">
+<div class="w-full h-32 rounded-lg bg-cover bg-center mb-4" data-alt="A clean, minimalist 3D rendering of a secure digital vault with a glowing blue core, representing ultimate data protection. The composition uses soft studio lighting, high-contrast shadows, and a sophisticated monochromatic palette with vibrant blue accents to match a modern professional UI aesthetic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBNi1rjFb4VNgbR6fPr9UBMejBmmL-d-sgMZxBN2Rud61fYTM6gBGNduxb-QaLxwZleMFauWPadJOCI5J7M5s7Swke4GjPCnAZBjPM-eBYu_8cs8xWtIU8Rz_aRf8O3e6Opw2gy6NmUxYuTEXvPIz9KBMDszHEfYyGyRjzT8k7QbTgmZNv4jNWTnfK4fxa4kaEVGbS6GU5EMVMeGEq6k1PJStUWQ3EqNScU_11lgvxw6wHTEo0tpkV_XGPEuw3-tGJzDsCil_XTaONy')"></div>
+<p class="text-label-sm text-primary font-bold">Enterprise-Grade Security</p>
+<p class="text-[13px] text-on-surface-variant mt-1 leading-relaxed">FocusFlow uses industry-standard AES-256 encryption for all your stored data and authentication tokens.</p>
+</div>
+</div>
+</aside>
+</div>
+<!-- Mobile Navigation Toggle (Simple implementation) -->
+<button class="md:hidden fixed bottom-6 right-6 w-14 h-14 bg-primary text-on-primary rounded-full shadow-xl flex items-center justify-center z-50">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<script>
+        // Simple interaction for the enable button
+        document.querySelector('button[onclick]').addEventListener('click', function() {
+            const btn = this;
+            setTimeout(() => {
+                alert('This would typically launch a modal with a QR code for your authenticator app.');
+                btn.innerHTML = 'Enable';
+            }, 500);
+        });
+
+        // Search bar focus effect
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('focus', () => {
+            searchInput.classList.add('w-80');
+            searchInput.classList.remove('w-64');
+        });
+        searchInput.addEventListener('blur', () => {
+            searchInput.classList.remove('w-80');
+            searchInput.classList.add('w-64');
+        });
+    </script>
+</body></html>

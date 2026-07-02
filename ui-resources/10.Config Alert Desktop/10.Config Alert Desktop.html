@@ -1,0 +1,394 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>FocusFlow - Desktop Alerts Configuration</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Geist:wght@400;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed-variant": "#404758",
+                        "error-container": "#ffdad6",
+                        "surface-dim": "#d9dadb",
+                        "surface-container-high": "#e7e8e9",
+                        "secondary": "#735c00",
+                        "tertiary-container": "#666d7f",
+                        "error": "#ba1a1a",
+                        "surface-container-highest": "#e1e3e4",
+                        "surface": "#f8f9fa",
+                        "surface-elevated-dark": "#27272A",
+                        "tertiary-fixed": "#dce2f7",
+                        "on-secondary": "#ffffff",
+                        "background": "#f8f9fa",
+                        "canvas-dark": "#09090B",
+                        "border-subtle-dark": "rgba(39, 39, 42, 0.5)",
+                        "surface-tint": "#0053db",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "inverse-primary": "#b4c5ff",
+                        "secondary-container": "#fed01b",
+                        "surface-dark": "#18181B",
+                        "on-error": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-secondary-container": "#6f5900",
+                        "on-tertiary-fixed": "#141b2b",
+                        "outline-variant": "#c3c6d7",
+                        "primary-container": "#2563eb",
+                        "surface-container-lowest": "#ffffff",
+                        "primary": "#004ac6",
+                        "outline": "#737686",
+                        "secondary-fixed-dim": "#eec200",
+                        "border-subtle-light": "#F3F4F6",
+                        "tertiary": "#4e5566",
+                        "surface-bright": "#f8f9fa",
+                        "text-secondary-dark": "#A1A1AA",
+                        "tertiary-fixed-dim": "#c0c6db",
+                        "surface-variant": "#e1e3e4",
+                        "on-background": "#191c1d",
+                        "surface-container": "#edeeef",
+                        "on-primary-fixed": "#00174b",
+                        "surface-container-low": "#f3f4f5",
+                        "on-primary-container": "#eeefff",
+                        "secondary-fixed": "#ffe083",
+                        "inverse-surface": "#2e3132",
+                        "inverse-on-surface": "#f0f1f2",
+                        "text-secondary-light": "#6B7280",
+                        "primary-fixed": "#dbe1ff",
+                        "on-surface-variant": "#434655",
+                        "on-tertiary-container": "#ecf0ff",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "on-secondary-fixed": "#231b00",
+                        "on-secondary-fixed-variant": "#574500",
+                        "on-surface": "#191c1d",
+                        "on-primary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sidebar-width": "288px",
+                        "stack-gap": "0.25rem",
+                        "detail-panel-width": "384px",
+                        "container-padding": "3rem",
+                        "container-padding-mobile": "1rem",
+                        "gutter-md": "1rem"
+                    },
+                    "fontFamily": {
+                        "task-item": ["Inter"],
+                        "display-xl": ["Geist"],
+                        "display-xl-mobile": ["Geist"],
+                        "label-sm": ["Geist"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Geist"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "task-item": ["15px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "display-xl": ["36px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "display-xl-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-sidebar {
+            background: rgba(248, 249, 250, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .switch-checkbox:checked + .switch-label {
+            background-color: #004ac6;
+        }
+        .switch-checkbox:checked + .switch-label .switch-dot {
+            transform: translateX(1.25rem);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md min-h-screen">
+<div class="flex min-h-screen">
+<!-- Sidebar Navigation (3-Column Architecture: Col 1) -->
+<aside class="hidden lg:flex flex-col w-[288px] h-screen sticky top-0 py-8 border-r border-outline-variant/30 glass-sidebar z-50">
+<div class="px-6 mb-10">
+<h1 class="font-display-xl text-display-xl font-bold text-primary">FocusFlow</h1>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-6 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="light_mode">light_mode</span>
+<span class="font-body-md">My Day</span>
+</a>
+<a class="flex items-center gap-3 px-6 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="star">star</span>
+<span class="font-body-md">Important</span>
+</a>
+<a class="flex items-center gap-3 px-6 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_month">calendar_month</span>
+<span class="font-body-md">Planned</span>
+</a>
+<a class="flex items-center gap-3 px-6 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-body-md">Tasks</span>
+</a>
+</nav>
+<div class="mt-auto px-2">
+<a class="flex items-center gap-3 px-4 py-3 bg-primary-container/10 text-primary font-semibold border-l-4 border-primary transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-body-md">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-6 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="font-body-md">Help</span>
+</a>
+<div class="mt-4 px-4 py-4 flex items-center gap-3 border-t border-outline-variant/20">
+<img alt="Alex Rivera" class="w-10 h-10 rounded-full bg-primary-fixed" data-alt="A professional and clean close-up portrait of a young male professional named Alex Rivera. He has a friendly expression, set against a soft, out-of-focus modern office background with cool blue and white tones. The lighting is bright and airy, matching a high-end light-mode UI aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOK-Dq2rKOlHe3Lv7alriGrU3wF6nycmSpyw-ZSyDq5gkJhjVf26-IKvBOIKH35i2l4FJ_jSpK5uCRtom7kd2XNO8WYnTVxkFPh9tRCoTc_k9PbrzfqLqcaK3QvNrwrbALBspZMsZeCy2PVJRUSKSf7x_Rjk_2710cRFKTzstMU6anNi5F1fUJm1Mf2oR1oeHQ2n2vaPs8-hTaZPfjSn5tcy01IFXeQu_k1UzKa8jpw_712WmgjnnCm0MfdSemayfyChCBJrTEbRxZ">
+<div class="overflow-hidden">
+<p class="font-headline-md text-sm font-bold truncate">Alex Rivera</p>
+<p class="font-label-sm text-[10px] text-primary">Deep Work Mode</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Secondary Navigation (3-Column Architecture: Col 2) -->
+<nav class="hidden md:flex flex-col w-[256px] h-screen sticky top-0 bg-surface-container-low border-r border-outline-variant/20 py-10 px-4">
+<h2 class="px-4 mb-6 font-headline-md text-on-surface/70 uppercase tracking-widest text-[11px]">Settings Menu</h2>
+<div class="space-y-1">
+<a class="block px-4 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all font-body-md" href="#">Profile</a>
+<a class="block px-4 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all font-body-md" href="#">Account Security</a>
+<a class="block px-4 py-2.5 rounded-lg bg-white shadow-sm text-primary font-semibold border border-outline-variant/10 transition-all font-body-md flex items-center justify-between" href="#">
+                    Notifications
+                    <span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+</a>
+<a class="block px-4 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all font-body-md" href="#">Focus Sessions</a>
+<a class="block px-4 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all font-body-md" href="#">Integrations</a>
+<a class="block px-4 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all font-body-md" href="#">Language &amp; Region</a>
+</div>
+</nav>
+<!-- Main Workspace (3-Column Architecture: Col 3 - Fluid) -->
+<main class="flex-1 p-6 md:p-12 overflow-y-auto">
+<div class="max-w-3xl mx-auto">
+<!-- Header -->
+<header class="mb-10">
+<div class="flex items-center gap-2 text-primary font-label-sm mb-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="arrow_back">arrow_back</span>
+<span>Notifications</span>
+</div>
+<h2 class="font-display-xl text-display-xl text-on-surface mb-2">Desktop Alerts</h2>
+<p class="font-body-md text-on-surface-variant">Manage how and when you receive notifications on your computer to stay focused without missing what matters.</p>
+</header>
+<!-- Content Sections -->
+<div class="space-y-8">
+<!-- Master Toggle Card -->
+<section class="bg-white rounded-xl p-6 shadow-sm border border-outline-variant/10">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[28px]" data-icon="desktop_windows">desktop_windows</span>
+</div>
+<div>
+<h3 class="font-headline-md text-on-surface">Enable Desktop Notifications</h3>
+<p class="text-sm text-on-surface-variant">Allow FocusFlow to send alerts to your desktop</p>
+</div>
+</div>
+<div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+<input checked="" class="switch-checkbox absolute block w-5 h-5 rounded-full bg-white border-2 border-outline-variant appearance-none cursor-pointer z-10 checked:border-primary" id="master_toggle" name="master_toggle" type="checkbox">
+<label class="switch-label block overflow-hidden h-5 rounded-full bg-outline-variant cursor-pointer transition-colors duration-200" for="master_toggle">
+<span class="switch-dot block w-5 h-5 rounded-full bg-white shadow-md transform transition-transform duration-200"></span>
+</label>
+</div>
+</div>
+</section>
+<!-- Notification Types -->
+<section class="space-y-4">
+<h3 class="font-label-sm text-on-surface-variant uppercase tracking-widest px-1">Notification Triggers</h3>
+<div class="bg-white rounded-xl border border-outline-variant/10 divide-y divide-outline-variant/10 overflow-hidden">
+<!-- Trigger Item -->
+<div class="flex items-center justify-between p-4 hover:bg-surface-container-low transition-colors group">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors" data-icon="notifications_active">notifications_active</span>
+<div>
+<p class="font-body-md font-medium">Task Reminders</p>
+<p class="text-[13px] text-on-surface-variant">Alerts for task start times and reminders</p>
+</div>
+</div>
+<div class="relative inline-block w-10 align-middle select-none transition duration-200 ease-in">
+<input checked="" class="switch-checkbox absolute block w-5 h-5 rounded-full bg-white border-2 border-outline-variant appearance-none cursor-pointer z-10 checked:border-primary" id="t1" type="checkbox">
+<label class="switch-label block overflow-hidden h-5 rounded-full bg-outline-variant cursor-pointer transition-colors duration-200" for="t1">
+<span class="switch-dot block w-5 h-5 rounded-full bg-white shadow-md transform transition-transform duration-200"></span>
+</label>
+</div>
+</div>
+<!-- Trigger Item -->
+<div class="flex items-center justify-between p-4 hover:bg-surface-container-low transition-colors group">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors" data-icon="group_add">group_add</span>
+<div>
+<p class="font-body-md font-medium">New Shared List</p>
+<p class="text-[13px] text-on-surface-variant">Notify when someone invites you to a list</p>
+</div>
+</div>
+<div class="relative inline-block w-10 align-middle select-none transition duration-200 ease-in">
+<input checked="" class="switch-checkbox absolute block w-5 h-5 rounded-full bg-white border-2 border-outline-variant appearance-none cursor-pointer z-10 checked:border-primary" id="t2" type="checkbox">
+<label class="switch-label block overflow-hidden h-5 rounded-full bg-outline-variant cursor-pointer transition-colors duration-200" for="t2">
+<span class="switch-dot block w-5 h-5 rounded-full bg-white shadow-md transform transition-transform duration-200"></span>
+</label>
+</div>
+</div>
+<!-- Trigger Item -->
+<div class="flex items-center justify-between p-4 hover:bg-surface-container-low transition-colors group">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors" data-icon="event_busy">event_busy</span>
+<div>
+<p class="font-body-md font-medium">Due Date Alerts</p>
+<p class="text-[13px] text-on-surface-variant">High-priority alerts for approaching deadlines</p>
+</div>
+</div>
+<div class="relative inline-block w-10 align-middle select-none transition duration-200 ease-in">
+<input checked="" class="switch-checkbox absolute block w-5 h-5 rounded-full bg-white border-2 border-outline-variant appearance-none cursor-pointer z-10 checked:border-primary" id="t3" type="checkbox">
+<label class="switch-label block overflow-hidden h-5 rounded-full bg-outline-variant cursor-pointer transition-colors duration-200" for="t3">
+<span class="switch-dot block w-5 h-5 rounded-full bg-white shadow-md transform transition-transform duration-200"></span>
+</label>
+</div>
+</div>
+<!-- Trigger Item -->
+<div class="flex items-center justify-between p-4 hover:bg-surface-container-low transition-colors group">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors" data-icon="update">update</span>
+<div>
+<p class="font-body-md font-medium">System Updates</p>
+<p class="text-[13px] text-on-surface-variant">Important maintenance and feature announcements</p>
+</div>
+</div>
+<div class="relative inline-block w-10 align-middle select-none transition duration-200 ease-in">
+<input class="switch-checkbox absolute block w-5 h-5 rounded-full bg-white border-2 border-outline-variant appearance-none cursor-pointer z-10 checked:border-primary" id="t4" type="checkbox">
+<label class="switch-label block overflow-hidden h-5 rounded-full bg-outline-variant cursor-pointer transition-colors duration-200" for="t4">
+<span class="switch-dot block w-5 h-5 rounded-full bg-white shadow-md transform transition-transform duration-200"></span>
+</label>
+</div>
+</div>
+</div>
+</section>
+<!-- Appearance & Sound -->
+<section class="space-y-4">
+<h3 class="font-label-sm text-on-surface-variant uppercase tracking-widest px-1">Appearance &amp; Sound</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Sound Selection -->
+<div class="bg-white rounded-xl p-6 border border-outline-variant/10 flex flex-col gap-4 shadow-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="volume_up">volume_up</span>
+<label class="font-medium text-on-surface" for="sound-select">Notification Sound</label>
+</div>
+<div class="relative">
+<select class="w-full bg-surface-container-low border-outline-variant/30 rounded-lg py-2.5 px-4 font-body-md focus:ring-primary focus:border-primary transition-all appearance-none" id="sound-select">
+<option>Zen Bell (Default)</option>
+<option>Minimal Chirp</option>
+<option>Soft Pulse</option>
+<option>Mechanical Click</option>
+<option>None</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-2.5 text-on-surface-variant pointer-events-none" data-icon="expand_more">expand_more</span>
+</div>
+<button class="text-primary font-label-sm flex items-center gap-2 hover:underline w-fit" onclick="playTestSound()">
+<span class="material-symbols-outlined text-[16px]" data-icon="play_circle">play_circle</span>
+                                    Preview Sound
+                                </button>
+</div>
+<!-- Alert Style Preview -->
+<div class="bg-white rounded-xl p-6 border border-outline-variant/10 shadow-sm">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary" data-icon="branding_watermark">branding_watermark</span>
+<span class="font-medium text-on-surface">Alert Style</span>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<button class="p-3 rounded-lg border-2 border-primary bg-primary/5 flex flex-col items-center gap-2 group transition-all">
+<div class="w-full h-12 bg-white rounded border border-outline-variant/30 relative overflow-hidden">
+<div class="absolute right-1 top-1 w-8 h-4 bg-primary/20 rounded-sm"></div>
+</div>
+<span class="text-[12px] font-medium text-primary">Banner</span>
+</button>
+<button class="p-3 rounded-lg border-2 border-transparent bg-surface-container-low flex flex-col items-center gap-2 hover:border-outline-variant/50 transition-all">
+<div class="w-full h-12 bg-white rounded border border-outline-variant/30 flex items-center justify-center">
+<div class="w-8 h-8 bg-on-surface/5 rounded-full"></div>
+</div>
+<span class="text-[12px] font-medium text-on-surface-variant">Alert</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Test Button -->
+<section class="flex justify-center pt-4">
+<button class="group flex items-center gap-2 px-6 py-3 rounded-xl border border-primary text-primary font-semibold hover:bg-primary/5 transition-all active:scale-95" onclick="triggerTestNotification()">
+<span class="material-symbols-outlined group-hover:rotate-12 transition-transform" data-icon="send">send</span>
+                            Test Notification
+                        </button>
+</section>
+<!-- Footer Actions -->
+<footer class="pt-10 mt-10 border-t border-outline-variant/20 flex flex-col sm:flex-row items-center justify-between gap-4">
+<p class="text-[13px] text-on-surface-variant">Last updated: 2 hours ago from Chrome Desktop</p>
+<div class="flex items-center gap-3 w-full sm:w-auto">
+<button class="flex-1 sm:flex-none px-8 py-2.5 rounded-lg text-on-surface-variant font-medium hover:bg-surface-container transition-all">Cancel</button>
+<button class="flex-1 sm:flex-none px-8 py-2.5 rounded-lg bg-primary text-white font-medium shadow-md shadow-primary/20 hover:bg-primary-container transition-all active:scale-95">Save Changes</button>
+</div>
+</footer>
+</div>
+</div>
+</main>
+<!-- Toast / Micro-interaction layer -->
+<div class="fixed bottom-8 right-8 bg-white border border-outline-variant/20 shadow-2xl rounded-xl p-4 flex items-center gap-4 transform translate-y-24 opacity-0 transition-all duration-500 z-[100] max-w-sm" id="test-toast">
+<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white">
+<span class="material-symbols-outlined" data-icon="check_circle">check_circle</span>
+</div>
+<div>
+<p class="font-bold text-sm">Test Notification</p>
+<p class="text-xs text-on-surface-variant">FocusFlow notifications are working correctly!</p>
+</div>
+<button class="text-on-surface-variant hover:text-on-surface" onclick="hideToast()">
+<span class="material-symbols-outlined text-[18px]" data-icon="close">close</span>
+</button>
+</div>
+</div>
+<script>
+        function triggerTestNotification() {
+            const toast = document.getElementById('test-toast');
+            toast.classList.remove('translate-y-24', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+            
+            setTimeout(() => {
+                hideToast();
+            }, 5000);
+        }
+
+        function hideToast() {
+            const toast = document.getElementById('test-toast');
+            toast.classList.add('translate-y-24', 'opacity-0');
+            toast.classList.remove('translate-y-0', 'opacity-100');
+        }
+
+        function playTestSound() {
+            // Visual feedback for sound play
+            const btn = event.currentTarget;
+            const icon = btn.querySelector('.material-symbols-outlined');
+            icon.style.color = '#0053db';
+            icon.innerText = 'graphic_eq';
+            setTimeout(() => {
+                icon.innerText = 'play_circle';
+                icon.style.color = '';
+            }, 1000);
+        }
+    </script>
+</body></html>

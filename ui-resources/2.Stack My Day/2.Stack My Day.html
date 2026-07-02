@@ -1,0 +1,384 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Ethereal Focus - My Day (Selection Mode)</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;family=Inter:wght@100..900&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed": "#dbe1ff",
+                        "on-secondary-fixed-variant": "#574500",
+                        "surface-container": "#edeeef",
+                        "primary": "#004ac6",
+                        "background": "#f8f9fa",
+                        "surface-tint": "#0053db",
+                        "surface-dim": "#d9dadb",
+                        "inverse-primary": "#b4c5ff",
+                        "text-secondary-dark": "#A1A1AA",
+                        "inverse-surface": "#2e3132",
+                        "tertiary-fixed": "#dce2f7",
+                        "surface-dark": "#18181B",
+                        "tertiary": "#4e5566",
+                        "border-subtle-dark": "rgba(39, 39, 42, 0.5)",
+                        "surface-container-high": "#e7e8e9",
+                        "outline": "#737686",
+                        "tertiary-fixed-dim": "#c0c6db",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "outline-variant": "#c3c6d7",
+                        "on-surface-variant": "#434655",
+                        "on-secondary": "#ffffff",
+                        "surface-elevated-dark": "#27272A",
+                        "on-primary-container": "#eeefff",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-container": "#ecf0ff",
+                        "surface-bright": "#f8f9fa",
+                        "secondary": "#735c00",
+                        "error": "#ba1a1a",
+                        "on-surface": "#191c1d",
+                        "canvas-dark": "#09090B",
+                        "surface-container-lowest": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "secondary-fixed": "#ffe083",
+                        "on-background": "#191c1d",
+                        "text-secondary-light": "#6B7280",
+                        "surface-container-low": "#f3f4f5",
+                        "on-secondary-container": "#6f5900",
+                        "on-primary-fixed": "#00174b",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "border-subtle-light": "#F3F4F6",
+                        "on-tertiary-fixed": "#141b2b",
+                        "secondary-container": "#fed01b",
+                        "surface": "#f8f9fa",
+                        "secondary-fixed-dim": "#eec200",
+                        "on-error-container": "#93000a",
+                        "on-error": "#ffffff",
+                        "inverse-on-surface": "#f0f1f2",
+                        "on-tertiary-fixed-variant": "#404758",
+                        "surface-container-highest": "#e1e3e4",
+                        "primary-container": "#2563eb",
+                        "tertiary-container": "#666d7f",
+                        "surface-variant": "#e1e3e4",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed": "#231b00"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sidebar-width": "288px",
+                        "container-padding": "3rem",
+                        "detail-panel-width": "384px",
+                        "container-padding-mobile": "1rem",
+                        "gutter-md": "1rem",
+                        "stack-gap": "0.25rem"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Geist"],
+                        "display-xl-mobile": ["Geist"],
+                        "task-item": ["Inter"],
+                        "headline-md": ["Geist"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "display-xl": ["Geist"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "display-xl-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "task-item": ["15px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "display-xl": ["36px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .glass-sidebar {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .task-checkbox-ring {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .task-checkbox-ring:hover {
+            border-color: #004ac6;
+            background-color: rgba(0, 74, 198, 0.05);
+        }
+        .task-selected {
+            background-color: rgba(0, 74, 198, 0.04);
+            border-color: rgba(0, 74, 198, 0.2);
+        }
+        .bulk-action-bar {
+            transform: translateY(-20px);
+            opacity: 0;
+            animation: slideIn 0.4s forwards cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        @keyframes slideIn {
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface min-h-screen flex overflow-hidden">
+<!-- Navigation Sidebar -->
+<aside class="fixed left-0 top-0 h-full w-sidebar-width bg-white/80 border-r border-border-subtle-light glass-sidebar z-50 flex flex-col py-8">
+<div class="px-6 mb-8">
+<div class="flex items-center gap-3 mb-2">
+<div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-white">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">blur_on</span>
+</div>
+<div>
+<h1 class="font-display-xl text-headline-md font-bold text-primary">Ethereal Focus</h1>
+<p class="font-body-md text-label-sm text-on-surface-variant">Stay productive</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 px-4 space-y-1">
+<!-- Active State: My Day -->
+<a class="flex items-center gap-3 px-4 py-3 bg-primary-container/10 text-primary font-semibold border-l-4 border-primary transition-all duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">sunny</span>
+<span class="font-body-md">My Day</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant/50 transition-all duration-300" href="#">
+<span class="material-symbols-outlined">star</span>
+<span class="font-body-md">Important</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant/50 transition-all duration-300" href="#">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="font-body-md">Planned</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant/50 transition-all duration-300" href="#">
+<span class="material-symbols-outlined">task_alt</span>
+<span class="font-body-md">Tasks</span>
+</a>
+<div class="pt-8 px-4">
+<button class="w-full py-2.5 px-4 bg-primary text-white rounded-xl font-body-md font-semibold flex items-center justify-center gap-2 hover:bg-surface-tint transition-all active:scale-[0.98]">
+<span class="material-symbols-outlined">add</span>
+                    New List
+                </button>
+</div>
+</nav>
+<div class="px-4 mt-auto">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant/50 transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-md">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant/50 transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-body-md">Help</span>
+</a>
+<div class="mt-6 flex items-center gap-3 px-4 py-4 border-t border-border-subtle-light">
+<img alt="User Profile" class="w-10 h-10 rounded-full object-cover shadow-sm" data-alt="A professional studio portrait of a woman with a confident expression, set against a clean, neutral background. The lighting is soft and flattering, emphasizing a modern professional aesthetic. The color palette is composed of soft grays and muted blues to match a high-end light mode UI theme." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOqgVKk0a9iLgl_NrhhKsrfILyTLDgHjuzXCx-RPALkZzWy4ZLkhYJ3YIcNOiPqbp60ROOvkF43rM5aBgbf5GaTtE27fKCiF-nqJExx9viDcBK0stBWmYdT7YzO2kCn2BuM7_ow1XvlJDPVOV37dyjCX9_zSqeuraIUeuRDMaQ_Yl3tKuDfZ_EdU9e-0fVNri-EdMoSNYm_Ioh1hD0kMlW9jbZ0Q-6fvQg0BtspY_bUtfCGKBlm-VaLL_cACAx0HsRVLNBQrHm3pTP">
+<div>
+<p class="font-body-md font-semibold text-on-surface">Alex Rivera</p>
+<p class="font-label-sm text-text-secondary-light">Pro Plan</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Workspace -->
+<main class="flex-1 ml-sidebar-width min-h-screen flex flex-col relative">
+<!-- Bulk Action Bar (Sticky at top of content area) -->
+<header class="sticky top-0 z-40 bg-surface-container-lowest/80 backdrop-blur-md px-12 py-4 border-b border-primary/10 shadow-sm bulk-action-bar">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-6">
+<button class="flex items-center justify-center w-8 h-8 rounded-full hover:bg-surface-variant transition-colors" onclick="location.reload()">
+<span class="material-symbols-outlined text-primary">close</span>
+</button>
+<span class="font-headline-md text-primary font-bold">3 items selected</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="flex items-center gap-2 px-4 py-2 text-on-surface-variant hover:bg-surface-variant transition-all rounded-lg font-label-sm">
+<span class="material-symbols-outlined text-primary">check_circle</span>
+                        Mark as completed
+                    </button>
+<button class="flex items-center gap-2 px-4 py-2 text-on-surface-variant hover:bg-surface-variant transition-all rounded-lg font-label-sm">
+<span class="material-symbols-outlined text-primary">event_upcoming</span>
+                        Set due date
+                    </button>
+<button class="flex items-center gap-2 px-4 py-2 text-on-surface-variant hover:bg-surface-variant transition-all rounded-lg font-label-sm">
+<span class="material-symbols-outlined text-primary">drive_file_move</span>
+                        Move to...
+                    </button>
+<div class="w-[1px] h-6 bg-outline-variant mx-2"></div>
+<button class="flex items-center gap-2 px-4 py-2 text-error hover:bg-error-container/20 transition-all rounded-lg font-label-sm">
+<span class="material-symbols-outlined">delete</span>
+                        Delete
+                    </button>
+</div>
+</div>
+</header>
+<!-- Content Canvas -->
+<div class="p-12 max-w-5xl mx-auto w-full">
+<div class="mb-12">
+<h2 class="font-display-xl text-display-xl font-bold text-on-surface mb-2">My Day</h2>
+<p class="font-body-md text-on-surface-variant">Wednesday, October 25</p>
+</div>
+<!-- Task List Area -->
+<div class="space-y-3">
+<!-- Task Item 1 (Selected) -->
+<div class="group flex items-center gap-4 p-4 bg-surface-container-lowest rounded-xl border border-primary/20 shadow-sm task-selected transition-all">
+<div class="relative w-6 h-6 flex items-center justify-center">
+<input checked="" class="w-6 h-6 rounded-full border-2 border-primary text-primary focus:ring-0 cursor-pointer" type="checkbox">
+</div>
+<div class="flex-1">
+<p class="font-task-item text-body-md text-on-surface font-medium">Finalize the Quarterly Report deck</p>
+<div class="flex items-center gap-3 mt-1">
+<span class="font-label-sm text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">calendar_today</span>
+                                Today
+                            </span>
+<span class="font-label-sm text-text-secondary-light flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">list</span>
+                                Strategic Planning
+                            </span>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity cursor-grab">drag_indicator</span>
+</div>
+<!-- Task Item 2 (Selected) -->
+<div class="group flex items-center gap-4 p-4 bg-surface-container-lowest rounded-xl border border-primary/20 shadow-sm task-selected transition-all">
+<div class="relative w-6 h-6 flex items-center justify-center">
+<input checked="" class="w-6 h-6 rounded-full border-2 border-primary text-primary focus:ring-0 cursor-pointer" type="checkbox">
+</div>
+<div class="flex-1">
+<p class="font-task-item text-body-md text-on-surface font-medium">Sync with the Design Team on the mobile app UI</p>
+<div class="flex items-center gap-3 mt-1">
+<span class="font-label-sm text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">calendar_today</span>
+                                Today
+                            </span>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity cursor-grab">drag_indicator</span>
+</div>
+<!-- Task Item 3 (Unselected) -->
+<div class="group flex items-center gap-4 p-4 bg-surface-container-lowest rounded-xl border border-transparent shadow-sm hover:border-outline-variant transition-all">
+<div class="relative w-6 h-6 flex items-center justify-center">
+<input class="w-6 h-6 rounded-full border-2 border-outline text-primary focus:ring-0 cursor-pointer" type="checkbox">
+</div>
+<div class="flex-1">
+<p class="font-task-item text-body-md text-on-surface">Review client feedback for Project Ethereal</p>
+<div class="flex items-center gap-3 mt-1">
+<span class="font-label-sm text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">calendar_today</span>
+                                Today
+                            </span>
+<span class="font-label-sm text-text-secondary-light flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">attach_file</span>
+                                2 Attachments
+                            </span>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity cursor-grab">drag_indicator</span>
+</div>
+<!-- Task Item 4 (Selected) -->
+<div class="group flex items-center gap-4 p-4 bg-surface-container-lowest rounded-xl border border-primary/20 shadow-sm task-selected transition-all">
+<div class="relative w-6 h-6 flex items-center justify-center">
+<input checked="" class="w-6 h-6 rounded-full border-2 border-primary text-primary focus:ring-0 cursor-pointer" type="checkbox">
+</div>
+<div class="flex-1">
+<p class="font-task-item text-body-md text-on-surface font-medium">Lunch with Sarah about the new partnership</p>
+<div class="flex items-center gap-3 mt-1">
+<span class="font-label-sm text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+                                12:30 PM
+                            </span>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity cursor-grab">drag_indicator</span>
+</div>
+<!-- Task Item 5 (Completed - Faded) -->
+<div class="group flex items-center gap-4 p-4 bg-surface-container-lowest rounded-xl border border-transparent opacity-50 grayscale-[0.2]">
+<div class="relative w-6 h-6 flex items-center justify-center">
+<div class="w-6 h-6 rounded-full bg-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-[18px]">check</span>
+</div>
+</div>
+<div class="flex-1">
+<p class="font-task-item text-body-md text-on-surface line-through">Prepare coffee and morning meditation</p>
+</div>
+</div>
+</div>
+<!-- Bento Layout for Stats/Visual Interest -->
+<div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="md:col-span-2 bg-primary-fixed p-6 rounded-2xl relative overflow-hidden">
+<div class="relative z-10">
+<h3 class="font-headline-md font-bold text-on-primary-fixed mb-2">Focus Mode</h3>
+<p class="font-body-md text-on-primary-fixed-variant mb-4">You have 4 priority tasks today. Ready to start your deep work session?</p>
+<button class="bg-primary text-white px-6 py-2 rounded-xl font-body-md font-semibold hover:bg-surface-tint transition-all">Start Timer</button>
+</div>
+<div class="absolute -right-12 -bottom-12 w-64 h-64 bg-primary/10 rounded-full blur-3xl"></div>
+<div class="absolute -right-4 top-1/2 -translate-y-1/2 opacity-20">
+<span class="material-symbols-outlined text-[120px] text-primary">timer</span>
+</div>
+</div>
+<div class="bg-white border border-border-subtle-light p-6 rounded-2xl flex flex-col justify-between">
+<div class="w-12 h-12 rounded-xl bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed">
+<span class="material-symbols-outlined">analytics</span>
+</div>
+<div>
+<h4 class="font-headline-md font-bold text-on-surface">85%</h4>
+<p class="font-label-sm text-text-secondary-light">Daily efficiency</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Add Task Floating Utility (Bottom) -->
+<div class="fixed bottom-8 left-sidebar-width right-0 flex justify-center pointer-events-none px-12">
+<div class="w-full max-w-4xl pointer-events-auto bg-white/95 border border-border-subtle-light shadow-2xl rounded-2xl p-2 flex items-center gap-2 transition-all duration-500 hover:scale-[1.01] backdrop-blur-md">
+<div class="p-2 text-primary">
+<span class="material-symbols-outlined text-[28px]">add</span>
+</div>
+<input class="flex-1 bg-transparent border-none focus:ring-0 text-body-lg font-task-item placeholder:text-outline/60" placeholder="Add a task to 'My Day'..." type="text">
+<div class="flex items-center gap-1 pr-2">
+<button class="p-2 text-on-surface-variant hover:bg-surface-variant rounded-lg transition-colors">
+<span class="material-symbols-outlined">calendar_month</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-variant rounded-lg transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-variant rounded-lg transition-colors">
+<span class="material-symbols-outlined">repeat</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<!-- Micro-interaction Scripts -->
+<script>
+        // Simple logic to demonstrate interactivity for the demo
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        const bulkBar = document.querySelector('.bulk-action-bar');
+        
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', () => {
+                const checkedCount = Array.from(checkboxes).filter(c => c.checked).length;
+                const headerText = bulkBar.querySelector('span.font-headline-md');
+                
+                if (checkedCount > 0) {
+                    headerText.textContent = `${checkedCount} item${checkedCount > 1 ? 's' : ''} selected`;
+                    checkbox.closest('.group').classList.add('task-selected', 'border-primary/20');
+                } else {
+                    // This is a fixed state demo, but normally would hide the bar
+                    headerText.textContent = `0 items selected`;
+                    checkbox.closest('.group').classList.remove('task-selected', 'border-primary/20');
+                }
+            });
+        });
+    </script>
+</body></html>

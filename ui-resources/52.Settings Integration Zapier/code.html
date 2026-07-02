@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FocusFlow | Zapier &amp; Make Integration</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Geist:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .glass-sidebar {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .ethereal-gradient {
+            background: radial-gradient(circle at top right, rgba(37, 99, 235, 0.05), transparent);
+        }
+        .mask-dots {
+            mask-image: linear-gradient(to right, black 40%, transparent 90%);
+            -webkit-mask-image: linear-gradient(to right, black 40%, transparent 90%);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary": "#4e5566",
+                        "tertiary-container": "#666d7f",
+                        "surface-container": "#edeeef",
+                        "inverse-surface": "#2e3132",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "outline-variant": "#c3c6d7",
+                        "background": "#f8f9fa",
+                        "on-error-container": "#93000a",
+                        "surface-container-highest": "#e1e3e4",
+                        "canvas-dark": "#09090B",
+                        "on-tertiary-fixed-variant": "#404758",
+                        "on-secondary-fixed": "#231b00",
+                        "text-secondary-dark": "#A1A1AA",
+                        "on-primary-container": "#eeefff",
+                        "on-tertiary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "surface-dark": "#18181B",
+                        "primary": "#004ac6",
+                        "on-surface-variant": "#434655",
+                        "on-background": "#191c1d",
+                        "error-container": "#ffdad6",
+                        "secondary-container": "#fed01b",
+                        "tertiary-fixed": "#dce2f7",
+                        "secondary": "#735c00",
+                        "on-secondary-fixed-variant": "#574500",
+                        "on-tertiary-container": "#ecf0ff",
+                        "on-primary-fixed": "#00174b",
+                        "primary-container": "#2563eb",
+                        "text-secondary-light": "#6B7280",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "surface-tint": "#0053db",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#f8f9fa",
+                        "surface-container-low": "#f3f4f5",
+                        "on-tertiary-fixed": "#141b2b",
+                        "border-subtle-light": "#F3F4F6",
+                        "inverse-on-surface": "#f0f1f2",
+                        "border-subtle-dark": "rgba(39, 39, 42, 0.5)",
+                        "surface-container-high": "#e7e8e9",
+                        "secondary-fixed": "#ffe083",
+                        "secondary-fixed-dim": "#eec200",
+                        "outline": "#737686",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-container": "#6f5900",
+                        "surface-dim": "#d9dadb",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed-dim": "#c0c6db",
+                        "on-surface": "#191c1d",
+                        "surface-elevated-dark": "#27272A",
+                        "surface-variant": "#e1e3e4",
+                        "surface": "#f8f9fa",
+                        "on-primary": "#ffffff",
+                        "inverse-primary": "#b4c5ff",
+                        "primary-fixed": "#dbe1ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-padding-mobile": "1rem",
+                        "stack-gap": "0.25rem",
+                        "gutter-md": "1rem",
+                        "detail-panel-width": "384px",
+                        "sidebar-width": "288px",
+                        "container-padding": "3rem"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Geist"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "display-xl-mobile": ["Geist"],
+                        "display-xl": ["Geist"],
+                        "label-sm": ["Geist"],
+                        "task-item": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "display-xl-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "display-xl": ["36px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "task-item": ["15px", {"lineHeight": "20px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-surface font-body-md text-on-surface antialiased overflow-hidden">
+<!-- WebGL Background Overlay -->
+
+<div class="flex h-screen w-full relative">
+<!-- COLUMN 1: SIDEBAR (Shared Component: SideNavBar) -->
+<aside class="w-[288px] h-screen fixed left-0 top-0 bg-surface/80 glass-sidebar flex flex-col py-6 px-4 z-50">
+<div class="mb-10 px-2 flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-primary-container flex items-center justify-center text-white">
+<span class="material-symbols-outlined !text-xl" style="font-variation-settings: 'FILL' 1;">blur_on</span>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary">FocusFlow</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant opacity-70">Ethereal Focus</p>
+</div>
+</div>
+<nav class="flex-1 flex flex-col gap-1">
+<a class="group flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant font-body-md hover:bg-surface-container-highest/50 transition-colors duration-300" href="#">
+<span class="material-symbols-outlined">light_mode</span>
+<span>My Day</span>
+</a>
+<a class="group flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant font-body-md hover:bg-surface-container-highest/50 transition-colors duration-300" href="#">
+<span class="material-symbols-outlined">star</span>
+<span>Important</span>
+</a>
+<a class="group flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant font-body-md hover:bg-surface-container-highest/50 transition-colors duration-300" href="#">
+<span class="material-symbols-outlined">calendar_month</span>
+<span>Planned</span>
+</a>
+<a class="group flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant font-body-md hover:bg-surface-container-highest/50 transition-colors duration-300" href="#">
+<span class="material-symbols-outlined">check_circle</span>
+<span>Tasks</span>
+</a>
+<div class="my-4 border-t border-outline-variant/30"></div>
+<!-- Settings Active -->
+<a class="group flex items-center gap-3 px-3 py-2 rounded-lg text-primary font-bold bg-surface-container-low border-l-4 border-primary transition-colors duration-300" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">settings</span>
+<span>Settings</span>
+</a>
+<!-- Sub-items Logic -->
+<div class="ml-9 flex flex-col gap-1 mt-1">
+<a class="px-3 py-1.5 rounded-md text-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">General</a>
+<a class="px-3 py-1.5 rounded-md text-label-sm text-primary font-bold bg-primary/5 transition-colors" href="#">Integrations</a>
+<a class="px-3 py-1.5 rounded-md text-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Security</a>
+</div>
+</nav>
+<button class="mt-auto mb-6 mx-2 py-3 bg-primary-container text-on-primary-container rounded-xl font-headline-md text-[14px] font-bold flex items-center justify-center gap-2 hover:brightness-110 transition-all shadow-sm">
+<span class="material-symbols-outlined !text-lg">add</span>
+<span>Add Task</span>
+</button>
+<div class="flex flex-col gap-2 px-2 border-t border-outline-variant/30 pt-4">
+<div class="flex items-center justify-between text-on-surface-variant opacity-60">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined !text-sm">sync</span>
+<span class="text-[11px] font-medium uppercase tracking-wider">Sync Status</span>
+</div>
+<span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+</div>
+</div>
+</aside>
+<!-- COLUMN 2: MAIN CONTENT AREA -->
+<main class="flex-1 ml-[288px] mr-[384px] p-12 overflow-y-auto ethereal-gradient h-screen">
+<!-- Header -->
+<header class="mb-10 animate-fade-in">
+<div class="flex items-center gap-4 mb-4">
+<div class="flex -space-x-3">
+<div class="w-12 h-12 rounded-xl bg-white shadow-sm border border-outline-variant/30 flex items-center justify-center z-10">
+<span class="material-symbols-outlined text-[#FF6600]" style="font-variation-settings: 'FILL' 1;">bolt</span>
+</div>
+<div class="w-12 h-12 rounded-xl bg-white shadow-sm border border-outline-variant/30 flex items-center justify-center">
+<span class="material-symbols-outlined text-[#4a90e2]" style="font-variation-settings: 'FILL' 1;">join_inner</span>
+</div>
+</div>
+</div>
+<h2 class="font-display-xl text-display-xl text-on-surface mb-2">Zapier &amp; Make Automation</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Connect FocusFlow with 5,000+ apps to automate your repetitive workflows.</p>
+</header>
+<section class="space-y-8">
+<!-- API Access Section -->
+<div class="bg-white rounded-2xl p-6 border border-outline-variant/30 shadow-sm transition-all hover:shadow-md">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">key</span>
+<h3 class="font-headline-md text-headline-md">API Access</h3>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-green-100 text-green-700 text-[11px] font-bold uppercase tracking-wider flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+                            Active
+                        </span>
+</div>
+<p class="text-on-surface-variant text-body-md mb-6">Use your API key to authenticate FocusFlow in external automation platforms.</p>
+<div class="flex items-center gap-3 bg-surface-container-low p-4 rounded-xl border border-outline-variant/20">
+<div class="flex-1 font-mono text-sm tracking-widest text-on-surface-variant overflow-hidden">
+<span class="mask-dots">ff_live_5829104x_j92k3ll009s88172vva888</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 hover:bg-surface-container-highest rounded-lg transition-colors text-on-surface-variant" title="Copy Key">
+<span class="material-symbols-outlined !text-lg">content_copy</span>
+</button>
+<button class="p-2 hover:bg-surface-container-highest rounded-lg transition-colors text-on-surface-variant" title="Regenerate">
+<span class="material-symbols-outlined !text-lg">refresh</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Webhooks Section -->
+<div class="space-y-4">
+<div class="flex items-center gap-3 px-2">
+<span class="material-symbols-outlined text-primary">webhook</span>
+<h3 class="font-headline-md text-headline-md">Live Webhooks</h3>
+</div>
+<div class="bg-white rounded-2xl overflow-hidden border border-outline-variant/30 divide-y divide-outline-variant/20">
+<div class="flex items-center justify-between p-5 hover:bg-surface-container-lowest transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-primary/5 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">add_task</span>
+</div>
+<div>
+<p class="font-medium text-on-surface">New Task Created</p>
+<p class="text-xs text-on-surface-variant">Triggers whenever a task is added to any list.</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<div class="flex items-center justify-between p-5 hover:bg-surface-container-lowest transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-primary/5 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">task_alt</span>
+</div>
+<div>
+<p class="font-medium text-on-surface">Task Completed</p>
+<p class="text-xs text-on-surface-variant">Triggers when a task is checked off as done.</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</div>
+<!-- Quick Start Templates (Bento Grid Style) -->
+<div class="space-y-4">
+<div class="flex items-center gap-3 px-2">
+<span class="material-symbols-outlined text-primary">grid_view</span>
+<h3 class="font-headline-md text-headline-md">Quick Start Templates</h3>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="group bg-white p-6 rounded-2xl border border-outline-variant/30 hover:border-primary/40 transition-all cursor-pointer shadow-sm hover:shadow-md">
+<div class="flex items-center justify-between mb-4">
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full bg-[#4A154B] flex items-center justify-center text-white ring-2 ring-white">
+<span class="text-[10px] font-bold">#</span>
+</div>
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center text-white ring-2 ring-white">
+<span class="material-symbols-outlined !text-sm">blur_on</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+<p class="font-medium text-on-surface mb-2">Add Slack saved messages to FocusFlow</p>
+<p class="text-xs text-on-surface-variant">Auto-sync your important Slack communications directly into your daily task list.</p>
+</div>
+<div class="group bg-white p-6 rounded-2xl border border-outline-variant/30 hover:border-primary/40 transition-all cursor-pointer shadow-sm hover:shadow-md">
+<div class="flex items-center justify-between mb-4">
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full bg-[#EA4335] flex items-center justify-center text-white ring-2 ring-white">
+<span class="material-symbols-outlined !text-xs">mail</span>
+</div>
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center text-white ring-2 ring-white">
+<span class="material-symbols-outlined !text-sm">blur_on</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+<p class="font-medium text-on-surface mb-2">Create FocusFlow tasks from new Gmail emails</p>
+<p class="text-xs text-on-surface-variant">Turn starred or labeled emails into actionable tasks without leaving your inbox.</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- COLUMN 3: DETAIL PANEL (Live Preview & Tips) -->
+<aside class="w-[384px] h-screen fixed right-0 top-0 bg-surface/80 glass-sidebar border-l border-outline-variant/20 p-8 z-40 overflow-y-auto">
+<div class="mb-8">
+<h4 class="text-label-sm font-bold uppercase tracking-widest text-on-surface-variant opacity-60 mb-6">Live Automation Preview</h4>
+<!-- Visual 'Zap' Preview -->
+<div class="relative bg-surface-container-low rounded-2xl p-6 border border-outline-variant/10 overflow-hidden min-h-[320px] flex flex-col items-center justify-center">
+<!-- Atmospheric background dots -->
+<div class="absolute inset-0 grid grid-cols-8 gap-4 p-4 opacity-10 pointer-events-none">
+<div class="w-1 h-1 rounded-full bg-primary"></div>
+<div class="w-1 h-1 rounded-full bg-primary"></div>
+<!-- ... repeated dots for texture ... -->
+</div>
+<div class="relative z-10 w-full" id="zap-animation-container">
+<div class="flex flex-col gap-4">
+<!-- Outbound app -->
+<div class="animate-bounce-slow flex flex-col items-center">
+<div class="w-12 h-12 rounded-xl bg-white shadow-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-2xl">mail</span>
+</div>
+<span class="text-[10px] mt-2 font-bold text-on-surface-variant">Gmail</span>
+</div>
+<!-- Connect line -->
+<div class="flex justify-center my-2 relative h-12">
+<div class="w-[1px] h-full bg-gradient-to-b from-primary/20 to-primary"></div>
+<div class="absolute top-1/2 -translate-y-1/2 bg-primary rounded-full p-1 animate-pulse shadow-[0_0_15px_rgba(37,99,235,0.5)]">
+<span class="material-symbols-outlined !text-xs text-white">bolt</span>
+</div>
+</div>
+<!-- Target FocusFlow Item -->
+<div class="opacity-0 translate-y-4 transition-all duration-700 w-full bg-white rounded-xl p-4 shadow-xl border border-primary/20 scale-105" id="preview-task">
+<div class="flex items-center gap-3">
+<div class="w-5 h-5 rounded-full border-2 border-primary/30"></div>
+<div class="flex-1">
+<p class="text-sm font-medium text-on-surface">Review client feedback</p>
+<div class="flex items-center gap-1.5 mt-1">
+<span class="px-1.5 py-0.5 rounded bg-primary/10 text-[9px] font-bold text-primary uppercase">via Zapier</span>
+<span class="text-[9px] text-on-surface-variant opacity-60">Just now</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="space-y-6">
+<div class="bg-primary/5 rounded-2xl p-6 border border-primary/10">
+<div class="flex items-center gap-3 mb-3">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">lightbulb</span>
+<h5 class="font-headline-md text-[16px]">Pro Tip</h5>
+</div>
+<p class="text-sm leading-relaxed text-on-surface-variant">
+                        Use <strong class="text-primary font-semibold">Make</strong> for complex multi-step workflows like syncing project deadlines with your CRM or generating automated weekly reports from completed tasks.
+                    </p>
+</div>
+<div class="bg-white rounded-2xl p-6 border border-outline-variant/30">
+<h5 class="text-label-sm font-bold uppercase tracking-widest text-on-surface-variant opacity-60 mb-4">Documentation</h5>
+<ul class="space-y-3">
+<li>
+<a class="flex items-center justify-between text-sm text-on-surface hover:text-primary transition-colors group" href="#">
+<span>Integration Guide</span>
+<span class="material-symbols-outlined !text-sm opacity-0 group-hover:opacity-100 transition-opacity">open_in_new</span>
+</a>
+</li>
+<li>
+<a class="flex items-center justify-between text-sm text-on-surface hover:text-primary transition-colors group" href="#">
+<span>Webhook Endpoints</span>
+<span class="material-symbols-outlined !text-sm opacity-0 group-hover:opacity-100 transition-opacity">open_in_new</span>
+</a>
+</li>
+</ul>
+</div>
+</div>
+</aside>
+</div>
+<script>
+        // Micro-interaction: Zapier Preview Animation Loop
+        const previewTask = document.getElementById('preview-task');
+        
+        function runPreviewAnimation() {
+            previewTask.style.opacity = '0';
+            previewTask.style.transform = 'translateY(1rem) scale(1)';
+            
+            setTimeout(() => {
+                previewTask.style.opacity = '1';
+                previewTask.style.transform = 'translateY(0) scale(1.05)';
+            }, 1000);
+
+            setTimeout(() => {
+                previewTask.style.opacity = '0';
+                previewTask.style.transform = 'translateY(-1rem) scale(1)';
+            }, 4500);
+        }
+
+        setInterval(runPreviewAnimation, 5000);
+        runPreviewAnimation();
+
+        // Style helper for active states
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                if(link.textContent.trim() === 'Settings') return; // Keep settings active for this demo
+                document.querySelectorAll('nav a').forEach(l => {
+                    l.classList.remove('text-primary', 'font-bold', 'bg-surface-container-low', 'border-l-4', 'border-primary');
+                    l.classList.add('text-on-surface-variant');
+                });
+            });
+        });
+    </script>
+<style>
+        @keyframes bounce-slow {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        .animate-bounce-slow {
+            animation: bounce-slow 3s ease-in-out infinite;
+        }
+        @keyframes fade-in {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fade-in 0.8s ease-out forwards;
+        }
+    </style>
+</body></html>

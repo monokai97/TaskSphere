@@ -1,0 +1,226 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang2058{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\f0\fs22\lang10 I18n\par
+The Admin Panel is translated in over 30 languages and counting. With I18n, editors can navigate the interface and read API error messages in their preferred language. This is similar to Localization, but instead of managing translations for the data itself, you are managing translations for your application's interface.\par
+\par
+By default, Payload comes preinstalled with English, but you can easily load other languages into your own application. Languages are automatically detected based on the request. If no language is detected, or if the user's language is not yet supported by your application, English will be chosen.\par
+\par
+To add I18n to your project, you first need to install the @payloadcms/translations package:\par
+\par
+pnpm install @payloadcms/translations\par
+Once installed, it can be configured using the i18n key in your Payload Config:\par
+\par
+import \{ buildConfig \} from 'payload'\par
+\par
+export default buildConfig(\{\par
+  // ...\par
+  i18n: \{\par
+    \par
+    // ...\par
+  \},\par
+\})\par
+Note: If there is a language that Payload does not yet support, we accept code contributions.\par
+\par
+Config Options\par
+You can easily customize and override any of the i18n settings that Payload provides by default. Payload will use your custom options and merge them in with its own.\par
+\par
+import \{ buildConfig \} from 'payload'\par
+\par
+export default buildConfig(\{\par
+  // ...\par
+  i18n: \{\par
+    fallbackLanguage: 'en', // default\par
+  \},\par
+\})\par
+The following options are available:\par
+\par
+Option\par
+\par
+Description\par
+\par
+fallbackLanguage\par
+\par
+The language to fall back to if the user's preferred language is not supported. Default is 'en'.\par
+\par
+translations\par
+\par
+An object containing the translations. The keys are the language codes and the values are the translations.\par
+\par
+supportedLanguages\par
+\par
+An object containing the supported languages. The keys are the language codes and the values are the translations.\par
+\par
+Adding Languages\par
+You can easily add new languages to your Payload app by providing the translations for the new language. Payload maintains a number of built-in translations that can be imported from @payloadcms/translations, but you can also provide your own Custom Translations to support any language.\par
+\par
+To add a new language, use the i18n.supportedLanguages key in your Payload Config:\par
+\par
+import \{ buildConfig \} from 'payload'\par
+import \{ en \} from '@payloadcms/translations/languages/en'\par
+import \{ de \} from '@payloadcms/translations/languages/de'\par
+\par
+export default buildConfig(\{\par
+  // ...\par
+  i18n: \{\par
+    supportedLanguages: \{ en, de \},\par
+  \},\par
+\})\par
+Tip: It's best to only support the languages that you need so that the bundled JavaScript is kept to a minimum for your project.\par
+\par
+Custom Translations\par
+You can customize Payload's built-in translations either by extending existing languages or by adding new languages entirely. This can be done by injecting new translation strings into existing languages, or by providing an entirely new language keys altogether.\par
+\par
+To add Custom Translations, use the i18n.translations key in your Payload Config:\par
+\par
+import \{ buildConfig \} from 'payload'\par
+\par
+export default buildConfig(\{\par
+  //...\par
+  i18n: \{\par
+    translations: \{\par
+      en: \{\par
+        custom: \{\par
+          // namespace can be anything you want\par
+          key1: 'Translation with \{\{variable\}\}', // translation\par
+        \},\par
+        // override existing translation keys\par
+        general: \{\par
+          dashboard: 'Home',\par
+        \},\par
+      \},\par
+    \},\par
+  \},\par
+  //...\par
+\})\par
+Project Translations\par
+While Payload's built-in features come fully translated, you may also want to translate parts of your own project. This is possible in places like Collections and Globals, such as on their labels and groups, field labels, descriptions or input placeholder text.\par
+\par
+To do this, provide the translations wherever applicable, keyed to the language code:\par
+\par
+import type \{ CollectionConfig \} from 'payload'\par
+\par
+export const Articles: CollectionConfig = \{\par
+  slug: 'articles',\par
+  labels: \{\par
+    singular: \{\par
+      en: 'Article',\par
+      es: 'Art\'edculo',\par
+    \},\par
+    plural: \{\par
+      en: 'Articles',\par
+      es: 'Art\'edculos',\par
+    \},\par
+  \},\par
+  admin: \{\par
+    group: \{\par
+      en: 'Content',\par
+      es: 'Contenido',\par
+    \},\par
+  \},\par
+  fields: [\par
+    \{\par
+      name: 'title',\par
+      type: 'text',\par
+      label: \{\par
+        en: 'Title',\par
+        es: 'T\'edtulo',\par
+      \},\par
+      admin: \{\par
+        placeholder: \{\par
+          en: 'Enter title',\par
+          es: 'Introduce el t\'edtulo',\par
+        \},\par
+      \},\par
+    \},\par
+  ],\par
+\}\par
+Changing Languages\par
+Users can change their preferred language in their account settings or by otherwise manipulating their User Preferences.\par
+\par
+Node.js\par
+Payload's backend sets the language on incoming requests before they are handled. This allows backend validation to return error messages in the user's own language or system generated emails to be sent using the correct translation. You can make HTTP requests with the accept-language header and Payload will use that language.\par
+\par
+Anywhere in your Payload app that you have access to the req object, you can access Payload's extensive internationalization features assigned to req.i18n. To access text translations you can use req.t('namespace:key').\par
+\par
+TypeScript\par
+In order to use Custom Translations in your project, you need to provide the types for the translations.\par
+\par
+Here we create a shareable translations object. We will import this in both our custom components and in our Payload config.\par
+\par
+In this example we show how to extend English, but you can do the same for any language you want.\par
+\par
+// <rootDir>/custom-translations.ts\par
+\par
+import \{ enTranslations \} from '@payloadcms/translations/languages/en'\par
+import type \{ NestedKeysStripped \} from '@payloadcms/translations'\par
+\par
+export const customTranslations = \{\par
+  en: \{\par
+    general: \{\par
+      myCustomKey: 'My custom english translation',\par
+    \},\par
+    fields: \{\par
+      addLabel: 'Add!',\par
+    \},\par
+  \},\par
+\}\par
+\par
+export type CustomTranslationsObject = typeof customTranslations.en &\par
+  typeof enTranslations\par
+export type CustomTranslationsKeys =\par
+  NestedKeysStripped<CustomTranslationsObject>\par
+Import the shared translations object into our Payload config so they are available for use:\par
+\par
+// <rootDir>/payload.config.ts\par
+\par
+import \{ buildConfig \} from 'payload'\par
+\par
+import \{ customTranslations \} from './custom-translations'\par
+\par
+export default buildConfig(\{\par
+  //...\par
+  i18n: \{\par
+    translations: customTranslations,\par
+  \},\par
+  //...\par
+\})\par
+Import the shared translation types to use in your Custom Component:\par
+\par
+// <rootDir>/components/MyComponent.tsx\par
+\par
+'use client'\par
+import type React from 'react'\par
+import \{ useTranslation \} from '@payloadcms/ui'\par
+\par
+import type \{\par
+  CustomTranslationsObject,\par
+  CustomTranslationsKeys,\par
+\} from '../custom-translations'\par
+\par
+export const MyComponent: React.FC = () => \{\par
+  const \{ i18n, t \} = useTranslation<\par
+    CustomTranslationsObject,\par
+    CustomTranslationsKeys\par
+  >() // These generics merge your custom translations with the default client translations\par
+\par
+  return t('general:myCustomKey')\par
+\}\par
+Additionally, Payload exposes the t function in various places, for example in labels. Here is how you would type those:\par
+\par
+// <rootDir>/fields/myField.ts\par
+\par
+import type \{ TFunction \} from '@payloadcms/translations'\par
+import type \{ Field \} from 'payload'\par
+\par
+import \{ CustomTranslationsKeys \} from '../custom-translations'\par
+\par
+const field: Field = \{\par
+  name: 'myField',\par
+  type: 'text',\par
+  label: (\{ t: defaultT \}) => \{\par
+    const t = defaultT as TFunction<CustomTranslationsKeys>\par
+    return t('fields:addLabel')\par
+  \},\par
+\}\par
+}
+ 

@@ -1,0 +1,333 @@
+<!DOCTYPE html><html class="light" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;family=Inter:wght@100..900&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-highest": "#e1e3e4",
+                        "on-error-container": "#93000a",
+                        "on-surface-variant": "#434655",
+                        "surface-elevated-dark": "#27272A",
+                        "on-surface": "#191c1d",
+                        "outline": "#737686",
+                        "secondary": "#735c00",
+                        "surface-dim": "#d9dadb",
+                        "tertiary-container": "#666d7f",
+                        "secondary-container": "#fed01b",
+                        "on-tertiary-container": "#ecf0ff",
+                        "on-secondary-container": "#6f5900",
+                        "primary-fixed": "#dbe1ff",
+                        "on-primary-container": "#eeefff",
+                        "inverse-on-surface": "#f0f1f2",
+                        "secondary-fixed": "#ffe083",
+                        "on-primary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "primary-container": "#2563eb",
+                        "border-subtle-dark": "rgba(39, 39, 42, 0.5)",
+                        "on-secondary": "#ffffff",
+                        "canvas-dark": "#09090B",
+                        "on-tertiary-fixed": "#141b2b",
+                        "text-secondary-dark": "#A1A1AA",
+                        "tertiary-fixed": "#dce2f7",
+                        "surface-dark": "#18181B",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "on-secondary-fixed-variant": "#574500",
+                        "error": "#ba1a1a",
+                        "secondary-fixed-dim": "#eec200",
+                        "on-secondary-fixed": "#231b00",
+                        "background": "#f8f9fa",
+                        "on-tertiary-fixed-variant": "#404758",
+                        "surface-tint": "#0053db",
+                        "surface-variant": "#e1e3e4",
+                        "surface-container-lowest": "#ffffff",
+                        "surface": "#f8f9fa",
+                        "surface-container": "#edeeef",
+                        "surface-container-low": "#f3f4f5",
+                        "on-error": "#ffffff",
+                        "tertiary": "#4e5566",
+                        "outline-variant": "#c3c6d7",
+                        "border-subtle-light": "#F3F4F6",
+                        "inverse-surface": "#2e3132",
+                        "text-secondary-light": "#6B7280",
+                        "on-background": "#191c1d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-padding-mobile": "1rem",
+                        "stack-gap": "0.25rem",
+                        "sidebar-width": "288px",
+                        "gutter-md": "1rem",
+                        "detail-panel-width": "384px",
+                        "container-padding": "3rem"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Geist"],
+                        "task-item": ["Inter"],
+                        "label-sm": ["Geist"],
+                        "display-xl": ["Geist"],
+                        "display-xl-mobile": ["Geist"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "task-item": ["15px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "display-xl": ["36px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "display-xl-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+            user-select: none;
+        }
+        .glass-effect {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #e1e3e4;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-primary-fixed selection:text-on-primary-fixed overflow-hidden">
+<!-- Background Context (Dashboard) -->
+<div class="fixed inset-0 flex flex-col lg:flex-row overflow-hidden blur-[2px] opacity-40 pointer-events-none">
+<!-- Sidebar Navigation -->
+<aside class="hidden lg:flex flex-col w-[288px] h-full py-8 bg-surface/80 backdrop-blur-md border-r border-outline-variant/30">
+<div class="px-8 mb-10">
+<h1 class="font-display-xl text-display-xl font-bold text-primary">FocusFlow</h1>
+</div>
+<nav class="flex-1 space-y-1">
+<div class="flex items-center gap-3 px-4 py-3 bg-primary-container/10 text-primary font-semibold border-l-4 border-primary">
+<span class="material-symbols-outlined" data-icon="light_mode">light_mode</span>
+<span class="font-body-md text-body-md">My Day</span>
+</div>
+<div class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200">
+<span class="material-symbols-outlined" data-icon="star">star</span>
+<span class="font-body-md text-body-md">Important</span>
+</div>
+<div class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200">
+<span class="material-symbols-outlined" data-icon="calendar_month">calendar_month</span>
+<span class="font-body-md text-body-md">Planned</span>
+</div>
+<div class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-body-md text-body-md">Tasks</span>
+</div>
+</nav>
+<div class="px-6 py-4 mt-auto">
+<button class="w-full flex items-center justify-center gap-2 py-3 bg-primary text-on-primary rounded-xl font-semibold">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+                    New List
+                </button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col overflow-y-auto bg-surface p-12">
+<header class="mb-10">
+<h2 class="font-display-xl text-display-xl text-on-surface mb-2">My Day</h2>
+<p class="text-on-surface-variant">Tuesday, October 24</p>
+</header>
+<div class="space-y-3">
+<div class="bg-surface-container-lowest p-4 rounded-xl shadow-sm border border-outline-variant/10 flex items-center gap-4">
+<div class="w-5 h-5 rounded-full border-2 border-outline"></div>
+<div class="flex-1 h-4 bg-surface-container-high rounded-full w-1/3"></div>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-xl shadow-sm border border-outline-variant/10 flex items-center gap-4">
+<div class="w-5 h-5 rounded-full border-2 border-outline"></div>
+<div class="flex-1 h-4 bg-surface-container-high rounded-full w-1/2"></div>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-xl shadow-sm border border-outline-variant/10 flex items-center gap-4">
+<div class="w-5 h-5 rounded-full border-2 border-outline"></div>
+<div class="flex-1 h-4 bg-surface-container-high rounded-full w-1/4"></div>
+</div>
+</div>
+</main>
+</div>
+<!-- Modal Overlay -->
+<div class="fixed inset-0 z-50 flex items-center justify-center p-4 glass-effect bg-surface/30" id="modal-overlay">
+<!-- Modal Container -->
+<div class="w-full max-w-md bg-surface-container-lowest rounded-xl shadow-2xl overflow-hidden border border-outline-variant/20 transform transition-all duration-300 scale-100" id="new-list-modal">
+<!-- Modal Header -->
+<div class="px-8 pt-8 pb-6">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-headline-md text-headline-md text-on-surface">Nueva lista</h3>
+<button class="text-on-surface-variant hover:text-on-surface transition-colors" onclick="closeModal()">
+<span class="material-symbols-outlined" data-icon="close">close</span>
+</button>
+</div>
+<!-- Input Field -->
+<div class="relative mb-8">
+<input autofocus="" class="w-full text-display-xl-mobile font-display-xl-mobile text-on-surface bg-transparent border-0 border-b-2 border-outline-variant/30 focus:border-primary focus:ring-0 px-0 pb-2 placeholder-on-surface-variant/40" id="list-name-input" oninput="validateForm()" placeholder="Sin título" type="text">
+</div>
+<!-- Icon Selector -->
+<div class="mb-8">
+<label class="font-label-sm text-label-sm text-on-surface-variant mb-4 block uppercase tracking-wider">Elegir icono</label>
+<div class="grid grid-cols-6 gap-2">
+<button class="icon-option p-3 rounded-xl border border-outline-variant/10 hover:bg-surface-container transition-all flex items-center justify-center text-primary bg-primary-container/10 border-primary" data-icon="list">
+<span class="material-symbols-outlined" data-icon="list">list</span>
+</button>
+<button class="icon-option p-3 rounded-xl border border-outline-variant/10 hover:bg-surface-container transition-all flex items-center justify-center text-on-surface-variant" data-icon="shopping_cart">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+</button>
+<button class="icon-option p-3 rounded-xl border border-outline-variant/10 hover:bg-surface-container transition-all flex items-center justify-center text-on-surface-variant" data-icon="work">
+<span class="material-symbols-outlined" data-icon="work">work</span>
+</button>
+<button class="icon-option p-3 rounded-xl border border-outline-variant/10 hover:bg-surface-container transition-all flex items-center justify-center text-on-surface-variant" data-icon="fitness_center">
+<span class="material-symbols-outlined" data-icon="fitness_center">fitness_center</span>
+</button>
+<button class="icon-option p-3 rounded-xl border border-outline-variant/10 hover:bg-surface-container transition-all flex items-center justify-center text-on-surface-variant" data-icon="school">
+<span class="material-symbols-outlined" data-icon="school">school</span>
+</button>
+<button class="icon-option p-3 rounded-xl border border-outline-variant/10 hover:bg-surface-container transition-all flex items-center justify-center text-on-surface-variant" data-icon="home">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+</button>
+<button class="icon-option p-3 rounded-xl border border-outline-variant/10 hover:bg-surface-container transition-all flex items-center justify-center text-on-surface-variant" data-icon="favorite">
+<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+</button>
+<button class="icon-option p-3 rounded-xl border border-outline-variant/10 hover:bg-surface-container transition-all flex items-center justify-center text-on-surface-variant" data-icon="flight">
+<span class="material-symbols-outlined" data-icon="flight">flight</span>
+</button>
+<button class="icon-option p-3 rounded-xl border border-outline-variant/10 hover:bg-surface-container transition-all flex items-center justify-center text-on-surface-variant" data-icon="palette">
+<span class="material-symbols-outlined" data-icon="palette">palette</span>
+</button>
+<button class="icon-option p-3 rounded-xl border border-outline-variant/10 hover:bg-surface-container transition-all flex items-center justify-center text-on-surface-variant" data-icon="restaurant">
+<span class="material-symbols-outlined" data-icon="restaurant">restaurant</span>
+</button>
+<button class="icon-option p-3 rounded-xl border border-outline-variant/10 hover:bg-surface-container transition-all flex items-center justify-center text-on-surface-variant" data-icon="savings">
+<span class="material-symbols-outlined" data-icon="savings">savings</span>
+</button>
+<button class="icon-option p-3 rounded-xl border border-outline-variant/10 hover:bg-surface-container transition-all flex items-center justify-center text-on-surface-variant" data-icon="more_horiz">
+<span class="material-symbols-outlined" data-icon="more_horiz">more_horiz</span>
+</button>
+</div>
+</div>
+<!-- Theme Selection -->
+<div class="mb-8">
+<label class="font-label-sm text-label-sm text-on-surface-variant mb-4 block uppercase tracking-wider">Color de la lista</label>
+<div class="flex items-center gap-3">
+<button class="color-option w-8 h-8 rounded-full bg-primary ring-offset-4 ring-2 ring-primary transition-all scale-110" data-color="primary"></button>
+<button class="color-option w-8 h-8 rounded-full bg-secondary hover:scale-110 transition-all" data-color="secondary"></button>
+<button class="color-option w-8 h-8 rounded-full bg-tertiary-container hover:scale-110 transition-all" data-color="tertiary"></button>
+<button class="color-option w-8 h-8 rounded-full bg-on-primary-fixed-variant hover:scale-110 transition-all" data-color="blue-dark"></button>
+<button class="color-option w-8 h-8 rounded-full bg-on-secondary-fixed-variant hover:scale-110 transition-all" data-color="gold"></button>
+</div>
+</div>
+</div>
+<!-- Modal Actions -->
+<div class="px-8 py-6 bg-surface-container-low flex items-center justify-end gap-3">
+<button class="px-6 py-2.5 rounded-xl text-on-surface-variant font-semibold hover:bg-surface-container-highest transition-colors" onclick="closeModal()">
+                    Cancelar
+                </button>
+<button class="px-6 py-2.5 rounded-xl bg-primary text-on-primary font-semibold opacity-40 cursor-not-allowed transition-all active:scale-95" disabled="" id="create-btn">
+                    Crear lista
+                </button>
+</div>
+</div>
+</div>
+<!-- Bottom Nav (Mobile Only) -->
+<nav class="fixed bottom-0 left-0 w-full z-40 lg:hidden flex justify-around items-center h-16 px-4 bg-surface-container-lowest/90 backdrop-blur-lg border-t border-outline-variant/20 shadow-xl opacity-20 pointer-events-none">
+<div class="flex flex-col items-center justify-center text-primary bg-primary-container/20 rounded-xl px-4 py-1">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-sm-mobile text-label-sm-mobile">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="event_note">event_note</span>
+<span class="font-label-sm-mobile text-label-sm-mobile">Planned</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="grade">grade</span>
+<span class="font-label-sm-mobile text-label-sm-mobile">Starred</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-sm-mobile text-label-sm-mobile">Settings</span>
+</div>
+</nav>
+<script>
+        function closeModal() {
+            const modal = document.getElementById('new-list-modal');
+            const overlay = document.getElementById('modal-overlay');
+            modal.classList.remove('scale-100');
+            modal.classList.add('scale-95', 'opacity-0');
+            overlay.classList.add('opacity-0');
+            setTimeout(() => {
+                // In a real app, this would route back or close the component
+                console.log('Modal closed');
+            }, 300);
+        }
+
+        function validateForm() {
+            const input = document.getElementById('list-name-input');
+            const btn = document.getElementById('create-btn');
+            if (input.value.trim().length > 0) {
+                btn.disabled = false;
+                btn.classList.remove('opacity-40', 'cursor-not-allowed');
+                btn.classList.add('hover:bg-primary-container', 'shadow-lg');
+            } else {
+                btn.disabled = true;
+                btn.classList.add('opacity-40', 'cursor-not-allowed');
+                btn.classList.remove('hover:bg-primary-container', 'shadow-lg');
+            }
+        }
+
+        // Icon Selection Logic
+        document.querySelectorAll('.icon-option').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.icon-option').forEach(b => {
+                    b.classList.remove('text-primary', 'bg-primary-container/10', 'border-primary');
+                    b.classList.add('text-on-surface-variant');
+                });
+                btn.classList.add('text-primary', 'bg-primary-container/10', 'border-primary');
+                btn.classList.remove('text-on-surface-variant');
+            });
+        });
+
+        // Color Selection Logic
+        document.querySelectorAll('.color-option').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.color-option').forEach(b => {
+                    b.classList.remove('ring-offset-4', 'ring-2', 'ring-primary', 'scale-110');
+                });
+                btn.classList.add('ring-offset-4', 'ring-2', 'ring-primary', 'scale-110');
+                
+                // Update active button color theme if needed
+                const createBtn = document.getElementById('create-btn');
+                const selectedColor = btn.classList[btn.classList.length - 2]; // Extracting color
+                // We keep primary as the main action per system guidelines
+            });
+        });
+
+        // Close on Esc
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+    </script>
+</body></html>

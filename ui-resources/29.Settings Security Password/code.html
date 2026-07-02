@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Change Password - FocusFlow</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Geist:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "error": "#ba1a1a",
+                      "tertiary-fixed-dim": "#c0c6db",
+                      "on-secondary-fixed-variant": "#574500",
+                      "surface-elevated-dark": "#27272A",
+                      "tertiary": "#4e5566",
+                      "tertiary-container": "#666d7f",
+                      "border-subtle-light": "#F3F4F6",
+                      "secondary-container": "#fed01b",
+                      "text-secondary-light": "#6B7280",
+                      "on-background": "#191c1d",
+                      "outline": "#737686",
+                      "surface-container-highest": "#e1e3e4",
+                      "text-secondary-dark": "#A1A1AA",
+                      "primary-container": "#2563eb",
+                      "secondary": "#735c00",
+                      "surface-container-low": "#f3f4f5",
+                      "surface-bright": "#f8f9fa",
+                      "on-secondary": "#ffffff",
+                      "on-tertiary-fixed-variant": "#404758",
+                      "on-tertiary-fixed": "#141b2b",
+                      "border-subtle-dark": "rgba(39, 39, 42, 0.5)",
+                      "primary": "#004ac6",
+                      "surface-container-lowest": "#ffffff",
+                      "on-primary": "#ffffff",
+                      "surface": "#f8f9fa",
+                      "on-secondary-fixed": "#231b00",
+                      "error-container": "#ffdad6",
+                      "outline-variant": "#c3c6d7",
+                      "inverse-surface": "#2e3132",
+                      "inverse-on-surface": "#f0f1f2",
+                      "background": "#f8f9fa",
+                      "surface-tint": "#0053db",
+                      "secondary-fixed-dim": "#eec200",
+                      "surface-dim": "#d9dadb",
+                      "on-secondary-container": "#6f5900",
+                      "on-tertiary": "#ffffff",
+                      "on-error-container": "#93000a",
+                      "on-primary-fixed-variant": "#003ea8",
+                      "on-error": "#ffffff",
+                      "tertiary-fixed": "#dce2f7",
+                      "surface-container-high": "#e7e8e9",
+                      "on-tertiary-container": "#ecf0ff",
+                      "secondary-fixed": "#ffe083",
+                      "on-primary-fixed": "#00174b",
+                      "surface-variant": "#e1e3e4",
+                      "surface-dark": "#18181B",
+                      "surface-container": "#edeeef",
+                      "inverse-primary": "#b4c5ff",
+                      "canvas-dark": "#09090B",
+                      "on-primary-container": "#eeefff",
+                      "primary-fixed-dim": "#b4c5ff",
+                      "on-surface-variant": "#434655",
+                      "on-surface": "#191c1d",
+                      "primary-fixed": "#dbe1ff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "sidebar-width": "288px",
+                      "detail-panel-width": "384px",
+                      "stack-gap": "0.25rem",
+                      "gutter-md": "1rem",
+                      "container-padding-mobile": "1rem",
+                      "container-padding": "3rem"
+              },
+              "fontFamily": {
+                      "label-sm": ["Geist"],
+                      "display-xl-mobile": ["Geist"],
+                      "display-xl": ["Geist"],
+                      "body-md": ["Inter"],
+                      "headline-md": ["Geist"],
+                      "task-item": ["Inter"],
+                      "body-lg": ["Inter"]
+              },
+              "fontSize": {
+                      "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                      "display-xl-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                      "display-xl": ["36px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                      "task-item": ["15px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-effect {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        input:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
+            border-color: #2563eb;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-primary-container selection:text-on-primary-container overflow-hidden h-screen flex">
+<!-- Sidebar Navigation -->
+<aside class="w-sidebar-width h-screen sticky top-0 left-0 bg-surface/80 dark:bg-canvas-dark/80 backdrop-blur-md flex flex-col border-r border-border-subtle-light dark:border-border-subtle-dark z-50">
+<div class="p-8">
+<h1 class="text-headline-md font-headline-md text-primary dark:text-primary-container tracking-tight">FocusFlow</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant opacity-70">Productivity Workspace</p>
+</div>
+<nav class="flex-1 px-4 space-y-1">
+<div class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-text-secondary-dark hover:bg-surface-container-high dark:hover:bg-surface-elevated-dark transition-colors duration-200 cursor-pointer">
+<span class="material-symbols-outlined">sunny</span>
+<span class="font-label-sm text-label-sm">My Day</span>
+</div>
+<div class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-text-secondary-dark hover:bg-surface-container-high dark:hover:bg-surface-elevated-dark transition-colors duration-200 cursor-pointer">
+<span class="material-symbols-outlined">star</span>
+<span class="font-label-sm text-label-sm">Important</span>
+</div>
+<div class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-text-secondary-dark hover:bg-surface-container-high dark:hover:bg-surface-elevated-dark transition-colors duration-200 cursor-pointer">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="font-label-sm text-label-sm">Planned</span>
+</div>
+<div class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-text-secondary-dark hover:bg-surface-container-high dark:hover:bg-surface-elevated-dark transition-colors duration-200 cursor-pointer">
+<span class="material-symbols-outlined">check_circle</span>
+<span class="font-label-sm text-label-sm">Tasks</span>
+</div>
+</nav>
+<div class="px-4 py-6 border-t border-border-subtle-light space-y-1">
+<!-- Settings Active -->
+<div class="flex items-center gap-3 px-4 py-3 bg-primary-container/10 text-primary font-bold border-l-4 border-primary transition-all cursor-pointer">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-sm text-label-sm">Settings</span>
+</div>
+<div class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-text-secondary-dark hover:bg-surface-container-high dark:hover:bg-surface-elevated-dark transition-colors duration-200 cursor-pointer">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-sm text-label-sm">Help</span>
+</div>
+<div class="mt-6 flex items-center gap-3 px-4 py-2">
+<img class="w-8 h-8 rounded-full object-cover" data-alt="Close up professional portrait of a tech-savvy female user with minimal glasses, soft studio lighting against a clean neutral background, 8k resolution, minimalist style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCh9ktEz131wX2X5eUbJqvSDa29H91Xgx7oLCt3o_FrXY1O0Sb_wBwMSL8a4umB2xSXGtGiUbYdLtU66MTg_QjXVvXfFUy3Re3NS5MxEr9yCfZq0D73QO91C5XnGx7TwXCZ8x1GtzoAYpCiOBxaKimd5YoITyDbys8DlOgDOkLuESPRPzCfuOE-nGJW6SeTLXaX0-LSolh17jqrsb6_FfVAiPr7d50vs3OWBXjffdqKFQctnNSsPsfJ8N38yKRcg6ozmUSDAyGVl6R3"/>
+<div class="overflow-hidden">
+<p class="text-label-sm font-bold truncate">Alex Rivera</p>
+<p class="text-[10px] text-on-surface-variant truncate">alex.rivera@workspace.io</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Secondary Navigation (Settings Categories) -->
+<nav class="w-72 h-screen bg-surface-container-lowest flex flex-col border-r border-border-subtle-light glass-effect">
+<div class="px-8 py-10">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-6">Settings</h2>
+<div class="space-y-2">
+<a class="group flex items-center justify-between px-4 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors" href="#">
+<span class="text-label-sm font-label-sm">Profile Information</span>
+<span class="material-symbols-outlined text-sm opacity-0 group-hover:opacity-100 transition-opacity">chevron_right</span>
+</a>
+<!-- Active -->
+<a class="group flex items-center justify-between px-4 py-2 rounded-lg bg-primary/5 text-primary transition-colors" href="#">
+<span class="text-label-sm font-label-sm font-bold">Privacy &amp; Security</span>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</a>
+<a class="group flex items-center justify-between px-4 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors" href="#">
+<span class="text-label-sm font-label-sm">Appearance</span>
+<span class="material-symbols-outlined text-sm opacity-0 group-hover:opacity-100 transition-opacity">chevron_right</span>
+</a>
+<a class="group flex items-center justify-between px-4 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors" href="#">
+<span class="text-label-sm font-label-sm">Notifications</span>
+<span class="material-symbols-outlined text-sm opacity-0 group-hover:opacity-100 transition-opacity">chevron_right</span>
+</a>
+<a class="group flex items-center justify-between px-4 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors" href="#">
+<span class="text-label-sm font-label-sm">Language</span>
+<span class="material-symbols-outlined text-sm opacity-0 group-hover:opacity-100 transition-opacity">chevron_right</span>
+</a>
+</div>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 h-screen overflow-y-auto bg-background">
+<div class="max-w-4xl mx-auto p-12">
+<!-- Header Section -->
+<header class="mb-12">
+<nav class="flex items-center gap-2 text-label-sm text-on-surface-variant mb-4">
+<span>Settings</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+<span>Privacy &amp; Security</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+<span class="text-primary font-bold">Change Password</span>
+</nav>
+<h1 class="font-display-xl text-display-xl text-on-surface mb-2">Password &amp; Security</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Manage your password and keep your account secure.</p>
+</header>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+<!-- Form Section -->
+<div class="lg:col-span-7 space-y-8">
+<section class="space-y-6">
+<!-- Current Password -->
+<div class="space-y-2">
+<label class="text-label-sm font-label-sm text-on-surface-variant" for="current_password">Current Password</label>
+<div class="relative group">
+<input class="w-full h-12 px-4 bg-surface-container-lowest border border-outline-variant rounded-xl transition-all focus:shadow-sm" id="current_password" placeholder="Enter your current password" type="password"/>
+<button class="absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-primary transition-colors" onclick="togglePassword('current_password')" type="button">
+<span class="material-symbols-outlined" id="icon_current_password">visibility</span>
+</button>
+</div>
+</div>
+<!-- New Password -->
+<div class="space-y-2">
+<label class="text-label-sm font-label-sm text-on-surface-variant" for="new_password">New Password</label>
+<div class="relative group">
+<input class="w-full h-12 px-4 bg-surface-container-lowest border border-outline-variant rounded-xl transition-all focus:shadow-sm" id="new_password" onkeyup="checkStrength(this.value)" placeholder="At least 8 characters" type="password"/>
+<button class="absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-primary transition-colors" onclick="togglePassword('new_password')" type="button">
+<span class="material-symbols-outlined" id="icon_new_password">visibility</span>
+</button>
+</div>
+<!-- Strength Indicator -->
+<div class="flex gap-1 mt-3">
+<div class="h-1.5 flex-1 bg-surface-container-highest rounded-full transition-colors duration-500" id="strength_1"></div>
+<div class="h-1.5 flex-1 bg-surface-container-highest rounded-full transition-colors duration-500" id="strength_2"></div>
+<div class="h-1.5 flex-1 bg-surface-container-highest rounded-full transition-colors duration-500" id="strength_3"></div>
+<div class="h-1.5 flex-1 bg-surface-container-highest rounded-full transition-colors duration-500" id="strength_4"></div>
+</div>
+<p class="text-label-sm font-label-sm text-on-surface-variant mt-1" id="strength_text">Password strength: <span class="font-bold">Not set</span></p>
+</div>
+<!-- Confirm Password -->
+<div class="space-y-2">
+<label class="text-label-sm font-label-sm text-on-surface-variant" for="confirm_password">Confirm New Password</label>
+<input class="w-full h-12 px-4 bg-surface-container-lowest border border-outline-variant rounded-xl transition-all focus:shadow-sm" id="confirm_password" placeholder="Re-type your new password" type="password"/>
+</div>
+</section>
+<!-- Footer Actions -->
+<div class="flex items-center gap-4 pt-4">
+<button class="px-8 h-12 bg-primary text-on-primary rounded-xl font-label-sm text-label-sm hover:shadow-lg active:scale-95 transition-all">Save Changes</button>
+<button class="px-8 h-12 text-on-surface-variant font-label-sm text-label-sm hover:bg-surface-container-high rounded-xl transition-all">Cancel</button>
+</div>
+</div>
+<!-- Info Sidebar -->
+<div class="lg:col-span-5 space-y-6">
+<!-- Requirements -->
+<div class="p-6 bg-surface-container-low border border-border-subtle-light rounded-2xl">
+<h3 class="text-label-sm font-bold text-on-surface mb-4">Password Requirements</h3>
+<ul class="space-y-3">
+<li class="flex items-center gap-3 text-label-sm text-on-surface-variant" id="req_length">
+<span class="material-symbols-outlined text-[18px] text-outline-variant">check_circle</span>
+                                Minimum 8 characters
+                            </li>
+<li class="flex items-center gap-3 text-label-sm text-on-surface-variant" id="req_upper">
+<span class="material-symbols-outlined text-[18px] text-outline-variant">check_circle</span>
+                                One uppercase letter
+                            </li>
+<li class="flex items-center gap-3 text-label-sm text-on-surface-variant" id="req_number">
+<span class="material-symbols-outlined text-[18px] text-outline-variant">check_circle</span>
+                                One number (0-9)
+                            </li>
+<li class="flex items-center gap-3 text-label-sm text-on-surface-variant" id="req_special">
+<span class="material-symbols-outlined text-[18px] text-outline-variant">check_circle</span>
+                                One special character (!@#$)
+                            </li>
+</ul>
+</div>
+<!-- Security Tip -->
+<div class="p-6 bg-primary-container/5 border border-primary/10 rounded-2xl relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4 opacity-10">
+<span class="material-symbols-outlined text-4xl">shield</span>
+</div>
+<h3 class="text-label-sm font-bold text-primary mb-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">verified_user</span>
+                            Security Recommendation
+                        </h3>
+<p class="text-label-sm text-on-surface-variant leading-relaxed mb-4">
+                            Enhance your account's security further by enabling Two-Factor Authentication (2FA). We'll require a code from your phone whenever you sign in from a new device.
+                        </p>
+<a class="text-label-sm font-bold text-primary hover:underline inline-flex items-center gap-1 group-hover:gap-2 transition-all" href="#">
+                            Enable 2FA Now
+                            <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+<div class="p-6 bg-surface-variant/30 rounded-2xl border border-dashed border-outline-variant flex flex-col items-center text-center">
+<img class="w-24 h-24 mb-4 object-contain" data-alt="A minimalist 3D rendering of a chrome padlock floating in a cloud of soft, translucent blue glass fragments. The scene is bright and airy, representing digital safety and peace of mind. Light mode aesthetic, high-key lighting, professional design software style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjpgpIk5yhGsDdGzreWDgMxPVHWuxWTl8PDheO61v-KwbE9MHrZhJ9si_ucLaFFbTe-owrmxcPx2rvmBod_ou3-6M9R-sCDddH6PvKSW_bDfA6E3suLihKxykfxljNpP2a74nPBHWyqDTTRvdOrftDIdJy2T5uINv-4noWjuv0vC4GvsbyVct3WhpaCh_mntneW8fbyaqvoRdNGVfO7tUseMQFNFEr8E5ccIOaRUoLPxhWD0JNCEVhpB_CvJjTjHodT6GiZvF5H8cg"/>
+<p class="text-[11px] font-label-sm text-on-surface-variant max-w-[200px]">Your security is our priority. FocusFlow uses industry-standard encryption for all your data.</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Detail Panel (Optional, used as a subtle overlay for info) -->
+<div class="hidden md:block w-detail-panel-width h-screen bg-surface-container-lowest/80 backdrop-blur-xl border-l border-border-subtle-light transform translate-x-full transition-transform duration-300" id="info_panel">
+<!-- Content for details could go here -->
+</div>
+<script>
+        function togglePassword(id) {
+            const input = document.getElementById(id);
+            const icon = document.getElementById('icon_' + id);
+            if (input.type === "password") {
+                input.type = "text";
+                icon.innerText = "visibility_off";
+            } else {
+                input.type = "password";
+                icon.innerText = "visibility";
+            }
+        }
+
+        function checkStrength(password) {
+            let strength = 0;
+            const checks = {
+                length: password.length >= 8,
+                upper: /[A-Z]/.test(password),
+                number: /[0-9]/.test(password),
+                special: /[^A-Za-z0-9]/.test(password)
+            };
+
+            // Update UI requirements
+            Object.keys(checks).forEach(key => {
+                const el = document.getElementById('req_' + key);
+                const icon = el.querySelector('span');
+                if (checks[key]) {
+                    strength++;
+                    icon.style.fontVariationSettings = "'FILL' 1";
+                    icon.classList.remove('text-outline-variant');
+                    icon.classList.add('text-primary');
+                } else {
+                    icon.style.fontVariationSettings = "'FILL' 0";
+                    icon.classList.remove('text-primary');
+                    icon.classList.add('text-outline-variant');
+                }
+            });
+
+            // Update Strength Bar
+            const bars = ['strength_1', 'strength_2', 'strength_3', 'strength_4'];
+            const text = document.getElementById('strength_text');
+            
+            bars.forEach((bar, i) => {
+                const el = document.getElementById(bar);
+                el.classList.remove('bg-error', 'bg-secondary-container', 'bg-primary-container', 'bg-surface-container-highest');
+                if (i < strength) {
+                    if (strength === 1) el.classList.add('bg-error');
+                    else if (strength === 2) el.classList.add('bg-secondary-container');
+                    else if (strength >= 3) el.classList.add('bg-primary-container');
+                } else {
+                    el.classList.add('bg-surface-container-highest');
+                }
+            });
+
+            const labels = ['Not set', 'Weak', 'Fair', 'Good', 'Strong'];
+            text.innerHTML = `Password strength: <span class="font-bold">${labels[strength]}</span>`;
+            if (strength === 1) text.classList.add('text-error'); else text.classList.remove('text-error');
+        }
+
+        // Initialize state
+        document.addEventListener('DOMContentLoaded', () => {
+            // Subtle entrance animation
+            document.querySelector('main').style.opacity = '0';
+            setTimeout(() => {
+                document.querySelector('main').style.transition = 'opacity 0.6s ease';
+                document.querySelector('main').style.opacity = '1';
+            }, 100);
+        });
+    </script>
+</body></html>

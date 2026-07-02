@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Ethereal Focus - Repeat Settings</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Geist:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-on-surface": "#f0f1f2",
+                    "on-tertiary": "#ffffff",
+                    "on-background": "#191c1d",
+                    "on-primary-container": "#eeefff",
+                    "inverse-surface": "#2e3132",
+                    "border-subtle-dark": "rgba(39, 39, 42, 0.5)",
+                    "primary": "#004ac6",
+                    "outline-variant": "#c3c6d7",
+                    "surface-tint": "#0053db",
+                    "on-secondary-container": "#6f5900",
+                    "surface-container": "#edeeef",
+                    "error-container": "#ffdad6",
+                    "on-primary-fixed": "#00174b",
+                    "inverse-primary": "#b4c5ff",
+                    "surface-container-highest": "#e1e3e4",
+                    "tertiary": "#4e5566",
+                    "secondary-fixed": "#ffe083",
+                    "on-secondary-fixed": "#231b00",
+                    "tertiary-fixed-dim": "#c0c6db",
+                    "surface-bright": "#f8f9fa",
+                    "text-secondary-light": "#6B7280",
+                    "canvas-dark": "#09090B",
+                    "tertiary-fixed": "#dce2f7",
+                    "on-primary": "#ffffff",
+                    "on-surface": "#191c1d",
+                    "on-error-container": "#93000a",
+                    "tertiary-container": "#666d7f",
+                    "primary-container": "#2563eb",
+                    "border-subtle-light": "#F3F4F6",
+                    "secondary-container": "#fed01b",
+                    "on-surface-variant": "#434655",
+                    "on-secondary-fixed-variant": "#574500",
+                    "surface-container-lowest": "#ffffff",
+                    "on-surface": "#191c1d",
+                    "surface-dark": "#18181B",
+                    "surface-dim": "#d9dadb",
+                    "primary-fixed": "#dbe1ff",
+                    "surface-elevated-dark": "#27272A",
+                    "error": "#ba1a1a",
+                    "on-tertiary-fixed": "#141b2b",
+                    "outline": "#737686",
+                    "surface": "#f8f9fa",
+                    "on-tertiary-fixed-variant": "#404758",
+                    "background": "#f8f9fa",
+                    "on-secondary": "#ffffff",
+                    "surface-container-high": "#e7e8e9",
+                    "surface-variant": "#e1e3e4",
+                    "primary-fixed-dim": "#b4c5ff",
+                    "on-error": "#ffffff",
+                    "secondary": "#735c00",
+                    "secondary-fixed-dim": "#eec200",
+                    "surface-container-low": "#f3f4f5",
+                    "on-primary-fixed-variant": "#003ea8",
+                    "text-secondary-dark": "#A1A1AA"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter-md": "1rem",
+                    "container-padding": "3rem",
+                    "stack-gap": "0.25rem",
+                    "sidebar-width": "288px",
+                    "detail-panel-width": "384px",
+                    "container-padding-mobile": "1rem"
+            },
+            "fontFamily": {
+                    "label-sm": ["Geist"],
+                    "headline-md": ["Geist"],
+                    "task-item": ["Inter"],
+                    "display-xl-mobile": ["Geist"],
+                    "body-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "display-xl": ["Geist"]
+            },
+            "fontSize": {
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "task-item": ["15px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "display-xl-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "display-xl": ["36px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-hidden">
+<!-- Blurred Background: Detailed Create Task Modal (Mockup of SCREEN_17) -->
+<div class="fixed inset-0 flex items-center justify-center p-4 md:p-12 z-0 filter blur-sm grayscale-[0.2] opacity-60">
+<div class="w-full max-w-2xl bg-white rounded-xl shadow-2xl overflow-hidden border border-border-subtle-light h-[819px] flex flex-col">
+<div class="p-8 border-b border-border-subtle-light flex justify-between items-center">
+<div class="h-8 w-48 bg-surface-variant rounded-full animate-pulse"></div>
+<div class="h-6 w-6 bg-surface-variant rounded-full animate-pulse"></div>
+</div>
+<div class="p-8 flex-1 space-y-6">
+<div class="h-12 w-full bg-surface-variant rounded-lg animate-pulse"></div>
+<div class="h-32 w-full bg-surface-variant rounded-lg animate-pulse"></div>
+<div class="grid grid-cols-2 gap-4">
+<div class="h-12 bg-surface-variant rounded-lg animate-pulse"></div>
+<div class="h-12 bg-surface-variant rounded-lg animate-pulse"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Overlay Dimmer -->
+<div class="fixed inset-0 bg-on-background/10 backdrop-blur-[2px] z-10 transition-opacity duration-300"></div>
+<!-- Repeat Sub-Modal (The Main Task) -->
+<div class="fixed inset-0 flex items-center justify-center z-50 p-4">
+<div class="glass-panel w-full max-w-[320px] rounded-xl shadow-2xl border border-white/50 overflow-hidden transform scale-100 transition-all duration-300">
+<!-- Modal Header -->
+<div class="flex items-center justify-between px-5 py-4 border-b border-on-surface-variant/10">
+<h2 class="font-headline-md text-headline-md text-on-surface">Repeat</h2>
+<button class="p-1.5 rounded-full hover:bg-on-surface-variant/10 transition-colors text-on-surface-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<!-- Options List -->
+<div class="py-2 px-1">
+<button class="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-primary-container/5 hover:text-primary transition-all duration-200 group">
+<div class="w-8 h-8 rounded-full bg-surface-variant/50 flex items-center justify-center group-hover:bg-primary/10">
+<span class="material-symbols-outlined text-[18px]">calendar_today</span>
+</div>
+<span class="font-medium">Daily</span>
+</button>
+<button class="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-primary-container/5 hover:text-primary transition-all duration-200 group">
+<div class="w-8 h-8 rounded-full bg-surface-variant/50 flex items-center justify-center group-hover:bg-primary/10">
+<span class="material-symbols-outlined text-[18px]">work</span>
+</div>
+<span class="font-medium">Weekdays</span>
+</button>
+<button class="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-primary-container/5 hover:text-primary transition-all duration-200 group">
+<div class="w-8 h-8 rounded-full bg-surface-variant/50 flex items-center justify-center group-hover:bg-primary/10">
+<span class="material-symbols-outlined text-[18px]">event_repeat</span>
+</div>
+<span class="font-medium">Weekly</span>
+</button>
+<button class="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-primary-container/5 hover:text-primary transition-all duration-200 group">
+<div class="w-8 h-8 rounded-full bg-surface-variant/50 flex items-center justify-center group-hover:bg-primary/10">
+<span class="material-symbols-outlined text-[18px]">calendar_month</span>
+</div>
+<span class="font-medium">Monthly</span>
+</button>
+<button class="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-primary-container/5 hover:text-primary transition-all duration-200 group">
+<div class="w-8 h-8 rounded-full bg-surface-variant/50 flex items-center justify-center group-hover:bg-primary/10">
+<span class="material-symbols-outlined text-[18px]">history</span>
+</div>
+<span class="font-medium">Yearly</span>
+</button>
+<!-- Divider -->
+<div class="mx-4 my-2 h-px bg-on-surface-variant/10"></div>
+<!-- Custom Option -->
+<button class="w-full flex items-center justify-between px-4 py-3 rounded-lg text-primary hover:bg-primary/5 transition-all duration-200 group">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">settings_suggest</span>
+</div>
+<span class="font-semibold">Custom...</span>
+</div>
+<span class="material-symbols-outlined text-[18px] text-primary/40 group-hover:translate-x-1 transition-transform">chevron_right</span>
+</button>
+</div>
+<!-- Subtle Footer Indicator -->
+<div class="px-5 py-3 bg-surface-container-low/50 flex items-center justify-center">
+<p class="text-label-sm font-label-sm text-on-surface-variant/60 uppercase tracking-widest">Recurrence Patterns</p>
+</div>
+</div>
+</div>
+<!-- Atmospheric Micro-interaction Script -->
+<script>
+        // Simple click effect for list items
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('mousedown', () => {
+                button.style.transform = 'scale(0.98)';
+            });
+            button.addEventListener('mouseup', () => {
+                button.style.transform = 'scale(1)';
+            });
+            button.addEventListener('mouseleave', () => {
+                button.style.transform = 'scale(1)';
+            });
+        });
+
+        // Close modal logic (visual only for this prototype)
+        document.querySelector('button .material-symbols-outlined:contains("close")')?.parentElement.addEventListener('click', () => {
+            const modal = document.querySelector('.glass-panel');
+            modal.style.opacity = '0';
+            modal.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                window.location.reload(); // Reset state
+            }, 300);
+        });
+    </script>
+</body></html>

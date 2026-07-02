@@ -1,0 +1,481 @@
+<!DOCTYPE html><html class="light" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Geist:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-fixed-variant": "#574500",
+                    "surface-variant": "#e1e3e4",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "surface-dark": "#18181B",
+                    "on-tertiary": "#ffffff",
+                    "on-tertiary-fixed": "#141b2b",
+                    "border-subtle-dark": "rgba(39, 39, 42, 0.5)",
+                    "inverse-on-surface": "#f0f1f2",
+                    "secondary-fixed": "#ffe083",
+                    "on-primary": "#ffffff",
+                    "secondary-container": "#fed01b",
+                    "inverse-surface": "#2e3132",
+                    "primary": "#004ac6",
+                    "primary-container": "#2563eb",
+                    "on-secondary-container": "#6f5900",
+                    "text-secondary-dark": "#A1A1AA",
+                    "surface-tint": "#0053db",
+                    "background": "#f8f9fa",
+                    "surface-container-low": "#f3f4f5",
+                    "on-tertiary-fixed-variant": "#404758",
+                    "surface-container-highest": "#e1e3e4",
+                    "inverse-primary": "#b4c5ff",
+                    "primary-fixed-dim": "#b4c5ff",
+                    "on-secondary-fixed": "#231b00",
+                    "on-background": "#191c1d",
+                    "error": "#ba1a1a",
+                    "secondary": "#735c00",
+                    "surface": "#f8f9fa",
+                    "surface-container-high": "#e7e8e9",
+                    "error-container": "#ffdad6",
+                    "on-primary-fixed": "#00174b",
+                    "on-primary-container": "#eeefff",
+                    "canvas-dark": "#09090B",
+                    "on-primary-fixed-variant": "#003ea8",
+                    "tertiary-container": "#666d7f",
+                    "border-subtle-light": "#F3F4F6",
+                    "surface-container": "#edeeef",
+                    "tertiary-fixed": "#dce2f7",
+                    "tertiary-fixed-dim": "#c0c6db",
+                    "surface-bright": "#f8f9fa",
+                    "primary-fixed": "#dbe1ff",
+                    "outline": "#737686",
+                    "secondary-fixed-dim": "#eec200",
+                    "on-surface-variant": "#434655",
+                    "tertiary": "#4e5566",
+                    "on-error": "#ffffff",
+                    "text-secondary-light": "#6B7280",
+                    "outline-variant": "#c3c6d7",
+                    "on-surface": "#191c1d",
+                    "on-tertiary-container": "#ecf0ff",
+                    "surface-elevated-dark": "#27272A",
+                    "on-error-container": "#93000a",
+                    "surface-dim": "#d9dadb"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-padding-mobile": "1rem",
+                    "container-padding": "3rem",
+                    "stack-gap": "0.25rem",
+                    "sidebar-width": "288px",
+                    "gutter-md": "1rem",
+                    "detail-panel-width": "384px"
+            },
+            "fontFamily": {
+                    "display-xl-mobile": ["Geist"],
+                    "display-xl": ["Geist"],
+                    "task-item": ["Inter"],
+                    "headline-md": ["Geist"],
+                    "label-sm": ["Geist"],
+                    "body-md": ["Inter"],
+                    "body-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "display-xl-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "display-xl": ["36px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "task-item": ["15px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .glass-panel {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .sidebar-active-tab {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md text-body-md overflow-hidden h-screen">
+<div class="flex h-full">
+<!-- Sidebar Navigation -->
+<aside class="hidden lg:flex flex-col w-[288px] h-full py-8 bg-surface/80 glass-panel border-r border-outline-variant/30 z-30">
+<div class="px-6 mb-8">
+<h1 class="font-display-xl text-display-xl font-bold text-primary">FocusFlow</h1>
+<div class="mt-6 flex items-center gap-3">
+<img alt="User profile avatar" class="w-10 h-10 rounded-full object-cover border border-outline-variant" data-alt="A professional headshot of Alex Rivera, a young man with a focused and serene expression, set against a soft-focus minimalist office background. The lighting is bright and airy, following a high-key light mode aesthetic. The composition is clean with a shallow depth of field, highlighting crisp details of his face while the background dissolves into soft, architectural blurs of white and light gray." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-mdkEm-HQRNAebqvBSzEcRriS88S7N-MAAPtgBQcKZNpYzwHq1G_IzApe9CG_EoECxeRia9EfNwx2Hd8EuoWFezjlms-oYPz9gUA-_GneCZ4ccIcfhfqLLf492vC1hruw5OB_nO0z53N9yE2X1FizyANtJ9o-vxYtvdt3bJGNuPe15Bks7jTdBzV_A2l2oULf1XngNytYZUbJANZdrHZBQMs2rbm8w5Y8ZAxrDyKKNRPsbueg1HMHODygaMxGwgBI4kxxXYusOss-">
+<div>
+<p class="font-headline-md text-headline-md text-on-surface">Alex Rivera</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Deep Work Mode</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 px-2 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="light_mode">light_mode</span>
+<span class="font-body-md text-body-md">My Day</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="star">star</span>
+<span class="font-body-md text-body-md">Important</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_month">calendar_month</span>
+<span class="font-body-md text-body-md">Planned</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-body-md text-body-md">Tasks</span>
+</a>
+</nav>
+<div class="px-6 mt-4">
+<button class="w-full py-3 px-4 bg-primary text-on-primary rounded-xl font-bold flex items-center justify-center gap-2 hover:opacity-90 transition-all">
+<span class="material-symbols-outlined">add</span>
+                    New List
+                </button>
+</div>
+<footer class="px-2 mt-8 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 bg-primary-container/10 text-primary font-semibold border-l-4 border-primary" href="#">
+<span class="material-symbols-outlined sidebar-active-tab" data-icon="settings">settings</span>
+<span class="font-body-md text-body-md">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="font-body-md text-body-md">Help</span>
+</a>
+</footer>
+</aside>
+<!-- Main Workspace -->
+<main class="flex-1 flex flex-col min-w-0 bg-background relative">
+<!-- Mobile Top Bar -->
+<header class="flex lg:hidden justify-between items-center w-full px-container-padding-mobile h-16 sticky top-0 bg-surface/60 glass-panel z-40">
+<span class="font-headline-md text-headline-md font-bold text-primary">FocusFlow</span>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary">search</span>
+<span class="material-symbols-outlined text-primary">notifications</span>
+<img alt="User avatar" class="w-8 h-8 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDaohPgAQot-PHD0nk_tyLzMiT4asbumEtoki6EGO7TWsuex8Tj5XAFKntRxxh8nOCqzGoCrucpq-M2DXRH79G_dXg9e7VATuPtuYsYGPg7lEzPwCKb4WD9dedcBVaKW-W64z9FkLMAFUUypf_-Y0bNdyTDzemFpwHc0ZxSkNZ4kPG-bfevSw_oN7msHT6zGe3jZDp2nN-2Fm6guktJMAmw44_GNmLP8yWqavKviLqOUuPNmf-D1nT3uewA3Vg8yOtHAVgE26XXw36Y">
+</div>
+</header>
+<div class="flex-1 flex h-full overflow-hidden">
+<!-- Settings Internal Sub-Nav -->
+<div class="w-64 border-r border-outline-variant/20 flex flex-col bg-surface-container-low hidden md:flex h-full">
+<div class="p-8 pb-4">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-6">Configuración</h2>
+</div>
+<nav class="px-4 space-y-1">
+<button class="w-full flex items-center gap-3 px-4 py-3 rounded-xl bg-primary text-on-primary shadow-sm transition-all text-left" id="nav-cuenta" onclick="setActiveCategory('cuenta')">
+<span class="material-symbols-outlined">person</span>
+<span class="font-body-md text-body-md">Cuenta</span>
+</button>
+<button class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container transition-all text-left" id="nav-apariencia" onclick="setActiveCategory('apariencia')">
+<span class="material-symbols-outlined">palette</span>
+<span class="font-body-md text-body-md">Apariencia</span>
+</button>
+<button class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container transition-all text-left" id="nav-notificaciones" onclick="setActiveCategory('notificaciones')">
+<span class="material-symbols-outlined">notifications</span>
+<span class="font-body-md text-body-md">Notificaciones</span>
+</button>
+<button class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container transition-all text-left" id="nav-sincronizacion" onclick="setActiveCategory('sincronizacion')">
+<span class="material-symbols-outlined">sync</span>
+<span class="font-body-md text-body-md">Sincronización</span>
+</button>
+</nav>
+</div>
+<!-- Settings Content Panel -->
+<div class="flex-1 overflow-y-auto p-12 lg:p-16 max-w-4xl mx-auto w-full">
+<!-- Section: Cuenta -->
+<section class="settings-section space-y-12" id="section-cuenta">
+<div>
+<h3 class="font-display-xl text-display-xl mb-2 text-on-surface">Cuenta</h3>
+<p class="text-on-surface-variant">Gestiona tu información personal y seguridad.</p>
+</div>
+<div class="space-y-8">
+<div class="flex items-center gap-6 p-6 bg-surface-container-lowest rounded-xl border border-outline-variant/30 shadow-sm">
+<div class="relative group">
+<img alt="Alex Rivera Profile" class="w-24 h-24 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAytQF5RCuJHc9HPXOa8aVNOa3nhbqVhwg69oGBjnERKyyZGDj9SnfZ4nSSoKkZrgEduWoYvUGjVZqVt1kzbeIyN0Eb5NNxe3Z2nA9mAOLWidqZQz7L-3PYIQa5dPq-JmASG7YytJfFXX_cumDWiDQHs_VCXrPsZIm2BXXy6W7wcTOHWNt1ew5Je0PjSFNxWSI76kDU4Yq02CeVIWnywl7Wbwd7iTP20idSuyGPUEB8pojRGgSpsHK9amvL7A_VDKN3m8IpvO1KH0Hf">
+<button class="absolute inset-0 bg-black/40 rounded-full opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
+<span class="material-symbols-outlined text-white">edit</span>
+</button>
+</div>
+<div>
+<h4 class="font-headline-md text-headline-md text-on-surface">Alex Rivera</h4>
+<p class="text-on-surface-variant">alex.rivera@focusflow.com</p>
+<button class="mt-3 text-primary font-semibold text-label-sm uppercase tracking-wider hover:underline">Cambiar foto</button>
+</div>
+</div>
+<div class="grid grid-cols-1 gap-6">
+<div class="space-y-2">
+<label class="font-label-sm text-label-sm text-on-surface-variant block">NOMBRE COMPLETO</label>
+<input class="w-full px-4 py-3 bg-white border border-outline-variant/30 rounded-xl focus:ring-2 focus:ring-primary focus:outline-none text-on-surface" type="text" value="Alex Rivera">
+</div>
+<div class="space-y-2">
+<label class="font-label-sm text-label-sm text-on-surface-variant block">CORREO ELECTRÓNICO</label>
+<input class="w-full px-4 py-3 bg-white border border-outline-variant/30 rounded-xl focus:ring-2 focus:ring-primary focus:outline-none text-on-surface" type="email" value="alex.rivera@focusflow.com">
+</div>
+</div>
+<div class="pt-6 border-t border-outline-variant/20">
+<button class="flex items-center gap-2 px-6 py-3 border border-primary text-primary font-semibold rounded-xl hover:bg-primary/5 transition-colors">
+<span class="material-symbols-outlined">lock</span>
+                                    Cambiar contraseña
+                                </button>
+</div>
+</div>
+</section>
+<!-- Section: Apariencia (Hidden initially by JS or CSS) -->
+<section class="settings-section space-y-12 hidden" id="section-apariencia">
+<div>
+<h3 class="font-display-xl text-display-xl mb-2 text-on-surface">Apariencia</h3>
+<p class="text-on-surface-variant">Personaliza la interfaz para que se adapte a tu ritmo de trabajo.</p>
+</div>
+<div class="space-y-10">
+<div>
+<label class="font-label-sm text-label-sm text-on-surface-variant block mb-4 uppercase tracking-wider">TEMA DEL SISTEMA</label>
+<div class="grid grid-cols-3 gap-4">
+<button class="p-4 rounded-xl border-2 border-primary bg-white shadow-sm text-center space-y-2">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">light_mode</span>
+<p class="text-body-md font-semibold">Claro</p>
+</button>
+<button class="p-4 rounded-xl border border-outline-variant/30 bg-surface-dark text-white text-center space-y-2 hover:border-outline-variant">
+<span class="material-symbols-outlined">dark_mode</span>
+<p class="text-body-md font-semibold">Oscuro</p>
+</button>
+<button class="p-4 rounded-xl border border-outline-variant/30 bg-gradient-to-br from-white to-surface-dark text-center space-y-2 hover:border-outline-variant">
+<span class="material-symbols-outlined">auto_mode</span>
+<p class="text-body-md font-semibold">Auto</p>
+</button>
+</div>
+</div>
+<div>
+<label class="font-label-sm text-label-sm text-on-surface-variant block mb-4 uppercase tracking-wider">COLOR DE ACENTO</label>
+<div class="flex gap-4">
+<button class="w-8 h-8 rounded-full bg-[#2563eb] border-2 border-white ring-2 ring-primary"></button>
+<button class="w-8 h-8 rounded-full bg-emerald-500 hover:scale-110 transition-transform"></button>
+<button class="w-8 h-8 rounded-full bg-purple-500 hover:scale-110 transition-transform"></button>
+<button class="w-8 h-8 rounded-full bg-rose-500 hover:scale-110 transition-transform"></button>
+<button class="w-8 h-8 rounded-full bg-amber-500 hover:scale-110 transition-transform"></button>
+</div>
+</div>
+<div>
+<label class="font-label-sm text-label-sm text-on-surface-variant block mb-4 uppercase tracking-wider">DENSIDAD DEL DISEÑO</label>
+<div class="space-y-3">
+<label class="flex items-center gap-3 p-4 bg-white border border-outline-variant/30 rounded-xl cursor-pointer hover:bg-surface-container-low transition-colors">
+<input checked="" class="w-4 h-4 text-primary focus:ring-primary" name="density" type="radio">
+<div class="flex-1">
+<p class="font-semibold">Espacioso</p>
+<p class="text-on-surface-variant text-label-sm">Ideal para concentración profunda y calma visual.</p>
+</div>
+</label>
+<label class="flex items-center gap-3 p-4 bg-white border border-outline-variant/30 rounded-xl cursor-pointer hover:bg-surface-container-low transition-colors">
+<input class="w-4 h-4 text-primary focus:ring-primary" name="density" type="radio">
+<div class="flex-1">
+<p class="font-semibold">Compacto</p>
+<p class="text-on-surface-variant text-label-sm">Más información en pantalla, menos scroll.</p>
+</div>
+</label>
+</div>
+</div>
+</div>
+</section>
+<!-- Section: Notificaciones (Hidden) -->
+<section class="settings-section space-y-12 hidden" id="section-notificaciones">
+<div>
+<h3 class="font-display-xl text-display-xl mb-2 text-on-surface">Notificaciones</h3>
+<p class="text-on-surface-variant">Controla cómo y cuándo quieres recibir actualizaciones.</p>
+</div>
+<div class="space-y-6">
+<div class="flex items-center justify-between p-6 bg-surface-container-lowest rounded-xl border border-outline-variant/30 shadow-sm">
+<div class="flex items-center gap-4">
+<div class="p-3 bg-primary/10 rounded-lg">
+<span class="material-symbols-outlined text-primary">desktop_windows</span>
+</div>
+<div>
+<p class="font-semibold">Alertas de escritorio</p>
+<p class="text-on-surface-variant text-label-sm">Notificaciones nativas para recordatorios de tareas.</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox">
+<div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<div class="flex items-center justify-between p-6 bg-surface-container-lowest rounded-xl border border-outline-variant/30 shadow-sm">
+<div class="flex items-center gap-4">
+<div class="p-3 bg-primary/10 rounded-lg">
+<span class="material-symbols-outlined text-primary">mail</span>
+</div>
+<div>
+<p class="font-semibold">Resumen por email</p>
+<p class="text-on-surface-variant text-label-sm">Recibe un resumen diario de tus tareas pendientes.</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox">
+<div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<div class="flex items-center justify-between p-6 bg-surface-container-lowest rounded-xl border border-outline-variant/30 shadow-sm">
+<div class="flex items-center gap-4">
+<div class="p-3 bg-primary/10 rounded-lg">
+<span class="material-symbols-outlined text-primary">volume_up</span>
+</div>
+<div>
+<p class="font-semibold">Efectos de sonido</p>
+<p class="text-on-surface-variant text-label-sm">Reproducir sonidos al completar una tarea.</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox">
+<div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</section>
+<!-- Section: Sincronización (Hidden) -->
+<section class="settings-section space-y-12 hidden" id="section-sincronizacion">
+<div>
+<h3 class="font-display-xl text-display-xl mb-2 text-on-surface">Sincronización</h3>
+<p class="text-on-surface-variant">Mantén tus datos seguros y accesibles en todos tus dispositivos.</p>
+</div>
+<div class="space-y-6">
+<div class="p-8 bg-surface-container-lowest rounded-xl border border-outline-variant/30 shadow-sm text-center">
+<div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4">
+<span class="material-symbols-outlined text-4xl">cloud_done</span>
+</div>
+<h4 class="font-headline-md text-headline-md mb-2">Todo sincronizado</h4>
+<p class="text-on-surface-variant mb-6">La última sincronización fue hace 2 minutos.</p>
+<button class="px-6 py-2 bg-primary text-on-primary rounded-xl font-bold hover:opacity-90">Sincronizar ahora</button>
+</div>
+<div class="space-y-4">
+<h5 class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">CUENTAS CONECTADAS</h5>
+<div class="flex items-center justify-between p-4 border border-outline-variant/20 rounded-xl">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-white shadow-sm rounded-lg flex items-center justify-center border border-outline-variant/10">
+<img alt="Google icon" class="w-5 h-5" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7-2waTEmAj-KgLhRD6lxs75WvvvR778-bdkRHfnotVQpt40iz2hjwcZkiJp3Kyjh9zfAWwQkJ3Aw6xTBQTldBbqZUKud0UDIYzOR2wniVCYsnY9rZ3i4elJCTpz5tQdGFjyo3U_PnCdVO-7Oid4vCxBMjTZASNC8k30YGItiWkq9Tb9Z6A9adfakIPnqxWizgaWS2tM6oTpwnbbJ478yqVK3rXyEn-XgMR4kxe6P-FFioSSfVQkf_urAtO3g5E8PLLUvz_yFvJjem">
+</div>
+<div>
+<p class="font-semibold">Google Calendar</p>
+<p class="text-on-surface-variant text-label-sm">Conectado como alex.rivera@gmail.com</p>
+</div>
+</div>
+<button class="text-error font-semibold hover:underline">Desconectar</button>
+</div>
+<div class="flex items-center justify-between p-4 border border-dashed border-outline-variant/50 rounded-xl hover:bg-surface-container-low cursor-pointer transition-colors">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-surface-container rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant">add</span>
+</div>
+<p class="font-semibold text-on-surface-variant">Conectar Microsoft Outlook</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Detail Panel (Contextual help/info) -->
+<aside class="hidden xl:flex flex-col w-[384px] h-full p-8 border-l border-outline-variant/20 bg-surface/40 glass-panel overflow-y-auto">
+<div class="p-6 bg-white/60 rounded-xl border border-outline-variant/20 mb-8">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-primary">info</span>
+<h4 class="font-headline-md text-headline-md">Soporte FocusFlow</h4>
+</div>
+<p class="text-on-surface-variant mb-4">¿Necesitas ayuda con la configuración? Nuestro equipo está disponible para ayudarte a optimizar tu flujo de trabajo.</p>
+<a class="text-primary font-bold flex items-center gap-2 hover:translate-x-1 transition-transform" href="#">
+                            Visitar Centro de Ayuda
+                            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<div class="space-y-6">
+<h5 class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">ESTADÍSTICAS DE USO</h5>
+<div class="space-y-4">
+<div class="flex justify-between items-center">
+<span class="text-on-surface-variant">Almacenamiento en la nube</span>
+<span class="font-semibold">1.2 GB / 5 GB</span>
+</div>
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full" style="width: 24%"></div>
+</div>
+<p class="text-label-sm text-on-surface-variant">Tu plan Pro permite hasta 10GB de almacenamiento.</p>
+</div>
+<div class="pt-6 border-t border-outline-variant/20">
+<h5 class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-4">SEGURIDAD</h5>
+<div class="flex items-start gap-3 p-4 bg-emerald-50 rounded-lg">
+<span class="material-symbols-outlined text-emerald-600">verified_user</span>
+<div>
+<p class="font-semibold text-emerald-900">Protección Activa</p>
+<p class="text-emerald-700 text-label-sm">Tu cuenta está protegida con cifrado de extremo a extremo.</p>
+</div>
+</div>
+</div>
+</div>
+</aside>
+</div>
+<!-- Mobile Bottom Nav Bar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-16 px-4 bg-surface-container-lowest/90 glass-panel lg:hidden border-t border-outline-variant/20 rounded-t-xl shadow-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-sm-mobile text-label-sm-mobile">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">event_note</span>
+<span class="font-label-sm-mobile text-label-sm-mobile">Planned</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">grade</span>
+<span class="font-label-sm-mobile text-label-sm-mobile">Starred</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary bg-primary-container/20 rounded-xl px-4 py-1" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">settings</span>
+<span class="font-label-sm-mobile text-label-sm-mobile">Settings</span>
+</a>
+</nav>
+</main>
+</div>
+<script>
+        function setActiveCategory(category) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.settings-section');
+            sections.forEach(s => s.classList.add('hidden'));
+
+            // Show target section
+            const target = document.getElementById('section-' + category);
+            if (target) target.classList.remove('hidden');
+
+            // Update nav styles
+            const navButtons = document.querySelectorAll('[id^="nav-"]');
+            navButtons.forEach(btn => {
+                btn.classList.remove('bg-primary', 'text-on-primary', 'shadow-sm');
+                btn.classList.add('text-on-surface-variant', 'hover:bg-surface-container');
+            });
+
+            const activeBtn = document.getElementById('nav-' + category);
+            if (activeBtn) {
+                activeBtn.classList.remove('text-on-surface-variant', 'hover:bg-surface-container');
+                activeBtn.classList.add('bg-primary', 'text-on-primary', 'shadow-sm');
+            }
+        }
+
+        // Initialize state
+        window.onload = () => {
+            setActiveCategory('cuenta');
+        };
+    </script>
+</body></html>

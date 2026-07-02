@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FocusFlow - Configuración de Fecha</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Geist:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-on-surface": "#f0f1f2",
+                        "primary-container": "#2563eb",
+                        "on-secondary": "#ffffff",
+                        "inverse-primary": "#b4c5ff",
+                        "tertiary": "#4e5566",
+                        "background": "#f8f9fa",
+                        "on-tertiary-fixed": "#141b2b",
+                        "on-secondary-fixed": "#231b00",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "surface-container-high": "#e7e8e9",
+                        "on-secondary-container": "#6f5900",
+                        "surface-container-low": "#f3f4f5",
+                        "primary-fixed": "#dbe1ff",
+                        "surface-tint": "#0053db",
+                        "surface-dark": "#18181B",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed-variant": "#574500",
+                        "secondary-fixed": "#ffe083",
+                        "inverse-surface": "#2e3132",
+                        "surface-variant": "#e1e3e4",
+                        "on-tertiary-fixed-variant": "#404758",
+                        "text-secondary-dark": "#A1A1AA",
+                        "primary": "#004ac6",
+                        "on-primary-container": "#eeefff",
+                        "outline": "#737686",
+                        "tertiary-fixed": "#dce2f7",
+                        "surface-container": "#edeeef",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "secondary": "#735c00",
+                        "on-primary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "on-surface-variant": "#434655",
+                        "text-secondary-light": "#6B7280",
+                        "on-background": "#191c1d",
+                        "surface-dim": "#d9dadb",
+                        "tertiary-fixed-dim": "#c0c6db",
+                        "surface-bright": "#f8f9fa",
+                        "secondary-container": "#fed01b",
+                        "surface-container-highest": "#e1e3e4",
+                        "surface-elevated-dark": "#27272A",
+                        "secondary-fixed-dim": "#eec200",
+                        "error": "#ba1a1a",
+                        "outline-variant": "#c3c6d7",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-container": "#666d7f",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-container": "#ecf0ff",
+                        "border-subtle-dark": "rgba(39, 39, 42, 0.5)",
+                        "error-container": "#ffdad6",
+                        "on-surface": "#191c1d",
+                        "on-primary-fixed": "#00174b",
+                        "canvas-dark": "#09090B",
+                        "border-subtle-light": "#F3F4F6",
+                        "surface": "#f8f9fa"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "detail-panel-width": "384px",
+                        "container-padding-mobile": "1rem",
+                        "stack-gap": "0.25rem",
+                        "gutter-md": "1rem",
+                        "container-padding": "3rem",
+                        "sidebar-width": "288px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Geist"],
+                        "task-item": ["Inter"],
+                        "display-xl": ["Geist"],
+                        "label-sm": ["Geist"],
+                        "display-xl-mobile": ["Geist"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "task-item": ["15px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "display-xl": ["36px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "display-xl-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #f8f9fa;
+            color: #191c1d;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .sidebar-blur {
+            backdrop-filter: blur(12px);
+        }
+        input[type="radio"]:checked {
+            background-color: #2563eb;
+            border-color: #2563eb;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(8px);
+        }
+        .transition-soft {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    </style>
+</head>
+<body class="flex min-h-screen">
+<!-- 1. LEFT SIDEBAR (Main Navigation) -->
+<aside class="w-sidebar-width h-screen sticky top-0 left-0 bg-surface/80 backdrop-blur-md flex flex-col border-r border-border-subtle-light shrink-0">
+<div class="p-6">
+<h1 class="text-headline-md font-headline-md text-primary tracking-tight">FocusFlow</h1>
+<p class="font-label-sm text-label-sm text-text-secondary-light mt-1">Productivity Workspace</p>
+</div>
+<nav class="flex-1 px-3 space-y-1 mt-4">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">sunny</span>
+<span class="font-body-md text-body-md">My Day</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">star</span>
+<span class="font-body-md text-body-md">Important</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="font-body-md text-body-md">Planned</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">check_circle</span>
+<span class="font-body-md text-body-md">Tasks</span>
+</a>
+<div class="pt-4 mt-4 border-t border-border-subtle-light">
+<!-- ACTIVE: Settings -->
+<a class="flex items-center gap-3 px-4 py-3 bg-primary-container/10 text-primary font-bold border-l-4 border-primary rounded-r-lg transition-all" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">settings</span>
+<span class="font-body-md text-body-md">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-body-md text-body-md">Help</span>
+</a>
+</div>
+</nav>
+<div class="p-6 mt-auto">
+<div class="flex items-center gap-3 p-2 rounded-xl bg-surface-container-low border border-border-subtle-light">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="A professional headshot of a focused creative professional, soft studio lighting with a neutral gray background, modern minimalist style, high resolution and clean aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLWY8Kgnmb5mD2egutEn7NpY0YQaDJhAt2qXxiVElQUmirqa1LVDE6mP82CIjcs7jBAUKDGrmQKkzOuwA9QMdlJtChH4quJagTcwRnbsKqtQXIHfZetyk7pE85Bv6zVKDKTFMHH9SjrmJDjHZWTbVWjg2_xO7A3G5BUKCiX0dESKtc2vR0NzdskfColzl1SXgTaNGgph4yrHh_vYGDcdueWF-Z6NgXAa2mOYRjyalvuib5QrKFBi4c9TPk51h0ZlNb2OD23qPQhrRH"/>
+<div class="overflow-hidden">
+<p class="font-headline-md text-sm truncate">Alex Rivera</p>
+<p class="font-label-sm text-xs text-text-secondary-light truncate">Premium Member</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- 2. CENTER COLUMN (Sub-navigation) -->
+<nav class="w-80 h-screen sticky top-0 bg-surface-container-lowest border-r border-border-subtle-light flex flex-col shrink-0">
+<div class="p-8 pb-4">
+<h2 class="font-headline-md text-headline-md mb-6">Language &amp; Region</h2>
+</div>
+<div class="px-4 space-y-1">
+<a class="flex items-center justify-between px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-soft rounded-lg group" href="#">
+<span class="font-body-md text-body-md">Language</span>
+<span class="material-symbols-outlined opacity-0 group-hover:opacity-100 text-sm transition-opacity">chevron_right</span>
+</a>
+<!-- ACTIVE: Date Format -->
+<a class="flex items-center justify-between px-4 py-3 bg-surface-container-high text-primary font-semibold rounded-lg" href="#">
+<span class="font-body-md text-body-md">Date Format</span>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</a>
+<a class="flex items-center justify-between px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-soft rounded-lg group" href="#">
+<span class="font-body-md text-body-md">Time Zone</span>
+<span class="material-symbols-outlined opacity-0 group-hover:opacity-100 text-sm transition-opacity">chevron_right</span>
+</a>
+</div>
+</nav>
+<!-- 3. MAIN CONTENT (Workspace) -->
+<main class="flex-1 flex overflow-hidden">
+<div class="flex-1 overflow-y-auto p-container-padding bg-background">
+<header class="mb-10 max-w-2xl">
+<nav class="flex items-center gap-2 text-label-sm font-label-sm text-text-secondary-light mb-4">
+<span>Settings</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span>Language &amp; Region</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-primary">Date Format</span>
+</nav>
+<h1 class="font-display-xl text-display-xl mb-3">Formato de Fecha</h1>
+<p class="font-body-lg text-body-lg text-text-secondary-light">
+                    Personaliza cómo se muestran las fechas en tus tareas, calendarios y recordatorios para adaptarlos a tu flujo de trabajo local.
+                </p>
+</header>
+<section class="max-w-2xl space-y-8">
+<!-- Date Format Options -->
+<div class="space-y-4">
+<h3 class="font-headline-md text-sm uppercase tracking-widest text-text-secondary-light">Opciones de Formato</h3>
+<div class="grid gap-3">
+<!-- DD/MM/YYYY -->
+<label class="flex items-center justify-between p-4 bg-surface-container-lowest border border-border-subtle-light rounded-xl hover:border-primary/30 cursor-pointer transition-soft group">
+<div class="flex flex-col">
+<span class="font-body-md font-semibold">DD/MM/YYYY</span>
+<span class="font-label-sm text-text-secondary-light">Ejemplo: 25/10/2023</span>
+</div>
+<input checked="" class="w-5 h-5 text-primary border-outline focus:ring-primary" name="date-format" type="radio" value="ddmmyyyy"/>
+</label>
+<!-- MM/DD/YYYY -->
+<label class="flex items-center justify-between p-4 bg-surface-container-lowest border border-border-subtle-light rounded-xl hover:border-primary/30 cursor-pointer transition-soft group">
+<div class="flex flex-col">
+<span class="font-body-md font-semibold">MM/DD/YYYY</span>
+<span class="font-label-sm text-text-secondary-light">Ejemplo: 10/25/2023</span>
+</div>
+<input class="w-5 h-5 text-primary border-outline focus:ring-primary" name="date-format" type="radio" value="mmddyyyy"/>
+</label>
+<!-- YYYY-MM-DD -->
+<label class="flex items-center justify-between p-4 bg-surface-container-lowest border border-border-subtle-light rounded-xl hover:border-primary/30 cursor-pointer transition-soft group">
+<div class="flex flex-col">
+<span class="font-body-md font-semibold">YYYY-MM-DD</span>
+<span class="font-label-sm text-text-secondary-light">Ejemplo: 2023-10-25 (ISO 8601)</span>
+</div>
+<input class="w-5 h-5 text-primary border-outline focus:ring-primary" name="date-format" type="radio" value="yyyymmdd"/>
+</label>
+<!-- Long Format -->
+<label class="flex items-center justify-between p-4 bg-surface-container-lowest border border-border-subtle-light rounded-xl hover:border-primary/30 cursor-pointer transition-soft group">
+<div class="flex flex-col">
+<span class="font-body-md font-semibold">Long Format</span>
+<span class="font-label-sm text-text-secondary-light">Ejemplo: miércoles, 25 de octubre de 2023</span>
+</div>
+<input class="w-5 h-5 text-primary border-outline focus:ring-primary" name="date-format" type="radio" value="long"/>
+</label>
+</div>
+</div>
+<!-- First Day of the Week -->
+<div class="pt-8 border-t border-border-subtle-light space-y-4">
+<h3 class="font-headline-md text-sm uppercase tracking-widest text-text-secondary-light">Primer día de la semana</h3>
+<div class="relative max-w-xs">
+<select class="block w-full pl-4 pr-10 py-3 text-base border-border-subtle-light focus:outline-none focus:ring-primary focus:border-primary sm:text-sm rounded-xl appearance-none bg-surface-container-lowest">
+<option selected="">Lunes</option>
+<option>Domingo</option>
+<option>Sábado</option>
+</select>
+<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-text-secondary-light">
+<span class="material-symbols-outlined">expand_more</span>
+</div>
+</div>
+<p class="font-label-sm text-text-secondary-light">Esto afectará cómo se renderiza la vista de calendario semanal.</p>
+</div>
+<div class="pt-10 flex gap-4">
+<button class="px-8 py-3 bg-primary text-on-primary rounded-xl font-semibold shadow-lg shadow-primary/20 hover:scale-[1.02] transition-transform active:scale-95">
+                        Guardar cambios
+                    </button>
+<button class="px-8 py-3 bg-surface-container-high text-on-surface-variant rounded-xl font-semibold hover:bg-surface-dim transition-colors">
+                        Cancelar
+                    </button>
+</div>
+</section>
+</div>
+<!-- 4. DETAIL PANEL (Live Preview) -->
+<aside class="w-detail-panel-width h-screen sticky top-0 bg-surface/80 backdrop-blur-md border-l border-border-subtle-light p-8 flex flex-col gap-8 shrink-0">
+<div>
+<h3 class="font-headline-md text-xs uppercase tracking-widest text-text-secondary-light mb-6">Vista Previa</h3>
+<div class="space-y-6">
+<!-- Task Card Preview -->
+<div class="bg-surface-container-lowest p-5 rounded-2xl border border-border-subtle-light shadow-sm">
+<div class="flex items-start gap-4 mb-3">
+<div class="mt-1 w-5 h-5 rounded-full border-2 border-primary/40 flex items-center justify-center"></div>
+<div class="flex-1">
+<h4 class="font-body-md font-semibold text-on-surface">Finalizar reporte trimestral</h4>
+<div class="flex items-center gap-1.5 mt-2 text-primary">
+<span class="material-symbols-outlined text-[18px]">event</span>
+<span class="font-label-sm" id="preview-date">Vence el 25/10/2023</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-2 pt-3 border-t border-border-subtle-light">
+<span class="px-2 py-0.5 bg-tertiary-fixed text-on-tertiary-fixed text-[10px] rounded uppercase font-bold tracking-tight">Finanzas</span>
+<span class="px-2 py-0.5 bg-surface-container-high text-text-secondary-light text-[10px] rounded uppercase font-bold tracking-tight">Q4</span>
+</div>
+</div>
+<!-- Small Calendar Preview -->
+<div class="bg-surface-container-lowest p-5 rounded-2xl border border-border-subtle-light shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<span class="font-body-md font-bold">Octubre 2023</span>
+<div class="flex gap-2">
+<span class="material-symbols-outlined text-sm text-text-secondary-light cursor-pointer">chevron_left</span>
+<span class="material-symbols-outlined text-sm text-text-secondary-light cursor-pointer">chevron_right</span>
+</div>
+</div>
+<div class="grid grid-cols-7 gap-1 text-center">
+<div class="text-[10px] font-bold text-text-secondary-light">L</div>
+<div class="text-[10px] font-bold text-text-secondary-light">M</div>
+<div class="text-[10px] font-bold text-text-secondary-light">M</div>
+<div class="text-[10px] font-bold text-text-secondary-light">J</div>
+<div class="text-[10px] font-bold text-text-secondary-light">V</div>
+<div class="text-[10px] font-bold text-text-secondary-light">S</div>
+<div class="text-[10px] font-bold text-text-secondary-light">D</div>
+<!-- Simple Row Mockup -->
+<div class="text-xs p-1 text-text-secondary-light">23</div>
+<div class="text-xs p-1 text-text-secondary-light">24</div>
+<div class="text-xs p-1 bg-primary text-on-primary rounded-full">25</div>
+<div class="text-xs p-1">26</div>
+<div class="text-xs p-1">27</div>
+<div class="text-xs p-1">28</div>
+<div class="text-xs p-1">29</div>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-auto bg-primary-container/5 rounded-2xl p-6 border border-primary/10">
+<div class="flex items-center gap-3 mb-3">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">info</span>
+<span class="font-body-md font-bold text-primary">Consejo Zen</span>
+</div>
+<p class="font-label-sm text-on-surface-variant leading-relaxed">
+                    Elegir un formato de fecha consistente reduce la carga cognitiva al escanear tu lista de tareas. El formato ISO (YYYY-MM-DD) es excelente para la organización técnica.
+                </p>
+</div>
+</aside>
+</main>
+<script>
+        // Micro-interaction for live preview update
+        const formatRadios = document.querySelectorAll('input[name="date-format"]');
+        const previewDate = document.getElementById('preview-date');
+
+        const samples = {
+            'ddmmyyyy': 'Vence el 25/10/2023',
+            'mmddyyyy': 'Vence el 10/25/2023',
+            'yyyymmdd': 'Vence el 2023-10-25',
+            'long': 'Vence el miércoles, 25 de oct. de 2023'
+        };
+
+        formatRadios.forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                const val = e.target.value;
+                previewDate.style.opacity = 0;
+                setTimeout(() => {
+                    previewDate.innerText = samples[val];
+                    previewDate.style.opacity = 1;
+                }, 150);
+            });
+        });
+
+        // Simple opacity transition for preview
+        previewDate.style.transition = 'opacity 0.2s ease-in-out';
+    </script>
+</body></html>

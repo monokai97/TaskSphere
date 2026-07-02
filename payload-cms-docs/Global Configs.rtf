@@ -1,0 +1,291 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang2058{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\f0\fs22\lang10 Global Configs\par
+Globals are in many ways similar to Collections, except that they correspond to only a single Document. You can define as many Globals as your application needs. Each Global Document is stored in the Database based on the Fields that you define, and automatically generates a Local API, REST API, and GraphQL API used to manage your Documents.\par
+\par
+Globals are the primary way to structure singletons in Payload, such as a header navigation, site-wide banner alerts, or app-wide localized strings. Each Global can have its own unique Access Control, Hooks, Admin Options, and more.\par
+\par
+To define a Global Config, use the globals property in your Payload Config:\par
+\par
+import \{ buildConfig \} from 'payload'\par
+\par
+export default buildConfig(\{\par
+  // ...\par
+  globals: [\par
+    \par
+    // Your Globals go here\par
+  ],\par
+\})\par
+Tip: If you have more than one Global that share the same structure, consider using a Collection instead.\par
+\par
+Config Options\par
+It's often best practice to write your Globals in separate files and then import them into the main Payload Config.\par
+\par
+Here is what a simple Global Config might look like:\par
+\par
+import type \{ GlobalConfig \} from 'payload'\par
+\par
+export const Nav: GlobalConfig = \{\par
+  slug: 'nav',\par
+  fields: [\par
+    \{\par
+      name: 'items',\par
+      type: 'array',\par
+      required: true,\par
+      maxRows: 8,\par
+      fields: [\par
+        \{\par
+          name: 'page',\par
+          type: 'relationship',\par
+          relationTo: 'pages', // "pages" is the slug of an existing collection\par
+          required: true,\par
+        \},\par
+      ],\par
+    \},\par
+  ],\par
+\}\par
+Reminder: For more complex examples, see the Templates and Examples directories in the Payload repository.\par
+\par
+The following options are available:\par
+\par
+Option\par
+\par
+Description\par
+\par
+access\par
+\par
+Provide Access Control functions to define exactly who should be able to do what with this Global. More details.\par
+\par
+admin\par
+\par
+The configuration options for the Admin Panel. More details.\par
+\par
+custom\par
+\par
+Extension point for adding custom data (e.g. for plugins)\par
+\par
+dbName\par
+\par
+Custom table or collection name for this Global depending on the Database Adapter. Auto-generated from slug if not defined.\par
+\par
+description\par
+\par
+Text or React component to display below the Global header to give editors more information.\par
+\par
+endpoints\par
+\par
+Add custom routes to the REST API. More details.\par
+\par
+fields *\par
+\par
+Array of field types that will determine the structure and functionality of the data stored within this Global. More details.\par
+\par
+graphQL\par
+\par
+Manage GraphQL-related properties related to this global. More details\par
+\par
+hooks\par
+\par
+Entry point for Hooks. More details.\par
+\par
+label\par
+\par
+Text for the name in the Admin Panel or an object with keys for each language. Auto-generated from slug if not defined.\par
+\par
+lockDocuments\par
+\par
+Enables or disables document locking. By default, document locking is enabled. Set to an object to configure, or set to false to disable locking. More details.\par
+\par
+slug *\par
+\par
+Unique, URL-friendly string that will act as an identifier for this Global.\par
+\par
+typescript\par
+\par
+An object with property interface as the text used in schema generation. Auto-generated from slug if not defined.\par
+\par
+versions\par
+\par
+Set to true to enable default options, or configure with object properties. More details.\par
+\par
+forceSelect\par
+\par
+Specify which fields should be selected always, regardless of the select query which can be useful that the field exists for access control / hooks. More details.\par
+\par
+* An asterisk denotes that a property is required.\par
+\par
+Fields\par
+Fields define the schema of the Global. To learn more, go to the Fields documentation.\par
+\par
+Access Control\par
+Global Access Control determines what a user can and cannot do with any given Global Document. To learn more, go to the Access Control documentation.\par
+\par
+Hooks\par
+Global Hooks allow you to tie into the lifecycle of your Documents so you can execute your own logic during specific events. To learn more, go to the Hooks documentation.\par
+\par
+Admin Options\par
+The behavior of Globals within the Admin Panel can be fully customized to fit the needs of your application. This includes grouping or hiding their navigation links, adding Custom Components, setting page metadata, and more.\par
+\par
+To configure Admin Options for Globals, use the admin property in your Global Config:\par
+\par
+import type \{ GlobalConfig \} from 'payload'\par
+\par
+export const MyGlobal: GlobalConfig = \{\par
+  // ...\par
+  admin: \{\par
+    \par
+    // ...\par
+  \},\par
+\}\par
+The following options are available:\par
+\par
+Option\par
+\par
+Description\par
+\par
+group\par
+\par
+Text or localization object used to group Collection and Global links in the admin navigation. Set to false to hide the link from the navigation while keeping its routes accessible.\par
+\par
+hidden\par
+\par
+Set to true or a function, called with the current user, returning true to exclude this Global from navigation and admin routing.\par
+\par
+components\par
+\par
+Swap in your own React components to be used within this Global. More details.\par
+\par
+preview\par
+\par
+Function to generate a preview URL within the Admin Panel for this Global that can point to your app. More details.\par
+\par
+livePreview\par
+\par
+Enable real-time editing for instant visual feedback of your front-end application. More details.\par
+\par
+hideAPIURL\par
+\par
+Hides the "API URL" meta field while editing documents within this collection.\par
+\par
+meta\par
+\par
+Page metadata overrides to apply to this Global within the Admin Panel. More details.\par
+\par
+Custom Components\par
+Globals can set their own Custom Components which only apply to Global-specific UI within the Admin Panel. This includes elements such as the Save Button, or entire layouts such as the Edit View.\par
+\par
+To override Global Components, use the admin.components property in your Global Config:\par
+\par
+import type \{ SanitizedGlobalConfig \} from 'payload'\par
+\par
+export const MyGlobal: SanitizedGlobalConfig = \{\par
+  // ...\par
+  admin: \{\par
+    components: \{\par
+      \par
+      // ...\par
+    \},\par
+  \},\par
+\}\par
+The following options are available:\par
+\par
+General\par
+Option\par
+\par
+Description\par
+\par
+elements\par
+\par
+Override or create new elements within the Edit View. More details.\par
+\par
+views\par
+\par
+Override or create new views within the Admin Panel. More details.\par
+\par
+Edit View Options\par
+Custom components within the Edit View are configured under admin.components.elements:\par
+\par
+import type \{ GlobalConfig \} from 'payload'\par
+\par
+export const MyGlobal: GlobalConfig = \{\par
+  // ...\par
+  admin: \{\par
+    components: \{\par
+      elements: \{\par
+        Status: '/path/to/CustomStatus',\par
+        SaveButton: '/path/to/CustomSaveButton',\par
+        PublishButton: '/path/to/CustomPublishButton',\par
+      \},\par
+    \},\par
+  \},\par
+\}\par
+The following elements can be customized within admin.components.elements:\par
+\par
+Option\par
+\par
+Description\par
+\par
+beforeDocumentControls\par
+\par
+Inject custom components before the Save button. More details.\par
+\par
+Description\par
+\par
+A component to render below the Global label in the Edit View. More details.\par
+\par
+SaveButton\par
+\par
+Replace the default Save Button with a Custom Component. Drafts must be disabled. More details.\par
+\par
+SaveDraftButton\par
+\par
+Replace the default Save Draft Button with a Custom Component. Drafts must be enabled and autosave must be disabled. More details.\par
+\par
+PublishButton\par
+\par
+Replace the default Publish Button with a Custom Component. Drafts must be enabled. More details.\par
+\par
+UnpublishButton\par
+\par
+Replace the default Unpublish Button with a Custom Component. Drafts must be enabled. More details.\par
+\par
+PreviewButton\par
+\par
+Replace the default Preview Button with a Custom Component. Preview must be enabled. More details.\par
+\par
+Status\par
+\par
+Replace the default Status component with a Custom Component. Drafts must be enabled. More details.\par
+\par
+Note: For details on how to build Custom Components, see Building Custom Components.\par
+\par
+GraphQL\par
+You can completely disable GraphQL for this global by passing graphQL: false to your global config. This will completely disable all queries, mutations, and types from appearing in your GraphQL schema.\par
+\par
+You can also pass an object to the global's graphQL property, which allows you to define the following properties:\par
+\par
+Option\par
+\par
+Description\par
+\par
+name\par
+\par
+Override the name that will be used in GraphQL schema generation.\par
+\par
+disableQueries\par
+\par
+Disable all GraphQL queries that correspond to this global by passing true.\par
+\par
+disableMutations\par
+\par
+Disable all GraphQL mutations that correspond to this global by passing true.\par
+\par
+TypeScript\par
+You can import types from Payload to help make writing your Global configs easier and type-safe. There are two main types that represent the Global Config, GlobalConfig and SanitizedGlobalConfig.\par
+\par
+The GlobalConfig type represents a raw Global Config in its full form, where only the bare minimum properties are marked as required. The SanitizedGlobalConfig type represents a Global Config after it has been fully sanitized. Generally, this is only used internally by Payload.\par
+\par
+import type \{ GlobalConfig, SanitizedGlobalConfig \} from 'payload'\par
+Next\par
+}
+ 

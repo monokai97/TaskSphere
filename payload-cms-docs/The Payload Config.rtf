@@ -1,0 +1,420 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang2058{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil Calibri;}}
+{\colortbl ;\red0\green0\blue255;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\f0\fs22\lang10 The Payload Config\par
+Payload is a config-based, code-first CMS and application framework. The Payload Config is central to everything that Payload does, allowing for deep configuration of your application through a simple and intuitive API. The Payload Config is a fully-typed JavaScript object that can be infinitely extended upon.\par
+\par
+Everything from your Database choice to the appearance of the Admin Panel is fully controlled through the Payload Config. From here you can define Fields, add Localization, enable Authentication, configure Access Control, and so much more.\par
+\par
+The Payload Config is a payload.config.ts file typically located in the root of your project:\par
+\par
+import \{ buildConfig \} from 'payload'\par
+\par
+export default buildConfig(\{\par
+  // Your config goes here\par
+\})\par
+The Payload Config is strongly typed and ties directly into Payload's TypeScript codebase. This means your IDE (such as VSCode) will provide helpful information like type-ahead suggestions while you write your config.\par
+\par
+Tip: The location of your Payload Config can be customized. More details.\par
+\par
+Config Options\par
+To author your Payload Config, first determine which Database you'd like to use, then use Collections or Globals to define the schema of your data through Fields.\par
+\par
+Here is one of the simplest possible Payload configs:\par
+\par
+import \{ buildConfig \} from 'payload'\par
+import \{ mongooseAdapter \} from '@payloadcms/db-mongodb'\par
+\par
+export default buildConfig(\{\par
+  secret: process.env.PAYLOAD_SECRET,\par
+  db: mongooseAdapter(\{\par
+    url: process.env.DATABASE_URL,\par
+  \}),\par
+  collections: [\par
+    \{\par
+      slug: 'pages',\par
+      fields: [\par
+        \{\par
+          name: 'title',\par
+          type: 'text',\par
+        \},\par
+      ],\par
+    \},\par
+  ],\par
+\})\par
+Note: For more complex examples, see the Templates and Examples directories in the Payload repository.\par
+\par
+The following options are available:\par
+\par
+Option\par
+\par
+Description\par
+\par
+admin\par
+\par
+The configuration options for the Admin Panel, including Custom Components, Live Preview, etc. More details.\par
+\par
+bin\par
+\par
+Register custom bin scripts for Payload to execute. More Details.\par
+\par
+editor\par
+\par
+The Rich Text Editor which will be used by richText fields. More details.\par
+\par
+db *\par
+\par
+The Database Adapter which will be used by Payload. More details.\par
+\par
+serverURL\par
+\par
+A string used to define the absolute URL of your app. This includes the protocol, for example {{\field{\*\fldinst{HYPERLINK https://example.com }}{\fldrslt{https://example.com\ul0\cf0}}}}\f0\fs22 . No paths allowed, only protocol, domain and (optionally) port.\par
+\par
+collections\par
+\par
+An array of Collections for Payload to manage. More details.\par
+\par
+compatibility\par
+\par
+Compatibility flags for earlier versions of Payload. More details.\par
+\par
+globals\par
+\par
+An array of Globals for Payload to manage. More details.\par
+\par
+cors\par
+\par
+Cross-origin resource sharing (CORS) is a mechanism that accept incoming requests from given domains. You can also customize the Access-Control-Allow-Headers header. More details.\par
+\par
+localization\par
+\par
+Opt-in to translate your content into multiple locales. More details.\par
+\par
+logger\par
+\par
+Logger options, logger options with a destination stream, or an instantiated logger instance. More details.\par
+\par
+loggingLevels\par
+\par
+An object to override the level to use in the logger for Payload's errors.\par
+\par
+graphQL\par
+\par
+Manage GraphQL-specific functionality, including custom queries and mutations, query complexity limits, etc. More details.\par
+\par
+cookiePrefix\par
+\par
+A string that will be prefixed to all cookies that Payload sets.\par
+\par
+csrf\par
+\par
+A whitelist array of URLs to allow Payload to accept cookies from. More details.\par
+\par
+defaultDepth\par
+\par
+If a user does not specify depth while requesting a resource, this depth will be used. More details.\par
+\par
+defaultMaxTextLength\par
+\par
+The maximum allowed string length to be permitted application-wide. Helps to prevent malicious public document creation.\par
+\par
+folders\par
+\par
+An optional object to configure global folder settings. More details.\par
+\par
+queryPresets\par
+\par
+An object that to configure Collection Query Presets. More details.\par
+\par
+maxDepth\par
+\par
+The maximum allowed depth to be permitted application-wide. This setting helps prevent against malicious queries. Defaults to 10. More details.\par
+\par
+indexSortableFields\par
+\par
+Automatically index all sortable top-level fields in the database to improve sort performance and add database compatibility for Azure Cosmos and similar.\par
+\par
+upload\par
+\par
+Base Payload upload configuration. More details.\par
+\par
+routes\par
+\par
+Control the routing structure that Payload binds itself to. More details.\par
+\par
+email\par
+\par
+Configure the Email Adapter for Payload to use. More details.\par
+\par
+onInit\par
+\par
+A function that is called immediately following startup that receives the Payload instance as its only argument.\par
+\par
+debug\par
+\par
+Enable to expose more detailed error information.\par
+\par
+telemetry\par
+\par
+Disable Payload telemetry by passing false. More details.\par
+\par
+hooks\par
+\par
+An array of Root Hooks. More details.\par
+\par
+plugins\par
+\par
+An array of Plugins. More details.\par
+\par
+endpoints\par
+\par
+An array of Custom Endpoints added to the Payload router. More details.\par
+\par
+custom\par
+\par
+Extension point for adding custom data (e.g. for plugins).\par
+\par
+i18n\par
+\par
+Internationalization configuration. Pass all i18n languages you'd like the admin UI to support. Defaults to English-only. More details.\par
+\par
+secret *\par
+\par
+A secure, unguessable string that Payload will use for any encryption workflows - for example, password salt / hashing.\par
+\par
+sharp\par
+\par
+If you would like Payload to offer cropping, focal point selection, and automatic media resizing, install and pass the Sharp module to the config here.\par
+\par
+typescript\par
+\par
+Configure TypeScript settings here. More details.\par
+\par
+* An asterisk denotes that a property is required.\par
+\par
+Note: Some properties are removed from the client-side bundle. More details.\par
+\par
+TypeScript Config\par
+Payload exposes a variety of TypeScript settings that you can leverage. These settings are used to auto-generate TypeScript interfaces for your Collections and Globals, and to ensure that Payload uses your Generated Types for all Local API methods.\par
+\par
+To customize the TypeScript settings, use the typescript property in your Payload Config:\par
+\par
+import \{ buildConfig \} from 'payload'\par
+\par
+export default buildConfig(\{\par
+  // ...\par
+  typescript: \{\par
+    // ...\par
+  \},\par
+\})\par
+The following options are available:\par
+\par
+Option\par
+\par
+Description\par
+\par
+autoGenerate\par
+\par
+By default, Payload will auto-generate TypeScript interfaces for all collections and globals that your config defines. Opt out by setting typescript.autoGenerate: false. More details.\par
+\par
+declare\par
+\par
+By default, Payload adds a declare block to your generated types, which makes sure that Payload uses your generated types for all Local API methods. Opt out by setting typescript.declare: false.\par
+\par
+outputFile\par
+\par
+Control the output path and filename of Payload's auto-generated types by defining the typescript.outputFile property to a full, absolute path.\par
+\par
+strictDraftTypes\par
+\par
+Enable strict type safety for draft mode. When enabled: (1) Query operations (find, findByID) with draft: true will type required fields as optional, since validation is skipped for drafts. (2) The draft property is forbidden for collections without drafts in create operations. (3) Create operations enforce proper data requirements via discriminated unions. Defaults to false. This will become the default behavior in v4.0.\par
+\par
+Config Location\par
+For Payload command-line scripts, we need to be able to locate your Payload Config. We'll check a variety of locations for the presence of payload.config.ts by default, including:\par
+\par
+The root current working directory\par
+The compilerOptions in your `tsconfig`*\par
+The dist directory*\par
+* Config location detection is different between development and production environments. See below for more details.\par
+\par
+Important: Ensure your tsconfig.json is properly configured for Payload to auto-detect your config location. If it does not exist, or does not specify the proper compilerOptions, Payload will default to the current working directory.\par
+\par
+Development Mode\par
+\par
+In development mode, if the configuration file is not found at the root, Payload will attempt to read your tsconfig.json, and attempt to find the config file specified in the rootDir:\par
+\par
+\{\par
+  // ...\par
+  "compilerOptions": \{\par
+    "rootDir": "src"\par
+  \}\par
+\}\par
+Production Mode\par
+\par
+In production mode, Payload will first attempt to find the config file in the outDir of your tsconfig.json, and if not found, will fallback to the rootDir directory:\par
+\par
+\{\par
+  // ...\par
+  "compilerOptions": \{\par
+    "outDir": "dist",\par
+    "rootDir": "src"\par
+  \}\par
+\}\par
+If none was in either location, Payload will finally check the dist directory.\par
+\par
+Customizing the Config Location\par
+In addition to the above automated detection, you can specify your own location for the Payload Config. This can be useful in situations where your config is not in a standard location, or you wish to switch between multiple configurations. To do this, Payload exposes an Environment Variable to bypass all automatic config detection.\par
+\par
+To use a custom config location, set the PAYLOAD_CONFIG_PATH environment variable:\par
+\par
+\{\par
+  "scripts": \{\par
+    "payload": "PAYLOAD_CONFIG_PATH=/path/to/custom-config.ts payload"\par
+  \}\par
+\}\par
+Tip: PAYLOAD_CONFIG_PATH can be either an absolute path, or path relative to your current working directory.\par
+\par
+Telemetry\par
+Payload collects completely anonymous telemetry data about general usage. This data is super important to us and helps us accurately understand how we're growing and what we can do to build the software into everything that it can possibly be. The telemetry that we collect also help us demonstrate our growth in an accurate manner, which helps us as we seek investment to build and scale our team. If we can accurately demonstrate our growth, we can more effectively continue to support Payload as free and open-source software. To opt out of telemetry, you can pass telemetry: false within your Payload Config.\par
+\par
+For more information about what we track, take a look at our privacy policy.\par
+\par
+Cross-origin resource sharing (CORS)\par
+Cross-origin resource sharing (CORS) can be configured with either a whitelist array of URLS to allow CORS requests from, a wildcard string (*) to accept incoming requests from any domain, or an object with the following properties:\par
+\par
+Option\par
+\par
+Description\par
+\par
+origins\par
+\par
+Either a whitelist array of URLS to allow CORS requests from, or a wildcard string ('*') to accept incoming requests from any domain.\par
+\par
+headers\par
+\par
+A list of allowed headers that will be appended in Access-Control-Allow-Headers.\par
+\par
+Here's an example showing how to allow incoming requests from any domain:\par
+\par
+import \{ buildConfig \} from 'payload'\par
+\par
+export default buildConfig(\{\par
+  // ...\par
+  cors: '*',\par
+\})\par
+Here's an example showing how to append a new header (x-custom-header) in Access-Control-Allow-Headers:\par
+\par
+import \{ buildConfig \} from 'payload'\par
+\par
+export default buildConfig(\{\par
+  // ...\par
+  cors: \{\par
+    origins: ['{{\field{\*\fldinst{HYPERLINK http://localhost:3000 }}{\fldrslt{http://localhost:3000\ul0\cf0}}}}\f0\fs22 '],\par
+    headers: ['x-custom-header'],\par
+  \},\par
+\})\par
+TypeScript\par
+You can import types from Payload to help make writing your config easier and type-safe. There are two main types that represent the Payload Config, Config and SanitizedConfig.\par
+\par
+The Config type represents a raw Payload Config in its full form. Only the bare minimum properties are marked as required. The SanitizedConfig type represents a Payload Config after it has been fully sanitized. Generally, this is only used internally by Payload.\par
+\par
+import type \{ Config, SanitizedConfig \} from 'payload'\par
+Server vs. Client\par
+The Payload Config only lives on the server and is not allowed to contain any client-side code. That way, you can load up the Payload Config in any server environment or standalone script, without having to use Bundlers or Node.js loaders to handle importing client-only modules (e.g. scss files or React Components) without any errors.\par
+\par
+Behind the curtains, the Next.js-based Admin Panel generates a ClientConfig, which strips away any server-only code and enriches the config with React Components.\par
+\par
+Compatibility flags\par
+The Payload Config can accept compatibility flags for running the newest versions but with older databases. You should only use these flags if you need to, and should confirm that you need to prior to enabling these flags.\par
+\par
+allowLocalizedWithinLocalized\par
+\par
+Payload localization works on a field-by-field basis. As you can nest fields within other fields, you could potentially nest a localized field within a localized field\f1\emdash but this would be redundant and unnecessary. There would be no reason to define a localized field within a localized parent field, given that the entire data structure from the parent field onward would be localized.\par
+\par
+By default, Payload will remove the localized: true property from sub-fields if a parent field is localized. Set this compatibility flag to true only if you have an existing Payload MongoDB database from pre-3.0, and you have nested localized fields that you would like to maintain without migrating.\par
+\par
+Logger\par
+Payload uses Pino as its logger. By default, Payload logs pretty-printed output to stdout. You can customise this through the logger option in your config.\par
+\par
+The logger option accepts one of three forms:\par
+\par
+1. Logger options with an optional destination stream\par
+Pass a \{ options, destination? \} object to configure the logger. options accepts standard Pino logger options such as level and name. An optional destination stream can be supplied as a second argument.\par
+\par
+import \{ buildConfig \} from 'payload'\par
+\par
+export default buildConfig(\{\par
+  logger: \{\par
+    options: \{\par
+      level: 'debug',\par
+    \},\par
+  \},\par
+\})\par
+To write logs to a file, pass a destination stream:\par
+\par
+import \{ buildConfig \} from 'payload'\par
+import \{ pino \} from 'pino'\par
+\par
+export default buildConfig(\{\par
+  logger: \{\par
+    options: \{ level: 'info' \},\par
+    destination: pino.destination('/var/log/payload.log'),\par
+  \},\par
+\})\par
+Compatibility note: The transport property of Pino's LoggerOptions may fail with "unable to determine transport target" in some environments. Pino transports spawn a worker thread with their own module resolution, which can break when modules are bundled or the project uses ESM. If you encounter this error, use a pre-instantiated logger instead (see below).\par
+\par
+2. Pre-instantiated logger\par
+Pass a fully configured Pino logger instance. This is the recommended approach when you need custom transports, formatters, or pino-pretty in development:\par
+\par
+import \{ buildConfig \} from 'payload'\par
+import \{ pino \} from 'pino'\par
+import pinoPretty from 'pino-pretty'\par
+\par
+const logger = pino(\{ level: 'debug' \}, pinoPretty(\{ colorize: true \}))\par
+\par
+export default buildConfig(\{\par
+  logger,\par
+\})\par
+3. Disabling logging\par
+Set the DISABLE_LOGGING environment variable to 'true' to suppress all log output:\par
+\par
+DISABLE_LOGGING=true node server.js\par
+Custom bin scripts\par
+Using the bin configuration property, you can inject your own scripts to npx payload. Example for pnpm payload seed:\par
+\par
+Step 1: create seed.ts file in the same folder with payload.config.ts with:\par
+\par
+import type \{ SanitizedConfig \} from 'payload'\par
+\par
+import payload from 'payload'\par
+\par
+// Script must define a "script" function export that accepts the sanitized config\par
+export const script = async (config: SanitizedConfig) => \{\par
+  await payload.init(\{ config \})\par
+  await payload.create(\{\par
+    collection: 'pages',\par
+    data: \{ title: 'my title' \},\par
+  \})\par
+  payload.logger.info('Successfully seeded!')\par
+  process.exit(0)\par
+\}\par
+Step 2: add the seed script to bin:\par
+\par
+export default buildConfig(\{\par
+  bin: [\par
+    \{\par
+      scriptPath: path.resolve(dirname, 'seed.ts'),\par
+      key: 'seed',\par
+    \},\par
+  ],\par
+\})\par
+Now you can run the command using:\par
+\par
+pnpm payload seed\par
+Running bin scripts on a schedule\par
+Every bin script supports being run on a schedule using cron syntax. Simply pass the --cron flag followed by the cron expression when running the script. Example:\par
+\par
+pnpm payload run ./myScript.ts --cron "0 * * * *"\par
+This will use the run bin script to execute the specified script on the defined schedule.\f0\par
+}
+ 
